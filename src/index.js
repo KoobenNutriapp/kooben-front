@@ -1,12 +1,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './index.scss';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+//pages
+import Home from './pages/Home'
+import CreateRecipe from './pages/CreateRecipe'
+import DetailRecipe from './pages/DetailRecipe'
+import Login from './pages/Login'
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <BrowserRouter>
+      <Routes>
+      <Route path='/' element={<App />} />
+        <Route path='/home' element={<Home />} />
+          <Route path='/CreateRecipe' element={<CreateRecipe />} />
+          <Route path='/DetailRecipe' element={<DetailRecipe />} />
+          <Route path='/Login' element={<Login />} />
+      </Routes>
+      {/* <App /> */}
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );
