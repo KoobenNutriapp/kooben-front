@@ -1,4 +1,6 @@
 import './App.scss';
+import Buttons from "./components/Buttons/";
+import Pills from "./components/Pills/";
 
 function App() {
   return (
@@ -20,6 +22,34 @@ function App() {
     // </div>
     <div className='title-container'>
       <h1 className='kooben-title'>K'óoben</h1>
+      <Buttons  
+        children="Exportar"
+        size="sm"
+        color="mexican-pink"
+      />
+
+      <Buttons
+        children="Editar"
+        size="lg"
+        color="mayan-blue"
+      />
+
+      <Pills  
+        children="high-fiber"
+        color="success"
+        pill="true"
+      />
+
+      <Pills  
+        children="high-calories"
+        color="warning"
+        pill="true"
+      />
+
+      <Pills  
+        children="high-cholesterol"
+        color="danger"
+      />
     </div>
   );
 }
