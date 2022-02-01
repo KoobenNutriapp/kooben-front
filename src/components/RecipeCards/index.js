@@ -3,10 +3,10 @@ import {
     CardImg,
     CardBody,
     CardTitle,
-    CardSubtitle,
     CardText,
-    Button,
 } from 'reactstrap';
+import LikesCounter from '../LikesCounter';
+import Pills from '../Pills';
 
 import './RecipeCards.scss'
 
@@ -14,25 +14,35 @@ function RecipeCard({AltImage, SrcImage, RecipeTitle, RecipeDescription}){
     return(
     <Card className='Recipe-Card'>
     <CardImg
-      // alt="Card image cap"
+
       alt={AltImage}
-      // src="https://picsum.photos/256/186"
+
       src={SrcImage}
       top
       className='Card-Image'
     />
     <CardBody className='Card-Body'>
-      <CardTitle tag="h3" className='Card-Title'>
-        {/* Ensalada de nopales */}
+  
+      <CardTitle tag="h4" className='Card-Title'>
         {RecipeTitle}
+        {/* <div className='col-md-5 Title-Container'> */}
+        
+        {/* </div>
+        <div className='col-md-4'>
+        </div> */}
+
+      <LikesCounter />
       </CardTitle>
+      <Pills children={'Vegan'} />
+      <Pills children={'Prehispanic'} />
+      <Pills children={'Low Fat'} />
+      <Pills children={'Low Carbs'} />
+
+  
       <CardText className='Card-Text'>
-        {/* This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. */}
         {RecipeDescription}      
       </CardText>
-      {/* <Button>
-        Button
-      </Button> */}
+
     </CardBody>
   </Card>
     )

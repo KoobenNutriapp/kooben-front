@@ -5,28 +5,36 @@
 .Recipe-Card{
     width: 50%;
     border: 2px solid $mayan-blue !important;
-    margin: 15px;
-    height: 350px;
+    // margin: 15px;
+    height: 320px;
     justify-content: center !important;
 
     .Card-Image{
-        height: 60% !important;
+        height: 65% !important;
         // width: 95% !important;
-        padding: 2%;
+        padding: 1%;
         justify-content: space-around !important;
         border-radius: 10px;
     }
 
     .Card-Body{
-        height: 50% !important;
+        height: 25% !important;
 
         .Card-Title{
             font-family: $title-font !important;
+            flex-direction: row !important;
+            // width: 50% !important;
+
+            // .Title-Container{
+            //     width: 40%;
+            // }
+
         }
 
         .Card-Text{
             font-family: $steps-recipe-font !important;
-            font-size: large;
+            font-size: small;
+            text-align: justify;
         }
 
     }
