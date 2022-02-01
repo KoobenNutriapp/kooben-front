@@ -22,17 +22,23 @@ function RecipeCard({AltImage, SrcImage, RecipeTitle, RecipeDescription}){
       className='Card-Image'
     />
     <CardBody className='Card-Body'>
-  
-      <CardTitle tag="h4" className='Card-Title'>
+  <div  className='Title-Likes-Container'>
+    <div className='Title-Container col-lg-10 col-m-6'>
+    <CardTitle tag="h4" className='Card-Title'>
         {RecipeTitle}
+    </CardTitle>
+    </div>
+    <div className='Likes-Counter-Container'>
+    <LikesCounter />
+    </div>
+  </div>
+
         {/* <div className='col-md-5 Title-Container'> */}
         
         {/* </div>
         <div className='col-md-4'>
         </div> */}
-
-      <LikesCounter />
-      </CardTitle>
+      
       <Pills children={'Vegan'} />
       <Pills children={'Prehispanic'} />
       <Pills children={'Low Fat'} />

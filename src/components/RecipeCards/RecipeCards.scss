@@ -6,7 +6,7 @@
     width: 50%;
     border: 2px solid $mayan-blue !important;
     // margin: 15px;
-    height: 320px;
+    height: 420px;
     justify-content: center !important;
 
     .Card-Image{
@@ -29,6 +29,11 @@
             //     width: 40%;
             // }
 
+        }
+
+        .Title-Likes-Container{
+            display: flex;
+            flex-direction: row;
         }
 
         .Card-Text{
