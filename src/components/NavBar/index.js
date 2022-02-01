@@ -1,10 +1,12 @@
-import { Navbar,
+import {
+    Navbar,
     NavbarBrand,
     NavbarToggler,
     Collapse,
     Nav,
     NavItem,
-    NavLink} from "reactstrap";
+    NavLink
+      } from "reactstrap";
 
 import 'react-icons';
 import './NavBar.scss';
@@ -34,13 +36,13 @@ function NavBar(){
             navbar
           >
             <NavItem className="my-recipe-label col-md-5">
-              <NavLink href="#">
+              <NavLink to ="/something">
                 Mi Receta
               </NavLink>
             </NavItem>
 
             <NavItem className="col-md-5">
-              <NavLink className="login-label" href="#">
+              <NavLink className="login-label" to ="/something">
                 Login
                 <FaUserCircle className="login-icon"/>
               </NavLink>
