@@ -2,8 +2,43 @@ import './App.scss';
 import Buttons from "./components/Buttons/";
 import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
+import IngredientsStaticTable from "./components/IngredientsStaticTable/";
+import IngredientTableHeader from './components/IngredientsTableHeader';
 
 function App() {
+
+  const ingredients = [
+    {
+      name:"nopal",
+      equivalence:{
+        cup:60,
+        spoon:5,
+        piece:110,
+        gram:1
+      }
+    },
+    {
+      name:"jitomate",
+      equivalence:{
+        cup:40,
+        spoon:7,
+        piece:80,
+        gram:1
+      }
+    },
+    {
+      name:"cebolla",
+      equivalence:{
+        cup:50,
+        spoon:8,
+        piece:70,
+        gram:1
+      }
+    }
+  ]
+
+
+
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -56,40 +91,83 @@ function App() {
         portion={300} 
         energy={100}
         carbohydrate={100}
+        dvCarbohydrate={2}
         sugars={100}
         fiber={100}
+        dvFiber={2}
+        glycemic_load={10}
         protein={100}
         fat={100}
+        dvFat={2}
         saturated_fatty_acids={100}
+        dvSaturated_fatty_acids={2}
         monounsaturated_fatty_acids={100}
+        dvMonounsaturated_fatty_acids={2}
         polyunsaturated_fatty_acids={100}
+        dvPolyunsaturated_fatty_acids={2}
         cholesterol={100}
-        glycemic_load={100}
+        dvCholesterol={2}
         sodium={100}
+        dvSodium={2}
         calcium={100}
+        dvCalcium={2}
         phosphorus={100}
+        dvPhosphorus
         iron={100}
+        dvIron={2}
         potassium={100}
+        dvPotassium={2}
         magnesium={100}
+        dvMagnesium={2}
         copper={100}
+        dvCopper={2}
         zinc={100}
+        dvZinc={2}
         manganese={100}
+        dvManganese={2}
         selenium={100}
+        dvSelenium={2}
         lithium={100}
+        dvLithium={2}
         vitA={100}
+        dvVitA={2}
         carotene={100}
+        dvCarotene={2}
         bcarotene={100}
+        dvBcarotene={2}
         vitB1={100}
+        dvVitB1={2}
         vitB2={100}
+        dvVitB2={2}
         vitB3={100}
+        dvVitB3={2}
         vitB6={100}
+        dvVitB6={2}
         vitB12={100}
+        dvVitB12={2}
         vitC={100}
+        dvVitC={2}
         folicAc={100}
+        dvFolicAc={2}
         vitD={100}
+        dvVitD={2}
         vitE={100}
+        dvVitE={2}
         vitK={100}
+        dvVitK={2}
       />
+
+      <IngredientTableHeader />
+
+      {ingredients.map(({name,equivalence})=>{
+        return <IngredientsStaticTable 
+          name={name}
+          cups={equivalence.cup}
+          spoons={equivalence.spoon}
+          pieces={equivalence.piece}
+        />
+      })}
+
     </div>
   );
 }
