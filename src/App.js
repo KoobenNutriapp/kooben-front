@@ -3,6 +3,7 @@ import NavBar from './components/NavBar'
 import Buttons from "./components/Buttons/";
 import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
+import RecipeCard from './components/RecipeCards';
 
 function App() {
   return (
@@ -94,6 +95,7 @@ function App() {
         vitE={100}
         vitK={100}
       />
+      <RecipeCard />
     </div>
   );
 }
