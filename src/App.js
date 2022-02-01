@@ -2,8 +2,7 @@ import './App.scss';
 import Buttons from "./components/Buttons/";
 import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
-import IngredientsStaticTable from "./components/IngredientsStaticTable/";
-import IngredientTableHeader from './components/IngredientsTableHeader';
+import IngredientsTable from "./components/IngredientsTable";
 
 function App() {
 
@@ -37,6 +36,23 @@ function App() {
     }
   ]
 
+  const newIngredient=[
+    {
+      name:"perejil",
+      equivalence:{
+        cup:50,
+        spoon:8,
+        piece:70,
+        gram:1
+      }
+    }
+  ]
+
+  const handleAddIngredient = (e) =>{
+    const join = [...ingredients,...newIngredient]
+    console.log(join);
+    return
+  }
 
 
   return (
@@ -58,11 +74,17 @@ function App() {
     // </div>
     <div className='title-container'>
       <h1 className='kooben-title'>K'óoben</h1>
+
+<div className="tempDivider"></div>
+
+
       <Buttons  
         children="Haz favor de exportar"
         size="sm"
         color="mexican-pink"
       />
+
+<div className="tempDivider"></div>
 
       <Buttons
         children="Editar"
@@ -70,11 +92,15 @@ function App() {
         color="mayan-blue"
       />
 
+<div className="tempDivider"></div>
+
       <Pills  
         children="high-fiber"
         color="success"
         pill={true}
       />
+
+<div className="tempDivider"></div>
 
       <Pills  
         children="high-calories"
@@ -82,10 +108,14 @@ function App() {
         pill={true}
       />
 
+<div className="tempDivider"></div>
+
       <Pills  
         children="high-cholesterol"
         color="danger"
       />
+
+<div className="tempDivider"></div>
 
       <NutFactTable
         portion={300} 
@@ -157,16 +187,20 @@ function App() {
         dvVitK={2}
       />
 
-      <IngredientTableHeader />
+<div className="tempDivider"></div>
 
-      {ingredients.map(({name,equivalence})=>{
-        return <IngredientsStaticTable 
-          name={name}
-          cups={equivalence.cup}
-          spoons={equivalence.spoon}
-          pieces={equivalence.piece}
-        />
-      })}
+      <IngredientsTable 
+        ingredients={ingredients} 
+      />
+
+      <Buttons  
+        children="Agrega ingrediente"
+        size="sm"
+        color="mexican-pink"
+        callback={handleAddIngredient}
+      />
+
+<div className="tempDivider"></div>
 
     </div>
   );
