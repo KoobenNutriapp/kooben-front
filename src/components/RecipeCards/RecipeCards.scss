@@ -1,10 +1,27 @@
+@import '../../styles/typography';
+@import '../../styles/colors';
+
+
 .Recipe-Card{
-    width: 50%;
-    border: 1px solid #355c7d !important;
+    width: 60%;
+    border: 2px solid $mayan-blue !important;
     margin: 15px;
     height: 350px;
+    justify-content: center !important;
 
     .Card-Image{
-        height: 25% !important;
+        height: 60% !important;
+        width: 95% !important;
+        justify-content: space-between !important;
+        border-radius: 5px;
+    }
+
+    .Card-Body{
+        height: 50% !important;
+
+        .Card-Title{
+            font-family: $title-font !important;
+        }
+
     }
 }

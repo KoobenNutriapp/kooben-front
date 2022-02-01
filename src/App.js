@@ -191,7 +191,6 @@ function App() {
         vitK={100}
         dvVitK={2}
       />
-      <RecipeCard />
 
 <div className="tempDivider"></div>
 
@@ -208,6 +207,12 @@ function App() {
 
 <div className="tempDivider"></div>
 
+      <RecipeCard
+      AltImage={'Card image cap'}
+      SrcImage={'https://picsum.photos/256/186'}
+      RecipeTitle={'Ensalada de Nopales'}
+      RecipeDescription={'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'}
+      />
     </div>
   );
 }

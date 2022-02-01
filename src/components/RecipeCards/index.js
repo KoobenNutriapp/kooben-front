@@ -10,29 +10,25 @@ import {
 
 import './RecipeCards.scss'
 
-function RecipeCard(){
+function RecipeCard({AltImage, SrcImage, RecipeTitle, RecipeDescription}){
     return(
     <Card className='Recipe-Card'>
     <CardImg
-      alt="Card image cap"
-      src="https://picsum.photos/256/186"
+      // alt="Card image cap"
+      alt={AltImage}
+      // src="https://picsum.photos/256/186"
+      src={SrcImage}
       top
-    //   width="50%"
-    //   height="30%"
       className='Card-Image'
     />
-    <CardBody>
-      <CardTitle tag="h5">
-        Card title
+    <CardBody className='Card-Body'>
+      <CardTitle tag="h3" className='Card-Title'>
+        {/* Ensalada de nopales */}
+        {RecipeTitle}
       </CardTitle>
-      <CardSubtitle
-        className="mb-2 text-muted"
-        tag="h6"
-      >
-        Card subtitle
-      </CardSubtitle>
-      <CardText>
-        This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
+      <CardText className='Card-Text'>
+        {/* This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. */}
+        {RecipeDescription}      
       </CardText>
       {/* <Button>
         Button
