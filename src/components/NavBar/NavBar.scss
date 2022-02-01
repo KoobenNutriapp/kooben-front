@@ -1,0 +1,29 @@
+@import '../../styles/colors';
+@import '../../styles/typography';
+
+.Kooben-Navbar{
+    background-color: $mayan-blue !important;
+    max-height: 55px;
+    // margin: 15px solid $mexican-pink !important;
+}
+
+.Kooben-Brand{
+    font-family: $title-font;
+    font-size: x-large !important;
+    
+}
+
+.my-recipe-label{
+    font-family: $title-font;
+    font-size: large;
+}
+
+.login-label{
+    font-family: $title-font;
+    font-size: large;
+    margin-right: 5px;
+
+    .login-icon{
+        margin-left: 5px;
+    }
+}
