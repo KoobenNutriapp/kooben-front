@@ -5,7 +5,7 @@ const IngredientsTable = ({ingredients}) => {
   console.log(ingredients);
 
   return (
-  <div className="frame">
+  <div className="frameIngredientsTable">
     <Table hover size="sm">
       <thead>
         <tr className="thinLine center">
