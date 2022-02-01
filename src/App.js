@@ -1,4 +1,5 @@
 import './App.scss';
+import NavBar from './components/NavBar'
 import Buttons from "./components/Buttons/";
 import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
@@ -73,6 +74,9 @@ function App() {
     //   </header>
     // </div>
     <div className='title-container'>
+
+      <NavBar />
+
       <h1 className='kooben-title'>K'óoben</h1>
 
 <div className="tempDivider"></div>
