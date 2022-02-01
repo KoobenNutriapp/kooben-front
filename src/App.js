@@ -191,9 +191,7 @@ function App() {
         vitK={100}
         dvVitK={2}
       />
-<<<<<<< HEAD
       <RecipeCard />
-=======
 
 <div className="tempDivider"></div>
 
@@ -210,7 +208,6 @@ function App() {
 
 <div className="tempDivider"></div>
 
->>>>>>> develop
     </div>
   );
 }
