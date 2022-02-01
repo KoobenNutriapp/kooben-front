@@ -1,0 +1,20 @@
+@import '../../styles/colors';
+
+.frameIngredientsTable{
+    border:2px $mayan-blue solid;
+    box-shadow: $mayan-blue 5px 10px; 
+    width: 500px !important; 
+    padding: 10px;
+}
+
+.thinLine{
+    border-bottom: 2px $mayan-blue solid ;
+}
+
+.center{
+    text-align: center;
+}
+
+.left{
+    text-align: left;
+}
