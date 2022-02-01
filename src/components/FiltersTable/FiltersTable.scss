@@ -1,0 +1,115 @@
+@import '../../styles/colors';
+@import '../../styles/typography';
+
+.frameFiltersTable{
+    border:1px $mayan-blue solid;
+    width: 250px !important;
+    box-shadow: $mayan-blue 5px 10px;  
+    padding: 10px;
+    font-size: 14px;
+}
+
+.filterTitle{
+    font-family: $title-font,Arial, Helvetica, sans-serif;
+    text-align: center;
+    border-bottom: 2px $mayan-blue solid ;
+}
+
+.filterItems{
+    font-family: $title-font,Arial, Helvetica, sans-serif;
+    text-align: left;
+}
+
+.rotation{
+    animation: rotation 30s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+  }
+
+.agua{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Agua.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.aguila{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Aguila.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.canoa{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Canoa.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.chimalli1{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/chimalli1.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.coatl{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Coatl.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.conejo{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Conejo.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.movimiento{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Movimiento.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.pedernal{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Pedernal.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.tepetl{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Tepetl.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.venado{
+    width: 40px;
+    height: 5px;
+    background: url('../../img/Venado.svg');
+    background-repeat: no-repeat;
+    background-position: center;
+}

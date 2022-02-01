@@ -5,6 +5,7 @@ import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
 import RecipeCard from './components/RecipeCards';
 import IngredientsTable from "./components/IngredientsTable";
+import FiltersTable from './components/FiltersTable';
 
 function App() {
 
@@ -207,6 +208,7 @@ function App() {
 
 <div className="tempDivider"></div>
 
+<<<<<<< HEAD
       <RecipeCard
       AltImage={'Card image cap'}
       SrcImage={'https://d1uz88p17r663j.cloudfront.net/resized/57a0e0353946ed412490f56d78087f6c_Ensalada_de_nopales_1200_600.png'}
@@ -214,6 +216,12 @@ function App() {
       RecipeDescription={'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'}
       />
 <div className="tempDivider"></div>
+=======
+      <FiltersTable />
+
+<div className="tempDivider"></div>
+
+>>>>>>> develop
     </div>
   );
 }

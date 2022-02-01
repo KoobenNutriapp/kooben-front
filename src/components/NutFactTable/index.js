@@ -76,7 +76,7 @@ const NutFactTable = (props) => {
   console.log(props);
 
   return (
-      <div className="frame">
+      <div className="frameNutFactTable">
         <Table hover className="nutTable">
            <thead>
              <tr>
