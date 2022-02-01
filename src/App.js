@@ -4,6 +4,7 @@ import Buttons from "./components/Buttons/";
 import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
 import IngredientsTable from "./components/IngredientsTable";
+import FiltersTable from './components/FiltersTable';
 
 function App() {
 
@@ -203,6 +204,10 @@ function App() {
         color="mexican-pink"
         callback={handleAddIngredient}
       />
+
+<div className="tempDivider"></div>
+
+      <FiltersTable />
 
 <div className="tempDivider"></div>
 
