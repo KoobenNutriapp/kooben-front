@@ -3,8 +3,9 @@ import NavBar from './components/NavBar'
 import Buttons from "./components/Buttons/";
 import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
-import IngredientsTable from "./components/IngredientsTable";
+import IngredientsDynamicTable from "./components/IngredientsDynamicTable";
 import FiltersTable from './components/FiltersTable';
+import IngredientsStaticTable from './components/IngredientsStaticTable';
 
 function App() {
 
@@ -84,7 +85,7 @@ function App() {
 
 
       <Buttons  
-        children="Haz favor de exportar"
+        children="Crear receta"
         size="sm"
         color="mexican-pink"
       />
@@ -194,7 +195,13 @@ function App() {
 
 <div className="tempDivider"></div>
 
-      <IngredientsTable 
+      <IngredientsStaticTable
+        ingredients={ingredients} 
+      />
+
+<div className="tempDivider"></div>
+
+      <IngredientsDynamicTable 
         ingredients={ingredients} 
       />
 
