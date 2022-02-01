@@ -3,7 +3,7 @@
 
 
 .Recipe-Card{
-    width: 60%;
+    width: 50%;
     border: 2px solid $mayan-blue !important;
     margin: 15px;
     height: 350px;
@@ -11,9 +11,10 @@
 
     .Card-Image{
         height: 60% !important;
-        width: 95% !important;
-        justify-content: space-between !important;
-        border-radius: 5px;
+        // width: 95% !important;
+        padding: 2%;
+        justify-content: space-around !important;
+        border-radius: 10px;
     }
 
     .Card-Body{
@@ -21,6 +22,11 @@
 
         .Card-Title{
             font-family: $title-font !important;
+        }
+
+        .Card-Text{
+            font-family: $steps-recipe-font !important;
+            font-size: large;
         }
 
     }
