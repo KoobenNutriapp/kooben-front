@@ -302,6 +302,8 @@ function App() {
 
 <div className="tempDivider"></div>
 
+      <UploadImage />
+
     </div>
   );
 }
