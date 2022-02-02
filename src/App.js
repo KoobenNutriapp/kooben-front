@@ -7,7 +7,7 @@ import IngredientsDynamicTable from "./components/IngredientsDynamicTable";
 import RecipeCard from './components/RecipeCards';
 import FiltersTable from './components/FiltersTable';
 import IngredientsStaticTable from './components/IngredientsStaticTable';
-import UploadImage from './components/UploadImage';
+import CreateTitleInput from './components/CreateTitleInput';
 
 function App() {
 
@@ -230,6 +230,8 @@ function App() {
       />
 
 <div className="tempDivider"></div>
+
+<CreateTitleInput />
 
 
 
