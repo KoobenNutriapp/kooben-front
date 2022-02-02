@@ -1,11 +1,16 @@
 import { Table } from "reactstrap";
 import "./IngredientsDynamicTable.scss";
+import { ImBin2 } from "react-icons/im";
 
 const IngredientsDynamicTable = ({ingredients}) => {
   console.log(ingredients);
 
   const handleSelection = (e) => {
     console.log(e.target.value);
+  }
+
+  const handleDeleteIngredient = (e) => {
+    console.log(e.currentTarget.id);
   }
 
   return (
@@ -19,7 +24,7 @@ const IngredientsDynamicTable = ({ingredients}) => {
         </tr>
       </thead>
       <tbody>
-        {ingredients.map((item) =>{
+        {ingredients.map((item,index) =>{
           return <tr className="center">
             <td className="left">{item.name}</td>
             <td> - </td>
@@ -27,11 +32,12 @@ const IngredientsDynamicTable = ({ingredients}) => {
             <td> + </td>
             <td>
               <select onChange={handleSelection}className="form-select selectPortion">
-                <option value="gram">tazas</option>
-                <option value="cup">gramos</option>
+                <option value="cup">tazas</option>
+                <option value="gram">gramos</option>
                 <option value="piece">piezas</option>
               </select>
             </td>
+            <td id={index} className="bin" onClick={handleDeleteIngredient}>{<ImBin2 />}</td>
           </tr>
         })}
       </tbody>
