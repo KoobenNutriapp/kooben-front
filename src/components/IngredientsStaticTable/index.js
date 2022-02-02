@@ -5,6 +5,10 @@ import "./IngredientsStaticTable.scss";
 const IngredientsStaticTable = ({ingredients}) => {
   console.log(ingredients);
 
+  const handleSelection = (e) => {
+    console.log(e.target.id);
+  }
+
   return (
   <div className="frameIngredientsTable">
     <Table hover size="sm">
@@ -26,9 +30,9 @@ const IngredientsStaticTable = ({ingredients}) => {
                   gramos
                 </DropdownToggle>
                 <DropdownMenu>
-                  <DropdownItem>tazas</DropdownItem>
+                  <DropdownItem onClick={handleSelection} id="cup" eventKey="tazas">tazas</DropdownItem>
                   <DropdownItem divider />
-                  <DropdownItem>piezas</DropdownItem>
+                  <DropdownItem onClick={handleSelection} id="piece" eventKey="piezas">piezas</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </td>
