@@ -11,6 +11,7 @@ import CreateTitleInput from './components/CreateTitleInput';
 import SelectIngredient from './components/SelectIngredient';
 import UploadImage from './components/UploadImage';
 import TagsManager from './components/TagsManager';
+import Modals from './components/Modals';
 
 function App() {
 
@@ -78,6 +79,10 @@ function App() {
     return
   }
   
+  const handleModal = (e) => {
+    console.log('Ejecutar cuando se acepta');
+  }
+
   //data only for card-recipe testing ====================
   
   const testingData = {
@@ -286,9 +291,17 @@ function App() {
 
 <div className="tempDivider"></div>
 
-    <UploadImage />
+      <Modals 
+        buttonText={'Insert here your button text or variable'}
+        header={'Insert here your header or variable'}
+        body={'Insert here your body or variable'}
+        footerOK={'Aceptar'}
+        footerNOK={'No aceptar'}
+        callback={handleModal}
+      />
 
-    <div className="tempDivider"></div>
+<div className="tempDivider"></div>
+
     </div>
   );
 }
