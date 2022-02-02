@@ -1,11 +1,17 @@
 import { Table } from "reactstrap";
 import "./IngredientsStaticTable.scss";
+import { ImBin2 } from "react-icons/im";
+
 
 const IngredientsStaticTable = ({ingredients}) => {
   console.log(ingredients);
 
   const handleSelection = (e) => {
     console.log(e.target.value);
+  }
+
+  const handleDeleteIngredient = (e) => {
+    console.log(e.currentTarget.id);
   }
 
   return (
@@ -20,17 +26,18 @@ const IngredientsStaticTable = ({ingredients}) => {
         </tr>
       </thead>
       <tbody>
-        {ingredients.map((item) =>{
-          return <tr className="center">
+        {ingredients.map((item,index) =>{
+          return <tr id="" className="center">
             <td className="left">{item.name}</td>
             <td colSpan="3">{item.equivalence.cup}</td>
             <td colSpan="2">
               <select onChange={handleSelection}className="form-select selectPortion">
-                <option value="gram">tazas</option>
-                <option value="cup">gramos</option>
+                <option value="cup">tazas</option>
+                <option value="gram">gramos</option>
                 <option value="piece">piezas</option>
               </select>
             </td>
+            <td id={index} className="bin" onClick={handleDeleteIngredient}>{<ImBin2 />}</td>
           </tr>
         })}
       </tbody>
