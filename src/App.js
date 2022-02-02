@@ -11,6 +11,7 @@ import CreateTitleInput from './components/CreateTitleInput';
 import SelectIngredient from './components/SelectIngredient';
 import TagsManager from './components/TagsManager';
 import Modals from './components/Modals';
+import MainSearchBar from './components/MainSearchBar';
 
 function App() {
 
@@ -283,6 +284,12 @@ function App() {
         footerNOK={'No aceptar'}
         callback={handleModal}
       />
+
+<div className="tempDivider"></div>
+
+
+      <MainSearchBar />
+
 
 <div className="tempDivider"></div>
 
