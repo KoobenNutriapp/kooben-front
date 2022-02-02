@@ -1,9 +1,12 @@
 import { Table } from "reactstrap";
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./IngredientsDynamicTable.scss";
 
 const IngredientsDynamicTable = ({ingredients}) => {
   console.log(ingredients);
+
+  const handleSelection = (e) => {
+    console.log(e.target.value);
+  }
 
   return (
   <div className="frameIngredientsTable">
@@ -23,16 +26,11 @@ const IngredientsDynamicTable = ({ingredients}) => {
             <td>{item.equivalence.cup}</td>
             <td> + </td>
             <td>
-              <UncontrolledDropdown direction="right">
-                <DropdownToggle color="info" caret>
-                  gramos
-                </DropdownToggle>
-                <DropdownMenu className="selectPortion">
-                <DropdownItem>tazas</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>piezas</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              <select onChange={handleSelection}className="form-select selectPortion">
+                <option value="gram">tazas</option>
+                <option value="cup">gramos</option>
+                <option value="piece">piezas</option>
+              </select>
             </td>
           </tr>
         })}
