@@ -1,12 +1,11 @@
 import { Table } from "reactstrap";
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./IngredientsStaticTable.scss";
 
 const IngredientsStaticTable = ({ingredients}) => {
   console.log(ingredients);
 
   const handleSelection = (e) => {
-    console.log(e.target.id);
+    console.log(e.target.value);
   }
 
   return (
@@ -17,6 +16,7 @@ const IngredientsStaticTable = ({ingredients}) => {
           <th className="left">Ingrediente</th>
           <th colSpan="3">Cantidad</th>
           <th>Porción</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -24,17 +24,12 @@ const IngredientsStaticTable = ({ingredients}) => {
           return <tr className="center">
             <td className="left">{item.name}</td>
             <td colSpan="3">{item.equivalence.cup}</td>
-            <td>
-              <UncontrolledDropdown direction="right">
-                <DropdownToggle color="info" caret>
-                  gramos
-                </DropdownToggle>
-                <DropdownMenu>
-                  <DropdownItem onClick={handleSelection} id="cup" eventKey="tazas">tazas</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem onClick={handleSelection} id="piece" eventKey="piezas">piezas</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+            <td colSpan="2">
+              <select onChange={handleSelection}className="form-select selectPortion">
+                <option value="gram">tazas</option>
+                <option value="cup">gramos</option>
+                <option value="piece">piezas</option>
+              </select>
             </td>
           </tr>
         })}
