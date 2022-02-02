@@ -1,4 +1,7 @@
 import React, {useEffect, useState} from 'react';
+import {CardGroup, Card, Input} from 'reactstrap';
+import {ImBin2 } from "react-icons/im";
+import './UploadImage.scss'
 
 function UploadImage(){
 
@@ -7,24 +10,43 @@ function UploadImage(){
 
     
     const onImageChange = (event) => {
+        console.log(event)
+        console.log(event.target.files)
         setPicture([...event.target.files])
-    }
-    
-    // console.log(...picture)
-    // // console.log()
+    };
+
+
+    const removeImage = () => {
+        setPicture([]);
+    };
+
     useEffect(() => {
-        if(picture.length < 1) return;
         const newImageUrls = [];
-        picture.forEach(image => newImageUrls.push(URL.createObjectURL(picture)))
+        picture.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
         setPath(newImageUrls)
     }, [picture])
     
+    console.log(picture)
     
 
     return(
         <div>
-            <input type = 'file' accept='image/*' onChange={onImageChange}/>
-            {path.map(imageSrc => <img alt = '' src = {imageSrc} />)}
+            <h3>Añade una imagen a tu receta</h3>
+            <CardGroup className='AddImage-Section'>
+                
+                <Card className='Search-Delete-Section'>
+                    <Input id = 'uploadImage'type = 'file' onChange={onImageChange}/>
+                    <div className='Delete-Button-Container'>
+                        <ImBin2 onClick={removeImage}/>
+                    </div>
+                </Card>
+
+                <Card className='Image-Container'>
+                    {path.map(imageSrc => <img clasName = 'recipeImage' alt = '' height= "120px" src = {imageSrc} />)}
+                </Card>
+
+            </CardGroup>
+
         </div>
 
     );

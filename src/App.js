@@ -9,6 +9,7 @@ import FiltersTable from './components/FiltersTable';
 import IngredientsStaticTable from './components/IngredientsStaticTable';
 import CreateTitleInput from './components/CreateTitleInput';
 import SelectIngredient from './components/SelectIngredient';
+import UploadImage from './components/UploadImage';
 import TagsManager from './components/TagsManager';
 import Modals from './components/Modals';
 
@@ -106,7 +107,22 @@ function App() {
   //=======================================================
   
   return (
-
+    // <div className="App">
+    //   <header className="App-header">
+    //     <img src={logo} className="App-logo" alt="logo" />
+    //     <p>
+    //       Edit <code>src/App.js</code> and save to reload.
+    //     </p>
+    //     <a
+    //       className="App-link"
+    //       href="https://reactjs.org"
+    //       target="_blank"
+    //       rel="noopener noreferrer"
+    //     >
+    //       Learn React
+    //     </a>
+    //   </header>
+    // </div>
     <div className='title-container'>
 
       <NavBar />
@@ -285,6 +301,8 @@ function App() {
       />
 
 <div className="tempDivider"></div>
+
+      <UploadImage />
 
     </div>
   );
