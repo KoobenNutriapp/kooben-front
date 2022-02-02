@@ -1,8 +1,8 @@
 import {
-    Card,
-    CardImg,
-    CardBody,
-    CardTitle,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
     CardText,
 } from 'reactstrap';
 import LikesCounter from '../LikesCounter';
@@ -10,7 +10,21 @@ import Pills from '../Pills';
 
 import './RecipeCards.scss'
 
-function RecipeCard({AltImage, SrcImage, RecipeTitle, RecipeDescription}){
+
+// const tagsArray = ["healthy",
+// "prehispanic",
+// "low_calories",
+// "high_fiber"
+// ]
+
+function getTags(Array){
+    return Array.map((item) => 
+      <Pills children={item} />
+    )
+} 
+  
+
+function RecipeCard({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsArray}){
     return(
     <Card className='Recipe-Card'>
     <CardImg
@@ -33,16 +47,13 @@ function RecipeCard({AltImage, SrcImage, RecipeTitle, RecipeDescription}){
     </div>
   </div>
 
-        {/* <div className='col-md-5 Title-Container'> */}
-        
-        {/* </div>
-        <div className='col-md-4'>
-        </div> */}
-      
-      <Pills children={'Vegan'} />
+  <div className='Tags-Section'>
+    {getTags(tagsArray)}
+  </div>
+      {/* <Pills children={'Vegan'} />
       <Pills children={'Prehispanic'} />
       <Pills children={'Low Fat'} />
-      <Pills children={'Low Carbs'} />
+      <Pills children={'Low Carbs'} /> */}
 
   
       <CardText className='Card-Text'>
