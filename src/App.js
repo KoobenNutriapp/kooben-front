@@ -8,12 +8,13 @@ import RecipeCard from './components/RecipeCards';
 import FiltersTable from './components/FiltersTable';
 import IngredientsStaticTable from './components/IngredientsStaticTable';
 import CreateTitleInput from './components/CreateTitleInput';
+import SelectIngredient from './components/SelectIngredient';
 
 function App() {
 
   const ingredients = [
     {
-      name:"nopal",
+      name:"nopal 🌵",
       equivalence:{
         cup:5,
         spoon:30,
@@ -22,7 +23,7 @@ function App() {
       }
     },
     {
-      name:"jitomate",
+      name:"jitomate 🍅",
       equivalence:{
         cup:4,
         spoon:20,
@@ -31,7 +32,7 @@ function App() {
       }
     },
     {
-      name:"cebolla",
+      name:"cebolla 🧅",
       equivalence:{
         cup:3,
         spoon:15,
@@ -233,6 +234,13 @@ function App() {
 
 <CreateTitleInput />
 
+<div className="tempDivider"></div>
+
+      <SelectIngredient
+        ingredients={ingredients}  
+      />
+
+<div className="tempDivider"></div>
 
 
     </div>
