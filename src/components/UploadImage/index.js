@@ -1,4 +1,6 @@
 import React, {useEffect, useState} from 'react';
+// import {ImBin2 } from "react-icons/im";
+import './UploadImage.scss'
 
 function UploadImage(){
 
@@ -7,24 +9,37 @@ function UploadImage(){
 
     
     const onImageChange = (event) => {
+        console.log(event)
+        console.log(event.target.files)
         setPicture([...event.target.files])
-    }
-    
-    // console.log(...picture)
-    // // console.log()
+    };
+
+
+    // useEffect(() => {
+    //     if(picture.length < 1) return;
+    //     const newImageUrls = [];
+    //     // picture.forEach(image => newImageUrls.push(URL.createObjectURL(picture)))
+    //     picture.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
+    //     setPath(newImageUrls)
+    // }, [picture])
+
     useEffect(() => {
-        if(picture.length < 1) return;
+        // if(picture.length < 1) return;
         const newImageUrls = [];
-        picture.forEach(image => newImageUrls.push(URL.createObjectURL(picture)))
+        // picture.forEach(image => newImageUrls.push(URL.createObjectURL(picture)))
+        picture.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
         setPath(newImageUrls)
     }, [picture])
     
+    console.log(picture)
     
 
     return(
-        <div>
+        <div className='AddImage-Section'>
             <input type = 'file' accept='image/*' onChange={onImageChange}/>
-            {path.map(imageSrc => <img alt = '' src = {imageSrc} />)}
+            {path.map(imageSrc => <img width = '220px' alt = '' src = {imageSrc} />)}
+            {/* <ImBin2 onClick={deleteImage()}/> */}
+
         </div>
 
     );

@@ -1,0 +1,8 @@
+@import '../../styles/colors';
+
+.AddImage-Section{
+    min-height: 350px;
+    display: flex;
+    flex-direction: row;
+    background-color: $mayan-blue;
+}
