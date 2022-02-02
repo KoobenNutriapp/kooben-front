@@ -11,12 +11,6 @@ import Pills from '../Pills';
 import './RecipeCards.scss'
 
 
-// const tagsArray = ["healthy",
-// "prehispanic",
-// "low_calories",
-// "high_fiber"
-// ]
-
 function getTags(Array){
     return Array.map((item) => 
       <Pills children={item} />
@@ -50,11 +44,6 @@ function RecipeCard({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsArr
   <div className='Tags-Section'>
     {getTags(tagsArray)}
   </div>
-      {/* <Pills children={'Vegan'} />
-      <Pills children={'Prehispanic'} />
-      <Pills children={'Low Fat'} />
-      <Pills children={'Low Carbs'} /> */}
-
   
       <CardText className='Card-Text'>
         {RecipeDescription}      
