@@ -10,6 +10,7 @@ import IngredientsStaticTable from './components/IngredientsStaticTable';
 import CreateTitleInput from './components/CreateTitleInput';
 import SelectIngredient from './components/SelectIngredient';
 import UploadImage from './components/UploadImage';
+import TagsManager from './components/TagsManager';
 
 function App() {
 
@@ -53,6 +54,22 @@ function App() {
         gram:1
       }
     }
+  ]
+
+  const tagsArr=[
+    { key: 0, label: '🥦healthy' },
+    { key: 1, label: '💀 prehispanic' },
+    { key: 2, label: '🍏low-calories' },
+    { key: 3, label: '🍆high-fiber' },
+    { key: 3, label: '🍕high-calories' },
+    { key: 3, label: '🍉low_sodium' },
+    { key: 3, label: '🥩high-proteins' },
+    { key: 3, label: '🍦low_sugars' },
+    { key: 3, label: '🥝low_fat' },
+    { key: 3, label: '🍣low_cholesterol' },
+    { key: 3, label: '🥒low_glycemic_load' },
+    { key: 3, label: '🍟high-sugars' },
+    { key: 3, label: '🍔high-cholesterol' },
   ]
 
   const handleAddIngredient = (e) =>{
@@ -265,6 +282,9 @@ function App() {
 
     <UploadImage />
 
+      <TagsManager 
+        tags={tagsArr}
+      />
 
     </div>
   );
