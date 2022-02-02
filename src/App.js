@@ -15,28 +15,28 @@ function App() {
     {
       name:"nopal",
       equivalence:{
-        cup:60,
-        spoon:5,
-        piece:110,
-        gram:1
+        cup:5,
+        spoon:30,
+        piece:2,
+        gram:110
       }
     },
     {
       name:"jitomate",
       equivalence:{
-        cup:40,
-        spoon:7,
-        piece:80,
-        gram:1
+        cup:4,
+        spoon:20,
+        piece:1,
+        gram:70
       }
     },
     {
       name:"cebolla",
       equivalence:{
-        cup:50,
-        spoon:8,
-        piece:70,
-        gram:1
+        cup:3,
+        spoon:15,
+        piece:1,
+        gram:65
       }
     }
   ]

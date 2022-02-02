@@ -1,9 +1,17 @@
 import { Table } from "reactstrap";
-import { UncontrolledDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import "./IngredientsDynamicTable.scss";
+import { ImBin2 } from "react-icons/im";
 
 const IngredientsDynamicTable = ({ingredients}) => {
   console.log(ingredients);
+
+  const handleSelection = (e) => {
+    console.log(e.target.value);
+  }
+
+  const handleDeleteIngredient = (e) => {
+    console.log(e.currentTarget.id);
+  }
 
   return (
   <div className="frameIngredientsTable">
@@ -16,24 +24,20 @@ const IngredientsDynamicTable = ({ingredients}) => {
         </tr>
       </thead>
       <tbody>
-        {ingredients.map((item) =>{
+        {ingredients.map((item,index) =>{
           return <tr className="center">
             <td className="left">{item.name}</td>
             <td> - </td>
             <td>{item.equivalence.cup}</td>
             <td> + </td>
             <td>
-              <UncontrolledDropdown direction="right">
-                <DropdownToggle color="info" caret>
-                  gramos
-                </DropdownToggle>
-                <DropdownMenu className="selectPortion">
-                <DropdownItem>tazas</DropdownItem>
-                  <DropdownItem divider />
-                  <DropdownItem>piezas</DropdownItem>
-                </DropdownMenu>
-              </UncontrolledDropdown>
+              <select onChange={handleSelection}className="form-select selectPortion">
+                <option value="cup">tazas</option>
+                <option value="gram">gramos</option>
+                <option value="piece">piezas</option>
+              </select>
             </td>
+            <td id={index} className="bin" onClick={handleDeleteIngredient}>{<ImBin2 />}</td>
           </tr>
         })}
       </tbody>
