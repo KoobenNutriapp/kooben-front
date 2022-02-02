@@ -1,7 +1,8 @@
 import { Table } from "reactstrap";
 import "./IngredientsStaticTable.scss";
-import { ImBin2 } from "react-icons/im";
-
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const IngredientsStaticTable = ({ingredients}) => {
   console.log(ingredients);
@@ -37,7 +38,15 @@ const IngredientsStaticTable = ({ingredients}) => {
                 <option value="piece">piezas</option>
               </select>
             </td>
-            <td id={index} className="bin" onClick={handleDeleteIngredient}>{<ImBin2 />}</td>
+            <td id={index} onClick={handleDeleteIngredient}>
+              {
+                <Tooltip title="Elimina ingrediente" placement="right-start">
+                  <IconButton>
+                    <DeleteIcon className="bin"/>
+                  </IconButton>
+                </Tooltip>
+              }
+            </td>
           </tr>
         })}
       </tbody>
