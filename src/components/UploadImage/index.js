@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
-// import {ImBin2 } from "react-icons/im";
+import {CardGroup, Card, Input} from 'reactstrap';
+import {ImBin2 } from "react-icons/im";
 import './UploadImage.scss'
 
 function UploadImage(){
@@ -15,18 +16,12 @@ function UploadImage(){
     };
 
 
-    // useEffect(() => {
-    //     if(picture.length < 1) return;
-    //     const newImageUrls = [];
-    //     // picture.forEach(image => newImageUrls.push(URL.createObjectURL(picture)))
-    //     picture.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
-    //     setPath(newImageUrls)
-    // }, [picture])
+    const removeImage = () => {
+        setPicture([]);
+    };
 
     useEffect(() => {
-        // if(picture.length < 1) return;
         const newImageUrls = [];
-        // picture.forEach(image => newImageUrls.push(URL.createObjectURL(picture)))
         picture.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
         setPath(newImageUrls)
     }, [picture])
@@ -35,10 +30,22 @@ function UploadImage(){
     
 
     return(
-        <div className='AddImage-Section'>
-            <input type = 'file' accept='image/*' onChange={onImageChange}/>
-            {path.map(imageSrc => <img width = '220px' alt = '' src = {imageSrc} />)}
-            {/* <ImBin2 onClick={deleteImage()}/> */}
+        <div>
+            <h3>Añade una imagen a tu receta</h3>
+            <CardGroup className='AddImage-Section'>
+                
+                <Card className='Search-Delete-Section'>
+                    <Input id = 'uploadImage'type = 'file' onChange={onImageChange}/>
+                    <div className='Delete-Button-Container'>
+                        <ImBin2 onClick={removeImage}/>
+                    </div>
+                </Card>
+
+                <Card className='Image-Container'>
+                    {path.map(imageSrc => <img clasName = 'recipeImage' alt = '' height= "120px" src = {imageSrc} />)}
+                </Card>
+
+            </CardGroup>
 
         </div>
 

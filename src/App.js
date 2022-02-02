@@ -280,12 +280,15 @@ function App() {
 
 <div className="tempDivider"></div>
 
-    <UploadImage />
-
       <TagsManager 
         tags={tagsArr}
       />
 
+<div className="tempDivider"></div>
+
+    <UploadImage />
+
+    <div className="tempDivider"></div>
     </div>
   );
 }
