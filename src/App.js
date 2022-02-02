@@ -59,27 +59,32 @@ function App() {
     console.log(join);
     return
   }
+  
+  //data only for card-recipe testing ====================
+  
+  const testingData = {
+    recipeTitle: "Ensalada de nopales",
+    recipeSynopsis: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.',
+    imageURL: 'https://d1uz88p17r663j.cloudfront.net/resized/57a0e0353946ed412490f56d78087f6c_Ensalada_de_nopales_1200_600.png',
+    tags: [
+      "gluten-free",
+      "prehispanic",
+      "low_calories",
+      "high_fiber"
+    ]
+  }
 
-  //testing array for tags in recipe cards
-  const testingTagsArray = ["gluten-free", "prehispanic", "low_calories", "high_fiber"]
+  const {recipeTitle, recipeSynopsis, imageURL, tags} = testingData
+  const altImage = recipeTitle
+  const url = imageURL
+  const title = recipeTitle
+  const synopsis = recipeSynopsis
+  const listOfTags = tags
 
+  //=======================================================
+  
   return (
-    // <div className="App">
-    //   <header className="App-header">
-    //     <img src={logo} className="App-logo" alt="logo" />
-    //     <p>
-    //       Edit <code>src/App.js</code> and save to reload.
-    //     </p>
-    //     <a
-    //       className="App-link"
-    //       href="https://reactjs.org"
-    //       target="_blank"
-    //       rel="noopener noreferrer"
-    //     >
-    //       Learn React
-    //     </a>
-    //   </header>
-    // </div>
+
     <div className='title-container'>
 
       <NavBar />
@@ -223,11 +228,11 @@ function App() {
 <div className="tempDivider"></div>
 
       <RecipeCard
-      AltImage={'Card image cap'}
-      SrcImage={'https://d1uz88p17r663j.cloudfront.net/resized/57a0e0353946ed412490f56d78087f6c_Ensalada_de_nopales_1200_600.png'}
-      RecipeTitle={'Ensalada de Nopales'}
-      RecipeDescription={'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'}
-      tagsArray = {testingTagsArray}
+      AltImage={altImage}
+      SrcImage={url}
+      RecipeTitle={title}
+      RecipeDescription={synopsis}
+      tagsArray={listOfTags}
       />
 
 <div className="tempDivider"></div>
