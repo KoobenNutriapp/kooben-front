@@ -13,7 +13,7 @@ import UploadImage from './components/UploadImage';
 import TagsManager from './components/TagsManager';
 import Modals from './components/Modals';
 import MainSearchBar from './components/MainSearchBar';
-import MultilineTextFields from './components/StepsProcedureInputs';
+
 
 function App() {
 
@@ -315,7 +315,6 @@ function App() {
 
 <div className="tempDivider"></div>
 
-<MultilineTextFields />
 
     </div>
   );
