@@ -2,7 +2,6 @@ import { Container, Row, Col } from 'reactstrap';
 import MainSearchBar from "../../components/MainSearchBar";
 import FiltersTable from "../../components/FiltersTable";
 import RecipeCard from "../../components/RecipeCards";
-import { Card, Button, CardTitle, CardText } from 'reactstrap';
 import "./Home.scss"
 
 function Home(){
@@ -37,12 +36,11 @@ function Home(){
             <Container className="container" fluid>
                 <MainSearchBar />
                 <Row className="row">
-                    <Col xs="12" md="2"className="col sideLeft">
-                        <FiltersTable  />
+                    <Col md="2"className="col-1 sideLeft">
                         <FiltersTable  />
 
                     </Col>
-                    <Col xs="12" md="10"className="col sideRight">
+                    <Col md="9"className="col-2 sideRight">
                         <RecipeCard
                             AltImage={altImage}
                             SrcImage={url}
