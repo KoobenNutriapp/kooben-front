@@ -20,15 +20,28 @@ export default function MultilineTextFields() {
     setValue(event.target.value);
   };
 
+
+  const step = {
+    sequence: 1,
+    text: " ",
+    url: " ",
+    _id: " " 
+  }
+
+
   let testArray = [1, 2, 3, 4, 5];
+  let procedureArray = []
 
-  // const [steps, setSteps] = useState([]);
-  // // console.log(steps)
+  const [steps, setSteps] = useState([step]);
+  console.log(steps)
 
-  // const addStep = () => {
-  //     setSteps(steps + 1)
-  //     console.log(steps)
-  //   };
+  const addStep = () => {
+    setSteps(steps +1)
+    step.sequence = steps
+    procedureArray.push(step)
+    };
+
+    console.log(procedureArray)
 
   //   React.useEffect(() => {
   //     testArray.push(steps)
@@ -42,7 +55,7 @@ export default function MultilineTextFields() {
   return (
     <div>
 
-    <button>Añadir Paso</button>
+    <button onClick={addStep}>Añadir Paso</button>
 
   {    testArray.map(item => (
 
