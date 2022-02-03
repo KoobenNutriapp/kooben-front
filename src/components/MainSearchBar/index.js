@@ -83,7 +83,7 @@ function MainSearchBar() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Enviando');
+    console.log('Enviando...');
   }
 
   const menuId = 'primary-search-account-menu';
@@ -142,7 +142,7 @@ function MainSearchBar() {
 
   return (
     <Box sx={{ flexGrow: 1}} className='bk'>
-      <AppBar position="static" >
+      <AppBar position="fixed" >
         <Toolbar className='background_color'>
           <IconButton
             size="large"

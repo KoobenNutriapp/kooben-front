@@ -1,0 +1,46 @@
+body{
+    background-color: rgb(245 245 245);
+}
+
+.container{
+    border: 1px black solid;
+    margin-top: 65px;
+    display: flex;
+
+    
+
+}
+
+.row{
+    border: 1px blue solid;
+    display: flex;
+    justify-content:end;
+   
+    width: 100%;
+
+}
+
+
+.sideLeft{
+    position: fixed;
+    top: 65px;
+    left: 144px;
+    border: 1px black solid;
+
+
+
+    background-color: rgb(255 255 255);
+    border-radius: 5px;
+}
+
+.sideRight{
+    border: 1px black solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: rgb(255 255 255);
+    border-radius: 5px;
+
+}
