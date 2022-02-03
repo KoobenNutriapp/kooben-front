@@ -1,0 +1,21 @@
+@import '../../styles/colors';
+@import '../../styles/typography';
+
+.typography_title{
+    font-family: $title-font;
+    font-size: 32px;
+}
+
+.typography_search{
+    font-family: $title-font;
+    font-size: 15px;
+}
+
+.typography_login{
+    font-family: $title-font;
+    font-size: 20px;
+}
+
+.background_color{
+    background-color: $mayan-blue;
+}
