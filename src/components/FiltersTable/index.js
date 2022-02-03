@@ -1,11 +1,29 @@
+import { useState } from 'react';
 import { Table, Label, Input } from "reactstrap";
 import "./FiltersTable.scss";
 
 const FiltersTable = () => {
+  
+  const [selection, setSelection] = useState([]);
+
   const handleFilters = (e) => {
-    console.log(e.target.checked);
-    console.log(e.target.id);
+    const checked = e.target.checked;
+    const id = e.target.id
+
+    const removeItemFromArr = ( arr, item ) => {
+      return arr.filter( e => e !== item );
+    };
+
+    if(checked){
+      setSelection([...selection,id])
+    }else{
+      const removeSelection = removeItemFromArr(selection,id)
+      setSelection(removeSelection);
+    }
+
   };
+
+  console.table(selection);
 
   return (
     <div className="frameFiltersTable">

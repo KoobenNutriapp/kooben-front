@@ -1,4 +1,4 @@
-import {useEffect,useState} from 'react';
+import { useEffect,useState } from 'react';
 import { getRecipes } from "../../services/recipes";
 import { Container, Row, Col } from 'reactstrap';
 import MainSearchBar from "../../components/MainSearchBar";
