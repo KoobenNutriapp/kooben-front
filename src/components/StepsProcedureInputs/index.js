@@ -1,41 +1,120 @@
-// import {useState} from 'react';
-import {Form, Label, Input, FormGroup} from 'reactstrap';
-import Buttons from '../../components/Buttons'
-import './StepsProcedureInputs.scss';
+// // import {useState} from 'react';
+// import {Form, Label, Input, FormGroup} from 'reactstrap';
+// import Buttons from '../../components/Buttons'
+// import './StepsProcedureInputs.scss';
 
-function ProcedureSteps(){
+import * as React from 'react';
+import {useState} from 'react'
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input'
+import Button from '@mui/material/Button'
+import IconButton from '@mui/material/IconButton'
+// import PhotoCamera from '@mui/material/PhotoCamera'
 
 
-    const testingHandler = (e) => {
-        console.log(e.target.value)
-    }
-    return(
-        <div>
+export default function MultilineTextFields() {
+  const [value, setValue] = useState('Controlled');
 
-            <Input
-            className='Input-Style'
-            id = 'CreateTitleInput'
-            name='CreateTitleInput'
-            placeholder='Dale el mejor título a tus creaciones'
-            type= 'textarea'
-            // onChange={(e)=> {setTitle(e.target.value)}}
-            />
+  const handleChange = (event) => {
+    setValue(event.target.value);
+  };
 
-            {/* <Buttons
-                    color = {$mayan-blue}
-                    children={'Agregar Paso'}
-                    size={'small'}
-                    callback={}/> */}
+  let testArray = [1, 2, 3, 4, 5];
 
-                    <Buttons 
-                    color={$mayan-blue}
-                    children={'Añadir Paso'}
-                    size={small}
-                    callback={testingHandler}
-                    />
+  // const [steps, setSteps] = useState([]);
+  // // console.log(steps)
 
-        </div>
-    );
-};
+  // const addStep = () => {
+  //     setSteps(steps + 1)
+  //     console.log(steps)
+  //   };
 
-export default ProcedureSteps
+  //   React.useEffect(() => {
+  //     testArray.push(steps)
+  //     console.log(testArray)
+
+  //   }, [steps])
+
+  // console.log(steps);
+  // console.log(testArray);
+
+  return (
+    <div>
+
+    <button>Añadir Paso</button>
+
+  {    testArray.map(item => (
+
+      <Box
+      component="form"
+      sx={{
+        '& .MuiTextField-root': { m: 1, width: '25ch' },
+      }}
+      noValidate
+      autoComplete="off"
+    >
+      <div>
+        <TextField
+          id="outlined-multiline-flexible"
+          label=" "
+          multiline
+          maxRows={4}
+          value={value}
+          onChange={handleChange}
+        />
+
+      </div>   
+    </Box>
+    ))}
+
+    </div>
+ 
+
+
+
+  );
+}
+
+
+
+
+
+
+
+// function ProcedureSteps(){
+
+
+//     const testingHandler = (e) => {
+//         console.log(e.target.value)
+//     }
+//     return(
+//         <div>
+
+//             <Input
+//             className='Input-Style'
+//             id = 'CreateTitleInput'
+//             name='CreateTitleInput'
+//             placeholder='Dale el mejor título a tus creaciones'
+//             type= 'textarea'
+//             // onChange={(e)=> {setTitle(e.target.value)}}
+//             />
+
+//             {/* <Buttons
+//                     color = {$mayan-blue}
+//                     children={'Agregar Paso'}
+//                     size={'small'}
+//                     callback={}/> */}
+
+//                     <Buttons 
+//                     color={$mayan-blue}
+//                     children={'Añadir Paso'}
+//                     size={small}
+//                     callback={testingHandler}
+//                     />
+
+//         </div>
+//     );
+// };
+
+// export default MultilineTextFields
