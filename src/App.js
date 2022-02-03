@@ -6,7 +6,7 @@ import Pills from "./components/Pills/";
 import RecipeCard from './components/RecipeCards';
 import IngredientsTable from "./components/IngredientsTable";
 import FiltersTable from './components/FiltersTable';
-
+import Like from './components/ButtonaddIngredient';
 function App() {
 
   const ingredients = [
@@ -208,6 +208,9 @@ function App() {
 
 <div className="tempDivider"></div>
       <FiltersTable />
+
+<div className="tempDivider"></div>
+      <Like />
 
 <div className="tempDivider"></div>
 
