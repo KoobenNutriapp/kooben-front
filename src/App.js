@@ -12,6 +12,7 @@ import SelectIngredient from './components/SelectIngredient';
 import UploadImage from './components/UploadImage';
 import TagsManager from './components/TagsManager';
 import Modals from './components/Modals';
+import MainSearchBar from './components/MainSearchBar';
 
 function App() {
 
@@ -302,7 +303,16 @@ function App() {
 
 <div className="tempDivider"></div>
 
+
+      <MainSearchBar />
+
+
+<div className="tempDivider"></div>
+
       <UploadImage />
+
+
+<div className="tempDivider"></div>
 
     </div>
   );
