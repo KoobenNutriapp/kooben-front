@@ -12,6 +12,7 @@ import SelectIngredient from './components/SelectIngredient';
 import UploadImage from './components/UploadImage';
 import TagsManager from './components/TagsManager';
 import Modals from './components/Modals';
+import ProcedureSteps from './components/StepsProcedureInputs';
 
 function App() {
 
@@ -303,6 +304,10 @@ function App() {
 <div className="tempDivider"></div>
 
       <UploadImage />
+
+<div className="tempDivider"></div>
+
+      <ProcedureSteps />
 
     </div>
   );
