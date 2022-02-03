@@ -53,9 +53,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-function MainSearchBar() {
+function MainSearchBar({callback}) {
+  
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+
+  const [content, setContent] = useState('');
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -79,11 +82,16 @@ function MainSearchBar() {
 
   const handleSearch = (e) => {
     console.log(e.currentTarget.value);
+    setContent(e.currentTarget.value)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Enviando...');
+    if(content.trim().length > 2){
+      callback(content);
+      setContent(e.target.reset());
+    }
   }
 
   const menuId = 'primary-search-account-menu';
