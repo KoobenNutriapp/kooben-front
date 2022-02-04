@@ -4,7 +4,7 @@ import Buttons from "./components/Buttons/";
 import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
 import IngredientsDynamicTable from "./components/IngredientsDynamicTable";
-import RecipeCard from './components/RecipeCards';
+// import RecipeCard from './components/RecipeCards';
 import FiltersTable from './components/FiltersTable';
 import IngredientsStaticTable from './components/IngredientsStaticTable';
 import CreateTitleInput from './components/CreateTitleInput';
@@ -13,6 +13,8 @@ import UploadImage from './components/UploadImage';
 import TagsManager from './components/TagsManager';
 import Modals from './components/Modals';
 import MainSearchBar from './components/MainSearchBar';
+import RecipeCards from './components/RecipeCards'
+
 
 function App() {
 
@@ -88,7 +90,7 @@ function App() {
   
   const testingData = {
     recipeTitle: "Ensalada de nopales",
-    recipeSynopsis: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.',
+    recipeSynopsis: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.',
     imageURL: 'https://d1uz88p17r663j.cloudfront.net/resized/57a0e0353946ed412490f56d78087f6c_Ensalada_de_nopales_1200_600.png',
     tags: [
       "gluten-free",
@@ -266,13 +268,13 @@ function App() {
 
 <div className="tempDivider"></div>
 
-      <RecipeCard
+      {/* <RecipeCard
       AltImage={altImage}
       SrcImage={url}
       RecipeTitle={title}
       RecipeDescription={synopsis}
       tagsArray={listOfTags}
-      />
+      /> */}
 
 <div className="tempDivider"></div>
 
@@ -313,6 +315,18 @@ function App() {
 
 
 <div className="tempDivider"></div>
+
+<RecipeCards
+
+AltImage={altImage}
+SrcImage={url}
+RecipeTitle={title}
+RecipeDescription={synopsis}
+tagsArray={listOfTags}
+
+/>
+
+
 
     </div>
   );
