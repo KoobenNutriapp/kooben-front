@@ -18,10 +18,10 @@ function getTags(Array){
 
 function RecipeCards({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsArray}) {
   return (
-    <Card sx={{ maxWidth: 680 }} sy={{minHeight: 400 }} className='FullCard'>
+    <Card sx={{ maxWidth: 680 }} sy={{height: 600 }} className='FullCard'>
       <CardMedia
         component="img"
-        height="220"
+        height="200"
         image={SrcImage}
         alt={AltImage}
       />
@@ -34,11 +34,12 @@ function RecipeCards({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsAr
         <div className='Tags-Section'>
             {getTags(tagsArray)}
         </div>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" color="text.secondary" className='Recipe-Description'>
           {RecipeDescription}
         </Typography>
       </CardContent>
       <CardActions>
+        {/* <Button size="small">Share</Button> */}
         <Button size="small">Leer más</Button>
       </CardActions>
     </Card>

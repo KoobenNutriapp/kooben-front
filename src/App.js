@@ -107,7 +107,9 @@ function App() {
   const synopsis = recipeSynopsis
   const listOfTags = tags
 
-  //=======================================================
+  const synopsis2 = 'Un manjar de agua dulce que, si todvía no has probado, te estás perdiendo de mucho.'
+
+//=======================================================
   
   return (
     // <div className="App">
@@ -322,6 +324,16 @@ AltImage={altImage}
 SrcImage={url}
 RecipeTitle={title}
 RecipeDescription={synopsis}
+tagsArray={listOfTags}
+
+/>
+
+<RecipeCards
+
+AltImage={altImage}
+SrcImage={url}
+RecipeTitle={title}
+RecipeDescription={synopsis2}
 tagsArray={listOfTags}
 
 />
