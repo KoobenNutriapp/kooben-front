@@ -270,7 +270,7 @@ function App() {
       />
 
 <div className="tempDivider"></div>
-      <FiltersTable />
+      {/* <FiltersTable /> */}
 
 <div className="tempDivider"></div>
 
