@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Table, Label, Input } from "reactstrap";
 import "./FiltersTable.scss";
 
-const FiltersTable = () => {
+const FiltersTable = ({callback}) => {
+  console.log(callback);
   
   const [selection, setSelection] = useState([]);
-
+  
   const handleFilters = (e) => {
     const checked = e.target.checked;
     const id = e.target.id
@@ -21,6 +22,7 @@ const FiltersTable = () => {
       setSelection(removeSelection);
     }
 
+    callback(selection)
   };
 
   console.table(selection);

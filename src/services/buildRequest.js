@@ -26,6 +26,6 @@ const getRecipes = async (search) => {
 
 
 
-export { getRecipes,
+export { request,
          
 };

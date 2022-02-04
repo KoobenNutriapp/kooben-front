@@ -4,7 +4,7 @@ const PATH_RECIPE = "/recipe";
 const PATH_INGREDIENT = "/ingredient";
 const PATH_PAYMENT = "/payment";
 const PATH_USER = "/user"
-const SEARCH = "?search="
+const SEARCH = "search="
 
 export { BASE_URL,
          PORT,

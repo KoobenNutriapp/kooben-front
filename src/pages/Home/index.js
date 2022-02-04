@@ -9,7 +9,7 @@ import "./Home.scss"
 function Home(){
 
 const [recipes, setRecipes] = useState([])
-const [search, setSearch] = useState(null);
+const [search, setSearch] = useState([]);
 
 useEffect(() => {  
     const fetchData = async () => {    
@@ -21,9 +21,11 @@ useEffect(() => {
   },[search]);
 
   const handleSearch = (datosSearch) => {
-    console.log(datosSearch);
+    console.log('data: ' + datosSearch);
     setSearch(datosSearch)
   }
+
+  
 
     return(
         <>
@@ -33,7 +35,9 @@ useEffect(() => {
                 />
                 <Row className="row">
                     <Col md="2"className="col-1 sideLeft">
-                        <FiltersTable  />
+                        <FiltersTable  
+                          callback={handleSearch} 
+                        />
                     </Col>
                     <Col md="9"className="col-2 sideRight">
                         {
