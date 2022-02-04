@@ -9,11 +9,13 @@ function CreateTitleInput(){
 
     return(
         <div className="Input-Title-Container fluid">
+
             <Form>
             <FormGroup className='FormGroup'>
             <Label for = "CreateTitleInput" >
                 Nombre: {title}
             </Label>
+
             <Input
             className='Input-Style'
             id = 'CreateTitleInput'
@@ -25,8 +27,8 @@ function CreateTitleInput(){
 
             </FormGroup>
             </Form>
-        </div>
 
+        </div>
 
     )
 
