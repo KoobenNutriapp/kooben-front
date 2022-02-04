@@ -1,0 +1,57 @@
+@import '../../styles/typography';
+@import '../../styles/colors';
+
+
+.Recipe-Card{
+    width: 700px;
+    border: 2px solid $mayan-blue !important;
+    // margin: 15px;
+    height: 600px;
+    justify-content: center !important;
+
+    .Card-Image{
+        height: 60% !important;
+        // width: 95% !important;
+        padding: 1%;
+        justify-content: space-around !important;
+        border-radius: 10px;
+    }
+
+    .Card-Body{
+        height: 25% !important;
+
+        .Card-Title{
+            font-family: $title-font !important;
+            flex-direction: row !important;
+            // width: 50% !important;
+
+            // .Title-Container{
+            //     width: 40%;
+            // }
+
+        }
+
+        .Title-Likes-Container{
+            display: flex;
+            flex-direction: row;
+        }
+
+        .Card-Text{
+            font-family: $steps-recipe-font !important;
+            font-size: large;
+            text-align: justify;
+            height: 100px;
+            width: 600px;
+            overflow-y: scroll;
+            // overflow: auto !important;
+            // .text-box{
+            //     min-width: 50px;
+            //     min-height: 5px;               
+            //     background: yellow;
+            //     overflow: scroll;
+
+            // }
+        }
+
+    }
+}

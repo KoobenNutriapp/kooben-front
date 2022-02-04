@@ -1,13 +1,11 @@
-import {
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-    CardText,
-} from 'reactstrap';
-import LikesCounter from '../LikesCounter';
+import * as React from 'react';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 import Pills from '../Pills';
-
 import './RecipeCards.scss'
 
 
@@ -16,42 +14,35 @@ function getTags(Array){
       <Pills key={`Tag${index}`} children={item} />
     )
 } 
-  
 
-function RecipeCard({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsArray}){
-    return(
-    <Card className='Recipe-Card'>
-    <CardImg
 
-      alt={AltImage}
+function RecipeCards({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsArray}) {
+  return (
+    <Card sx={{ maxWidth: 680 }} sy={{minHeight: 400 }} className='FullCard'>
+      <CardMedia
+        component="img"
+        height="220"
+        image={SrcImage}
+        alt={AltImage}
+      />
+      <CardContent className = 'CardContent-Section'>
 
-      src={SrcImage}
-      top
-      className='Card-Image'
-    />
-    <CardBody className='Card-Body'>
-  <div  className='Title-Likes-Container'>
-    <div className='Title-Container col-lg-10 col-m-6'>
-    <CardTitle tag="h4" className='Card-Title'>
-        {RecipeTitle}
-    </CardTitle>
-    </div>
-    <div className='Likes-Counter-Container'>
-    <LikesCounter />
-    </div>
-  </div>
+            <Typography gutterBottom variant="h6" component="div" className='Typography' >
+            {RecipeTitle}
+            </Typography>
 
-  <div className='Tags-Section'>
-    {getTags(tagsArray)}
-  </div>
-  
-      <CardText className='Card-Text'>
-        {RecipeDescription}      
-      </CardText>
+        <div className='Tags-Section'>
+            {getTags(tagsArray)}
+        </div>
+        <Typography variant="body2" color="text.secondary">
+          {RecipeDescription}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button size="small">Leer más</Button>
+      </CardActions>
+    </Card>
+  );
+  }
 
-    </CardBody>
-  </Card>
-    )
-}
-
-export default RecipeCard;
+  export default RecipeCards
