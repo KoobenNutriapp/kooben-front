@@ -2,6 +2,10 @@ import { BASE_URL, PORT, PATH_RECIPE, SEARCH } from "../utils/constants";
 let request = null;
 
 const getRecipes = async (search) => {
+
+
+
+
   if(search){
     request = `${BASE_URL}:${PORT}${PATH_RECIPE}?${SEARCH}${search}`
   }else{
@@ -12,7 +16,7 @@ const getRecipes = async (search) => {
     const response = await fetch(request, {
       method: "GET",
     });
-    console.log(response);
+    //console.log(response);
     return await response.json();
   } catch (error) {
     console.error(error);
