@@ -4,7 +4,7 @@
 // import './StepsProcedureInputs.scss';
 
 import * as React from 'react';
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input'
@@ -13,51 +13,42 @@ import IconButton from '@mui/material/IconButton'
 // import PhotoCamera from '@mui/material/PhotoCamera'
 
 
-export default function MultilineTextFields() {
+export default function ProcedureStep() {
   const [value, setValue] = useState('Controlled');
 
   const handleChange = (event) => {
     setValue(event.target.value);
   };
 
+  // const step = {
+  //   sequence: 1,
+  //   text: " ",
+  //   url: " ",
+  //   _id: " " 
+  // }
 
-  const step = {
-    sequence: 1,
-    text: " ",
-    url: " ",
-    _id: " " 
-  }
+const [steps, setSteps] = useState([1])
+  // const [steps, setSteps] = useState(1);
 
-
-  let testArray = [1, 2, 3, 4, 5];
-  let procedureArray = []
-
-  const [steps, setSteps] = useState([step]);
+  
   console.log(steps)
+  
+  // let numberOfSteps = [];
 
   const addStep = () => {
-    setSteps(steps +1)
-    step.sequence = steps
-    procedureArray.push(step)
+    setSteps([1, ...steps])
+    let paso = steps
+    numberOfSteps.push(paso)
     };
-
-    console.log(procedureArray)
-
-  //   React.useEffect(() => {
-  //     testArray.push(steps)
-  //     console.log(testArray)
-
-  //   }, [steps])
-
-  // console.log(steps);
-  // console.log(testArray);
+    
+    console.log(numberOfSteps)
 
   return (
     <div>
 
     <button onClick={addStep}>Añadir Paso</button>
 
-  {    testArray.map(item => (
+  {    numberOfSteps.map(item => (
 
       <Box
       component="form"

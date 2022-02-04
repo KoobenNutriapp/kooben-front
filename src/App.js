@@ -14,6 +14,7 @@ import TagsManager from './components/TagsManager';
 import Modals from './components/Modals';
 import MainSearchBar from './components/MainSearchBar';
 import RecipeCards from './components/RecipeCards'
+import ProcedureStep from './components/StepsProcedureInputs';
 
 
 function App() {
@@ -337,8 +338,9 @@ RecipeDescription={synopsis2}
 tagsArray={listOfTags}
 
 />
+<div className="tempDivider"></div>
 
-
+<ProcedureStep />
 
     </div>
   );
