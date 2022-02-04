@@ -22,10 +22,8 @@ useEffect(() => {
 
   const handleSearch = (datosSearch) => {
     console.log('data: ' + datosSearch);
-    setSearch([datosSearch])
+    setSearch(datosSearch)
   }
-
-  
 
     return(
         <>

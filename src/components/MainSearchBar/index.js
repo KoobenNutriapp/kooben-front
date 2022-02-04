@@ -88,8 +88,9 @@ function MainSearchBar({callback}) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Enviando...');
-    if(content.trim().length > 2){
-      callback(content);
+    if(content?.trim().length > 2){
+      const builRequest = `search=${content?.trim()}`
+      callback(builRequest);
       setContent(e.target.reset());
     }
   }

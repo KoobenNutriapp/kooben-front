@@ -48,6 +48,8 @@ function App() {
     }
   ]
 
+  console.log(ingredients.join());
+
   const newIngredient=[
     {
       name:"perejil",
@@ -75,6 +77,7 @@ function App() {
     { key: 3, label: '🍟high-sugars' },
     { key: 3, label: '🍔high-cholesterol' },
   ]
+
 
   const handleAddIngredient = (e) =>{
     const join = [...ingredients,...newIngredient]
