@@ -21,7 +21,7 @@ function RecipeCards({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsAr
     <Card sx={{ maxWidth: 680 }} sy={{minHeight: 400 }} className='FullCard'>
       <CardMedia
         component="img"
-        height="220"
+        height="200"
         image={SrcImage}
         alt={AltImage}
       />
@@ -39,6 +39,7 @@ function RecipeCards({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsAr
         </Typography>
       </CardContent>
       <CardActions>
+
         <Button size="small">Leer más</Button>
       </CardActions>
     </Card>
