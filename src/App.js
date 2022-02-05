@@ -14,6 +14,7 @@ import TagsManager from './components/TagsManager';
 import Modals from './components/Modals';
 import MainSearchBar from './components/MainSearchBar';
 import RecipeCards from './components/RecipeCards'
+import { Carousel } from 'reactstrap';
 
 
 function App() {
@@ -341,7 +342,13 @@ tagsArray={listOfTags}
 
 />
 
+<div className="tempDivider"></div>
 
+<Carousel 
+
+/>
+
+<div className="tempDivider"></div>
 
     </div>
   );

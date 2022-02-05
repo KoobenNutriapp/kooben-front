@@ -175,6 +175,7 @@ function MainSearchBar({callback}) {
                 placeholder="Busca tu receta…"
                 inputProps={{ 'aria-label': 'search' }}
                 onChange={handleSearch}
+                fullWidth="true"
               />
             </Search>
           </form>
