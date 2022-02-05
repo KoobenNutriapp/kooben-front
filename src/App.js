@@ -3,41 +3,54 @@ import NavBar from './components/NavBar'
 import Buttons from "./components/Buttons/";
 import NutFactTable from './components/NutFactTable';
 import Pills from "./components/Pills/";
-import RecipeCard from './components/RecipeCards';
-import IngredientsTable from "./components/IngredientsTable";
+import IngredientsDynamicTable from "./components/IngredientsDynamicTable";
+// import RecipeCard from './components/RecipeCards';
 import FiltersTable from './components/FiltersTable';
 import Like from './components/ButtonaddIngredient';
+import IngredientsStaticTable from './components/IngredientsStaticTable';
+import CreateTitleInput from './components/CreateTitleInput';
+import SelectIngredient from './components/SelectIngredient';
+import UploadImage from './components/UploadImage';
+import TagsManager from './components/TagsManager';
+import Modals from './components/Modals';
+import MainSearchBar from './components/MainSearchBar';
+import RecipeCards from './components/RecipeCards'
+import { Carousel } from 'reactstrap';
+
+
 function App() {
 
   const ingredients = [
     {
-      name:"nopal",
+      name:"nopal 🌵",
       equivalence:{
-        cup:60,
-        spoon:5,
-        piece:110,
-        gram:1
+        cup:5,
+        spoon:30,
+        piece:2,
+        gram:110
       }
     },
     {
-      name:"jitomate",
+      name:"jitomate 🍅",
       equivalence:{
-        cup:40,
-        spoon:7,
-        piece:80,
-        gram:1
+        cup:4,
+        spoon:20,
+        piece:1,
+        gram:70
       }
     },
     {
-      name:"cebolla",
+      name:"cebolla 🧅",
       equivalence:{
-        cup:50,
-        spoon:8,
-        piece:70,
-        gram:1
+        cup:3,
+        spoon:15,
+        piece:1,
+        gram:65
       }
     }
   ]
+
+  console.log(ingredients.join());
 
   const newIngredient=[
     {
@@ -51,13 +64,58 @@ function App() {
     }
   ]
 
+  const tagsArr=[
+    { key: 0, label: '🥦healthy' },
+    { key: 1, label: '💀 prehispanic' },
+    { key: 2, label: '🍏low-calories' },
+    { key: 3, label: '🍆high-fiber' },
+    { key: 3, label: '🍕high-calories' },
+    { key: 3, label: '🍉low_sodium' },
+    { key: 3, label: '🥩high-proteins' },
+    { key: 3, label: '🍦low_sugars' },
+    { key: 3, label: '🥝low_fat' },
+    { key: 3, label: '🍣low_cholesterol' },
+    { key: 3, label: '🥒low_glycemic_load' },
+    { key: 3, label: '🍟high-sugars' },
+    { key: 3, label: '🍔high-cholesterol' },
+  ]
+
+
   const handleAddIngredient = (e) =>{
     const join = [...ingredients,...newIngredient]
     console.log(join);
     return
   }
+  
+  const handleModal = (e) => {
+    console.log('Ejecutar cuando se acepta');
+  }
 
+  //data only for card-recipe testing ====================
+  
+  const testingData = {
+    recipeTitle: "Ensalada de nopales",
+    recipeSynopsis: 'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer. This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.',
+    imageURL: 'https://d1uz88p17r663j.cloudfront.net/resized/57a0e0353946ed412490f56d78087f6c_Ensalada_de_nopales_1200_600.png',
+    tags: [
+      "gluten-free",
+      "prehispanic",
+      "low_calories",
+      "high_fiber"
+    ]
+  }
 
+  const {recipeTitle, recipeSynopsis, imageURL, tags} = testingData
+  const altImage = recipeTitle
+  const url = imageURL
+  const title = recipeTitle
+  const synopsis = recipeSynopsis
+  const listOfTags = tags
+
+  const synopsis2 = 'Un manjar de agua dulce que, si todvía no has probado, te estás perdiendo de mucho.'
+
+//=======================================================
+  
   return (
     // <div className="App">
     //   <header className="App-header">
@@ -85,7 +143,7 @@ function App() {
 
 
       <Buttons  
-        children="Haz favor de exportar"
+        children="Crear receta"
         size="sm"
         color="mexican-pink"
       />
@@ -195,7 +253,13 @@ function App() {
 
 <div className="tempDivider"></div>
 
-      <IngredientsTable 
+      <IngredientsStaticTable
+        ingredients={ingredients} 
+      />
+
+<div className="tempDivider"></div>
+
+      <IngredientsDynamicTable 
         ingredients={ingredients} 
       />
 
@@ -214,12 +278,82 @@ function App() {
 
 <div className="tempDivider"></div>
 
-      <RecipeCard
-      AltImage={'Card image cap'}
-      SrcImage={'https://d1uz88p17r663j.cloudfront.net/resized/57a0e0353946ed412490f56d78087f6c_Ensalada_de_nopales_1200_600.png'}
-      RecipeTitle={'Ensalada de Nopales'}
-      RecipeDescription={'This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.'}
+      {/* <RecipeCard
+      AltImage={altImage}
+      SrcImage={url}
+      RecipeTitle={title}
+      RecipeDescription={synopsis}
+      tagsArray={listOfTags}
+      /> */}
+
+<div className="tempDivider"></div>
+
+<CreateTitleInput />
+
+<div className="tempDivider"></div>
+
+      <SelectIngredient
+        ingredients={ingredients}  
       />
+
+<div className="tempDivider"></div>
+
+      <TagsManager 
+        tags={tagsArr}
+      />
+
+<div className="tempDivider"></div>
+
+      <Modals 
+        buttonText={'Insert here your button text or variable'}
+        header={'Insert here your header or variable'}
+        body={'Insert here your body or variable'}
+        footerOK={'Aceptar'}
+        footerNOK={'No aceptar'}
+        callback={handleModal}
+      />
+
+<div className="tempDivider"></div>
+
+
+      <MainSearchBar />
+
+
+<div className="tempDivider"></div>
+
+      <UploadImage />
+
+
+<div className="tempDivider"></div>
+
+<RecipeCards
+
+AltImage={altImage}
+SrcImage={url}
+RecipeTitle={title}
+RecipeDescription={synopsis}
+tagsArray={listOfTags}
+
+/>
+
+<RecipeCards
+
+AltImage={altImage}
+SrcImage={url}
+RecipeTitle={title}
+RecipeDescription={synopsis2}
+tagsArray={listOfTags}
+
+/>
+
+<div className="tempDivider"></div>
+
+<Carousel 
+
+/>
+
+<div className="tempDivider"></div>
+
     </div>
   );
 }

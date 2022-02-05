@@ -1,4 +1,5 @@
 @import '../../styles/colors';
+@import '../../styles/typography';
 
 .mayan-blue{
     background-color: $mayan-blue !important;
@@ -8,6 +9,9 @@
 
 .mexican-pink{
     background-color: $mexican-pink !important;
-    color: black !important;
-    font-weight:500 !important;
+    color: rgb(245 245 245) !important;
+    font-family: $title-font,Arial, Helvetica, sans-serif;
+    width: 100%;
 }
+
+ 

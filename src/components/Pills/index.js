@@ -2,7 +2,7 @@ import { Badge } from "reactstrap";
 import "./Pills.scss";
 
 
-const Pills = ({children,color,pill}) => {
+const Pills = ({children,color="success",pill}) => {
   return (
     <>
       <Badge 

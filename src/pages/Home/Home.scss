@@ -1,0 +1,43 @@
+body{
+    background-color: rgb(245 245 245);
+}
+
+.container{
+    
+    margin-top: 65px;
+    display: flex;
+}
+
+.row{
+    
+    display: flex;
+    justify-content:flex-end;
+    width: 100%;
+}
+
+
+.sideLeft{
+    position: fixed;
+    top: 65px;
+    left: 190px;
+    
+    background-color: rgb(255 255 255);
+    border-radius: 5px;
+}
+
+.sideRight{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255 255 255);
+    border-radius: 5px;
+}
+
+.btnCreateRecipe{
+    margin-top: 35px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: center;
+}

@@ -3,7 +3,7 @@ import "./Buttons.scss";
 
 
 const Buttons = ({children,size,color,callback}) => {
-  console.log(callback);
+  //console.log(callback);
   return (
     <>
       <Button 
