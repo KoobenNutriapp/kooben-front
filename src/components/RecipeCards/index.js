@@ -11,7 +11,7 @@ import './RecipeCards.scss'
 
 function getTags(Array){
     return Array.map((item, index) => 
-      <Pills key={`Tag${index}`} children={item} />
+      <Pills key={`Tag${index}`} children={item} pill={true} />
     )
 } 
 
