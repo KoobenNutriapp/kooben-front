@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Home from './pages/Home'
 import CreateRecipe from './pages/CreateRecipe'
 import DetailRecipe from './pages/DetailRecipe'
+import NotFound from './pages/NotFound'
 import Login from './pages/Login'
 
 ReactDOM.render(
@@ -17,6 +18,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Routes>
       <Route path='/' element={<App />} />
+      <Route path='*' element={<NotFound />}/>
         <Route path='/home' element={<Home />} />
           <Route path='/CreateRecipe' element={<CreateRecipe />} />
           <Route path='/DetailRecipe' element={<DetailRecipe />} />
