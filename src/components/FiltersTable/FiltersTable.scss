@@ -13,6 +13,7 @@
     font-family: $title-font,Arial, Helvetica, sans-serif;
     text-align: center;
     border-bottom: 2px $mayan-blue solid ;
+    font-size: 20px;
 }
 
 .filterItems{
@@ -20,9 +21,9 @@
     text-align: left;
 }
 
-// .rotation{
-//     animation: rotation 30s infinite linear;
-// }
+.rotation{
+    animation: rotation 30s infinite linear;
+}
 
 @keyframes rotation {
     from {

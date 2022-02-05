@@ -5,27 +5,64 @@ import "./FiltersTable.scss";
 const FiltersTable = ({callback}) => {
   
   const [selection, setSelection] = useState([]);
+  const [prehispanic, setPrehispanic] = useState(false);
+  const [calories, setCalories] = useState(false);
+  const [carbohydrates, setCarbohydrates] = useState(false);
+  const [sodium, setSodium] = useState(false);
+  const [protein, setProtein] = useState(false);
+  const [fat, setFat] = useState(false);
+  const [cholesterol, setCholesterol] = useState(false);
+  const [glycemicLoad, setGlycemicLoad] = useState(false);
 
   useEffect(() => {     
     callback(selection)
   },[selection]);
   
   const handleFilters = (e) => {
-    const checked = e.target.checked;
+    const activated = e.target.checked;
     const id = e.target.id
+
+    switch (true) {
+      case id.includes('prehispanic'):
+        setPrehispanic(!prehispanic);
+        break;
+      case id.includes('calories'):
+        setCalories(!calories);
+        break;
+      case id.includes('carbohydrates'):
+        setCarbohydrates(!carbohydrates);
+        break;
+      case id.includes('sodium'):
+        setSodium(!sodium);
+        break;
+      case id.includes('protein'):
+        setProtein(!protein);
+        break;
+      case id.includes('fat'):
+        setFat(!fat);
+        break;      
+      case id.includes('cholesterol'):
+        setCholesterol(!cholesterol);
+        break;
+      case id.includes('glycemic'):
+        setGlycemicLoad(!glycemicLoad);
+        break;     
+      default:
+        break;
+    }
 
     const removeItemFromArr = ( arr, item ) => {
       return arr.filter( e => e !== item );
     };
 
-    if(checked){
+    if(activated){
       setSelection([...selection,id])
     }else{
       const removeSelection = removeItemFromArr(selection,id)
       setSelection(removeSelection);
     }
+    
   };
-
 
   return (
     <div className="frameFiltersTable">
@@ -43,7 +80,7 @@ const FiltersTable = ({callback}) => {
                 Prehispánico
               </Label>
             </td>
-            <td className="pedernal rotation"></td>
+            <td className={prehispanic ? 'pedernal rotation': 'pedernal'}></td>
           </tr>
           <tr>
             <td>
@@ -52,7 +89,7 @@ const FiltersTable = ({callback}) => {
                 Bajo en Kilocalorías
               </Label>
             </td>
-            <td className="pedernal rotation"></td>
+            <td className={calories? 'chimalli1 rotation': 'chimalli1'}></td>
           </tr>
           <tr>
             <td>
@@ -61,25 +98,7 @@ const FiltersTable = ({callback}) => {
                 Bajo en carbohidratos
               </Label>
             </td>
-            <td className="agua rotation"></td>
-          </tr>
-          <tr>
-            <td>
-              <Label check>
-                <Input type="checkbox" onChange={handleFilters} id="low_sugars=true" />{" "}
-                Bajo en azúcares
-              </Label>
-            </td>
-            <td className="tepetl rotation"></td>
-          </tr>
-          <tr>
-            <td>
-              <Label check>
-                <Input type="checkbox" onChange={handleFilters} id="high_fiber=true" />{" "}
-                Alto en fibra
-              </Label>
-            </td>
-            <td className="chimalli1 rotation"></td>
+            <td className={carbohydrates? 'agua rotation': 'agua'}></td>
           </tr>
           <tr>
             <td>
@@ -88,7 +107,7 @@ const FiltersTable = ({callback}) => {
                 Bajo en sodio
               </Label>
             </td>
-            <td className="coatl rotation"></td>
+            <td className={sodium? 'coatl rotation': 'coatl'}></td>
           </tr>
           <tr>
             <td>
@@ -97,7 +116,7 @@ const FiltersTable = ({callback}) => {
                 Alto en proteína
               </Label>
             </td>
-            <td className="venado rotation"></td>
+            <td className={protein ? 'venado rotation': 'venado'}></td>
           </tr>
           <tr>
             <td>
@@ -106,7 +125,7 @@ const FiltersTable = ({callback}) => {
                 Bajo en grasa
               </Label>
             </td>
-            <td className="movimiento rotation"></td>
+            <td className={fat? 'movimiento rotation': 'movimiento'}></td>
           </tr>
           <tr>
             <td>
@@ -115,7 +134,7 @@ const FiltersTable = ({callback}) => {
                 Bajo en colesterol
               </Label>
             </td>
-            <td className="aguila rotation"></td>
+            <td className={cholesterol? 'aguila rotation': 'aguila'}></td>
           </tr>
           <tr>
             <td>
@@ -124,7 +143,7 @@ const FiltersTable = ({callback}) => {
                 Bajo en carga glucémica
               </Label>
             </td>
-            <td className="conejo rotation"></td>
+            <td className={glycemicLoad? 'conejo rotation': 'conejo'}></td>
           </tr>
         </tbody>
       </Table>

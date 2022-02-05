@@ -3,13 +3,13 @@ body{
 }
 
 .container{
-    border: 1px black solid;
+    
     margin-top: 65px;
     display: flex;
 }
 
 .row{
-    border: 1px blue solid;
+    
     display: flex;
     justify-content:flex-end;
     width: 100%;
@@ -19,18 +19,25 @@ body{
 .sideLeft{
     position: fixed;
     top: 65px;
-    left: 166px;
-    border: 1px black solid;
+    left: 190px;
+    
     background-color: rgb(255 255 255);
     border-radius: 5px;
 }
 
 .sideRight{
-    border: 1px black solid;
+    
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: rgb(255 255 255);
     border-radius: 5px;
+}
+
+.btnCreateRecipe{
+    margin-top: 35px;
+    margin-bottom: 35px;
+    display: flex;
+    justify-content: center;
 }
