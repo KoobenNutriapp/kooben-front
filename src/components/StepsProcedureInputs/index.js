@@ -17,14 +17,30 @@ const addSteps = () => {
 }
 console.log(steps)
 
+// const deleteStep = ({arg}) => {
+//   setSteps(steps.splice(arg))
+// }
+
+const deleteStep = (e) => {
+  // console.log(e.currentTarget.id)
+  console.log(e)
+}
+
 function Button(props){
   return(
-    <button onClick={props.onClick}>Añadir Paso</button>
+    <button onClick={props.onClick}>{props.text}</button>
+  );
+};
+
+function AddButton(props){
+  return(
+    <button onSubmit={props.onClick}>{props.text}</button>
   );
 };
 
 function StepsList(){
   return(
+    <div>
     <Box
       component="form"
       sx={{
@@ -44,13 +60,20 @@ function StepsList(){
         />
       </div>   
     </Box>
+    <Button text={'Eliminar Paso'} onClick={deleteStep} />
+    </div>
+
   );
 };
 
   return (
     <div>
-      <Button onClick={addSteps} />
-      {steps.map((item) => (<StepsList />))}
+      <AddButton onSubmit={addSteps} text={'Añadir Paso'} />
+      {steps.map((item, index) => {
+        return(
+          <StepsList id={index} />
+        )
+      })}
     </div>
   );
 }
