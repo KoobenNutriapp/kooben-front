@@ -9,13 +9,17 @@
 
 .Kooben-Brand{
     font-family: $title-font;
-    font-size: x-large !important;
+    font-size: 32px !important;
     
 }
 
 .my-recipe-label{
     font-family: $title-font;
     font-size: large;
+
+    .Link-To-Create-Recipe{
+        text-decoration: none;
+    }
 }
 
 .login-label{

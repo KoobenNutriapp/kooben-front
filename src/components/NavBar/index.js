@@ -26,7 +26,7 @@ function NavBar(){
           light
           className="Kooben-Navbar"
         >
-        <NavbarBrand className = 'Kooben-Brand col-md-9 col-sm-10' href="/">
+        <NavbarBrand className = 'Kooben-Brand col-md-9 col-sm-10' href="/home">
           K'óoben
         </NavbarBrand>
         <NavbarToggler className="NavBarToggler col-md-4" onClick={function noRefCheck(){}} />
@@ -36,7 +36,7 @@ function NavBar(){
             navbar
           >
             <NavItem className="my-recipe-label col-md-5">
-              <NavLink to ="/something">
+              <NavLink href="/CreateRecipe">
                 Mi Receta
               </NavLink>
             </NavItem>
