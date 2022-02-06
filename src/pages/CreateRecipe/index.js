@@ -1,18 +1,38 @@
 import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 import { Container, Row, Col } from "reactstrap";
 import NavBar from "../../components/NavBar";
+import { useState } from 'react';
 import "./CreateRecipe.scss";
+
 
 const CreateRecipe = () => {
 
-  const handleSubmit = (e) =>{
+  // const handleSubmit = (e) =>{
+  //   e.preventDefault()
+  //   console.log('Enviando...');
+  // }
+
+  const [url, setUrl] = useState('');
+  const [file, setFile] = useState('');
+
+
+  const handleLoad = (e) => {
     e.preventDefault()
-    console.log('Enviando...');
+    const imageFile = e.target.files[0]
+    const imageUrl = URL.createObjectURL(imageFile)
+    setUrl(imageUrl)
+    }
+
+  const handleDelete = (e) => {
+    e.preventDefault()
+    console.log(e.target)
   }
 
-  const handleValidation = (e) =>{
-    console.log('validar campo');
-  }
+  const handleSend = (e) => {
+    console.log('Sending to AWS');
+  } 
+
+  console.log(url);
 
   return (
     <>
@@ -21,7 +41,8 @@ const CreateRecipe = () => {
         <Row className="rowCreate">
           <Col md="12" className="mainCreate">
             <h1 className="newRecipeTitle">Crea una nueva receta</h1>
-            <Form onSubmit={handleSubmit}>
+            {/* <Form onSubmit={handleSubmit}> */}
+            <Form>
               <FormGroup row>
               <Label
                   for="title"
@@ -35,7 +56,6 @@ const CreateRecipe = () => {
                     name="title"
                     placeholder="escribe el título de tu receta..."
                     type="text"
-                    onChange={handleValidation}
                   />
                   <FormFeedback></FormFeedback>
                 </Col>
@@ -61,8 +81,8 @@ const CreateRecipe = () => {
                 <FormGroup className='imgContainer'>
                   <img
                     className='thumbnail'
-                    alt='salsa'
-                    src='https://kooben.s3.amazonaws.com/images/home-images/seller.jpg'
+                    alt='image'
+                    src={url}
                   />
                 </FormGroup>
 
@@ -80,6 +100,8 @@ const CreateRecipe = () => {
                       accept="image/png,image/jpeg"
                       name="file"
                       type="file"
+                      onChange={handleLoad}
+                      
                     />
                     <FormText>
                       Agrega la fotografía principal de tu receta. Ten en cuenta que no debe ser 
@@ -87,6 +109,21 @@ const CreateRecipe = () => {
                       .jpg, .jpeg, .png
                     </FormText>
                   </Col>
+                </FormGroup>
+
+                <FormGroup>
+                  <Button
+                    onClick={handleSend}
+                  >
+                    agrega foto
+                  </Button>
+
+                  <Button
+            
+                  >
+                    Borra foto
+                  </Button>
+
                 </FormGroup>
 
                 <FormGroup row>
