@@ -1,7 +1,6 @@
 import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from 'reactstrap';
 import { Container, Row, Col } from "reactstrap";
 import NavBar from "../../components/NavBar";
-import salsa from '../../img/salsa.jpg'
 import "./CreateRecipe.scss";
 
 const CreateRecipe = () => {
@@ -61,8 +60,9 @@ const CreateRecipe = () => {
 
                 <FormGroup className='imgContainer'>
                   <img
-                    src={salsa}
+                    className='thumbnail'
                     alt='salsa'
+                    src='https://kooben.s3.amazonaws.com/images/home-images/seller.jpg'
                   />
                 </FormGroup>
 

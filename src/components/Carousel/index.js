@@ -8,22 +8,34 @@ const Carousel = () => {
       <UncontrolledCarousel
           items={[
             {
-              altText: 'Slide 1',
+              altText: 'elote preparado',
               //caption: 'Slide 1',
               key: 1,
-              src: 'https://picsum.photos/id/123/1200/600'
+              src: 'https://kooben.s3.amazonaws.com/images/home-images/corn.jpg'
             },
             {
-              altText: 'Slide 2',
+              altText: 'mertcado',
               //caption: 'Slide 2',
               key: 2,
-              src: 'https://picsum.photos/id/456/1200/600'
+              src: 'https://kooben.s3.amazonaws.com/images/home-images/market.jpg'
             },
             {
-              altText: 'Slide 3',
+              altText: 'recetas prehispánicas',
               //caption: 'Slide 3',
               key: 3,
-              src: 'https://picsum.photos/id/678/1200/600'
+              src: 'https://kooben.s3.amazonaws.com/images/home-images/recipes.jpg'
+            },
+            {
+              altText: 'salsa mexicana',
+              //caption: 'Slide 3',
+              key: 4,
+              src: 'https://kooben.s3.amazonaws.com/images/home-images/salsa.jpg'
+            },
+            {
+              altText: 'marchanta',
+              //caption: 'Slide 3',
+              key: 5,
+              src: 'https://kooben.s3.amazonaws.com/images/home-images/seller.jpg'
             }
           ]}
       />
