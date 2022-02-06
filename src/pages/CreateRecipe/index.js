@@ -31,7 +31,7 @@ const CreateRecipe = () => {
                   Título:
                 </Label>
                 <Col sm={10}>
-                  <Input 
+                  <Input invalid
                     id="title"
                     name="title"
                     placeholder="escribe el título de tu receta..."
