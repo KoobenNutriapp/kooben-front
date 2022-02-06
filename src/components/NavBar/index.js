@@ -36,7 +36,7 @@ function NavBar(){
             navbar
           >
             <NavItem className="my-recipe-label col-md-5">
-              <NavLink to ="/something">
+              <NavLink href="/CreateRecipe">
                 Mi Receta
               </NavLink>
             </NavItem>

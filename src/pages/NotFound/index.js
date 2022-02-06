@@ -1,6 +1,7 @@
 import MainSearchBar from '../../components/MainSearchBar';
+import Navbar from '../../components/NavBar';
 import './NotFound.scss'
-import {Container} from 'reactstrap';
+import {Container, Nav, Row} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 
@@ -11,31 +12,31 @@ function NotFound(){
 
     const WarningMessage = () => {
         return(
-            <h3>
+            <h4>
                 Ha sucedido un error. La página que estás buscando no existe.
-            </h3>
+            </h4>
         );
     };
 
     const ErrorCode = () =>{
         return(
-            <h3>404</h3>
+            <h1>404</h1>
         );
     };
 
     const SearchRecipeSuggestion = () => {
         return(
-            <h3>
-                Si quieres buscar una nueva receta, da click <Link to='/home'>aquí</Link>.
-            </h3>
+            <h4>
+                Si quieres buscar una nueva receta, da click <Link className='Link-To-Page' to='/home'>aquí</Link>.
+            </h4>
         );
     };
 
     const CreateRecipeSuggestion = () => {
         return (
-        <h3>
-            ¿Quiéres crear una nueva receta? Intenta <Link to='/CreateRecipe'>aquí</Link>.
-        </h3>
+        <h4>
+            ¿Quiéres crear una nueva receta? Intenta <Link className='Link-To-Page' to='/CreateRecipe'>aquí</Link>.
+        </h4>
         );
     };
 
@@ -50,18 +51,19 @@ function NotFound(){
 
     return(
         <>
-        <Container className='container Not-Found-Container' fluid>
-            <MainSearchBar />
-            <WarningMessage />
-            <ErrorCode />
-            <SearchRecipeSuggestion />
-            <CreateRecipeSuggestion />
-            {/* <BackgroundImage
-            alt={altBackgroundImage}
-            src={backgroundImagePath}
-            /> */}
-            {/* <img alt={'traditional mexican kitchen'} src={require('../../img/RuralMexicanKitchen.jpg')} /> */}
-        </Container>|
+        <Container className='Not-Found-Container' fluid>
+
+            {/* <MainSearchBar /> */}
+            <Navbar/>
+            <Row>
+                <Container className='Main-Content-Container col-xs-12 col-lg-8'>
+                    <WarningMessage />
+                    <ErrorCode />
+                    <SearchRecipeSuggestion />
+                    <CreateRecipeSuggestion />
+                </Container>
+            </Row>
+        </Container>
         
         
         </>
