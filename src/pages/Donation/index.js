@@ -8,6 +8,14 @@ const urlQRCode = 'https://kooben.s3.amazonaws.com/QR-paypal-kooben'
 const qrCodeAlt = 'Imagen de código QR para donación a Kooben'
 const mainImageAlt = 'Imagen alusiva a la gastronomía mexicana.'
 
+function DonationInvite(){
+    return(
+        <div>
+            ¿Te gustó la app?, ¡Apóyanos con tu donativo?
+        </div>
+    )
+}
+
 function NoDonate(){
     return(
         <div>
@@ -66,8 +74,8 @@ function DonationPage(){
         <NavBar />
 
         </Row>
-        <Row>
-        <Container className='col-lg-8'>
+        <Row className="Main-Row-Container">
+        <Container fluid className='General-Container col-lg-12'>
         <MainImage />
         <PaypalLogo />
         <NoDonate />
