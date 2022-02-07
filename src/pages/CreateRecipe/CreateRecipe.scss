@@ -1,87 +1,61 @@
-@import '../../styles/typography';
+@import "../../styles/typography";
+@import "../../styles/colors";
 
-body{
-    background-color: rgb(245 245 245);
+body {
+  background-color: rgb(245 245 245);
 }
 
-.containerCreate{
-    margin-top: 55px;
-    display: flex;
+.containerCreate {
+  margin-top: 55px;
+  display: flex;
 }
 
-.rowCreate{
-    display: flex;
-    justify-content:center;
-    width: 100%;
+.rowCreate {
+  display: flex;
+  justify-content: center;
+  width: 100%;
 }
 
-.mainCreate{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(255 255 255);
-    border-radius: 5px;
-    width: 77%;
+.mainCreate {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255 255 255);
+  border-radius: 5px;
+  width: 77%;
 }
 
-.newRecipeTitle{
-    font-family: $title-font;
-    font-size: 40px;
-    font-weight: 800;
-    margin-bottom: 45px;
-    width: 100%;
-    text-align: center;
+.newRecipeTitle {
+  font-family: $title-font;
+  font-size: 40px;
+  font-weight: 800;
+  margin-bottom: 45px;
+  width: 100%;
+  text-align: center;
 }
 
-.synopsis{
-    width: 100%;
-    height: 150px;
+.synopsis {
+  width: 100%;
+  height: 150px;
 }
 
-.imgContainer{
-
-    align-self: flex-end;
-    width: 450px;
-    margin-left: 215px;
+.center {
+  text-align: center;
 }
 
-.thumbnail {
-    display: flex;
-    justify-content: center;
-    border: 1px solid #ddd; /* Gray border */
-    border-radius: 4px;  /* Rounded border */
-    padding: 5px; /* Some padding */
-    width: 100%; /* Set a small width */
-  }
+.ingredients {
+  display: flex;
+  justify-content: center;
+}
 
-  .thumbnail:hover {
-    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
-  }
-
-  .center{
-      text-align: center;
-  }
-
-  .ingredients{
-      display: flex;
-      justify-content: center;
-  }
-
-  .ingredientTable{
-      width: 56%;
-  }
-
-  .nutritionalTable{
-      width: 44%;
-  }
-
-  .boxCalculator{
-    margin-top: 45px;  
-    padding-top: 10px;
-    height: 700px;
-	width: 100%;
-	border: 1px solid #ddd;
-	background: rgb(245 245 245);
-	overflow-y: scroll;
-  }
+.boxCalculator {
+  margin-top: 45px;
+  padding-top: 10px;
+  height: 700px;
+  width: 100%;
+  border: 1px solid #ddd;
+  background: rgb(245 245 245);
+  overflow-y: scroll;
+  border-radius: 5px;
+}
