@@ -11,6 +11,7 @@ import Home from './pages/Home'
 import CreateRecipe from './pages/CreateRecipe'
 import DetailRecipe from './pages/DetailRecipe'
 import Login from './pages/Login'
+import DonationPage from './pages/Donation';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -21,6 +22,7 @@ ReactDOM.render(
           <Route path='/CreateRecipe' element={<CreateRecipe />} />
           <Route path='/DetailRecipe' element={<DetailRecipe />} />
           <Route path='/Login' element={<Login />} />
+          <Route path='/Donation' element={<DonationPage />}/>
       </Routes>
       {/* <App /> */}
     </BrowserRouter>
