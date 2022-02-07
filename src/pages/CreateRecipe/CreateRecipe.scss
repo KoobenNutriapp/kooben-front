@@ -5,13 +5,11 @@ body{
 }
 
 .containerCreate{
-    border: 1px black solid;
     margin-top: 55px;
     display: flex;
 }
 
 .rowCreate{
-    border: 1px black solid;
     display: flex;
     justify-content:center;
     width: 100%;
@@ -24,26 +22,37 @@ body{
     align-items: center;
     background-color: rgb(255 255 255);
     border-radius: 5px;
-    width: 70%;
+    width: 77%;
 }
 
 .newRecipeTitle{
     font-family: $title-font;
-    font-size: 32px;
+    font-size: 40px;
+    font-weight: 800;
+    margin-bottom: 45px;
+    width: 100%;
+    text-align: center;
+}
+
+.synopsis{
+    width: 100%;
+    height: 150px;
 }
 
 .imgContainer{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+    align-self: flex-end;
+    width: 450px;
+    margin-left: 215px;
 }
 
 .thumbnail {
+    display: flex;
+    justify-content: center;
     border: 1px solid #ddd; /* Gray border */
     border-radius: 4px;  /* Rounded border */
     padding: 5px; /* Some padding */
-    width: 150px; /* Set a small width */
+    width: 100%; /* Set a small width */
   }
 
   .thumbnail:hover {
@@ -52,4 +61,27 @@ body{
 
   .center{
       text-align: center;
+  }
+
+  .ingredients{
+      display: flex;
+      justify-content: center;
+  }
+
+  .ingredientTable{
+      width: 56%;
+  }
+
+  .nutritionalTable{
+      width: 44%;
+  }
+
+  .boxCalculator{
+    margin-top: 45px;  
+    padding-top: 10px;
+    height: 700px;
+	width: 100%;
+	border: 1px solid #ddd;
+	background: rgb(245 245 245);
+	overflow-y: scroll;
   }

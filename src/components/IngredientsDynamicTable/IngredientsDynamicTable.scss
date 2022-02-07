@@ -1,26 +1,26 @@
-@import '../../styles/colors';
+@import "../../styles/colors";
 
-.frameIngredientsTable{
-    border:2px $mayan-blue solid;
-    box-shadow: $mayan-blue 5px 10px; 
-    width: 500px !important; 
-    padding: 10px;
+.frameIngredientsTable {
+  border: 1px $mayan-blue solid;
+  box-shadow: $mayan-blue 1px 4px;
+  width: 100%;
+  padding: 10px;
 }
 
-.thinLine{
-    border-bottom: 2px $mayan-blue solid ;
+.thinLine {
+  border-bottom: 1px $mayan-blue solid;
 }
 
-.center{
-    text-align: center;
+.center {
+  text-align: center;
 }
 
-.left{
-    text-align: left;
+.left {
+  text-align: left;
 }
 
-.bin2{
-    color: $mexican-pink;
-    cursor: pointer;
-    padding: 0px !important;
+.bin2 {
+  color: $mexican-pink;
+  cursor: pointer;
+  padding: 0px !important;
 }
