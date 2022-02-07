@@ -16,6 +16,10 @@
 .my-recipe-label{
     font-family: $title-font;
     font-size: large;
+
+    .Link-To-Create-Recipe{
+        text-decoration: none;
+    }
 }
 
 .login-label{
