@@ -1,0 +1,27 @@
+/* Solid border */
+hr.solid {
+    border-top: 3px solid #bbb;
+  }
+
+.title{
+    display: flex;
+    justify-content:center;
+    width: 100%;
+    color: rgb(64, 121, 187);
+}
+
+img{
+    justify-content:center;
+}
+.container{
+    
+    margin-top: 65px;
+    display: flex;
+}
+
+.row{
+    
+    display: flex;
+    justify-content:flex-end;
+    width: 100%;
+}
