@@ -1,0 +1,34 @@
+@import '../../styles/typography';
+@import '../../styles/colors';
+
+.ingredients{
+    display: flex;
+    justify-content: center;
+}
+
+.ingredientTable{
+    width: 56%;
+}
+
+.nutritionalTable{
+    width: 44%;
+}
+
+.btnAddIngredient{
+  border-color: $mexican-pink;
+  font-size: 13px;
+  font-weight:500;
+  border-radius: 5px;
+  background-color: $mexican-pink;
+  // background-color: $mayan-blue;
+}
+
+.btnAddIngredient:hover {
+  box-shadow: 0 0 2px 1px $mexican-pink;
+}
+
+.selectBox{
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
