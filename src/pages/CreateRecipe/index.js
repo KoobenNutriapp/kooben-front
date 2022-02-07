@@ -1,6 +1,8 @@
 import { Button, Form, FormGroup, Label, Input, FormText, FormFeedback } from "reactstrap";
 import { Container, Row, Col } from "reactstrap";
 import NavBar from "../../components/NavBar";
+import IngredientsDynamicTable from '../../components/IngredientsDynamicTable/'
+import NutFactTable from '../../components/NutFactTable/' 
 import { useState } from "react";
 import AWS from "aws-sdk";
 import Compressor from 'compressorjs';
@@ -136,6 +138,7 @@ const CreateRecipe = () => {
                 </Label>
                 <Col sm={10}>
                   <Input
+                    className="synopsis"
                     id="synopsis"
                     name="synopsis"
                     type="textarea"
@@ -143,9 +146,9 @@ const CreateRecipe = () => {
                   />
                 </Col>
               </FormGroup>
-
+              
               <FormGroup className="imgContainer">
-                {thumbnail ? <img className="thumbnail" alt="image" src={image} /> : ''}
+                {thumbnail ? <img className="thumbnail" alt="tu receta" src={image} /> : ''}
               </FormGroup>
 
               <FormGroup row>
@@ -165,15 +168,27 @@ const CreateRecipe = () => {
                   <FormFeedback valid className="center">
                     La imagen se cargó correctamente!
                   </FormFeedback>
-                  <FormFeedback invalid>
+                  <FormFeedback invalid className="center">
                     Parece que el archivo que seleccionaste no es válido. Intenta con una imagen :)
                   </FormFeedback>
-                  <FormText>
+                  <FormText className="center">
                     Agrega la fotografía principal de tu receta. Las imágenes serán
                     optimizadas para web.
                   </FormText>
                 </Col>
               </FormGroup>
+        <Row className="ingredients boxCalculator">
+          <Col className="ingredientTable">
+              <FormGroup>
+                <IngredientsDynamicTable 
+                />
+              </FormGroup>
+          </Col>
+          <Col className="nutritionalTable">
+              <NutFactTable 
+              />
+          </Col>    
+        </Row>
 
               <FormGroup>
                 <Button onClick={handleSend}>agrega foto</Button>
