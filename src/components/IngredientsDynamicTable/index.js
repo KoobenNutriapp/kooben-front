@@ -26,7 +26,7 @@ const IngredientsDynamicTable = ({ ingredients }) => {
           </tr>
         </thead>
         <tbody>
-          {ingredients.map((item, index) => {
+          {ingredients?.map((item, index) => {
             return (
               <tr className="center">
                 <td className="left">{item.name}</td>

@@ -1,28 +1,29 @@
-@import '../../styles/colors';
+@import "../../styles/colors";
 
-.frameNutFactTable{
-    border:1px $mayan-blue solid;
-    width: 400px !important;
-    box-shadow: $mayan-blue 5px 10px;  
-    padding: 10px;
+.frameNutFactTable {
+  border: 1px $mayan-blue solid;
+  width: 100%;
+  box-shadow: $mayan-blue 4px 9px;
+  padding: 10px;
 }
 
-.titleTable{
-    font-size: 30px;
+.titleTable {
+  font-size: 25px;
+  font-weight: 790;
 }
 
-.thickLine{
-    border-bottom: black 15px solid;
+.thickLine {
+  border-bottom: black 13px solid;
 }
 
-.mediumLine{
-    border-bottom: black 8px solid;
+.mediumLine {
+  border-bottom: black 8px solid;
 }
 
-.nutTable{
-    width: 100%;
+.nutTable {
+  width: 100%;
 }
 
-.center{
-    text-align: center;
+.center {
+  text-align: center;
 }

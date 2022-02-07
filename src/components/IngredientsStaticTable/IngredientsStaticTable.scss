@@ -1,14 +1,15 @@
 @import '../../styles/colors';
 
 .frameIngredientsTable{
-    border:2px $mayan-blue solid;
-    box-shadow: $mayan-blue 5px 10px; 
-    width: 500px !important; 
+    border:1px $mayan-blue solid;
+    box-shadow: $mayan-blue 1px 3px; 
+    width: 100%; 
     padding: 10px;
+    margin-bottom: 5px;
 }
 
 .thinLine{
-    border-bottom: 2px $mayan-blue solid ;
+    border-bottom: 1px $mayan-blue solid ;
 }
 
 .center{
