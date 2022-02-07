@@ -4,12 +4,9 @@ import {Container, Row} from 'reactstrap'
 import '../../styles/_colors.scss'
 import image from '../../img/mexican-food-donation.jpg'
 
-
 const urlQRCode = 'https://kooben.s3.amazonaws.com/QR-paypal-kooben'
 const qrCodeAlt = 'Imagen de código QR para donación a Kooben'
 const mainImageAlt = 'Imagen alusiva a la gastronomía mexicana.'
-
-
 
 function NoDonate(){
     return(
@@ -32,60 +29,34 @@ function QRCode(){
     )
 };
 
-// function PayPalButton(){
-//     return(
-//         <div id="donate-button-container">
-//         <div id="donate-button"></div>
-//         <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-//         <script>
-//         PayPal.Donation.Button({
-//         env:'production',
-//         hosted_button_id:'MQRFL8F42EH84',
-//         image: {
-//         src:'https://www.paypalobjects.com/es_XC/i/btn/btn_donate_LG.gif',
-//         alt:'Donar con el botón PayPal',
-//         title:'PayPal - The safer, easier way to pay online!',
-//         }}).render('#donate-button');
-//         </script>
-//         </div>
 
-//     )
-// }
+function PaypalLogo(){
+    return(
+        <div>
+            <table border="0" cellpadding="10" cellspacing="0" align="center">
+                    <tr>
+                        <td align="center"></td>
+                    </tr>
+                    <tr>
+                        <td align="center">
+                        <a href="https://www.paypal.com/c2/webapps/mpp/paypal-popup?locale.x=en_C2" title="PayPal" onclick="javascript:window.open('https://www.paypal.com/c2/webapps/mpp/paypal-popup?locale.x=en_C2','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
+                            <img src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/C2/logos-buttons/optimize/Online_Primary_Acceptance_Mark_RGB_V2.jpg" alt="PayPal" /></a>
+                        </td>
+                    </tr>
+                </table>
+        </div>
+    );
+};
 
-// function PayPalButton(){
-//         return(
-//             <>
-//             <div id="donate-button-container">
-//             <div id="donate-button"></div>
-//             <script src="https://www.paypalobjects.com/donate/sdk/donate-sdk.js" charset="UTF-8"></script>
-//             <script>
-//                 {PayPal.Donation.Button({
-//                 env:'production',
-//                 hosted_button_id:'MQRFL8F42EH84',
-//                 image: {
-//                 src:'https://www.paypalobjects.com/es_XC/i/btn/btn_donate_LG.gif',
-//                 alt:'Donar con el botón PayPal',
-//                 title:'PayPal - The safer, easier way to pay online!',
-//                 }}).render('#donate-button')};
-//             </script>
-//             </div>
-//             </>
-    
-//         )
-//     }
-
-    function RedirectingPayPalButton(){
+function RedirectingPayPalButton(){
         return(
-            <form action="https://www.paypal.com/donate" method="post" target="_top">
-<input type="hidden" name="hosted_button_id" value="MQRFL8F42EH84" />
-<input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donar con el botón PayPal" />
-<img alt="" border="0" src="https://www.paypal.com/es_MX/i/scr/pixel.gif" width="1" height="1" />
-</form>
-        );
-    };
-
-
-
+        <form action="https://www.paypal.com/donate" method="post" target="_top">
+            <input type="hidden" name="hosted_button_id" value="MQRFL8F42EH84" />
+            <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donar con el botón PayPal" />
+            <img alt="" border="0" src="https://www.paypal.com/es_MX/i/scr/pixel.gif" width="1" height="1" />
+        </form>
+    );
+};
 
 
 function DonationPage(){
@@ -96,9 +67,9 @@ function DonationPage(){
 
         </Row>
         <Row>
-        <MainImage />
         <Container className='col-lg-8'>
-
+        <MainImage />
+        <PaypalLogo />
         <NoDonate />
         <QRCode />
         <Buttons
@@ -114,4 +85,4 @@ function DonationPage(){
     );
 };
 
-export default DonationPage;
+export default DonationPage
