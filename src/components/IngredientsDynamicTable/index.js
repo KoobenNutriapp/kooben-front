@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 import "./IngredientsDynamicTable.scss";
 import Tooltip from "@mui/material/Tooltip";
@@ -5,7 +6,19 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 
 const IngredientsDynamicTable = ({ ingredients }) => {
+
+
   console.log(ingredients);
+
+  const [render, setRender] = useState(ingredients);
+
+  useEffect(() => {
+    const initial = () => {
+      setRender(ingredients)
+  };
+  initial();
+  }, [ingredients]);
+
 
   const handleSelection = (e) => {
     console.log(e.target.value);
@@ -26,12 +39,12 @@ const IngredientsDynamicTable = ({ ingredients }) => {
           </tr>
         </thead>
         <tbody>
-          {ingredients?.map((item, index) => {
+          {render.map((item,i) => {
             return (
-              <tr className="center">
-                <td className="left">{item.name}</td>
+              <tr key={item[i]?._id} className="center">
+                <td className="left">{item[i]?.name}</td>
                 <td> - </td>
-                <td>{item.equivalence.cup}</td>
+                {/* <td>{item.equivalence?.cup}</td> */}
                 <td> + </td>
                 <td>
                   <select
@@ -43,7 +56,7 @@ const IngredientsDynamicTable = ({ ingredients }) => {
                     <option value="piece">piezas</option>
                   </select>
                 </td>
-                <td id={index} className="bin2" onClick={handleDeleteIngredient}>
+                <td className="bin2" onClick={handleDeleteIngredient}>
                   {
                     <Tooltip title="Elimina ingrediente" placement="right-start">
                       <IconButton>
