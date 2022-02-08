@@ -1,55 +1,108 @@
 import { useEffect, useState } from "react";
-import { getRecipes } from "../../services/recipes";
-import Alert from "@mui/material/Alert";
-import { Container, Row, Col } from "reactstrap";
+import { getIngredients, getIngredientById } from "../../services/ingredient";
+import { Col } from "reactstrap";
 import SelectIngredient from "../../components/SelectIngredient";
-import IngredientsDynamicTable from '../../components/IngredientsDynamicTable/'
-import NutFactTable from '../../components/NutFactTable/'
+import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
+import NutFactTable from "../../components/NutFactTable/";
 import "./Calculator.scss";
 
 function Calculator() {
   const [addIngredient, setAddIngredient] = useState(false);
-  const [testIngredient, setTestIngredient] = useState([{name:"nopal 🌵",
-      equivalence:{
-        cup:5,
-        spoon:30,
-        piece:2,
-        gram:110}}]);
+  const [ingredients, setIngredients] = useState([
+    { name: "No se encontraron ingredientes 💔" },
+  ]);
+  const [ingredientTable, setIngredientTable] = useState([]);
+  const [detailTable, setDetailTable] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getIngredients();
+      const allIngredients = data.data.ingredients;
+      setIngredients(allIngredients);
+    };
+    fetchData();
+  }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getRecipes(search);
-  //     const allRecipes = data.data.recipes;
-  //     setRecipes(allRecipes);
-  //     setCounter(allRecipes.length);
-  //   };
-  //   fetchData();
-  // }, [search]);
+  useEffect(() => {
+    const response = buildArrayOfIngredients
+    setDetailTable(response)
+    console.log(detailTable);
+  }, [ingredientTable]);
 
   const handleAddIngredient = (e) => {
-    e.preventDefault()
-    setAddIngredient(true)
-    console.log('Agregando ingrediente...');
-  }
+    e.preventDefault();
+    setAddIngredient(true);
+    
+  };
+
+  const getIdOfIngredients = (allIngredients) => {
+      allIngredients?.map(items=>{
+      console.log(items);
+      requestById(items)
+      return 
+    })
+    return
+  };
   
+  const requestById = async (id) => {
+    const data = await getIngredientById(id)
+    console.log(data);
+    setIngredientTable([...ingredientTable,data])
+    console.log(ingredientTable);
+  }
+
+  // const cleanArray = (array) => {
+  //   const uniqueKeys = [...new Set(array)]
+  //   return uniqueKeys
+  // }
+
+
+  const cleanArray = ingredientTable.reduce((acc,ing)=>{
+    if(!acc.includes(ing)){
+      acc.push(ing);
+    }
+    return acc;
+  },[])
+
+
+
+
+ console.log(cleanArray);
+
+  console.log(getIdOfIngredients());
+
+  const buildArrayOfIngredients = ingredientTable?.map(ingredient => {
+    let ingredients = {
+        name:"",
+        equivalence:{}
+      }
+      ingredients.name = ingredient.data.getIngredientById.name
+      ingredients.equivalence = ingredient.data.getIngredientById.equivalence
+      return ingredients
+  })
+
   return (
     <>
       <Col className="ingredientTable">
-        <IngredientsDynamicTable 
-        />
-        <button
-          className="btnAddIngredient" 
-          onClick={handleAddIngredient}>Agrega ingrediente
+        {/* <IngredientsDynamicTable ingredients={ingredientTable} /> */}
+        <IngredientsDynamicTable />
+        <button className="btnAddIngredient" onClick={handleAddIngredient}>
+          Agrega ingrediente
         </button>
         <div className="selectBox">
-          {addIngredient ? <SelectIngredient ingredients={testIngredient}/> : ''}
+          {addIngredient ? (
+            <SelectIngredient
+              ingredients={ingredients}
+              callback={getIdOfIngredients}
+            />
+          ) : (
+            ""
+          )}
         </div>
       </Col>
       <Col className="nutritionalTable">
-          <NutFactTable
-          />
-      </Col> 
+        <NutFactTable />
+      </Col>
     </>
   );
 }
