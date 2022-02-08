@@ -19,6 +19,7 @@ function Home() {
     const fetchData = async () => {
       const data = await getRecipes(search);
       const allRecipes = data.data.recipes;
+      console.log(allRecipes)
       setRecipes(allRecipes);
       setCounter(allRecipes.length);
     };
@@ -104,9 +105,10 @@ function Home() {
             )}
 
             {recipes.map((recipe) => {
+              console.log(recipe._id)
               return (
                 <RecipeCard
-                  key={recipe._id}
+                  Recipekey={recipe._id}
                   AltImage={recipe.title}
                   SrcImage={recipe.url}
                   RecipeTitle={recipe.title}
