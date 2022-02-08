@@ -1,12 +1,38 @@
 import NavBar from "../../components/NavBar";
 import Buttons from "../../components/Buttons";
-import {Container, Row} from 'reactstrap'
+import {Button, Container, Row} from 'reactstrap'
 import '../../styles/_colors.scss'
 import image from '../../img/mexican-food-donation.jpg'
+// import pdfmakedownload from "./pdfContainer";
+
+
+//PDF document creation
+import {pdfMake} from "pdfmake/build/pdfmake";
+// import pdfFonts from "pdfmake/build/vfs_fonts";
+// import documentDefination from "./DocumentDefination";
 
 const urlQRCode = 'https://kooben.s3.amazonaws.com/QR-paypal-kooben'
 const qrCodeAlt = 'Imagen de código QR para donación a Kooben'
 const mainImageAlt = 'Imagen alusiva a la gastronomía mexicana.'
+
+
+
+//============================== PDF document ============
+
+const DocumentDefination = {
+    content: [
+      "First paragraph",
+      "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines"
+    ]
+  };
+
+
+  const pdfmakedownload = () => {
+    pdfMake.createPdf(DocumentDefination).download();
+  };
+
+
+
 
 function DonationInvite(){
     return(
@@ -66,6 +92,18 @@ function RedirectingPayPalButton(){
     );
 };
 
+function DownloadPDF() {
+    return (
+      <div className="App">
+        <h1>Hello CodeSandbox</h1>
+        <h2>Start editing to see some magic happen!</h2>
+        <Button color="primary" onClick={() => {
+            pdfmakedownload()}}>Exportar</Button>
+
+      </div>
+    );
+  }
+
 
 function DonationPage(){
     return(
@@ -85,6 +123,7 @@ function DonationPage(){
         size={'small'}
         color={'$mexican-pink'}
         />
+        <DownloadPDF />
         <RedirectingPayPalButton />
         </Container>
 

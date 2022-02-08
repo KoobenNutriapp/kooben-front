@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
+    "pdfmake": "^0.2.4",
     "sass": "^1.49.0"
   }
 }
