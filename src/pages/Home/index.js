@@ -105,7 +105,6 @@ function Home() {
             )}
 
             {recipes.map((recipe) => {
-              console.log(recipe._id)
               return (
                 <RecipeCard
                   Recipekey={recipe._id}
@@ -114,6 +113,7 @@ function Home() {
                   RecipeTitle={recipe.title}
                   RecipeDescription={recipe.synopsis}
                   tagsArray={recipe.tags}
+                  metaData = {recipe}
                 />
               );
             })}
