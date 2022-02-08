@@ -21,7 +21,7 @@ ReactDOM.render(
       <Route path='*' element={<NotFound />}/>
         <Route path='/home' element={<Home />} />
           <Route path='/CreateRecipe' element={<CreateRecipe />} />
-          <Route path='/DetailRecipe' element={<DetailRecipe />} />
+          <Route path='/DetailRecipe:recipeID' element={<DetailRecipe />} />
           <Route path='/Login' element={<Login />} />
       </Routes>
       {/* <App /> */}
