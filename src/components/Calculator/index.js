@@ -1,55 +1,80 @@
 import { useEffect, useState } from "react";
-import { getRecipes } from "../../services/recipes";
-import Alert from "@mui/material/Alert";
-import { Container, Row, Col } from "reactstrap";
-import SelectIngredient from "../../components/SelectIngredient";
-import IngredientsDynamicTable from '../../components/IngredientsDynamicTable/'
-import NutFactTable from '../../components/NutFactTable/'
+import { getIngredients } from "../../services/ingredient";
+import { Col } from "reactstrap";
+import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
+import NutFactTable from "../../components/NutFactTable/";
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
 import "./Calculator.scss";
 
 function Calculator() {
   const [addIngredient, setAddIngredient] = useState(false);
-  const [testIngredient, setTestIngredient] = useState([{name:"nopal 🌵",
-      equivalence:{
-        cup:5,
-        spoon:30,
-        piece:2,
-        gram:110}}]);
+  const [ingredients, setIngredients] = useState([])
+  const [detailTable, setDetailTable] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getIngredients();
+      const allIngredients = data.ingredients;
+      setIngredients(allIngredients);
+    };
+    fetchData();
+  }, []);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const data = await getRecipes(search);
-  //     const allRecipes = data.data.recipes;
-  //     setRecipes(allRecipes);
-  //     setCounter(allRecipes.length);
-  //   };
-  //   fetchData();
-  // }, [search]);
+  const options = ingredients?.map((option) => {
+    const firstLetter = option.name[0].toUpperCase();
+    return {
+      firstLetter: /[0-9]/.test(firstLetter) ? '0-9' : firstLetter,
+      ...option,
+    };
+  });
 
   const handleAddIngredient = (e) => {
-    e.preventDefault()
-    setAddIngredient(true)
-    console.log('Agregando ingrediente...');
+    e.preventDefault();
+    setAddIngredient(true);
+    
+  };
+
+  const filterDeletingItems = (deleteIngredient) =>{
+    const test = detailTable.filter(item=>{
+      return item._id !== deleteIngredient
+    })
+    setDetailTable(test)
   }
-  
+
+  const handleSelection = (sel) => {
+   sel ? setDetailTable([...detailTable,sel]) : console.log('empty');
+  }
+
   return (
     <>
       <Col className="ingredientTable">
         <IngredientsDynamicTable 
+          ingredients={detailTable} 
+          callback={filterDeletingItems}
         />
-        <button
-          className="btnAddIngredient" 
-          onClick={handleAddIngredient}>Agrega ingrediente
+        <button className="btnAddIngredient" onClick={handleAddIngredient}>
+          Agrega ingrediente
         </button>
         <div className="selectBox">
-          {addIngredient ? <SelectIngredient ingredients={testIngredient}/> : ''}
+          {addIngredient ? (
+          <Autocomplete
+            size='small'
+            options={options?.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+            groupBy={(option) => option.firstLetter}
+            getOptionLabel={(option) => option.name}
+            renderInput={(params) => <TextField {...params} label="Agrega un ingrediente" />}
+            className="selectIngredient"
+            onChange={(e,selection) => handleSelection(selection)}
+          />
+          ) : (
+            ""
+          )}
         </div>
       </Col>
       <Col className="nutritionalTable">
-          <NutFactTable
-          />
-      </Col> 
+        <NutFactTable />
+      </Col>
     </>
   );
 }
