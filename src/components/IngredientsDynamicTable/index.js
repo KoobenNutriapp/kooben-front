@@ -1,32 +1,16 @@
-import { useEffect, useState } from "react";
 import { Table } from "reactstrap";
-import "./IngredientsDynamicTable.scss";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
+import "./IngredientsDynamicTable.scss";
 
-const IngredientsDynamicTable = ({ ingredients }) => {
-
-
-  console.log(ingredients);
-
-  const [render, setRender] = useState(ingredients);
-
-  useEffect(() => {
-    const initial = () => {
-      setRender(ingredients)
-  };
-  initial();
-  }, [ingredients]);
-
-
+const IngredientsDynamicTable = ({ ingredients, callback }) => {
   const handleSelection = (e) => {
-    console.log(e.target.value);
   };
 
   const handleDeleteIngredient = (e) => {
-    console.log(e.currentTarget.id);
-  };
+    callback(e.currentTarget.id)
+  }
 
   return (
     <div className="frameIngredientsTable">
@@ -35,28 +19,30 @@ const IngredientsDynamicTable = ({ ingredients }) => {
           <tr className="thinLine center">
             <th className="left">Ingrediente</th>
             <th colSpan="3">Cantidad</th>
-            <th>Porción</th>
+            <th colSpan="2">Porción</th>
           </tr>
         </thead>
         <tbody>
-          {render.map((item,i) => {
+          {ingredients.map((item) => {
+            console.log(item);
             return (
-              <tr key={item[i]?._id} className="center">
-                <td className="left">{item[i]?.name}</td>
-                <td> - </td>
-                {/* <td>{item.equivalence?.cup}</td> */}
-                <td> + </td>
-                <td>
-                  <select
-                    onChange={handleSelection}
-                    className="form-select selectPortion"
-                  >
-                    <option value="cup">tazas</option>
-                    <option value="gram">gramos</option>
-                    <option value="piece">piezas</option>
-                  </select>
-                </td>
-                <td className="bin2" onClick={handleDeleteIngredient}>
+                <tr key={item._id} className="center">
+                  <td className="left">{item.name}</td>
+                  <td>-</td>
+                  <td colSpan="2">cantidad</td>
+                  {/* <td>{item.equivalence?.cup}</td> */}
+                  <td>+</td>
+                  <td>
+                    <select
+                      onChange={handleSelection}
+                      className="form-select selectPortion"
+                    >
+                      <option value="cup">tazas</option>
+                      <option value="gram">gramos</option>
+                      <option value="piece">piezas</option>
+                    </select>
+                  </td>
+                  <td className="bin2" id={item._id} onClick={handleDeleteIngredient}>
                   {
                     <Tooltip title="Elimina ingrediente" placement="right-start">
                       <IconButton>
@@ -65,7 +51,7 @@ const IngredientsDynamicTable = ({ ingredients }) => {
                     </Tooltip>
                   }
                 </td>
-              </tr>
+                </tr>
             );
           })}
         </tbody>
