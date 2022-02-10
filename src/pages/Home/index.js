@@ -93,7 +93,7 @@ function Home() {
             />
           </Col>
           <Col md="9" className="col-2 sideRight">
-            <Carousel></Carousel>
+            <Carousel className='carousel'></Carousel>
 
             {msg ? (
               <Alert className="alert" variant="outlined" severity="success">

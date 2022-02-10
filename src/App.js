@@ -7,7 +7,7 @@ import IngredientsDynamicTable from "./components/IngredientsDynamicTable";
 // import RecipeCard from './components/RecipeCards';
 import FiltersTable from './components/FiltersTable';
 import Like from './components/ButtonaddIngredient';
-import IngredientsStaticTable from './components/IngredientsStaticTable';
+//import IngredientsStaticTable from './components/IngredientsStaticTable';
 import CreateTitleInput from './components/CreateTitleInput';
 import SelectIngredient from './components/SelectIngredient';
 import UploadImage from './components/UploadImage';
@@ -253,9 +253,9 @@ function App() {
 
 <div className="tempDivider"></div>
 
-      <IngredientsStaticTable
+      {/* <IngredientsStaticTable
         ingredients={ingredients} 
-      />
+      /> */}
 
 <div className="tempDivider"></div>
 

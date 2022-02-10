@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import Facebook from '../Facebook';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -192,6 +193,7 @@ function MainSearchBar({callback}) {
               onClick={handleProfileMenuOpen}
               color="inherit"
             > Login
+              <Facebook />
               <AccountCircle />
             </IconButton>
           </Box>
