@@ -1,9 +1,12 @@
+import { useState, useEffect } from "react";
 import "./SelectIngredient.scss";
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-const SelectIngredient = ({ingredients}) => {
-  console.log(ingredients);
+const SelectIngredient = ({ingredients, callback}) => {
+  //console.log(callback);
+  const [ingredientsArray, setIngredientsArray] = useState([]);
+
   const options = ingredients?.map((option) => {
     const firstLetter = option.name[0].toUpperCase();
     return {
@@ -12,20 +15,28 @@ const SelectIngredient = ({ingredients}) => {
     };
   });
 
-  const handleSelection = (e) => {
-    console.log(e.target.value);
+  useEffect(() => {
+    const sendData = () => {
+    callback(ingredientsArray)
+  };
+    sendData();
+  }, [ingredientsArray]);
+  
+  const handleSelection = ({_id}) => {
+    const idSelected = _id;
+    setIngredientsArray([...ingredientsArray,idSelected])
   }
 
   return (
     <>
       <Autocomplete
-        id="grouped-demo"
+        size='small'
         options={options?.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
         groupBy={(option) => option.firstLetter}
         getOptionLabel={(option) => option.name}
         renderInput={(params) => <TextField {...params} label="Agrega un ingrediente" />}
         className="selectIngredient"
-        onSelect={handleSelection}
+        onChange={(e,selection) => handleSelection(selection)}
       />
     </>
   )};

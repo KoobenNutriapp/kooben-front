@@ -12,7 +12,8 @@ import CreateRecipe from './pages/CreateRecipe'
 import DetailRecipe from './pages/DetailRecipe'
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
-import DonationPage from './pages/Donation';
+import PrivacyPolicies from './components/PrivacyPolicies/'
+import DonationPage from './pages/Donation'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -23,6 +24,7 @@ ReactDOM.render(
         <Route path='/home' element={<Home />} />
           <Route path='/CreateRecipe' element={<CreateRecipe />} />
           <Route path='/DetailRecipe' element={<DetailRecipe />} />
+          <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
           <Route path='/Login' element={<Login />} />
           <Route path='/Donation' element={<DonationPage />}/>
       </Routes>

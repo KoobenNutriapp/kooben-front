@@ -155,6 +155,9 @@ const data = {
 //     ]
 //   };
 
+console.log(data.url)
+
+
 const dd = PDFRecipeCreator(data);
 
 
