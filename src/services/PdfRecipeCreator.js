@@ -1,10 +1,20 @@
-function PDFRecipeCreator(data){
+import {Buffer} from 'buffer';
+// import '../img/RuralMexicanKitchen.jpg'
+// const kitchenURL = '../img/RuralMexicanKitchen.jpg'
 
-    // const ingredients = data.
+
+function PDFRecipeCreator(data){
 
     const steps = data.steps.map((step) => {
         return `${step.text}`
-    })
+    });
+
+    const URLToBase64 = (imageURL) => {
+        const buff = Buffer.from(imageURL, 'utf-8');
+        const base64Format = buff.toString('base64');
+        return base64Format;
+    };
+
 
 
     const dd = {
@@ -12,6 +22,10 @@ function PDFRecipeCreator(data){
             {
                 text: `${data.title}`,
                 style: 'header'
+            },
+            {
+                image: `data:image/jpeg;base64,${URLToBase64(data.url)}`,
+                width: 100
             },
             {
                 text: [
