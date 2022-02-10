@@ -31,4 +31,14 @@
     margin-top: 10px;
     display: flex;
     justify-content: center;
+    width: 100%;
+}
+
+.selectIngredient{
+  width: 80%;
+  border: $mexican-pink 1px solid;
+}
+
+.selectIngredient:hover{
+  box-shadow: 0 0 2px 1px $mexican-pink;
 }

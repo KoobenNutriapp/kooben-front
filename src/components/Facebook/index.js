@@ -1,31 +1,34 @@
 import "./Facebook.scss";
-import FacebookLogin from 'react-facebook-login'
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { startFacebooklogin } from "../../actions/auth";
+
 
 const Facebook = () => {
 
-  const [fbItems, setFbItems] = useState()
+  const dispatch = useDispatch();
 
-  const componentClicked = () => {
-    console.log('Click en botón');
-  }
 
-  const responseFacebook = (response) => {
-    console.log(response);
+  const handleFB = (e) => {
+    e.preventDefault()
+    console.log('Login with FaceBook');
+    dispatch ( startFacebooklogin ());
   }
 
   return (
     <>
-      {
-        fbItems === 'isLoggedIn' ? 
-          console.log('In') :
-          <FacebookLogin
-          appId="251634143656901"
-          autoLoad={true}
-          fields="name,email,picture"
-          onClick={componentClicked}
-          callback={responseFacebook} />
-      }
+      {/* <div
+        className="fb-login-button bk"
+        data-width=""
+        data-size="large"
+        data-button-type="login_with"
+        data-layout="default"
+        data-auto-logout-link="true"
+        data-use-continue-as="true"
+        onClick={handleFB}
+      ></div> */}
+      <button onClick={handleFB}>
+        LogIn with Facebook
+      </button>
 
     </>
   );

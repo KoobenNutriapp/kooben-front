@@ -1,0 +1,9 @@
+@import "../../styles/colors";
+
+.bk{
+    background-color: $mayan-blue;
+}
+
+.bk:hover{
+    box-shadow: 0 0 2px 1px $mexican-pink;
+}
