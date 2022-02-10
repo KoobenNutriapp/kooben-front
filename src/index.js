@@ -13,6 +13,7 @@ import DetailRecipe from './pages/DetailRecipe'
 import NotFound from './pages/NotFound'
 import Login from './pages/Login'
 import PrivacyPolicies from './components/PrivacyPolicies/'
+import DonationPage from './pages/Donation'
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,6 +26,7 @@ ReactDOM.render(
           <Route path='/DetailRecipe' element={<DetailRecipe />} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
           <Route path='/Login' element={<Login />} />
+          <Route path='/Donation' element={<DonationPage />}/>
       </Routes>
       {/* <App /> */}
     </BrowserRouter>
