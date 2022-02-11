@@ -51,7 +51,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='*' element={<NotFound />}/>      
           <Route path='/CreateRecipe' element={isLoggedIn ? (<CreateRecipe />) : ( <Navigate to="/"/>)} />
-          <Route path='/DetailRecipe' element={<DetailRecipe />} />
+          <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
         </Routes>
       </BrowserRouter>
