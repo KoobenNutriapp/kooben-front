@@ -22,8 +22,9 @@ function RecipeCards({Recipekey,AltImage, SrcImage, RecipeTitle, RecipeDescripti
   const navigate = useNavigate();
 
   const toDetailRecipe=(recipe)=>{
-    console.log('Navega a detailed Recipe con ID: ' + JSON.stringify(recipe))
-    navigate(`/DetailRecipe:${recipe.id}`,{state:{recipe}});
+    console.log('Navega a detailed Recipe con ID: ')
+    console.log(recipe)
+    navigate(`/DetailRecipe/:${recipe.Recipekey}`,{state:{recipe}});
     }
 
   return (
