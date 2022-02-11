@@ -1,7 +1,7 @@
 import { Table } from "reactstrap";
 import "./NutFactTable.scss";
 
-const NutFactTable = (props) => {
+const NutFactTable = ({ingredient,operation, typePortion, firstSelection}) => {
 
   const {
     portion,
@@ -71,9 +71,9 @@ const NutFactTable = (props) => {
     dvVitE,
     vitK,
     dvVitK,
-  } = props
+  } = ingredient
 
-  console.log(props);
+  console.log(ingredient,operation,typePortion, firstSelection);
 
   return (
       <div className="frameNutFactTable">
