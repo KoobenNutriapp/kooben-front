@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Pills from '../Pills';
 import './RecipeCards.scss'
+import {Link, useNavigate} from 'react-router-dom';
 
 
 function getTags(Array){
@@ -16,7 +17,16 @@ function getTags(Array){
 } 
 
 
-function RecipeCards({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsArray}) {
+
+function RecipeCards({Recipekey,AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsArray,metaData}) {
+  const navigate = useNavigate();
+
+  const toDetailRecipe=(recipe)=>{
+    console.log('Navega a detailed Recipe con ID: ')
+    console.log(recipe)
+    navigate(`/DetailRecipe/:${recipe.Recipekey}`,{state:{recipe}});
+    }
+
   return (
     <Card sx={{ maxWidth: 680 }} sy={{height: 600 }} className='FullCard'>
       <CardMedia
@@ -27,8 +37,9 @@ function RecipeCards({AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsAr
       />
       <CardContent className = 'CardContent-Section'>
 
-            <Typography gutterBottom variant="h6" component="div" className='Typography' >
-            {RecipeTitle}
+            <Typography gutterBottom variant="h6" component="div" className='Typography'  >
+            
+            <a onClick={()=>{toDetailRecipe({Recipekey,metaData})}}>{RecipeTitle}</a>
             </Typography>
 
         <div className='Tags-Section'>

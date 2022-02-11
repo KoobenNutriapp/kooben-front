@@ -1,7 +1,7 @@
 import { Table } from "reactstrap";
 import "./NutFactTable.scss";
 
-const NutFactTable = (props) => {
+const NutFactTable = ({ingredient,operation, typePortion, firstSelection}) => {
 
   const {
     portion,
@@ -71,9 +71,9 @@ const NutFactTable = (props) => {
     dvVitE,
     vitK,
     dvVitK,
-  } = props
+  } = ingredient
 
-  console.log(props);
+  console.log(ingredient,operation,typePortion, firstSelection);
 
   return (
       <div className="frameNutFactTable">
@@ -83,14 +83,28 @@ const NutFactTable = (props) => {
                <th colSpan="3" className="titleTable">Información nutricional</th>
 
              </tr>
-             <tr className="thickLine">
+             {portion ? (
+               <tr className="thickLine">
                 <th>Tamaño de la porción:</th>
                 <th colSpan="2">{portion} gramos</th>
-             </tr>
-             <tr className="mediumLine">
+               </tr>
+             ): (
+                <tr className="thickLine">
+                  <th>Tamaño de la porción:</th>
+                  <th colSpan="2">{portion} gramos</th>
+                </tr>
+             )}
+             {energy ? (
+               <tr className="mediumLine">
                 <th>Energía:</th>
                 <th colSpan="2">{energy} Kcalorías</th>
-             </tr>
+               </tr>
+             ): (
+                <tr className="thickLine">
+                  <th>Tamaño de la porción:</th>
+                  <th colSpan="2">No hay Energia</th>
+                </tr>
+             )}
            </thead>
            <tbody>
              <tr>
@@ -98,11 +112,16 @@ const NutFactTable = (props) => {
                <td></td>
                <th className="center">% de valor diario *</th>
              </tr>
-             <tr>
+             {carbohydrate ? (
+               <tr>
                <th>Carbohidratos totales:</th>
                <td>{carbohydrate}g</td>
                <th className="center">{dvCarbohydrate}%</th>
              </tr>
+             ): (
+                ''
+             )}
+             
              <tr>
                <td> - Fibra:</td>
                <td>{fiber}g</td>
@@ -113,160 +132,313 @@ const NutFactTable = (props) => {
                <td>{sugars}g</td>
                <th className="center"></th>
              </tr>
-             <tr>
+             {glycemic_load ? (
+               <tr>
                <th>Carga glucémica total:</th>
                <th className="center" colSpan="2">{glycemic_load}</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {fat ? (
+               <tr>
                <th>Grasa total:</th>
                <td>{fat}g</td>
                <th className="center">{dvFat}%</th>
              </tr>
-             <tr>
-               <td> - Ácidos grasos saturados:</td>
-               <td>{saturated_fatty_acids}g</td>
-               <th className="center">{dvSaturated_fatty_acids}%</th>
-             </tr>
-             <tr>
-               <td> - Ácidos grasos monoinsaturados:</td>
-               <td>{monounsaturated_fatty_acids}g</td>
-               <th className="center">{dvMonounsaturated_fatty_acids}%</th>
-             </tr>
-             <tr>
-               <td> - Ácidos grasos polinsaturados:</td>
-               <td>{polyunsaturated_fatty_acids}g</td>
-               <th className="center">{dvPolyunsaturated_fatty_acids}%</th>
-             </tr>
-             <tr>
+             
+               ): (
+                 ''
+               )}
+
+
+            {saturated_fatty_acids ? (
+              <tr>
+              <td> - Ácidos grasos saturados:</td>
+              <td>{saturated_fatty_acids}g</td>
+              <th className="center">{dvSaturated_fatty_acids}%</th>
+            </tr>
+            
+              ): (
+               ''
+              )}
+
+
+            {monounsaturated_fatty_acids ? (
+              <tr>
+              <td> - Ácidos grasos monoinsaturados:</td>
+              <td>{monounsaturated_fatty_acids}g</td>
+              <th className="center">{dvMonounsaturated_fatty_acids}%</th>
+            </tr>
+            
+                ): (
+                  ''
+                )}
+            
+            {polyunsaturated_fatty_acids ? (
+              <tr>
+              <td> - Ácidos grasos polinsaturados:</td>
+              <td>{polyunsaturated_fatty_acids}g</td>
+              <th className="center">{dvPolyunsaturated_fatty_acids}%</th>
+            </tr>
+                ): (
+                  ''
+                )}
+
+             {protein ? (
+               <tr>
                <th>Proteínas totales:</th>
                <td>{protein}g</td>
                <th className="center"></th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {cholesterol ? (
+               <tr>
                <th>Colesterol total:</th>
                <td>{cholesterol}g</td>
                <th className="center">{dvCholesterol}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {sodium ? (
+               <tr>
                <th>Sodio:</th>
                <td>{sodium}mg</td>
                <th className="center">{dvSodium}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {calcium ? (
+               <tr>
                <th>Calcio:</th>
                <td>{calcium}mg</td>
                <th className="center">{dvCalcium}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {phosphorus ? (
+               <tr>
                <th>Fósforo:</th>
                <td>{phosphorus}mg</td>
                <th className="center">{dvPhosphorus}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {iron ? (
+               <tr>
                <th>Hierro:</th>
                <td>{iron}mg</td>
                <th className="center">{dvIron}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {potassium ? (
+               <tr>
                <th>Potasio:</th>
                <td>{potassium}mg</td>
                <th className="center">{dvPotassium}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {magnesium ? (
+               <tr>
                <th>Magnesio:</th>
                <td>{magnesium}mg</td>
                <th className="center">{dvMagnesium}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {copper ? (
+               <tr>
                <th>Cobre:</th>
                <td>{copper}mg</td>
                <th className="center">{dvCopper}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {zinc ? (
+               <tr>
                <th>Zinc:</th>
                <td>{zinc}mg</td>
                <th className="center">{dvZinc}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {manganese ? (
+               <tr>
                <th>Manganeso:</th>
                <td>{manganese}mg</td>
                <th className="center">{dvManganese}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {selenium ? (
+               <tr>
                <th>Selenio:</th>
                <td>{selenium}mg</td>
                <th className="center">{dvSelenium}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {lithium ? (
+               <tr>
                <th>Litio:</th>
                <td>{lithium}mg</td>
                <th className="center">{dvLithium}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {vitA ? (
+               <tr>
                <th>Vitamina A:</th>
                <td>{vitA}ug</td>
                <th className="center">{dvVitA}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {carotene ? (
+               <tr>
                <th>Caroteno:</th>
                <td>{carotene}mg</td>
                <th className="center">{dvCarotene}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {bcarotene ? (
+               <tr>
                <th>Beta-caroteno:</th>
                <td>{bcarotene}mg</td>
                <th className="center">{dvBcarotene}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {vitB1 ? (
+               <tr>
                <th>Vitamina B1:</th>
                <td>{vitB1}mg</td>
                <th className="center">{dvVitB1}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {vitB2 ? (
+               <tr>
                <th>Vitamina B2:</th>
                <td>{vitB2}mg</td>
                <th className="center">{dvVitB2}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             
+             {vitB3 ? (
+               <tr>
                <th>Vitamina B3:</th>
                <td>{vitB3}mg</td>
                <th className="center">{dvVitB3}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             {vitB6 ? (
+               <tr>
                <th>Vitamina B6:</th>
                <td>{vitB6}mg</td>
                <th className="center">{dvVitB6}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             {vitB12 ? (
+               <tr>
                <th>Vitamina B12:</th>
                <td>{vitB12}mg</td>
                <th className="center">{dvVitB12}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             {vitC ? (
+               <tr>
                <th>Vitamina C:</th>
                <td>{vitC}mg</td>
                <th className="center">{dvVitC}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             {folicAc ? (
+               <tr>
                <th>Ácido Fólico:</th>
                <td>{folicAc}mg</td>
                <th className="center">{dvFolicAc}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             {vitD ? (
+               <tr>
                <th>Vitamina D:</th>
                <td>{vitD}mg</td>
                <th className="center">{dvVitD}%</th>
              </tr>
-             <tr>
+               ): (
+                  ''
+               )}
+             {vitE ? (
+               <tr>
                <th>Vitamina E:</th>
                <td>{vitE}mg</td>
                <th className="center">{dvVitE}%</th>
              </tr>
-             <tr>
-               <th>Vitamina K:</th>
-               <td>{vitK}mg</td>
-               <th className="center">{dvVitK}%</th>
-             </tr>
+               ): (
+                  ''
+               )}
+             {vitK ? (
+               <tr>
+                <th>Vitamina K:</th>
+                  <td>{vitK}mg</td>
+                <th className="center">{dvVitK}%</th>
+              </tr>
+               ): (
+                  ''
+               )}
+             
            </tbody>
         </Table>
       </div>

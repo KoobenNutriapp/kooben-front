@@ -11,6 +11,10 @@ function Calculator() {
   const [addIngredient, setAddIngredient] = useState(false);
   const [ingredients, setIngredients] = useState([])
   const [detailTable, setDetailTable] = useState([]);
+  const [nutFacTable, setNutFactTable] = useState([]);
+  const [operation, setOperation] = useState(null);
+  const [typePortion, setTypePortion] = useState(null);
+  const [firstSelection, setFirstSelection] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,15 +40,35 @@ function Calculator() {
   };
 
   const filterDeletingItems = (deleteIngredient) =>{
-    const test = detailTable.filter(item=>{
+    const filteredIngredient = detailTable.filter(item=>{
       return item._id !== deleteIngredient
     })
-    setDetailTable(test)
+    setDetailTable(filteredIngredient)
+    setOperation('itemDeleted')
+    setTypePortion(null)
+    setFirstSelection(false)
+
   }
 
-  const handleSelection = (sel) => {
-   sel ? setDetailTable([...detailTable,sel]) : console.log('empty');
+  const handleSelection = (selection) => {
+   //selection ? setDetailTable([...detailTable,selection]) : console.log('empty');
+   if(selection){
+    setDetailTable([...detailTable,selection])
+    setNutFactTable(selection)
+    setOperation('add')
+    setTypePortion('cup')
+    setFirstSelection(true)
+   }else{
+    console.log('empty');
+   }
   }
+
+  const handleBypassToNutTable = ((ingredient,operation, portion) => {
+    setNutFactTable(ingredient)
+    setOperation(operation)
+    setTypePortion(portion)
+    setFirstSelection(false)
+  })
 
   return (
     <>
@@ -52,6 +76,7 @@ function Calculator() {
         <IngredientsDynamicTable 
           ingredients={detailTable} 
           callback={filterDeletingItems}
+          nutData={handleBypassToNutTable}
         />
         <button className="btnAddIngredient" onClick={handleAddIngredient}>
           Agrega ingrediente
@@ -73,7 +98,12 @@ function Calculator() {
         </div>
       </Col>
       <Col className="nutritionalTable">
-        <NutFactTable />
+        <NutFactTable 
+          ingredient={nutFacTable}
+          operation={operation}
+          typePortion={typePortion}
+          firstSelection={firstSelection}  
+        />
       </Col>
     </>
   );
