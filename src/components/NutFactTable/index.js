@@ -1,7 +1,32 @@
 import { Table } from "reactstrap";
+import { useEffect, useState } from "react";
 import "./NutFactTable.scss";
 
-const NutFactTable = ({ingredient,operation, typePortion, firstSelection}) => {
+const NutFactTable = ({ingredient,operation, typePortion, firstSelection, quantity}) => {
+
+  console.log(ingredient);
+
+  const [newTable, setNewTable] = useState([])
+  const [trigger, setTrigger] = useState(false)
+
+  // useEffect(() => {
+  //   setNewTable([...newTable, ingredient])
+  //   console.log(newTable);
+  // }, [ingredient]);
+
+  // useEffect(() => {
+  //   const updateTable = () =>{
+  //     setNewTable([...newTable, ingredient])
+  //     console.log(newTable);
+  //   };
+  //   updateTable()
+  // }, [ingredient]);
+
+  // ingredient ? setTrigger(true) : null
+
+  // trigger === true ? setNewTable([...newTable,ingredient]) : null
+
+ 
 
   const {
     portion,
@@ -73,7 +98,12 @@ const NutFactTable = ({ingredient,operation, typePortion, firstSelection}) => {
     dvVitK,
   } = ingredient
 
-  console.log(ingredient,operation,typePortion, firstSelection);
+  // console.log(ingredient,operation,typePortion, firstSelection, quantity);
+  // if(operation === 'add'){
+  //   console.log(quantity+1);
+  // }else{
+  //   console.log(quantity-1);
+  // }
 
   return (
       <div className="frameNutFactTable">
