@@ -1,6 +1,6 @@
 import "./Facebook.scss";
 import { useDispatch, useSelector } from 'react-redux';
-import { startFacebooklogin } from "../../actions/auth";
+import { startFacebooklogin, startLogout } from "../../actions/auth";
 
 
 const Facebook = () => {
@@ -8,10 +8,16 @@ const Facebook = () => {
   const dispatch = useDispatch();
 
 
-  const handleFB = (e) => {
+  const handleLoginFB = (e) => {
     e.preventDefault()
     console.log('Login with FaceBook');
     dispatch ( startFacebooklogin ());
+  }
+
+  const handleLogoutFB = (e) => {
+    e.preventDefault()
+    console.log('Logout from FaceBook');
+    dispatch ( startLogout())
   }
 
   return (
@@ -26,8 +32,11 @@ const Facebook = () => {
         data-use-continue-as="true"
         onClick={handleFB}
       ></div> */}
-      <button onClick={handleFB}>
-        LogIn with Facebook
+      <button onClick={handleLoginFB}>
+        ☑Login with Facebook
+      </button>
+      <button onClick={handleLogoutFB}>
+        ↩Logout from Facebook
       </button>
 
     </>
