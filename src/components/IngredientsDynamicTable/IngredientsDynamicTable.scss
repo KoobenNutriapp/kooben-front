@@ -18,10 +18,37 @@
 
 .left {
   text-align: left;
+  font-size: 15px;
+  font-weight: 700;
+  padding-top: 11px !important;
 }
 
-.bin2 {
+.bin {
   color: $mexican-pink;
   cursor: pointer;
   padding: 0px !important;
+}
+
+.diners{
+  display: flex;
+  justify-content: center;
+  
+}
+
+.people-blue {
+  color: $mexican-pink;
+  cursor: pointer;
+  ;
+}
+
+.people-pink {
+  color: $mayan-blue;
+  cursor: pointer;
+}
+
+.diners-number{
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  margin: 11px !important;
 }

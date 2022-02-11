@@ -26,7 +26,7 @@ function NavBar(){
           light
           className="Kooben-Navbar"
         >
-        <NavbarBrand className = 'Kooben-Brand col-md-9 col-sm-10' href="/home">
+        <NavbarBrand className = 'Kooben-Brand col-md-9 col-sm-10' href="/">
           K'óoben
         </NavbarBrand>
         <NavbarToggler className="NavBarToggler col-md-4" onClick={function noRefCheck(){}} />

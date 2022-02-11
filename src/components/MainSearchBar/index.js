@@ -12,6 +12,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import Facebook from '../Facebook';
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -180,9 +181,10 @@ function MainSearchBar({callback}) {
             </Search>
           </form>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { md: 'flex' } }}>
 
-            <IconButton
+            <Facebook />
+            {/* <IconButton
               className='typography_login'
               size="small"
               edge="end"
@@ -193,7 +195,7 @@ function MainSearchBar({callback}) {
               color="inherit"
             > Login
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton

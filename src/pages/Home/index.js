@@ -84,7 +84,7 @@ function Home() {
               key={"a102012"}
               AltImage={"Card image cap"}
               SrcImage={
-                "http://fmdiabetes.org/wp-content/uploads/2018/01/Iindice-glucemico-y-carga-glucemica-redes.jpg"
+                "https://fmdiabetes.org/wp-content/uploads/2018/01/Iindice-glucemico-y-carga-glucemica-redes.jpg"
               }
               RecipeTitle={"Kóoben tips"}
               RecipeDescription={
@@ -94,7 +94,7 @@ function Home() {
             />
           </Col>
           <Col md="9" className="col-2 sideRight">
-            <Carousel></Carousel>
+            <Carousel className='carousel'></Carousel>
 
             {msg ? (
               <Alert className="alert" variant="outlined" severity="success">
