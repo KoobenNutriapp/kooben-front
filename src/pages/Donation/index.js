@@ -4,6 +4,8 @@ import {Button, Container, Row} from 'reactstrap'
 import '../../styles/_colors.scss'
 import image from '../../img/mexican-food-donation.jpg'
 import PDFRecipeCreator from "../../services/PdfRecipeCreator";
+// import MyDocument from "../../services/PDFGenerator";
+// import { PDFViewer } from "@react-pdf/renderer";
 // import pdfmakedownload from "./pdfContainer";
 
 
@@ -264,6 +266,9 @@ function DonationPage(){
         color={'$mexican-pink'}
         />
         <RedirectingPayPalButton />
+        {/* <PDFViewer>
+            <MyDocument />
+        </PDFViewer> */}
         </Container>
 
         </Row>
