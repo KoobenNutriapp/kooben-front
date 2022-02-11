@@ -1,0 +1,38 @@
+@import "../../styles/colors";
+
+.add {
+  color: $mexican-pink;
+  cursor: pointer;
+  padding: 0px !important;
+}
+
+.remove {
+  color: $mayan-blue;
+  cursor: pointer;
+  padding: 0px !important;
+}
+
+.selectPortion {
+  background-color: #0dcaf0 !important;
+  width: 100% !important;
+  height: 35px !important;
+  padding-top: 0% !important;
+  margin: 0% !important;
+  border-radius: 10px !important;
+  font-size: 15px;
+  border: 1px $mayan-blue solid !important;
+}
+
+.selectPortion:hover {
+    box-shadow: 0 0 2px 1px rgba(0, 140, 186, 0.5);
+  }
+
+.text{
+   font-size: 15px;
+   font-weight: 700;
+   padding-top: 11px !important;
+}
+
+.area{
+    padding-top: 7.5px !important;
+}

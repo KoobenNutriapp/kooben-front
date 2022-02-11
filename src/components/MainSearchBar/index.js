@@ -181,9 +181,10 @@ function MainSearchBar({callback}) {
             </Search>
           </form>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { md: 'flex' } }}>
 
-            <IconButton
+            <Facebook />
+            {/* <IconButton
               className='typography_login'
               size="small"
               edge="end"
@@ -193,9 +194,8 @@ function MainSearchBar({callback}) {
               onClick={handleProfileMenuOpen}
               color="inherit"
             > Login
-              <Facebook />
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton

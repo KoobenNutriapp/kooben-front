@@ -27,7 +27,7 @@ function NotFound(){
     const SearchRecipeSuggestion = () => {
         return(
             <h4>
-                Si quieres buscar una nueva receta, da click <Link className='Link-To-Page' to='/home'>aquí</Link>.
+                Si quieres buscar una nueva receta, da click <Link className='Link-To-Page' to='/'>aquí</Link>.
             </h4>
         );
     };
@@ -35,7 +35,7 @@ function NotFound(){
     const CreateRecipeSuggestion = () => {
         return (
         <h4>
-            ¿Quiéres crear una nueva receta? Intenta <Link className='Link-To-Page' to='/CreateRecipe'>aquí</Link>.
+            ¿Quiéres crear una nueva receta? Intenta <Link className='Link-To-Page' to='/'>aquí</Link>.
         </h4>
         );
     };
