@@ -4,26 +4,36 @@ import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import "./SelectPortion.scss";
 
-const SelectPortion = ({equivalence}) => {
+const SelectPortion = ({ingredient, nutData, people}) => {
 
-  console.log(equivalence);
+  //console.log(ingredient);
+  //console.log(nutData);
 
-  const [portion, setPortion] = useState(equivalence.cup)
+  const [portion, setPortion] = useState(ingredient.equivalence.cup)
+  const [ingredientSelected, setIngredientSelected] = useState({ingredient})
+  const [operation, setOperation] = useState('add')
+  const [typePortion, setTypePortion] = useState('cup')
+  const [diner, setDiner] = useState(1)
+  
+  //setDiner(people)
 
   const handleSelection = (e) => {
-    
     switch (e.target.value) {
       case 'cup':
-        setPortion(equivalence.cup)
+        setPortion(ingredient.equivalence.cup)
+        setTypePortion(e.target.value)
         break;
       case 'gram':
-        setPortion(equivalence.gram)
+        setPortion(ingredient.equivalence.gram)
+        setTypePortion(e.target.value)
         break;
       case 'piece':
-        setPortion(equivalence.piece)
+        setPortion(ingredient.equivalence.piece)
+        setTypePortion(e.target.value)
         break;
       case 'spoon':
-        setPortion(equivalence.spoon)
+        setPortion(ingredient.equivalence.spoon)
+        setTypePortion(e.target.value)
         break;
       default:
         break;
@@ -31,13 +41,19 @@ const SelectPortion = ({equivalence}) => {
   };
 
   const handleRemove = (e) => {
-    console.log(e.currentTarget.id);
+    //console.log(e.currentTarget.id);
     setPortion(portion - 1)
+    setIngredientSelected(ingredient)
+    setOperation('remove')
+    nutData(ingredientSelected,operation,typePortion)
   }
 
   const handleAdd = (e) => {
-    console.log(e.currentTarget.id);
+    //console.log(e.currentTarget.id);
     setPortion(portion + 1)
+    setIngredientSelected(ingredient)
+    setOperation('add')
+    nutData(ingredientSelected,operation,typePortion)
   }
 
   return (
@@ -49,7 +65,7 @@ const SelectPortion = ({equivalence}) => {
           </IconButton>
         }  
       </td>
-      <td className="text">{portion}</td>
+      <td className="text">{ portion * diner }</td>
       <td>
         {
           <IconButton>

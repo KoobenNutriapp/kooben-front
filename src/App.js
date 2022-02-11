@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { firebase } from './Firebase/firebase-config'
 import { login } from './actions/auth';
@@ -37,7 +37,8 @@ function App() {
 
   if ( checking ) {
     return (
-        <h1>Espere...</h1>
+        // poner spinner aquí
+        <h1>Espere...</h1> 
     )
 }
 
@@ -48,8 +49,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='*' element={<NotFound />}/>
-          <Route path='/CreateRecipe' element={<CreateRecipe />} />
+          <Route path='*' element={<NotFound />}/>      
+          <Route path='/CreateRecipe' element={isLoggedIn ? (<CreateRecipe />) : ( <Navigate to="/"/>)} />
           <Route path='/DetailRecipe' element={<DetailRecipe />} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
         </Routes>
