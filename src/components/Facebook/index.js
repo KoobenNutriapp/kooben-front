@@ -1,11 +1,34 @@
 import "./Facebook.scss";
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { Button } from "reactstrap";
+import IconButton from "@mui/material/IconButton";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import { useDispatch } from 'react-redux';
+import { firebase } from '../../Firebase/firebase-config'
 import { startFacebooklogin, startLogout } from "../../actions/auth";
+import { login } from '../../actions/auth';
 
 
 const Facebook = () => {
 
   const dispatch = useDispatch();
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [ avatar, setAvatar ] = useState();
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user)=>{
+      console.log(user);
+      if(user?.uid){
+        dispatch( login ( user.uid, user.displayName, user.photoURL ) )
+        setIsLoggedIn( true );
+        setAvatar(user.photoURL)
+      }else{
+        setIsLoggedIn( false );
+        setAvatar('')
+      }
+    })
+  }, [ dispatch, isLoggedIn ])
 
 
   const handleLoginFB = (e) => {
@@ -20,6 +43,9 @@ const Facebook = () => {
     dispatch ( startLogout())
   }
 
+
+  
+
   return (
     <>
       {/* <div
@@ -32,13 +58,22 @@ const Facebook = () => {
         data-use-continue-as="true"
         onClick={handleFB}
       ></div> */}
-      <button onClick={handleLoginFB}>
-        ☑Login with Facebook
-      </button>
-      <button onClick={handleLogoutFB}>
-        ↩Logout from Facebook
-      </button>
-
+      <Button onClick={handleLoginFB} outline color="primary" className="facebook-login">
+        <IconButton>
+          <FacebookIcon className="facebook-icon"/>
+        </IconButton>
+        Login with Facebook
+        <IconButton>
+          <AccountCircleIcon className="avatar-empty"/>
+        </IconButton>
+      </Button>
+      <Button onClick={handleLogoutFB} outline color="primary" className="facebook-login">
+        <IconButton>
+          <FacebookIcon className="facebook-icon"/>
+        </IconButton>
+        Logout from Facebook
+        <img className="avatar" src={avatar}/>
+      </Button>
     </>
   );
 };

@@ -1,83 +1,142 @@
-import { Table } from "reactstrap";
+import { useEffect, useState } from "react";
 import "./NutFactTable.scss";
 
-const NutFactTable = ({ingredient,operation, typePortion, firstSelection}) => {
+const NutFactTable = ({ingredient,operation, typePortion, firstSelection, quantity}) => {
 
-  const {
-    portion,
-    energy,
-    carbohydrate,
-    dvCarbohydrate,
-    sugars,
-    fiber,
-    dvFiber,
-    protein,
-    fat,
-    dvFat,
-    saturated_fatty_acids,
-    dvSaturated_fatty_acids,
-    monounsaturated_fatty_acids,
-    dvMonounsaturated_fatty_acids,
-    polyunsaturated_fatty_acids,
-    dvPolyunsaturated_fatty_acids,
-    cholesterol,
-    dvCholesterol,
-    glycemic_load,
-    sodium,
-    dvSodium,
-    calcium,
-    dvCalcium,
-    phosphorus,
-    dvPhosphorus,
-    iron,
-    dvIron,
-    potassium,
-    dvPotassium,
-    magnesium,
-    dvMagnesium,
-    copper,
-    dvCopper,
-    zinc,
-    dvZinc,
-    manganese,
-    dvManganese,
-    selenium,
-    dvSelenium,
-    lithium,
-    dvLithium,
-    vitA,
-    dvVitA,
-    carotene,
-    dvCarotene,
-    bcarotene,
-    dvBcarotene,
-    vitB1,
-    dvVitB1,
-    vitB2,
-    dvVitB2,
-    vitB3,
-    dvVitB3,
-    vitB6,
-    dvVitB6,
-    vitB12,
-    dvVitB12,
-    vitC,
-    dvVitC,
-    folicAc,
-    dvFolicAc,
-    vitD,
-    dvVitD,
-    vitE,
-    dvVitE,
-    vitK,
-    dvVitK,
-  } = ingredient
+  console.log(ingredient);
 
-  console.log(ingredient,operation,typePortion, firstSelection);
+  const [newTable, setNewTable] = useState([])
+
+  useEffect(() => {
+      const fillArrayOfIngredients = () =>{
+        const updateTable = [...newTable, {
+          ingredient,
+          operation,
+          typePortion,
+          firstSelection,
+          quantity}]
+          console.log(updateTable);
+        manageIngredients(updateTable)
+        setNewTable(updateTable)
+      }
+      fillArrayOfIngredients();
+  }, [ingredient,
+    operation,
+    typePortion,
+    firstSelection,
+    quantity
+  ]);
+
+  const manageIngredients = (newTable) =>{
+    console.log(newTable);
+
+    newTable.forEach(item=>{
+      console.log(item?.ingredient?.name);
+    })  
+    const accum = newTable.reduce((acc,item)=> {
+      console.log(item);
+      return acc + (item?.ingredient?.energy || 0)},0)
+    console.log(accum);
+    // let total = 0
+    // newTable.forEach(item=>total+=item.ingredient.energy)
+
+    //newTable.forEach(item=>console.log(item.ingredient.energy))
+
+    // newTable.forEach(item => {
+    //   console.log(item);
+    //   if(firstSelection){
+    //     if(item.operation ==='add'){
+    //       const tEnergy = item.
+    //     }
+    //   }else{
+
+    //   }
+    // })
+    //console.log(total);
+    console.log(newTable.length);
+  }
+  
+
+  // const {
+  //   portion,
+  //   energy,
+  //   carbohydrate,
+  //   dvCarbohydrate,
+  //   sugars,
+  //   fiber,
+  //   dvFiber,
+  //   protein,
+  //   fat,
+  //   dvFat,
+  //   saturated_fatty_acids,
+  //   dvSaturated_fatty_acids,
+  //   monounsaturated_fatty_acids,
+  //   dvMonounsaturated_fatty_acids,
+  //   polyunsaturated_fatty_acids,
+  //   dvPolyunsaturated_fatty_acids,
+  //   cholesterol,
+  //   dvCholesterol,
+  //   glycemic_load,
+  //   sodium,
+  //   dvSodium,
+  //   calcium,
+  //   dvCalcium,
+  //   phosphorus,
+  //   dvPhosphorus,
+  //   iron,
+  //   dvIron,
+  //   potassium,
+  //   dvPotassium,
+  //   magnesium,
+  //   dvMagnesium,
+  //   copper,
+  //   dvCopper,
+  //   zinc,
+  //   dvZinc,
+  //   manganese,
+  //   dvManganese,
+  //   selenium,
+  //   dvSelenium,
+  //   lithium,
+  //   dvLithium,
+  //   vitA,
+  //   dvVitA,
+  //   carotene,
+  //   dvCarotene,
+  //   bcarotene,
+  //   dvBcarotene,
+  //   vitB1,
+  //   dvVitB1,
+  //   vitB2,
+  //   dvVitB2,
+  //   vitB3,
+  //   dvVitB3,
+  //   vitB6,
+  //   dvVitB6,
+  //   vitB12,
+  //   dvVitB12,
+  //   vitC,
+  //   dvVitC,
+  //   folicAc,
+  //   dvFolicAc,
+  //   vitD,
+  //   dvVitD,
+  //   vitE,
+  //   dvVitE,
+  //   vitK,
+  //   dvVitK,
+  // } = ingredient
+
+  // console.log(ingredient,operation,typePortion, firstSelection, quantity);
+  // if(operation === 'add'){
+  //   console.log(quantity+1);
+  // }else{
+  //   console.log(quantity-1);
+  // }
 
   return (
       <div className="frameNutFactTable">
-        <Table hover className="nutTable">
+        {/* <Table hover className="nutTable">
            <thead>
              <tr>
                <th colSpan="3" className="titleTable">Información nutricional</th>
@@ -440,7 +499,7 @@ const NutFactTable = ({ingredient,operation, typePortion, firstSelection}) => {
                )}
              
            </tbody>
-        </Table>
+        </Table> */}
       </div>
   )};
 

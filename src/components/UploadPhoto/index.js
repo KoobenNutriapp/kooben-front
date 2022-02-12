@@ -5,7 +5,7 @@ import AWS from "aws-sdk";
 import Compressor from 'compressorjs';
 import "./UploadPhoto.scss";
 
-const UploadPhoto = () => {
+const UploadPhoto = ({infMessage}) => {
 
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
@@ -125,8 +125,7 @@ const UploadPhoto = () => {
               Parece que el archivo que seleccionaste no es válido. Intenta con una imagen :)
             </FormFeedback>
             <FormText className="center">
-              Agrega la fotografía principal de tu receta. Las imágenes serán
-              optimizadas para web.
+              {infMessage}
             </FormText>
           </Col>
         </FormGroup>
