@@ -33,3 +33,19 @@ export const startLogout = () =>{
 export const logout = () => ({
   type: types.logout
 })
+
+export const createIngredient = (ingredient, portion, typePortion, diner) =>{
+  return ( dispatch ) => {
+    dispatch( newIngredient(ingredient, portion, typePortion, diner) )
+  }
+}
+
+export const newIngredient = (ingredient, portion, typePortion, diner) => ({
+  type: types.ingredient,
+  payload: {
+    ingredient,
+    portion,
+    typePortion,
+    diner,
+  }
+})

@@ -1,64 +1,130 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { createIngredient } from "../../actions/auth";
 import "./NutFactTable.scss";
 
 const NutFactTable = ({ingredient,operation, typePortion, firstSelection, quantity}) => {
 
-  console.log(ingredient);
+  //console.log(ingredient);
 
+// REDUX
+  const dispatch = useDispatch();
   const [newTable, setNewTable] = useState([])
 
   useEffect(() => {
-      const fillArrayOfIngredients = () =>{
-        const updateTable = [...newTable, {
-          ingredient,
-          operation,
-          typePortion,
-          firstSelection,
-          quantity}]
-          console.log(updateTable);
-        manageIngredients(updateTable)
-        setNewTable(updateTable)
-      }
-      fillArrayOfIngredients();
-  }, [ingredient,
-    operation,
-    typePortion,
-    firstSelection,
-    quantity
-  ]);
-
-  const manageIngredients = (newTable) =>{
+    const test = () =>dispatch(createIngredient())
+    test()
+    setNewTable([...newTable,dataRedux])
     console.log(newTable);
+    // const fillArrayOfIngredients = () =>{
+    //   const updateTable = [...newTable, {
+    //     ingredient,
+    //     operation,
+    //     typePortion,
+    //     firstSelection,
+    //     quantity}]
+    //     //console.log(updateTable);
+    //   manageIngredients(updateTable)
+    //   setNewTable(updateTable)
+    }
 
-    newTable.forEach(item=>{
-      console.log(item?.ingredient?.name);
-    })  
-    const accum = newTable.reduce((acc,item)=> {
-      console.log(item);
-      return acc + (item?.ingredient?.energy || 0)},0)
-    console.log(accum);
-    // let total = 0
-    // newTable.forEach(item=>total+=item.ingredient.energy)
+, []);
+const dataRedux = useSelector (state => state.ingredient)
+console.log(dataRedux);
 
-    //newTable.forEach(item=>console.log(item.ingredient.energy))
+
+// REDUX
+
+//   const [newTable, setNewTable] = useState([])
+
+//   useEffect(() => {
+//       const fillArrayOfIngredients = () =>{
+//         const updateTable = [...newTable, {
+//           ingredient,
+//           operation,
+//           typePortion,
+//           firstSelection,
+//           quantity}]
+//           //console.log(updateTable);
+//         manageIngredients(updateTable)
+//         setNewTable(updateTable)
+//       }
+//       fillArrayOfIngredients();
+// }, [ingredient,
+//   operation,
+//   typePortion,
+//   firstSelection,
+//   quantity
+// ]);
+
+
+  const manageIngredients = (table) =>{
+    console.log();
+    // const removeFromDynamicTable = newTable.filter(item=>{
+    //   return item?.ingredient?._id !== operation
+    // })
+
+    // const cleanNewTable = removeFromDynamicTable.filter(item=>{
+    //   return item.operation !== null && item.operation.length < 7
+    // })
+    // console.log(cleanNewTable);
+
+    // const tiz = caca.filter(item=>{
+    //   return item.operation.length < 7
+    // })
+    // console.log(caca);
+    
+    
+    // console.log(operation);
+
+    // if(operation === 'add' || operation === 'remove'){
+      //   console.log('borra o agrega');
+      // }else if(operation === null){
+        //   console.log('nulo');
+    // }else{
+    //   console.log('elemento a eliminar: ' + operation);
+    //   const filterTable = newTable.filter(item=>{
+    //     return item?.ingredient?._id !== operation
+    //   })
+    //   console.log(filterTable);
+    // }
+    
+
+    //console.log(newTable);
+    
+    // newTable.forEach(item=>{
+      //   console.log(item?.ingredient?.name, item?.operation);
+    // })  
+    // newTable.forEach(item=>{
+      //   console.log(item);
+      // })  
+      // const accum = newTable.reduce((acc,item)=> {
+        //   console.log(item);
+        //   return acc + (item?.ingredient?.energy || 0)},0)
+        // console.log(accum);
+        // let total = 0
+        // newTable.forEach(item=>total+=item.ingredient.energy)
+        
+        //newTable.forEach(item=>console.log(item.ingredient.energy))
 
     // newTable.forEach(item => {
     //   console.log(item);
     //   if(firstSelection){
     //     if(item.operation ==='add'){
-    //       const tEnergy = item.
+      //       const tEnergy = item.
     //     }
     //   }else{
-
-    //   }
-    // })
-    //console.log(total);
-    console.log(newTable.length);
-  }
-  
-
-  // const {
-  //   portion,
+      
+      //   }
+      // })
+      //console.log(total);
+      //console.log(newTable.length);
+    }
+    
+    
+    
+    // const {
+      //   portion,
   //   energy,
   //   carbohydrate,
   //   dvCarbohydrate,

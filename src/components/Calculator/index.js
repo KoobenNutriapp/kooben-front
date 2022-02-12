@@ -41,11 +41,12 @@ function Calculator() {
   };
 
   const filterDeletingItems = (deleteIngredient) =>{
+    console.log(deleteIngredient);
     const filteredIngredient = detailTable.filter(item=>{
       return item._id !== deleteIngredient
     })
     setDetailTable(filteredIngredient)
-    setOperation('itemDeleted')
+    setOperation(deleteIngredient)
     setTypePortion(null)
     setFirstSelection(false)
 
@@ -71,6 +72,9 @@ function Calculator() {
     setFirstSelection(false)
     setQuantity(quantity)
   })
+
+  console.log(detailTable);
+  
 
   return (
     <>
