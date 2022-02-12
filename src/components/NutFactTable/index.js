@@ -1,22 +1,23 @@
-import { Table } from "reactstrap";
 import { useEffect, useState } from "react";
 import "./NutFactTable.scss";
 
 const NutFactTable = ({ingredient,operation, typePortion, firstSelection, quantity}) => {
 
-  console.log(quantity);
+  console.log(ingredient);
 
   const [newTable, setNewTable] = useState([])
 
   useEffect(() => {
       const fillArrayOfIngredients = () =>{
-        setNewTable([...newTable, {
+        const updateTable = [...newTable, {
           ingredient,
           operation,
           typePortion,
           firstSelection,
-          quantity}])
-        manageIngredients()
+          quantity}]
+          console.log(updateTable);
+        manageIngredients(updateTable)
+        setNewTable(updateTable)
       }
       fillArrayOfIngredients();
   }, [ingredient,
@@ -26,8 +27,16 @@ const NutFactTable = ({ingredient,operation, typePortion, firstSelection, quanti
     quantity
   ]);
 
-  const manageIngredients = () =>{
-    //const algo = newTable.reduce((acc,item)=> acc + item.ingredient.energy,0)
+  const manageIngredients = (newTable) =>{
+    console.log(newTable);
+
+    newTable.forEach(item=>{
+      console.log(item?.ingredient?.name);
+    })  
+    const accum = newTable.reduce((acc,item)=> {
+      console.log(item);
+      return acc + (item?.ingredient?.energy || 0)},0)
+    console.log(accum);
     // let total = 0
     // newTable.forEach(item=>total+=item.ingredient.energy)
 
@@ -44,7 +53,6 @@ const NutFactTable = ({ingredient,operation, typePortion, firstSelection, quanti
     //   }
     // })
     //console.log(total);
-    console.log(newTable);
     console.log(newTable.length);
   }
   

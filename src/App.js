@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user)=>{
-      console.log(user);
+      //console.log(user);
       if(user?.uid){
         dispatch( login ( user.uid, user.displayName ) )
         setIsLoggedIn( true );
@@ -30,8 +30,6 @@ function App() {
       }
       setChecking(false);
     })
-  
-
   }, [ dispatch, checking, isLoggedIn ])
   
 

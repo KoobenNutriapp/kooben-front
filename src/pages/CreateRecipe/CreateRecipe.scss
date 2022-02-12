@@ -82,6 +82,7 @@ h2{
   background-color: $mexican-pink;
   width: 100%;
   height: 100%;
+  margin-bottom: 20px;
 }
 
 .publish{
@@ -92,4 +93,11 @@ h2{
   background-color: $mayan-blue;
   width: 100%;
   height: 100%;
+  margin-bottom: 20px;
+}
+
+.errors{
+  font-size: 10px;
+  color: red;
+  font-weight: 700;
 }
