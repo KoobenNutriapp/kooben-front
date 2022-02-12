@@ -7,17 +7,18 @@ export const startFacebooklogin = () =>{
       .then( ({user} )=> {
         console.log(user);
         dispatch(
-          login( user.uid, user.displayName )
+          login( user.uid, user.displayName, user.photoURL )
         )
       } )
   }
 }
 
-export const login = (uid,displayName) => ({
+export const login = (uid,displayName,photoURL) => ({
     type: types.login,
     payload: {
       uid,
-      displayName
+      displayName,
+      photoURL
     }
 })
 

@@ -15,6 +15,7 @@ function Calculator() {
   const [operation, setOperation] = useState(null);
   const [typePortion, setTypePortion] = useState(null);
   const [firstSelection, setFirstSelection] = useState(false);
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -63,11 +64,12 @@ function Calculator() {
    }
   }
 
-  const handleBypassToNutTable = ((ingredient,operation, portion) => {
+  const handleBypassToNutTable = ((ingredient,operation, portion, quantity) => {
     setNutFactTable(ingredient)
     setOperation(operation)
     setTypePortion(portion)
     setFirstSelection(false)
+    setQuantity(quantity)
   })
 
   return (
@@ -103,6 +105,7 @@ function Calculator() {
           operation={operation}
           typePortion={typePortion}
           firstSelection={firstSelection}  
+          quantity={quantity}
         />
       </Col>
     </>

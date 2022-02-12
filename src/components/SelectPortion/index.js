@@ -45,7 +45,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
     setPortion(portion - 1)
     setIngredientSelected(ingredient)
     setOperation('remove')
-    nutData(ingredientSelected,operation,typePortion)
+    nutData(ingredientSelected,operation,typePortion,portion)
   }
 
   const handleAdd = (e) => {
@@ -53,7 +53,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
     setPortion(portion + 1)
     setIngredientSelected(ingredient)
     setOperation('add')
-    nutData(ingredientSelected,operation,typePortion)
+    nutData(ingredientSelected,operation,typePortion,portion)
   }
 
   return (

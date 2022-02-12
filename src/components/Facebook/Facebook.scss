@@ -1,9 +1,17 @@
 @import "../../styles/colors";
 
-.bk{
-    background-color: $mayan-blue;
+.avatar-empty{
+    color: $mexican-pink;
+    width: 35px !important; 
 }
 
-.bk:hover{
-    box-shadow: 0 0 2px 1px $mexican-pink;
+.facebook-icon {
+    color: $mexican-pink;   
+  }
+
+.avatar{
+    border-radius: 50%;
+    width: 35px;
+    margin-left: 7px;
 }
+
