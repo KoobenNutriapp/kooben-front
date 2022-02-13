@@ -1,7 +1,14 @@
 import MainSearchBar from '../../components/MainSearchBar';
 import Navbar from '../../components/NavBar';
 import './NotFound.scss'
-import {Container, Nav, Row} from 'reactstrap';
+import {Container,
+    Card,
+    CardImg,
+    CardImgOverlay,
+    CardBody,
+    CardTitle,
+    CardText
+} from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 
@@ -48,22 +55,56 @@ function NotFound(){
         );
     };
 
+    const AlternativeContainer = () => {
+        return(
+    <Card inverse>
+    <CardImg
+      alt="Card image cap"
+      src='../../img/RuralMexicanKitchen.jpg'
+      left
+      width="50%"
+      height="80%"
+    />
+    <CardBody>
+    </CardBody>
+  </Card>
+        )
+    }
+
+    function AnotherImageContainer(){
+        return(
+            <div>
+  <Card inverse>
+    <CardImg
+      className='Card-Image'
+      alt="Card image cap"
+      src="https://teocentli.com.mx/wp-content/uploads/2018/08/teocentli_cocina-1000x687.png"
+      width="100%"
+    />
+    <CardImgOverlay>
+
+      <WarningMessage />
+      <ErrorCode />
+      <SearchRecipeSuggestion />
+      <CreateRecipeSuggestion />
+    </CardImgOverlay>
+  </Card>
+</div>
+        );
+    };
+
 
     return(
         <>
-        <Container className='Not-Found-Container' fluid>
+        <row>
 
-            {/* <MainSearchBar /> */}
-            <Navbar/>
-            <Row>
-                <Container className='Main-Content-Container col-xs-12 col-lg-8'>
-                    <WarningMessage />
-                    <ErrorCode />
-                    <SearchRecipeSuggestion />
-                    <CreateRecipeSuggestion />
-                </Container>
-            </Row>
-        </Container>
+        <MainSearchBar />
+        {/* <Navbar/> */}
+
+
+        <AnotherImageContainer className=' col-l-10 Main-Content-Container' />
+        </row>
+
         
         
         </>

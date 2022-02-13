@@ -3,9 +3,44 @@
     justify-content: center;
 }
 
-
-
 .General-Container{
     display: flex;
     flex-direction: row;
+}
+
+.Main-Image{
+    width: 100%;
+    justify-content: center !important;
+    align-items: center;
+}
+
+.Logo-QR-Container{
+    width: 25% !important;
+    border: none !important;
+}
+
+.Paypal-Logo-Container{
+    width: 20%;
+}
+
+.Paypal-Logo{
+    text-align: center;
+}
+
+.QR-Container{
+    align-items: center;
+    width: 20%;
+}
+
+.Download-Button{
+    justify-content: space-between;
+}
+
+.Paypal-QR.QR-Container{
+    justify-content: space-between;
+    flex-direction: row !important;
+}
+
+QR-Code, .Paypal-Logo{
+    display: flex;
 }
