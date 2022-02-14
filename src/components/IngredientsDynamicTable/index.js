@@ -20,7 +20,7 @@ const IngredientsDynamicTable = ({ ingredients, callback, nutData }) => {
     <>
       <div className="diners">
         <Tooltip title="menos personas" placement="left-start">
-          <IconButton onClick={(e) => setDinerCounter(dinerCounter - 1)}>
+          <IconButton onClick={(e) => dinerCounter > 1 ? setDinerCounter(dinerCounter - 1):setDinerCounter(1)}>
             <PersonRemoveIcon className="people-blue"/>
           </IconButton>
         </Tooltip>
