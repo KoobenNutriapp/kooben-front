@@ -3,9 +3,12 @@ import IconButton from "@mui/material/IconButton";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import "./SelectPortion.scss";
+import { createIngredient } from "../../actions/auth";
+import { useDispatch, useSelector } from 'react-redux';
 
 const SelectPortion = ({ingredient, nutData, people}) => {
 
+  const dispatch = useDispatch();
   //console.log(ingredient);
   //console.log(nutData);
 
@@ -13,9 +16,15 @@ const SelectPortion = ({ingredient, nutData, people}) => {
   const [ingredientSelected, setIngredientSelected] = useState({ingredient})
   const [operation, setOperation] = useState('add')
   const [typePortion, setTypePortion] = useState('cup')
-  const [diner, setDiner] = useState(1)
+  //const [diner, setDiner] = useState(1)
   
   //setDiner(people)
+
+  const sendStore = (ingredient) =>{
+    dispatch(createIngredient(ingredient, portion, typePortion))
+  }
+
+  //console.log(portion);
 
   const handleSelection = (e) => {
     switch (e.target.value) {
@@ -41,11 +50,13 @@ const SelectPortion = ({ingredient, nutData, people}) => {
   };
 
   const handleRemove = (e) => {
-    //console.log(e.currentTarget.id);
-    setPortion(portion - 1)
+    // console.log(e.currentTarget.id);
+    //console.log(portion);
+    portion > 1 ? setPortion(portion - 1) : setPortion(1)
     setIngredientSelected(ingredient)
     setOperation('remove')
-    nutData(ingredientSelected,operation,typePortion,portion)
+    nutData(ingredientSelected,operation,typePortion,portion-1)
+    sendStore(ingredientSelected)
   }
 
   const handleAdd = (e) => {
@@ -53,7 +64,8 @@ const SelectPortion = ({ingredient, nutData, people}) => {
     setPortion(portion + 1)
     setIngredientSelected(ingredient)
     setOperation('add')
-    nutData(ingredientSelected,operation,typePortion,portion)
+    nutData(ingredientSelected,operation,typePortion,portion+1)
+    sendStore(ingredientSelected)
   }
 
   return (
@@ -65,7 +77,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
           </IconButton>
         }  
       </td>
-      <td className="text">{ portion * diner }</td>
+      <td className="text">{ portion * people }</td>
       <td>
         {
           <IconButton>

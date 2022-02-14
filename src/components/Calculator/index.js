@@ -41,11 +41,12 @@ function Calculator() {
   };
 
   const filterDeletingItems = (deleteIngredient) =>{
+    console.log(deleteIngredient);
     const filteredIngredient = detailTable.filter(item=>{
       return item._id !== deleteIngredient
     })
     setDetailTable(filteredIngredient)
-    setOperation('itemDeleted')
+    setOperation(deleteIngredient)
     setTypePortion(null)
     setFirstSelection(false)
 
@@ -65,13 +66,39 @@ function Calculator() {
   }
 
   const handleBypassToNutTable = ((ingredient,operation, portion, quantity) => {
-    setNutFactTable(ingredient)
-    setOperation(operation)
-    setTypePortion(portion)
-    setFirstSelection(false)
-    setQuantity(quantity)
-  })
+    //¿porque no puedo leer el ingredient._id la primera vez????
+    console.log(ingredient);
+    //console.log('operation' + operation);
+    console.log('portion: ' + portion);
+    console.log(quantity);
 
+
+
+    detailTable.map(item=>{
+      //console.log(item._id);
+      if(item._id === ingredient._id){
+        console.log('ids iguales');
+        if(portion==='cup'){
+          console.log('entra a cup');
+          console.log(item.equivalence.gram);
+          console.log(item.equivalence.cup);
+          item.equivalence.gram = (quantity * item.equivalence.gram) / 2
+        }else if(portion==='piece'){
+          console.log('entra a piece');
+          item.equivalence.gram = quantity * item.equivalence.gram
+        }else if(portion==='spoon'){
+          console.log('entra a spooon');
+          item.equivalence.gram = (quantity * item.equivalence.gram) / 20
+        }else if(portion==='gram'){
+        console.log('entra a gram');
+        item.equivalence.gram = (item.equivalence.gram + quantity)
+        }
+      }
+    })
+  })
+  
+  console.log(detailTable);
+  
   return (
     <>
       <Col className="ingredientTable">
@@ -101,7 +128,7 @@ function Calculator() {
       </Col>
       <Col className="nutritionalTable">
         <NutFactTable 
-          ingredient={nutFacTable}
+          ingredient={detailTable}
           operation={operation}
           typePortion={typePortion}
           firstSelection={firstSelection}  
