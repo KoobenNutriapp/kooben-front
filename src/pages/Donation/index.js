@@ -1,4 +1,5 @@
 import NavBar from "../../components/NavBar";
+import MainSearchBar from '../../components/MainSearchBar';
 import Buttons from "../../components/Buttons";
 import {Button, Card, Container, Row, CardImg, Navbar, CardTitle, CardGroup, CardBody} from 'reactstrap'
 import '../../styles/_colors.scss'
@@ -153,23 +154,6 @@ const data = {
     "__v": 0
 }
 
-// var dd = {
-//     content: [
-//       "First paragraph",
-//       "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines"
-//     ]
-//   };
-
-// console.log(data.url)
-
-
-// const dd = PDFRecipeCreator(data);
-
-
-//   const pdfmakedownload = () => {
-
-//     pdfMake.createPdf(dd).download();
-//   };
 
 
 const exportHandler = async () => {
@@ -274,7 +258,8 @@ function DonationPage(){
     return(
         <>
 
-        <Navbar />
+        {/* <Navbar /> */}
+        <MainSearchBar />
 
 
         <Row className="Main-Row-Container">
