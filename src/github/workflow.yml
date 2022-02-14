@@ -3,8 +3,6 @@ name: Kooben CI
 on:
   push:
     branches:
-      - "develop"
-      - "main"
       - "NUT-68-CI"
 
 jobs:
