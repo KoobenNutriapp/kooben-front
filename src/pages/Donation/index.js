@@ -3,15 +3,16 @@ import Buttons from "../../components/Buttons";
 import {Button, Card, Container, Row, CardImg, Navbar, CardTitle, CardGroup, CardBody} from 'reactstrap'
 import '../../styles/_colors.scss'
 import image from '../../img/mexican-food-donation.jpg'
-import PDFRecipeCreator from "../../services/PdfRecipeCreator";
+// import PDFRecipeCreator from "../../services/PdfRecipeCreator";
 // import MyDocument from "../../services/PDFGenerator";
 // import { PDFViewer } from "@react-pdf/renderer";
 // import pdfmakedownload from "./pdfContainer";
+import pdfmakedownload from '../../services/pdfRecipeGenerator'
 
 
 //PDF document creation
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+// import pdfMake from "pdfmake/build/pdfmake";
+// import pdfFonts from "pdfmake/build/vfs_fonts";
 // import documentDefination from "./DocumentDefination";
 
 const urlQRCode = 'https://kooben.s3.amazonaws.com/QR-paypal-kooben'
@@ -19,7 +20,7 @@ const qrCodeAlt = 'Imagen de código QR para donación a Kooben'
 const mainImageAlt = 'Imagen alusiva a la gastronomía mexicana.'
 
 //=======================
-pdfMake.vfs = pdfFonts.pdfMake.vfs
+// pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 //============================== PDF document ============
 
@@ -61,7 +62,9 @@ const data = {
     },
     "_id": "61fc158a31438d0b54a7e427",
     "status": true,
-    "url": "https://recetinas.com/wp-content/uploads/2019/10/ensalada-de-nopales.jpg",
+    // "url": "",
+    "url": "https://balan-kodemia-first-bucket.s3.us-west-1.amazonaws.com/telecaster.jpeg",
+    // "url": "https://recetinas.com/wp-content/uploads/2019/10/ensalada-de-nopales.jpg",
     "type": "prehispanic",
     "title": "Ensalada de nopales 🌵🌵",
     "synopsis": "El nopal es sin duda uno de los ingredientes más representativos de la cocina Mexicana. Esta ensalada, aparte de ser Mexicana, es muy fresca, nutritiva y  también está llena de colores y sabores.",
@@ -157,17 +160,21 @@ const data = {
 //     ]
 //   };
 
-console.log(data.url)
+// console.log(data.url)
 
 
-const dd = PDFRecipeCreator(data);
+// const dd = PDFRecipeCreator(data);
 
 
-  const pdfmakedownload = () => {
+//   const pdfmakedownload = () => {
 
-    pdfMake.createPdf(dd).download();
-  };
+//     pdfMake.createPdf(dd).download();
+//   };
 
+
+const exportHandler = async () => {
+    await pdfmakedownload(data);
+}
 function DonationInvite(){
     return(
         <Card>
@@ -253,7 +260,7 @@ function DownloadPDF() {
     return (
       <Card className="text-center">
           <CardBody>
-            <Button color="primary" onClick={() => pdfmakedownload()}>Exportar</Button>
+            <Button color="primary" onClick={exportHandler}>Exportar</Button>
 
           </CardBody>
       </Card>
