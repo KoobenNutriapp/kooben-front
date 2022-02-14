@@ -173,8 +173,9 @@ const data = {
 
 
 const exportHandler = async () => {
-    await pdfmakedownload(data);
-}
+     await pdfmakedownload(data);
+};
+
 function DonationInvite(){
     return(
         <Card>
