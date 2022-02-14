@@ -9,6 +9,7 @@ import './App.scss';
 import Home from './pages/Home'
 import CreateRecipe from './pages/CreateRecipe'
 import DetailRecipe from './pages/DetailRecipe'
+import Donation from './pages/Donation'
 import NotFound from './pages/NotFound'
 import PrivacyPolicies from './components/PrivacyPolicies/'
 
@@ -51,6 +52,7 @@ function App() {
           <Route path='/CreateRecipe' element={isLoggedIn ? (<CreateRecipe />) : ( <Navigate to="/"/>)} />
           <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
+          <Route path='/Donation' element={<Donation />} />
         </Routes>
       </BrowserRouter>
     </>
