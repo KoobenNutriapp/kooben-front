@@ -2,7 +2,7 @@
 
 .frameNutFactTable {
   border: 1px $mayan-blue solid;
-  width: 85%;
+  width: 100%;
   box-shadow: $mayan-blue 4px 9px;
   padding: 10px;
 }
@@ -31,7 +31,7 @@
 .nut-label{
   border: 1px solid #ddd; /* Gray border */
   border-radius: 4px; /* Rounded border */
-  margin: 4px 8px 0px 10px;
+  margin: 2px 4px 0px 0px;
   width: 35%; /* Set a small width */
 }
 
@@ -42,5 +42,9 @@
 .label-container{
   display: flex;
   justify-content: space-between;
-  width: 85%;
+  width: 100%;
+}
+
+.healthy{
+  background-color: rgb(179, 236, 179);
 }

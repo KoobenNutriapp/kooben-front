@@ -53,28 +53,19 @@ function Calculator() {
   }
 
   const handleSelection = (selection) => {
-   //selection ? setDetailTable([...detailTable,selection]) : console.log('empty');
    if(selection){
-    setDetailTable([...detailTable,selection])
-    setNutFactTable(selection)
-    setOperation('add')
-    setTypePortion('cup')
-    setFirstSelection(true)
+     setDetailTable([...detailTable,selection])
    }else{
     console.log('empty');
    }
   }
 
   const handleBypassToNutTable = ((ingredient,operation, portion, quantity) => {
-    //¿porque no puedo leer el ingredient._id la primera vez????
-    console.log(ingredient);
-    //console.log('operation' + operation);
+    console.log(ingredient._id);
     console.log('portion: ' + portion);
     console.log(quantity);
 
-
-
-    detailTable.map(item=>{
+    const newDetailTable = detailTable.map(item=>{
       //console.log(item._id);
       if(item._id === ingredient._id){
         console.log('ids iguales');
@@ -90,15 +81,21 @@ function Calculator() {
           console.log('entra a spooon');
           item.equivalence.gram = (quantity * item.equivalence.gram) / 20
         }else if(portion==='gram'){
-        console.log('entra a gram');
-        item.equivalence.gram = (item.equivalence.gram + quantity)
+          console.log('entra a gram');
+          item.equivalence.gram = (item.equivalence.gram + quantity)
         }
       }
+      return item
     })
+
+
+    setDetailTable(newDetailTable)
+
+    console.log(newDetailTable);
   })
   
   console.log(detailTable);
-  
+
   return (
     <>
       <Col className="ingredientTable">

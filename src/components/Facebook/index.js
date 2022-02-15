@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { firebase } from '../../Firebase/firebase-config'
 import { startFacebooklogin, startLogout } from "../../actions/auth";
 import { login } from '../../actions/auth';
+import { getUsers } from "../../services/user";
 
 
 const Facebook = () => {
@@ -15,20 +16,24 @@ const Facebook = () => {
   const dispatch = useDispatch();
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
   const [ avatar, setAvatar ] = useState();
+  const [ admin, setAdmin ] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user)=>{
       console.log(user);
       if(user?.uid){
-        dispatch( login ( user.uid, user.displayName, user.photoURL ) )
+        dispatch( login ( user.uid, user.displayName, user.photoURL, user.email ) )
+        validateRol(user.email)
+        console.log(admin);
         setIsLoggedIn( true );
         setAvatar(user.photoURL)
       }else{
         setIsLoggedIn( false );
         setAvatar('')
+        setAdmin(false)
       }
     })
-  }, [ dispatch, isLoggedIn ])
+  }, [ dispatch, isLoggedIn, admin ])
 
 
   const handleLoginFB = (e) => {
@@ -43,21 +48,31 @@ const Facebook = () => {
     dispatch ( startLogout())
   }
 
+  const validateRol = async (emailToValidate) =>{
+    const data = await getUsers();
+    const userList = data.data.users
+    const test = userList.filter(user=>{
+        return user.mail===emailToValidate
+      })
+    if(test.length === 1){
+      setAdmin(true)
+    }
+  }
 
   
 
   return (
     <>
-      {/* <div
-        className="fb-login-button bk"
-        data-width=""
-        data-size="large"
-        data-button-type="login_with"
-        data-layout="default"
-        data-auto-logout-link="true"
-        data-use-continue-as="true"
-        onClick={handleFB}
-      ></div> */}
+      {
+        isLoggedIn ? 
+        <Button onClick={handleLogoutFB} outline color="primary" className="facebook-login">
+        <IconButton>
+          <FacebookIcon className="facebook-icon"/>
+        </IconButton>
+        Logout from Facebook
+        <img className="avatar" src={avatar}/>
+      </Button>
+      :
       <Button onClick={handleLoginFB} outline color="primary" className="facebook-login">
         <IconButton>
           <FacebookIcon className="facebook-icon"/>
@@ -67,13 +82,7 @@ const Facebook = () => {
           <AccountCircleIcon className="avatar-empty"/>
         </IconButton>
       </Button>
-      <Button onClick={handleLogoutFB} outline color="primary" className="facebook-login">
-        <IconButton>
-          <FacebookIcon className="facebook-icon"/>
-        </IconButton>
-        Logout from Facebook
-        <img className="avatar" src={avatar}/>
-      </Button>
+      }
     </>
   );
 };
