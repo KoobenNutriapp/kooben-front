@@ -15,12 +15,12 @@ const encodeURL = (imageURL) => {
     .then(dataURL => {
         console.log('imprimiendo')
         console.log('RESULT', dataURL)
-        img = dataURL
+        return img = dataURL
     });
 
-    return (
-        img
-    )
+    // return (
+    //     img
+    // )
 };
 
 export default encodeURL;

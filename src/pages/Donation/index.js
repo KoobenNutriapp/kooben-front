@@ -9,6 +9,7 @@ import image from '../../img/mexican-food-donation.jpg'
 // import { PDFViewer } from "@react-pdf/renderer";
 // import pdfmakedownload from "./pdfContainer";
 import pdfmakedownload from '../../services/pdfRecipeGenerator'
+import encodeURL from "../../services/imageEncoder";
 
 
 //PDF document creation
@@ -157,7 +158,11 @@ const data = {
 
 
 const exportHandler = async () => {
+     const urlBase64 = await encodeURL(data.url)
+     data.url  = urlBase64
+     console.log(data.url)
      await pdfmakedownload(data);
+     console.log('test-msg')
 };
 
 function DonationInvite(){
