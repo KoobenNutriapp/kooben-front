@@ -48,18 +48,17 @@ const CreateRecipe = () => {
         .required("¡la sinopsis es requerida! 😁"),
     }),
     onSubmit: (values) =>{
-      console.log(formik.errors);
+      console.log('Publishing...');
     }
 
   })
-
 
   return (
     <>
       <Container className="containerCreate" fluid>
         <NavBar />
         <Row className="rowCreate">
-          <Col md="12" className="mainCreate">
+          <Col className="mainCreate">
             <h1 className="newRecipeTitle">Crea una nueva receta</h1>
             {/* <Form onSubmit={handleSubmit}> */}
             <Form onSubmit={formik.handleSubmit}>
@@ -114,8 +113,6 @@ const CreateRecipe = () => {
 
               <h2>Procedimiento:</h2>
 
-
-
               <UploadPhoto
                 infMessage={
                   "Agrega una fotografía para este paso. Las imágenes serán optimizadas para web."
@@ -140,7 +137,6 @@ const CreateRecipe = () => {
               <FormGroup row>
                 <Col sm={9}>
                   <TagsManager />
-                  <FormFeedback></FormFeedback>
                 </Col>
               </FormGroup>
 
@@ -149,12 +145,12 @@ const CreateRecipe = () => {
               <FormGroup row>
                 <Col sm={8}>
                   <div className='add-step-box'>
-                    <button className='pink-button' onClick={handleExport}>Exportar</button>
+                    <button className='pink-button' onClick={() => window.print()}>Exportar</button>
+                    {/* <button className='pink-button' onClick={handlePublish}>Exportar</button> */}
                     <button className='publish' type="submit" value='submit'>Publicar</button>
                   </div>
                 </Col>
               </FormGroup>
-
             </Form>
           </Col>
         </Row>

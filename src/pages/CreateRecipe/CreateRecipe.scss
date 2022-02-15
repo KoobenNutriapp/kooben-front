@@ -2,28 +2,30 @@
 @import "../../styles/colors";
 
 body {
-  background-color: rgb(245 245 245);
+  background-color: rgb(245 245 245) !important;
 }
 
 .containerCreate {
+  // border: 1px blue solid;
   margin-top: 55px;
   display: flex;
+  justify-content: center;
+  width: 70% !important;
 }
 
 .rowCreate {
+  border-radius: 10px;
+  //border: 1px red solid;
   display: flex;
   justify-content: center;
-  width: 100%;
+  width: 70% !important;
 }
 
 .mainCreate {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  //border: 1px black solid;
   background-color: rgb(255 255 255);
   border-radius: 5px;
-  width: 60%;
+  width: 70%;
 }
 
 .newRecipeTitle {
@@ -44,17 +46,24 @@ body {
   text-align: center;
 }
 
+.value{
+  font-size: 15px;
+  //font-weight: 600;
+}
+
 .ingredients {
   display: flex;
   justify-content: center;
 }
 
 .boxCalculator {
+  display: flex;
+  justify-content: center;
   margin-top: 45px;
   margin-bottom: 25px;
   padding-top: 10px;
   height: 800px;
-  width: 70%;
+  width: 100%;
   border: 1px solid #ddd;
   background: rgb(245 245 245);
   overflow-y: scroll;
@@ -100,4 +109,9 @@ h2{
   font-size: 10px;
   color: red;
   font-weight: 700;
+}
+
+.bottom-label{
+  font-size: 12px;
+  font-weight: bold;
 }
