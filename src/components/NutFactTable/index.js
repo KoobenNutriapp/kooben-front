@@ -94,7 +94,7 @@ const NutFactTable = ({
   useEffect(() => {
     const test = () => dispatch(createIngredient());
     test();
-    console.log("entra a use effect");
+    //console.log("entra a use effect");
     //prepareArray()
     manageIngredients();
   }, [ingredient]);

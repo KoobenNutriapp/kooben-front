@@ -41,7 +41,7 @@ function Calculator() {
   };
 
   const filterDeletingItems = (deleteIngredient) =>{
-    console.log(deleteIngredient);
+    //console.log(deleteIngredient);
     const filteredIngredient = detailTable.filter(item=>{
       return item._id !== deleteIngredient
     })
@@ -61,40 +61,49 @@ function Calculator() {
   }
 
   const handleBypassToNutTable = ((ingredient,operation, portion, quantity) => {
-    console.log(ingredient._id);
-    console.log('portion: ' + portion);
-    console.log(quantity);
+    // console.log(ingredient._id);
+    // console.log('portion: ' + portion);
+    // console.log(quantity);
+    const gramFactor = 85
 
     const newDetailTable = detailTable.map(item=>{
       //console.log(item._id);
       if(item._id === ingredient._id){
-        console.log('ids iguales');
+        //console.log('ids iguales');
         if(portion==='cup'){
           console.log('entra a cup');
-          console.log(item.equivalence.gram);
-          console.log(item.equivalence.cup);
-          item.equivalence.gram = (quantity * item.equivalence.gram) / 2
+          console.log('cantidad: ' + quantity);
+          console.log('gramos: ' + item.equivalence.gram);
+          console.log('tazas: ' + item.equivalence.cup);
+          item.equivalence.gram = (quantity * gramFactor) / 2
         }else if(portion==='piece'){
           console.log('entra a piece');
-          item.equivalence.gram = quantity * item.equivalence.gram
+          console.log('cantidad: ' + quantity);
+          console.log('piezas: ' + item.equivalence.piece);
+          console.log('gramos: ' + item.equivalence.gram);
+          item.equivalence.gram = quantity * gramFactor
         }else if(portion==='spoon'){
           console.log('entra a spooon');
-          item.equivalence.gram = (quantity * item.equivalence.gram) / 20
+          console.log('cantidad: ' + quantity);
+          console.log('cucharadas: ' + item.equivalence.spoon);
+          console.log('gramos: ' + item.equivalence.gram);
+          item.equivalence.gram = (quantity * gramFactor) / 20
         }else if(portion==='gram'){
           console.log('entra a gram');
-          item.equivalence.gram = (item.equivalence.gram + quantity)
+          console.log('cantidad: ' + quantity);
+          console.log('gramos: ' + item.equivalence.gram);
+          item.equivalence.gram = quantity
         }
       }
       return item
     })
 
-
     setDetailTable(newDetailTable)
 
-    console.log(newDetailTable);
+    //console.log(newDetailTable);
   })
   
-  console.log(detailTable);
+  //console.log(detailTable);
 
   return (
     <>
