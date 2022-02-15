@@ -6,7 +6,7 @@ body {
 }
 
 .containerCreate {
-  // border: 1px blue solid;
+  border: 1px blue solid;
   margin-top: 55px;
   display: flex;
   justify-content: center;
@@ -15,14 +15,14 @@ body {
 
 .rowCreate {
   border-radius: 10px;
-  //border: 1px red solid;
+  border: 1px red solid;
   display: flex;
   justify-content: center;
-  width: 70% !important;
+  width: 80% !important;
 }
 
 .mainCreate {
-  //border: 1px black solid;
+  border: 1px black solid;
   background-color: rgb(255 255 255);
   border-radius: 5px;
   width: 70%;
@@ -40,6 +40,7 @@ body {
 .textbox {
   width: 100%;
   height: 150px;
+  margin-bottom: 5px;
 }
 
 .center {
@@ -58,7 +59,7 @@ body {
 
 .boxCalculator {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   margin-top: 45px;
   margin-bottom: 25px;
   padding-top: 10px;
@@ -68,12 +69,19 @@ body {
   background: rgb(245 245 245);
   overflow-y: scroll;
   border-radius: 5px;
+  margin-left: 0px!important;
 }
 
 h2{
   font-family: $title-font;
   text-align: center;
   font-weight: 800;
+}
+
+h3{
+  font-family: $title-font;
+  font-weight: 800;
+  color: $mayan-blue;
 }
 
 .add-step-box{
@@ -114,4 +122,24 @@ h2{
 .bottom-label{
   font-size: 12px;
   font-weight: bold;
+}
+
+.binStep{
+  color: $mexican-pink;
+  cursor: pointer;
+}
+
+.deleteButton{
+  display: flex;
+  justify-content: center;
+}
+
+.lineSteps{
+  border-bottom: $mayan-blue 5px solid;
+}
+
+.step {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 5px;
 }

@@ -97,7 +97,7 @@ function Home() {
             <Carousel className='carousel'></Carousel>
 
             {msg ? (
-              <Alert className="alert" variant="outlined" severity="success">
+              <Alert className="alert msgBox" variant="outlined" severity="success">
                 {`Su búsqueda de: ${msg} tiene: ${counter} resultado(s)`}
               </Alert>
             ) : (

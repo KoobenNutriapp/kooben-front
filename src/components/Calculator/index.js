@@ -65,6 +65,8 @@ function Calculator() {
     // console.log('portion: ' + portion);
     // console.log(quantity);
     const gramFactor = 85
+    const cupFactor = 2
+    const spoonFactor = 20
 
     const newDetailTable = detailTable.map(item=>{
       //console.log(item._id);
@@ -75,7 +77,7 @@ function Calculator() {
           console.log('cantidad: ' + quantity);
           console.log('gramos: ' + item.equivalence.gram);
           console.log('tazas: ' + item.equivalence.cup);
-          item.equivalence.gram = (quantity * gramFactor) / 2
+          item.equivalence.gram = (quantity * gramFactor) / cupFactor
         }else if(portion==='piece'){
           console.log('entra a piece');
           console.log('cantidad: ' + quantity);
@@ -87,7 +89,7 @@ function Calculator() {
           console.log('cantidad: ' + quantity);
           console.log('cucharadas: ' + item.equivalence.spoon);
           console.log('gramos: ' + item.equivalence.gram);
-          item.equivalence.gram = (quantity * gramFactor) / 20
+          item.equivalence.gram = (quantity * gramFactor) / spoonFactor
         }else if(portion==='gram'){
           console.log('entra a gram');
           console.log('cantidad: ' + quantity);

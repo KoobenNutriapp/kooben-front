@@ -1,12 +1,12 @@
 import {
-  Button,
   Form,
   FormGroup,
   Label,
   Input,
-  FormText,
-  FormFeedback,
 } from "reactstrap";
+import Tooltip from "@mui/material/Tooltip";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { Container, Row, Col } from "reactstrap";
 import { useForm, useFormik } from "formik";
 import * as Yup from "yup";
@@ -15,43 +15,70 @@ import Calculator from "../../components/Calculator";
 import UploadPhoto from "../../components/UploadPhoto";
 import TagsManager from "../../components/TagsManager";
 import "./CreateRecipe.scss";
-
+import React, { useState } from "react";
 
 const CreateRecipe = () => {
+  const [steps, setSteps] = useState([]);
+  const [counter, setCounter] = useState(1);
+  const [textValidator, setTextValidator] = useState(true)
 
-  const handleStep = (e) =>{
-    e.preventDefault()
-    console.log('add-step');
-  }
+  const handleExport = (e) => {
+    e.preventDefault();
+    console.log("exporting...");
+  };
 
-  const handleExport = (e) =>{
-    e.preventDefault()
-    console.log('exporting...');
-  }
-
-  const handlePublish = (e) =>{
-    e.preventDefault()
-    console.log('publishing...');
-  }
+  const handlePublish = (e) => {
+    e.preventDefault();
+    console.log("publishing...");
+  };
 
   const formik = useFormik({
-    initialValues:{
+    initialValues: {
       title: "",
-      synopsis:"",
+      synopsis: "",
+      step:"",
     },
     validationSchema: Yup.object({
       title: Yup.string()
-        .max(50,"¡50 caracteres como máximo!🤔")
+        .max(50, "¡50 caracteres como máximo!🤔")
         .required("¡el título es requerido! 😁"),
       synopsis: Yup.string()
-        .max(500,"¡500 caracteres como máximo!🤔")
+        .max(500, "¡500 caracteres como máximo!🤔")
         .required("¡la sinopsis es requerida! 😁"),
+      step: Yup.string()
+        .max(500, "¡500 caracteres como máximo!🤔")
+        .required("¡tu descripción es requerida! 😁"),
     }),
-    onSubmit: (values) =>{
-      console.log('Publishing...');
-    }
+    onSubmit: (values) => {
+      console.log("Publishing...");
+    },
+  });
 
-  })
+  const handleDeleteStep = (e) => {
+    console.log(e.currentTarget.id);
+    const stepSelected = e.currentTarget.id
+    const filteredSteps = steps.filter(item=>{
+      return item !== stepSelected
+    })
+    setSteps(filteredSteps)
+  }
+
+  const handleAddStep = (e) => {
+    e.preventDefault();
+    setCounter(counter + 1);
+    const paso = `paso ${counter}`;
+    console.log(paso);
+    setSteps([...steps, paso]);
+  };
+  //console.log(steps);
+
+  const handleStepsBlur = (e) =>{
+    console.log('Se activó algo');
+    console.log(e.target.value);
+    const someText = e.target.value
+    someText ? setTextValidator('has-success') : setTextValidator('has-danger')
+
+  }
 
   return (
     <>
@@ -76,7 +103,9 @@ const CreateRecipe = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.title}
                   />
-                  {formik.touched.title && formik.errors.title ? <p className="errors">{formik.errors.title}</p> : null}
+                  {formik.touched.title && formik.errors.title ? (
+                    <p className="errors">{formik.errors.title}</p>
+                  ) : null}
                 </Col>
               </FormGroup>
 
@@ -95,7 +124,9 @@ const CreateRecipe = () => {
                     onBlur={formik.handleBlur}
                     value={formik.values.synopsis}
                   />
-                  {formik.touched.synopsis && formik.errors.synopsis ? <p className="errors">{formik.errors.synopsis}</p> : null}
+                  {formik.touched.synopsis && formik.errors.synopsis ? (
+                    <p className="errors">{formik.errors.synopsis}</p>
+                  ) : null}
                 </Col>
               </FormGroup>
 
@@ -113,23 +144,49 @@ const CreateRecipe = () => {
 
               <h2>Procedimiento:</h2>
 
-              <UploadPhoto
-                infMessage={
-                  "Agrega una fotografía para este paso. Las imágenes serán optimizadas para web."
-                }
-              />
-              <Input
-                  className="textbox"
-                  id="textbox"
-                  name="textbox"
-                  type="textarea"
-                  placeholder="¡describe con detalle el paso aquí!"
-              />
+              {steps.map((item, index) => {
+                return (
+                  <React.Fragment key={item}>
+                    <div className="lineSteps"></div>
+                    <h3>{`paso ${index+1}`}</h3>
+                    <td className="deleteButton" id={item} onClick={handleDeleteStep}>
+                    {
+                      <Tooltip title="Elimina paso" placement="right-start">
+                        <IconButton>
+                          <DeleteIcon className="binStep"/>
+                        </IconButton>
+                      </Tooltip>
+                    }
+                  </td>
+                    <UploadPhoto
+                      infMessage={
+                        "Agrega una fotografía para este paso. Las imágenes serán optimizadas para web."
+                      }
+                    />
+                    <Input 
+                      valid={textValidator === 'has-success'}
+                      invalid={textValidator === 'has-danger'}
+                      className="step"
+                      id="step"
+                      name="step"
+                      type="textarea"
+                      placeholder="¡describe con detalle el paso aquí!"
+                      onBlur={handleStepsBlur}
+                    />
+                  </React.Fragment>
+                );
+              })}
 
               <FormGroup row>
                 <Col sm={8}>
-                  <div className='add-step-box'>
-                    <button className='pink-button' onClick={handleStep}>agrega paso</button>
+                  <div className="add-step-box">
+                    <button
+                      value="step"
+                      className="pink-button"
+                      onClick={handleAddStep}
+                    >
+                      agrega paso
+                    </button>
                   </div>
                 </Col>
               </FormGroup>
@@ -144,10 +201,17 @@ const CreateRecipe = () => {
 
               <FormGroup row>
                 <Col sm={8}>
-                  <div className='add-step-box'>
-                    <button className='pink-button' onClick={() => window.print()}>Exportar</button>
+                  <div className="add-step-box">
+                    <button
+                      className="pink-button"
+                      onClick={() => window.print()}
+                    >
+                      Exportar
+                    </button>
                     {/* <button className='pink-button' onClick={handlePublish}>Exportar</button> */}
-                    <button className='publish' type="submit" value='submit'>Publicar</button>
+                    <button className="publish" type="submit" value="submit">
+                      Publicar
+                    </button>
                   </div>
                 </Col>
               </FormGroup>

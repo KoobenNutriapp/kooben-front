@@ -94,9 +94,9 @@ const UploadPhoto = ({infMessage}) => {
       console.error(error);
     }
   };
-  console.log(file);
-  console.log(fileName);
-  console.log(fileType);
+  // console.log(file);
+  // console.log(fileName);
+  // console.log(fileType);
 
   return (
     <>
