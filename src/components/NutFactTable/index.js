@@ -3,7 +3,6 @@ import { Table } from "reactstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { createIngredient } from "../../actions/auth";
 import "./NutFactTable.scss";
-import { className } from "postcss-selector-parser";
 
 const NutFactTable = ({
   ingredient,
@@ -94,7 +93,7 @@ const NutFactTable = ({
   useEffect(() => {
     const test = () => dispatch(createIngredient());
     test();
-    console.log("entra a use effect");
+    //console.log("entra a use effect");
     //prepareArray()
     manageIngredients();
   }, [ingredient]);
@@ -341,7 +340,7 @@ const NutFactTable = ({
               Información nutricional
             </th>
           </tr>
-          <tr className="label-container">
+          <div className="label-container">
             {sugars > 0.01 ? (
               <img
                 className="nut-label"
@@ -366,7 +365,7 @@ const NutFactTable = ({
                 src="https://kooben.s3.amazonaws.com/images/sodio.png"
               />
             ) : null}
-          </tr>
+          </div>
           {portion ? (
             <tr className="thickLine">
               <th>Tamaño de la porción:</th>
@@ -400,11 +399,9 @@ const NutFactTable = ({
             <tr>
               <th>Carbohidratos totales:</th>
               <td className="value">
-                {(total_carbohydrate * portion).toFixed(1)} g
-              </td>
+                {(total_carbohydrate * portion).toFixed(1)} g</td>
               <th className="center">
-                {(dvCarbohydrate * portion).toFixed(0)}%
-              </th>
+                {(dvCarbohydrate * portion).toFixed(0)}%</th>
             </tr>
           ) : (
             ""
@@ -446,11 +443,9 @@ const NutFactTable = ({
             <tr>
               <td> - Ácidos grasos saturados:</td>
               <td className="value">
-                {(saturated_fatty_acids * portion).toFixed(1)} g
-              </td>
+                {(saturated_fatty_acids * portion).toFixed(1)} g</td>
               <th className="center">
-                {(dvSaturated_fatty_acids * portion).toFixed(0)} %
-              </th>
+                {(dvSaturated_fatty_acids * portion).toFixed(0)} %</th>
             </tr>
           ) : (
             ""
@@ -460,11 +455,9 @@ const NutFactTable = ({
             <tr>
               <td> - Ácidos grasos monoinsaturados:</td>
               <td className="value">
-                {(monounsaturated_fatty_acids * portion).toFixed(1)} g
-              </td>
+                {(monounsaturated_fatty_acids * portion).toFixed(1)} g</td>
               <th className="center">
-                {(dvMonounsaturated_fatty_acids * portion).toFixed(0)} %
-              </th>
+                {(dvMonounsaturated_fatty_acids * portion).toFixed(0)} %</th>
             </tr>
           ) : (
             ""
@@ -474,11 +467,9 @@ const NutFactTable = ({
             <tr>
               <td> - Ácidos grasos polinsaturados:</td>
               <td className="value">
-                {(polyunsaturated_fatty_acids * portion).toFixed(1)} g
-              </td>
+                {(polyunsaturated_fatty_acids * portion).toFixed(1)} g</td>
               <th className="center">
-                {(dvPolyunsaturated_fatty_acids * portion).toFixed(0)} %
-              </th>
+                {(dvPolyunsaturated_fatty_acids * portion).toFixed(0)} %</th>
             </tr>
           ) : (
             ""
@@ -499,8 +490,7 @@ const NutFactTable = ({
               <th>Colesterol total:</th>
               <td className="value">{(cholesterol * portion).toFixed(1)} g</td>
               <th className="center">
-                {(dvCholesterol * portion).toFixed(0)} %
-              </th>
+                {(dvCholesterol * portion).toFixed(0)} %</th>
             </tr>
           ) : (
             ""

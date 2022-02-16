@@ -3,7 +3,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import "./TagsManager.scss";
 
-function TagsManager() {
+function TagsManager({getTags}) {
 
   const tags=[
     '🤤 delicioso',
@@ -40,7 +40,7 @@ function TagsManager() {
 
   ]
 
-  const handleChange = (event, value) =>console.log(value);
+  const handleChange = (e, value) =>getTags(value)
 
   return (
     <Autocomplete

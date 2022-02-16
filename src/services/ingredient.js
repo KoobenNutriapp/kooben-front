@@ -8,6 +8,7 @@ const getIngredients = async () => {
         method: "GET",
       });
       return await response.json();
+      
     } catch (error) {
       console.error(error);
     }
