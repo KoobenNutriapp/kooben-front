@@ -7,7 +7,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import "./Calculator.scss";
 
-function Calculator() {
+function Calculator({getIngredientsToPost}) {
   const [addIngredient, setAddIngredient] = useState(false);
   const [ingredients, setIngredients] = useState([])
   const [detailTable, setDetailTable] = useState([]);
@@ -22,6 +22,7 @@ function Calculator() {
       const data = await getIngredients();
       const allIngredients = data.ingredients;
       setIngredients(allIngredients);
+      console.log(allIngredients);
     };
     fetchData();
   }, []);
@@ -55,6 +56,7 @@ function Calculator() {
   const handleSelection = (selection) => {
    if(selection){
      setDetailTable([...detailTable,selection])
+     
    }else{
     console.log('empty');
    }
@@ -67,6 +69,7 @@ function Calculator() {
     const gramFactor = 85
     const cupFactor = 2
     const spoonFactor = 20
+    const pieceFactor = 1
 
     const newDetailTable = detailTable.map(item=>{
       //console.log(item._id);
@@ -78,34 +81,47 @@ function Calculator() {
           console.log('gramos: ' + item.equivalence.gram);
           console.log('tazas: ' + item.equivalence.cup);
           item.equivalence.gram = (quantity * gramFactor) / cupFactor
+          item.equivalence.cup = quantity
+          item.equivalence.spoon = (quantity * spoonFactor) / cupFactor
+          item.equivalence.piece = (quantity * pieceFactor) / cupFactor
         }else if(portion==='piece'){
           console.log('entra a piece');
           console.log('cantidad: ' + quantity);
           console.log('piezas: ' + item.equivalence.piece);
           console.log('gramos: ' + item.equivalence.gram);
           item.equivalence.gram = quantity * gramFactor
+          item.equivalence.piece = quantity
+          item.equivalence.cup = (quantity * pieceFactor) * cupFactor
+          item.equivalence.spoon = quantity * spoonFactor
         }else if(portion==='spoon'){
           console.log('entra a spooon');
           console.log('cantidad: ' + quantity);
           console.log('cucharadas: ' + item.equivalence.spoon);
           console.log('gramos: ' + item.equivalence.gram);
           item.equivalence.gram = (quantity * gramFactor) / spoonFactor
+          item.equivalence.spoon = quantity
+          item.equivalence.cup = (quantity * cupFactor) / spoonFactor
+          item.equivalence.piece = quantity / spoonFactor
         }else if(portion==='gram'){
           console.log('entra a gram');
           console.log('cantidad: ' + quantity);
           console.log('gramos: ' + item.equivalence.gram);
           item.equivalence.gram = quantity
+          item.equivalence.cup = (quantity * cupFactor) / gramFactor
+          item.equivalence.piece = quantity / gramFactor
+          item.equivalence.spoon = (quantity * spoonFactor) / gramFactor
         }
       }
       return item
     })
 
     setDetailTable(newDetailTable)
-
+  
     //console.log(newDetailTable);
   })
   
   //console.log(detailTable);
+  getIngredientsToPost(detailTable)
 
   return (
     <>

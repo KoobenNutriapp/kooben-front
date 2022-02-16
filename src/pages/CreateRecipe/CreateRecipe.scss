@@ -143,3 +143,26 @@ h3{
   height: 150px;
   margin-bottom: 5px;
 }
+
+.imgContainer {
+  align-self: flex-end;
+  width: 450px;
+  margin-left: 215px;
+}
+
+.thumbnail {
+  display: flex;
+  justify-content: center;
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px; /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 100%; /* Set a small width */
+}
+
+.thumbnail:hover {
+  box-shadow: 0 0 2px 1px $mexican-pink;
+}
+
+.center {
+  text-align: center;
+}
