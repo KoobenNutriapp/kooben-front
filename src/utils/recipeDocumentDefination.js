@@ -1,8 +1,6 @@
-import encodeURL from '../services/imageEncoder';
 
 const ddFormater = (data) => {
 
-    const img = encodeURL(data.url)
 
     const dd = {
         content: [
@@ -11,8 +9,7 @@ const ddFormater = (data) => {
                 style: 'header'
             },
             {   
-                // image: `data:image/jpeg;base64,${encodeURL(data.url)}`, option 1
-                image: img,
+                image: `${data.url2}`,
                 width: 100
             },
             {

@@ -6,21 +6,6 @@ function PDFRecipeCreator(data){
         return `${step.text}`
     });
 
-    const URLToBase64 = (imageURL) => {
-        const buff = Buffer.from(imageURL, 'utf-8');
-        const base64Format = buff.toString('base64');
-        return base64Format;
-    };
-
-    // const URLToBase64 = (imageURL) => {
-    //     let buff = new Buffer(imageURL);
-    //     let base64data = buff.toString('base64');
-    //     return base64data;
-    // };
-
-    console.log(URLToBase64(data.url))
-
-
 
     const dd = {
         content: [
@@ -29,8 +14,7 @@ function PDFRecipeCreator(data){
                 style: 'header'
             },
             {   
-                image: `data:image/jpeg;base64,${URLToBase64(data.url)}`,
-                // image: `data:image/jpeg;base64,${URLToBase64(data.url)}`,
+                image: `${data.url2}`,
                 width: 100
             },
             {

@@ -10,7 +10,6 @@ const encodeURL = (imageURL) => {
     }));
     
     let img = ''
-    console.log('por entrar')
     toDataURL(imageURL)
     .then(dataURL => {
         console.log('imprimiendo')

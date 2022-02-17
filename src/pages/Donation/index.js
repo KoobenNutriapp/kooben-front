@@ -153,27 +153,23 @@ const data = {
     "__v": 0
 }
 
-// var dd = {
-//     content: [
-//       "First paragraph",
-//       "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines"
-//     ]
-//   };
 
-// console.log(data.url)
-
-
-// const dd = PDFRecipeCreator(data);
-
-
-//   const pdfmakedownload = () => {
-
-//     pdfMake.createPdf(dd).download();
-//   };
-
+const toDataURL = (url) => fetch(url)
+    .then(response => response.blob())
+    .then(blob => new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onloadend = () => resolve(reader.result)
+        reader.onerror = reject
+        reader.readAsDataURL(blob)
+    }));
 
 const exportHandler = async () => {
-     await pdfmakedownload(data);
+    console.log('llamando')
+    data.url2 = await toDataURL(data.url)
+    console.log(data.url2)
+    console.log('se codifico')
+    console.log('Convierte PDF')
+    await pdfmakedownload(data);
 };
 
 function DonationInvite(){
