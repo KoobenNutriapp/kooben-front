@@ -28,6 +28,7 @@ const UploadPhoto = ({infMessage}) => {
 
   const handleLoad = (e) => {
     e.preventDefault();
+    console.log('handleLoad');
     const imageFile = e.target.files[0];
     const imageUrl = URL.createObjectURL(imageFile);
     compressImage(imageFile)

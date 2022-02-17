@@ -21,6 +21,22 @@ const getRecipes = async (search) => {
     }
 }
 
+const createRecipe = async (data) => {
+  try {
+    const response = await fetch(`${BASE_URL}:${PORT}${PATH_RECIPE}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(response)
+    return await response.json();
+
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
 
@@ -29,5 +45,6 @@ const getRecipes = async (search) => {
 
 
 export { getRecipes,
+        createRecipe
          
 };

@@ -8,12 +8,12 @@ import NavBar from "../../components/NavBar";
 import Calculator from "../../components/Calculator";
 import TagsManager from "../../components/TagsManager";
 import { createRecipe } from "../../services/recipes";
-import "./CreateRecipe.scss";
+import "./MyRecipe.scss";
 import React, { useState } from "react";
 import AWS from "aws-sdk";
 import Compressor from 'compressorjs';
 
-const CreateRecipe = () => {
+const MyRecipe = () => {
   const [title, setTitle] = useState(null)
   const [author, setAuthor] = useState(null)
   const [synopsis, setSynopsis] = useState(null)
@@ -304,9 +304,8 @@ const CreateRecipe = () => {
         <NavBar />
         <Row className="rowCreate">
           <Col className="mainCreate">
-            <h1 className="newRecipeTitle">Crea una nueva receta</h1>
-            {/* <Form onSubmit={handleSubmit}> */}
-            <Form onSubmit={handleSubmit}>
+            <h1 className="MyRecipeTitle">❤ Mi receta ❤</h1>
+            <Form >
               <FormGroup row>
                 <Label for="title" sm={2}>
                   Título:
@@ -352,7 +351,7 @@ const CreateRecipe = () => {
                   />
                 </Col>
               </FormGroup>
-              <FormGroup className="imgContainer">
+              <FormGroup className="imgContainerMyRecipe">
               
               {thumbnail ? <img className="thumbnail" alt="tu receta" src={image} /> : ''}
               </FormGroup>
@@ -371,30 +370,15 @@ const CreateRecipe = () => {
                     type="file"
                     onChange={handleLoad}
                   />
-                  <FormFeedback valid className="center">
-                    La imagen se cargó correctamente!
-                  </FormFeedback>
                   <FormFeedback invalid className="center">
                     Parece que el archivo que seleccionaste no es válido. Intenta con una imagen :)
                   </FormFeedback>
                   <FormText className="center">
-                    {'Agrega la fotografía principal de tu receta. Las imágenes serán optimizadas para web.'}
+                    {'Agrega la fotografía principal de tu receta'}
                   </FormText>
                 </Col>
               </FormGroup>
         
-              <FormGroup>
-                <Label for="prehispanic" sm={2}>
-                  Prehispánica:
-                </Label>
-                <Switch
-                  id="prehispanic"
-                  name="prehispanic"
-                  checked={checked}
-                  onChange={handleType}
-                  inputProps={{ 'aria-label': 'controlled' }}
-                  />
-                </FormGroup>
               <h2>Ingredientes:</h2>
 
               <Row className="ingredients boxCalculator">
@@ -473,9 +457,6 @@ const CreateRecipe = () => {
                       Exportar
                     </button>
                     {/* <button className='pink-button' onClick={handlePublish}>Exportar</button> */}
-                    <button className="publish" type="submit" value="submit">
-                      Publicar
-                    </button>
                   </div>
                 </Col>
               </FormGroup>
@@ -487,4 +468,4 @@ const CreateRecipe = () => {
   );
 };
 
-export default CreateRecipe;
+export default MyRecipe;
