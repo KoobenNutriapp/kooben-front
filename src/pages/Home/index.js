@@ -61,7 +61,6 @@ function Home() {
   };
 
   const handleSearch = (datosSearch) => {
-    //console.log("data: " + datosSearch);
     setSearch(datosSearch);
     formatText(datosSearch);
   };

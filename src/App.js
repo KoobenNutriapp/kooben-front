@@ -10,6 +10,7 @@ import './App.scss';
 //pages
 import Home from './pages/Home'
 import CreateRecipe from './pages/CreateRecipe'
+import MyRecipe from './pages/MyRecipe'
 import DetailRecipe from './pages/DetailRecipe'
 import Donation from './pages/Donation'
 import NotFound from './pages/NotFound'
@@ -71,6 +72,7 @@ function App() {
           <Route path='*' element={<NotFound />}/>      
           <Route path='/CreateRecipe' element={isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
           <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
+          <Route path='/MyRecipe/' element={<MyRecipe />} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
           <Route path='/Donation' element={<Donation />} />
         </Routes>
