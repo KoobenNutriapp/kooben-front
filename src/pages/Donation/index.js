@@ -7,8 +7,8 @@ import image from '../../img/mexican-food-donation.jpg'
 // import MyDocument from "../../services/PDFGenerator";
 // import { PDFViewer } from "@react-pdf/renderer";
 // import pdfmakedownload from "./pdfContainer";
-import pdfmakedownload from '../../services/pdfRecipeGenerator'
-
+// import pdfmakedownload from '../../services/pdfRecipeGenerator'
+import pdfmakedownload from "../../services/PdfRecipeCreator";
 
 //PDF document creation
 // import pdfMake from "pdfmake/build/pdfmake";
@@ -24,7 +24,7 @@ const mainImageAlt = 'Imagen alusiva a la gastronomía mexicana.'
 
 //============================== PDF document ============
 
-const data = {
+const oldData = {
     "total_energy": {
         "quantity": 64.15,
         "unit": "KCalorías"
@@ -153,6 +153,195 @@ const data = {
     "__v": 0
 }
 
+const middleData = {
+    "title":"Nopales con aguacate",
+    "url":"https://kooben.s3.amazonaws.com/images/k-1645049441734",
+    "type":"prehispanic",
+    "synopsis":"Es la receta del año",
+    "tags":["🌮mexicana","✅ bajo en calorías","✅ alto en fibra","🤤 delicioso"],
+    "procedures":["paso 1","paso 2","paso 3","paso 4"],
+    "author":"Rafael Martínez Reyes",
+    "created":"16/02/2022 16:25:49",
+    "edited":"16/02/2022 16:25:49",
+    "total_energy":"96.90",
+    "total_carbohydrate":"13.77",
+    "total_sugars":"3.43",
+    "total_fiber":"13.94",
+    "total_sodium":"153.00",
+    "total_protein":"5.17",
+    "total_fat":"41.73",
+    "total_cholesterol":"0.00",
+    "total_glycemic_load":"0.9639",
+    "ingredients":[
+      {
+        "firstLetter":"A",
+        "equivalence":{
+          "cup":2,
+          "spoon":20,
+          "piece":1,
+          "gram":85},
+        "_id":"6209e041767be76789298d11",
+        "status":true,
+        "name":"aguacate 🥑",
+        "alias":["avocado","palta"],
+        "url":"https://lopezdoriga.com/wp-content/uploads/2022/02/aguacate.jpg",
+        "consistency":"S",
+        "energy":0.42,
+        "total_carbohydrate":0.0482,
+        "dietary_fiber":0.047,
+        "sugars":0.009,
+        "calcium":0.17,
+        "phosphorus":0.48,
+        "iron":0.0055,
+        "sodium":0.7,
+        "potassium":4.85,
+        "magnesium":0.29,
+        "copper":0.0068,
+        "zinc":0.0138,
+        "manganese":0.0016,
+        "selenium":0,
+        "vitA":0.07,
+        "vitB1":0.0006,
+        "vitB2":0.0012,
+        "vitB3":0.0138,
+        "vitB6":0.0026,
+        "vitB12":0,
+        "vitC":0.01195,
+        "folicAc":0.66,
+        "vitD":0,
+        "vitE":0,
+        "vitK":0,
+        "protein":0.0169,
+        "total_fat":0.245,
+        "saturated_fatty_acids":0.0213,
+        "monounsaturated_fatty_acids":0.098,
+        "polyunsaturated_fatty_acids":0.0182,
+        "cholesterol":0,
+        "glycemic_index":7,
+        "__v":0}]}
+
+        const data = {
+            "_id": "620e708c160682c3b665e897",
+            "url": "https://kooben.s3.amazonaws.com/images/k-1645113453740",
+            "type": "prehispanic",
+            "title": "Nopales con aguacate",
+            "synopsis": "Porque sí",
+            "tags": [
+                "🐍prehispánico",
+                "🤤 delicioso"
+            ],
+            "procedures": [
+                "uno",
+                "dos",
+                "tres"
+            ],
+            "author": "Rafael Martínez Reyes",
+            "total_energy": 96.9,
+            "total_carbohydrate": 13.77,
+            "total_sugars": 3.43,
+            "total_fiber": 13.94,
+            "total_sodium": 153,
+            "total_protein": 5.17,
+            "total_fat": 41.73,
+            "total_cholesterol": 0,
+            "total_glycemic_load": 0.9639,
+            "created": "17/02/2022 09:58:04",
+            "edited": "17/02/2022 09:58:04",
+            "ingredients": [
+                {
+                    "equivalence": {
+                        "cup": 2,
+                        "spoon": 20,
+                        "piece": 1,
+                        "gram": 85
+                    },
+                    "_id": "6209e041767be76789298d11",
+                    "name": "aguacate 🥑",
+                    "alias": [
+                        "avocado",
+                        "palta"
+                    ],
+                    "url": "https://lopezdoriga.com/wp-content/uploads/2022/02/aguacate.jpg",
+                    "consistency": "S",
+                    "energy": 0.42,
+                    "total_carbohydrate": 0.0482,
+                    "dietary_fiber": 0.047,
+                    "sugars": 0.009,
+                    "calcium": 0.17,
+                    "phosphorus": 0.48,
+                    "iron": 0.0055,
+                    "sodium": 0.7,
+                    "potassium": 4.85,
+                    "magnesium": 0.29,
+                    "copper": 0.0068,
+                    "zinc": 0.0138,
+                    "manganese": 0.0016,
+                    "selenium": 0,
+                    "vitA": 0.07,
+                    "vitB1": 0.0006,
+                    "vitC": 0.01195,
+                    "folicAc": 0.66,
+                    "vitD": 0,
+                    "vitE": 0,
+                    "vitK": 0,
+                    "protein": 0.0169,
+                    "total_fat": 0.245,
+                    "saturated_fatty_acids": 0.0213,
+                    "monounsaturated_fatty_acids": 0.098,
+                    "polyunsaturated_fatty_acids": 0.0182,
+                    "cholesterol": 0,
+                    "glycemic_index": 7
+                },
+                {
+                    "equivalence": {
+                        "cup": 2,
+                        "spoon": 20,
+                        "piece": 1,
+                        "gram": 85
+                    },
+                    "_id": "6209dd55767be76789298d0c",
+                    "name": "nopal cocido",
+                    "alias": [
+                        "tuna",
+                        "tunera",
+                        "higo de tuna",
+                        "caitias",
+                        "chumbera"
+                    ],
+                    "url": "https://media.justo.mx/products/VERDURAS-Nopal-4.jpg",
+                    "consistency": "S",
+                    "energy": 0.15,
+                    "total_carbohydrate": 0.0328,
+                    "dietary_fiber": 0.035,
+                    "sugars": 0.0112,
+                    "calcium": 1.64,
+                    "phosphorus": 0.16,
+                    "iron": 0.005,
+                    "sodium": 0.2,
+                    "potassium": 1.95,
+                    "magnesium": 0.47,
+                    "copper": 0.005,
+                    "zinc": 0.0153,
+                    "manganese": 0.0041,
+                    "selenium": 0,
+                    "vitA": 0.22,
+                    "vitB1": 0.0001,
+                    "vitC": 0.053,
+                    "folicAc": 0,
+                    "vitD": 0,
+                    "vitE": 0,
+                    "vitK": 0,
+                    "protein": 0.0135,
+                    "total_fat": 0.0005,
+                    "saturated_fatty_acids": 0.0001,
+                    "monounsaturated_fatty_acids": 0.0001,
+                    "polyunsaturated_fatty_acids": 0.0002,
+                    "cholesterol": 0,
+                    "glycemic_index": 7
+                }
+            ],
+            "__v": 0
+        }
 
 const toDataURL = (url) => fetch(url)
     .then(response => response.blob())

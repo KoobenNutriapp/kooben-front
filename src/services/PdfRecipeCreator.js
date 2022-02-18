@@ -1,11 +1,33 @@
-import { Buffer } from 'buffer';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-function PDFRecipeCreator(data){
+//alternatuive name function
+// const pdfmakedownload = (data)
 
-    const steps = data.steps.map((step) => {
-        return `${step.text}`
+function pdfmakedownload(data){
+
+    // const getEachStep = (step) => {
+        // const eachStep = [
+        //     {
+        //         image: `${step.url2}`,
+        //     },
+        //     {
+        //         text: `${step.text}`
+        //     }
+        // ];
+
+    //     return eachStep;
+    // };
+
+
+    const steps = data.procedures.map((step) => {
+        return `${step}`
     });
 
+    // const steps = data.steps.map((step) => {
+    //     return getEachStep(step);
+    // });
 
     const dd = {
         content: [
@@ -48,7 +70,9 @@ function PDFRecipeCreator(data){
         }
     };
 
-    return dd;
+    // return dd;
+    pdfMake.createPdf(dd).download();
 }
 
-export default PDFRecipeCreator
+// export default PDFRecipeCreator
+export default pdfmakedownload

@@ -27,7 +27,7 @@ const pdfmakedownload = (data) => {
         
     }
 
-    pdfMake.createPdf(dd).open();
+    pdfMake.createPdf(dd).download();
 }
 
 export default pdfmakedownload;
