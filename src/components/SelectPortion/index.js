@@ -9,8 +9,9 @@ import { useDispatch, useSelector } from 'react-redux';
 const SelectPortion = ({ingredient, nutData, people}) => {
 
   const dispatch = useDispatch();
-  //console.log(ingredient);
-  //console.log(nutData);
+  console.log('SELECT-PORTION:')
+  console.log(ingredient);
+  console.log(nutData);
 
   const [portion, setPortion] = useState(ingredient.equivalence.cup)
   const [ingredientSelected, setIngredientSelected] = useState({ingredient})

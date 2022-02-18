@@ -70,7 +70,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='*' element={<NotFound />}/>      
-          <Route path='/CreateRecipe' element={isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
+          <Route path='/CreateRecipe' element={ <CreateRecipe /> } />
           <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
           <Route path='/MyRecipe/' element={<MyRecipe />} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
