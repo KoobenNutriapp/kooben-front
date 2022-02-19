@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Pills from '../Pills';
 import './RecipeCards.scss'
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 function getTags(Array){
     return Array.map((item, index) => 

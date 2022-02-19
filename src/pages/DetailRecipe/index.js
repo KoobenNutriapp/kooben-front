@@ -3,18 +3,23 @@ import IngredientsDynamicTable from "../../components/IngredientsDynamicTable"
 import NutFactTable from "../../components/NutFactTable";
 import { Container, Row, Col } from "reactstrap";
 import {useLocation} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import "./DetailRecipe.scss";
 
 function DetailRecipe(){
-
+    const navigate = useNavigate();
     const location = useLocation();
     const ingredientes = location.state.recipe.metaData.ingredients
-    let TotalPortion = 0
+    
 
     const detailTable = location.state.recipe.metaData.ingredients
-    console.log('88888888')
-    console.log(nutTable)
     
+    
+    const toDonationPage=(recipe)=>{
+        console.log('Navega donation page con info para exportar ')
+        console.log(recipe)
+        navigate(`/Donation`,{state:{recipe}});
+        }
 
     
       console.log('******');
@@ -75,6 +80,7 @@ function DetailRecipe(){
                     <div class="d-flex flex-row-reverse">
                         <button type="button" class="btn btn-primary">Guardar</button>
                         <button type="button" class="btn btn-secondary">Editar</button>
+                        <button className='pink-button' onClick={toDonationPage}>Exportar</button>
                     </div>
                     
                 </div>

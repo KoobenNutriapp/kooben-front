@@ -78,9 +78,9 @@ function App() {
         <Routes>
           <Route path='*' element={<NotFound />}/>      
           <Route path='/' element={<Home />} />
-          <Route path='/CreateRecipe' element={admin && isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
+          <Route path='/CreateRecipe' element={<CreateRecipe />} />
           <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
-          <Route path='/MyRecipe/' element={isLoggedIn ? <MyRecipe /> : <Navigate to="/"/>} />
+          <Route path='/MyRecipe/' element={<MyRecipe />} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
           <Route path='/Donation' element={<Donation />} />
         </Routes>
