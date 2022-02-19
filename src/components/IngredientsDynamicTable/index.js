@@ -42,7 +42,8 @@ const IngredientsDynamicTable = ({ ingredients, callback, nutData }) => {
           </thead>
           <tbody>
             {ingredients.map((item) => {
-              //console.log(item);
+              console.log('ITEM')
+              console.log(item);
               return (
                   <tr key={item._id} className="center">
                     <td className="left">{item.name}</td>

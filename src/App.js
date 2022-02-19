@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { firebase } from './Firebase/firebase-config'
-import { login } from './actions/auth';
+import { login, userApp, newUserApp  } from './actions/auth';
 import { Spinner } from "reactstrap";
 import { getUsers } from "./services/user";
+import MainSearchBar from "./components/MainSearchBar/";
+import FinalNavBar from "./components/FinalNavBar/";
 import './App.scss';
 
 //pages
@@ -29,7 +31,9 @@ function App() {
       if(user?.uid){
         dispatch( login ( user.uid, user.displayName ) )
         validateRol(user.email)
-        console.log(admin);
+        //console.log(admin);
+        dispatch( newUserApp)
+        
         setIsLoggedIn( true );
       }else{
         setIsLoggedIn( false );
@@ -42,11 +46,12 @@ function App() {
   const validateRol = async (emailToValidate) =>{
     const data = await getUsers();
     const userList = data.data.users
-    const test = userList.filter(user=>{
+    const UserExist = userList.filter(user=>{
         return user.mail===emailToValidate
       })
-      console.log(test);
-    if(test.length === 1){
+      console.log(UserExist);
+    if(UserExist.length === 1){
+      dispatch(userApp('admin'))
       setAdmin(true)
     }
   }    
@@ -54,25 +59,28 @@ function App() {
   if ( checking ) {
     return (
       <>
-      <Spinner
-        color="info"
-        type="grow"
-        size="lg"
-      ></Spinner>
-        <h1 className='Waiting'>Espere...cargando Kóoben</h1>
-      </> 
+        <Spinner
+          className='spinner'
+          color="info"
+          type="grow"
+          size="lg"
+        ></Spinner>
+          <h1 className='Waiting'>Espere...cargando Kóoben</h1>
+        </> 
      )
 }
 
   return (
     <>
       <BrowserRouter>
+      {/* <MainSearchBar /> */}
+      <FinalNavBar />
         <Routes>
-          <Route path='/' element={<Home />} />
           <Route path='*' element={<NotFound />}/>      
-          <Route path='/CreateRecipe' element={isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
+          <Route path='/' element={<Home />} />
+          <Route path='/CreateRecipe' element={admin && isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
           <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
-          <Route path='/MyRecipe/' element={<MyRecipe />} />
+          <Route path='/MyRecipe/' element={isLoggedIn ? <MyRecipe /> : <Navigate to="/"/>} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
           <Route path='/Donation' element={<Donation />} />
         </Routes>

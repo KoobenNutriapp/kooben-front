@@ -11,12 +11,9 @@ export const authReducer = (state={},action) => {
       }
     case types.logout:
       return { }
-    case types.ingredient:
+    case types.userApp:
       return {
-        ingredient: action.payload.ingredient,
-        portion: action.payload.portion,
-        typePortion: action.payload.typePortion,
-        diner: action.payload.diner,
+        userApp: action.payload.userApp,
       }
   
     default:
