@@ -5,6 +5,9 @@ on:
     branches:
       - "main"
       - "NUT-68-CI"
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -16,6 +19,7 @@ jobs:
     
     steps:
       - uses: actions/checkout@v1
+      - run: echo Hello, world!
       - run: npm install
       - run: CI=false npm run build
       # - run: npm test
