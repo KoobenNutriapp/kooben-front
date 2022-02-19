@@ -3,28 +3,15 @@ import IconButton from "@mui/material/IconButton";
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 import "./SelectPortion.scss";
-import { createIngredient } from "../../actions/auth";
-import { useDispatch, useSelector } from 'react-redux';
+
 
 const SelectPortion = ({ingredient, nutData, people}) => {
-
-  //const dispatch = useDispatch();
-  //console.log(ingredient);
-  //console.log(nutData);
 
   const [portion, setPortion] = useState(ingredient.equivalence.cup)
   const [ingredientSelected, setIngredientSelected] = useState({ingredient})
   const [operation, setOperation] = useState('add')
   const [typePortion, setTypePortion] = useState('cup')
-  //const [diner, setDiner] = useState(1)
-  
-  //setDiner(people)
 
-  // const sendStore = (ingredient) =>{
-  //   dispatch(createIngredient(ingredient, portion, typePortion))
-  // }
-
-  //console.log(portion);
 
   const handleSelection = (e) => {
     switch (e.target.value) {
@@ -50,27 +37,21 @@ const SelectPortion = ({ingredient, nutData, people}) => {
   };
 
   const handleRemove = (e) => {
-    // console.log(e.currentTarget.id);
-    //console.log(portion);
-    //portion > 1 ? setPortion(portion - 1) : setPortion(1)
     const newPortion = portion > 1 ? portion - 1 : 1
     setPortion(newPortion)
     setIngredientSelected(ingredient)
     setOperation('remove')
-    // nutData(ingredientSelected,operation,typePortion,portion-1)
     nutData(ingredient,operation,typePortion,newPortion)
-    //sendStore(ingredientSelected)
+    console.log(newPortion);
   }
 
   const handleAdd = (e) => {
-    //console.log(e.currentTarget.id);
     const newPortion = portion + 1 
     setPortion(newPortion)
     setIngredientSelected(ingredient)
     setOperation('add')
-    //nutData(ingredientSelected,operation,typePortion,portion+1)
     nutData(ingredient,operation,typePortion,newPortion)
-    //sendStore(ingredientSelected)
+    console.log(newPortion);
   }
 
   return (

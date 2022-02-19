@@ -22,7 +22,7 @@ function App() {
 
   const [ checking, setChecking ] = useState(true);
   const [ isLoggedIn, setIsLoggedIn ] = useState(false);
-  const [ admin, setAdmin ] = useState(false);
+  const [ admin, setAdmin ] = useState(true);
 
   const dispatch = useDispatch();
 
@@ -33,7 +33,6 @@ function App() {
         validateRol(user.email)
         //console.log(admin);
         dispatch( newUserApp)
-        
         setIsLoggedIn( true );
       }else{
         setIsLoggedIn( false );
@@ -69,11 +68,11 @@ function App() {
         </> 
      )
 }
-
+  console.log(admin);
+  console.log(isLoggedIn);
   return (
     <>
       <BrowserRouter>
-      {/* <MainSearchBar /> */}
       <FinalNavBar />
         <Routes>
           <Route path='*' element={<NotFound />}/>      

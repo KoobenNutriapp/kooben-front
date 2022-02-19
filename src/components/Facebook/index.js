@@ -7,7 +7,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import { useDispatch } from 'react-redux';
 import { firebase } from '../../Firebase/firebase-config'
 import { startFacebooklogin, startLogout } from "../../actions/auth";
-import { login } from '../../actions/auth';
+import { login, userApp, newUserApp } from '../../actions/auth';
 import { getUsers } from "../../services/user";
 
 
@@ -25,6 +25,7 @@ const Facebook = () => {
         dispatch( login ( user.uid, user.displayName, user.photoURL, user.email ) )
         validateRol(user.email)
         console.log(admin);
+        dispatch( newUserApp)
         setIsLoggedIn( true );
         setAvatar(user.photoURL)
       }else{
@@ -55,6 +56,7 @@ const Facebook = () => {
         return user.mail===emailToValidate
       })
     if(test.length === 1){
+      dispatch(userApp('admin'))
       setAdmin(true)
     }
   }

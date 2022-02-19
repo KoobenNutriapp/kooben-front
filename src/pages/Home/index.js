@@ -86,10 +86,11 @@ function Home() {
 
   return (
     <>
-      <Container className="container" fluid>
-        {/* <MainSearchBar callback={handleSearch} /> */}
-        <FinalNavBar callback={handleSearch} />
-        <Row className="row">
+      <Container className="homeContainer" fluid>
+        <FinalNavBar 
+          handleSearchBar={handleSearch}
+        />
+        <Row className="homeRow">
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
             <div className="btnCreateRecipe">
@@ -99,21 +100,7 @@ function Home() {
                 color="mexican-pink"
               />
             </div>
-            {/* <RecipeCard
-              key={"a102012"}
-              AltImage={"Card image cap"}
-              
-              SrcImage={
-                "https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg"
-              }
-              RecipeTitle={"Kóoben tips"}
-              RecipeDescription={
-                "¿Qué es el índice glucémico y la carga glucémica?. Aprende más sobre diabetes mellitus y nutrición."
-              }
-              tagsArray={[""]}
-            /> */}
-
-            <Card className="cardBox">
+            <Card className="homeCardBox">
               <CardTitle tag="h5">K'óoben tips</CardTitle>
               <CardImg
                 className="cardImg"
