@@ -13,7 +13,7 @@ function DetailRecipe(){
 
     const detailTable = location.state.recipe.metaData.ingredients
     console.log('88888888')
-    console.log(nutTable)
+    // console.log(nutTable)
     
 
     
