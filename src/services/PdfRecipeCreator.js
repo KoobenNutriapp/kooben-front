@@ -7,22 +7,17 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 function pdfmakedownload(data){
 
-    // const getEachStep = (step) => {
-        // const eachStep = [
-        //     {
-        //         image: `${step.url2}`,
-        //     },
-        //     {
-        //         text: `${step.text}`
-        //     }
-        // ];
 
-    //     return eachStep;
-    // };
-
+    const tags = data.tags.map((tag) => {
+        return `${tag}`
+    });
 
     const steps = data.procedures.map((step) => {
         return `${step}`
+    });
+
+    const ingredients = data.ingredients.map((ingredient) => {
+        return `${ingredient.name}`
     });
 
     // const steps = data.steps.map((step) => {
@@ -31,24 +26,34 @@ function pdfmakedownload(data){
 
     const dd = {
         content: [
+            // {
+            //     stack: [
+
+            //     ]
+            // },
             {
                 text: `${data.title}`,
                 style: 'header'
             },
-            {   
+            {
                 image: `${data.url2}`,
-                width: 100
+                width: 320,
+                alignment: 'center'
+
             },
             {
-                text: [
-                    `${data.synopsis}\n`,
-                    {text: 'Tags:', fontSize: 15, bold: true},
-                    `${data.tags[0]}, ${data.tags[1]}, ${ data.tags[2]}, ${data.tags[3]}`
-                ]
+                text: `${data.synopsis}\n`
+            },
+            {
+                text: [{text: 'Tags:', fontSize: 15, bold: true}],
+                ul: tags
             },
             {
                 text: 'Ingredientes:',
                 style: 'subheader'
+            },
+            {
+                ol: ingredients
             },
             {
                 text: 'Preparación:',
@@ -60,8 +65,9 @@ function pdfmakedownload(data){
         ],
         styles: {
             header: {
-                fontSize: 18,
-                bold: true
+                fontSize: 22,
+                bold: true,
+                alignment: 'center'
             },
             subheader: {
                 fontSize: 16,
