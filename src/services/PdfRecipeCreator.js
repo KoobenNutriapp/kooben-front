@@ -26,52 +26,89 @@ function pdfmakedownload(data){
 
     const dd = {
         content: [
-            // {
-            //     stack: [
-
-            //     ]
-            // },
             {
-                text: `${data.title}`,
+                stack: [
+                    `${data.title}`
+                ],
                 style: 'header'
             },
             {
-                image: `${data.url2}`,
-                width: 320,
-                alignment: 'center'
-
+                stack: [
+                    {
+                        image: `${data.url2}`,
+                        width: 320,
+                        alignment: 'center',
+                        margin: [0, 10, 0, 10]
+                    }
+                ]
             },
             {
-                text: `${data.synopsis}\n`
+                stack: [
+                    `${data.synopsis}\n`
+                ],
+                italics: true,
+                margin: [50, 10, 50, 10]
+            },
+            // {
+            //     text: [{text: 'Tags:', fontSize: 15, bold: true}],
+            //     ul: tags
+            // },
+            {
+                stack: [
+                    {
+                        text: 'Ingredientes:',
+                        style: 'subtitle'
+                    },
+                    {
+                        ol: ingredients
+                    }
+                ], margin: [0, 10, 0, 10]
             },
             {
-                text: [{text: 'Tags:', fontSize: 15, bold: true}],
-                ul: tags
+                stack: [
+                    {
+                        text: 'Preparación:',
+                        style: 'subtitle'
+                    },
+                    {
+                        ol: steps
+                    }
+                ], margin: [0, 10, 0, 10]
             },
-            {
-                text: 'Ingredientes:',
-                style: 'subheader'
-            },
-            {
-                ol: ingredients
-            },
-            {
-                text: 'Preparación:',
-                style: 'subheader'
-            },
-            {
-                ol: steps
-            }
+            // {
+            //     table: {
+            //         body: [
+            //             text: [{text: "Información Nutrimental\n", style: 'tableHeader'},
+            //                 {text: 'Tamaño de la porción: 100 g'}]
+            //         ]
+            //     }
+            // }
         ],
         styles: {
             header: {
                 fontSize: 22,
                 bold: true,
-                alignment: 'center'
+                alignment: 'center',
+                margin: [0, 0, 0, 10],
+                color: '#0A9EBF'
             },
             subheader: {
+                fontSize: 12,
+                bold: false,
+                italics: true,
+                alignment: 'justifiy'
+            },
+            subtitle: {
                 fontSize: 16,
-                bold: true
+                bold: true,
+                italics: false,
+                alignment: 'left',
+                color: '#0A9EBF'
+            },
+            tableHeader: {
+                bold: true,
+                fontSize: 16,
+                margin: [10, 0, 10, 0]
             }
         }
     };
