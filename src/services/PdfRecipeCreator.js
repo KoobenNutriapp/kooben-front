@@ -1,70 +1,121 @@
-import { Buffer } from 'buffer';
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
-function PDFRecipeCreator(data){
+//alternatuive name function
+// const pdfmakedownload = (data)
 
-    const steps = data.steps.map((step) => {
-        return `${step.text}`
+function pdfmakedownload(data){
+
+
+    const tags = data.tags.map((tag) => {
+        return `${tag}`
     });
 
-    const URLToBase64 = (imageURL) => {
-        const buff = Buffer.from(imageURL, 'utf-8');
-        const base64Format = buff.toString('base64');
-        return base64Format;
-    };
+    const steps = data.procedures.map((step) => {
+        return `${step}`
+    });
 
-    // const URLToBase64 = (imageURL) => {
-    //     let buff = new Buffer(imageURL);
-    //     let base64data = buff.toString('base64');
-    //     return base64data;
-    // };
+    const ingredients = data.ingredients.map((ingredient) => {
+        return `${ingredient.name}`
+    });
 
-    console.log(URLToBase64(data.url))
-
-
+    // const steps = data.steps.map((step) => {
+    //     return getEachStep(step);
+    // });
 
     const dd = {
         content: [
             {
-                text: `${data.title}`,
+                stack: [
+                    `${data.title}`
+                ],
                 style: 'header'
             },
-            {   
-                image: `data:image/jpeg;base64,${URLToBase64(data.url)}`,
-                // image: `data:image/jpeg;base64,${URLToBase64(data.url)}`,
-                width: 100
-            },
             {
-                text: [
-                    `${data.synopsis}\n`,
-                    {text: 'Tags:', fontSize: 15, bold: true},
-                    `${data.tags[0]}, ${data.tags[1]}, ${ data.tags[2]}, ${data.tags[3]}`
+                stack: [
+                    {
+                        image: `${data.url2}`,
+                        width: 320,
+                        alignment: 'center',
+                        margin: [0, 10, 0, 10]
+                    }
                 ]
             },
             {
-                text: 'Ingredientes:',
-                style: 'subheader'
+                stack: [
+                    `${data.synopsis}\n`
+                ],
+                italics: true,
+                margin: [50, 10, 50, 10]
+            },
+            // {
+            //     text: [{text: 'Tags:', fontSize: 15, bold: true}],
+            //     ul: tags
+            // },
+            {
+                stack: [
+                    {
+                        text: 'Ingredientes:',
+                        style: 'subtitle'
+                    },
+                    {
+                        ol: ingredients
+                    }
+                ], margin: [0, 10, 0, 10]
             },
             {
-                text: 'Preparación:',
-                style: 'subheader'
+                stack: [
+                    {
+                        text: 'Preparación:',
+                        style: 'subtitle'
+                    },
+                    {
+                        ol: steps
+                    }
+                ], margin: [0, 10, 0, 10]
             },
-            {
-                ol: steps
-            }
+            // {
+            //     table: {
+            //         body: [
+            //             text: [{text: "Información Nutrimental\n", style: 'tableHeader'},
+            //                 {text: 'Tamaño de la porción: 100 g'}]
+            //         ]
+            //     }
+            // }
         ],
         styles: {
             header: {
-                fontSize: 18,
-                bold: true
+                fontSize: 22,
+                bold: true,
+                alignment: 'center',
+                margin: [0, 0, 0, 10],
+                color: '#0A9EBF'
             },
             subheader: {
+                fontSize: 12,
+                bold: false,
+                italics: true,
+                alignment: 'justifiy'
+            },
+            subtitle: {
                 fontSize: 16,
-                bold: true
+                bold: true,
+                italics: false,
+                alignment: 'left',
+                color: '#0A9EBF'
+            },
+            tableHeader: {
+                bold: true,
+                fontSize: 16,
+                margin: [10, 0, 10, 0]
             }
         }
     };
 
-    return dd;
+    // return dd;
+    pdfMake.createPdf(dd).download();
 }
 
-export default PDFRecipeCreator
+// export default PDFRecipeCreator
+export default pdfmakedownload
