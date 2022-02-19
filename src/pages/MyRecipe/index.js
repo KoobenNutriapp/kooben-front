@@ -3,7 +3,6 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Container, Row, Col } from "reactstrap";
-import Switch from '@mui/material/Switch';
 import NavBar from "../../components/NavBar";
 import Calculator from "../../components/Calculator";
 import TagsManager from "../../components/TagsManager";
@@ -14,9 +13,9 @@ import AWS from "aws-sdk";
 import Compressor from 'compressorjs';
 
 const MyRecipe = () => {
-  const [title, setTitle] = useState(null)
-  const [author, setAuthor] = useState(null)
-  const [synopsis, setSynopsis] = useState(null)
+  const [title, setTitle] = useState("")
+  const [author, setAuthor] = useState("")
+  const [synopsis, setSynopsis] = useState("")
   const [tags, setTags] = useState([]);
   const [steps, setSteps] = useState([]);
   const [procedures, setProcedures] = useState([]);
@@ -41,22 +40,10 @@ const MyRecipe = () => {
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [validateMainImage, setValidateMainImage] = useState(null);
+  const [validateTitle, setValidateTitle] = useState("");
+  const [validateAuthor, setValidateAuthor] = useState("");
+  const [validateSynopsis, setValidateSynopsis] = useState("");
   const [thumbnail, setThumbnail] = useState(false);
-
-  const cleanForm = () => {
-		setTitle("");
-		setUrl("");
-		setType("");
-		setSynopsis("");
-		setTags("");
-		setProcedures("")
-    setAuthor("")
-    setImage("")
-    setFile("")
-    setFileName("")
-    setFileType("")
-    setThumbnail("")
-	};
   
   //AWS
     AWS.config.update({
@@ -163,14 +150,40 @@ const MyRecipe = () => {
     setSteps([...steps, tempStep]);
   };
 
-  const handleStepsBlur = (e) =>{
+  const handleStepsBlur = (e) => {
     console.log(e.target.value);
-    const addProcedure = e.target.value
-    setProcedures([...procedures, addProcedure])
-  }
+    const addProcedure = e.target.value;
+    if(addProcedure!==""){
+      setProcedures([...procedures, addProcedure]);
+    }    
+  };
 
   const getTags = (arrayOfTags) => {
     setTags(arrayOfTags)
+  }
+
+  const validateText = () =>{
+    title?.length < 1 ? setValidateTitle('has-danger') : setValidateTitle('has-success')
+    author?.length < 5 ? setValidateAuthor('has-danger') : setValidateAuthor('has-success')
+    synopsis?.length < 11 ? setValidateSynopsis('has-danger') : setValidateSynopsis('has-success')
+  }
+
+  const handleTitle = (e) =>{
+    console.log( title?.length);
+    title?.length < 5 ? setValidateTitle('has-danger') : setValidateTitle('has-success')
+    setTitle(e.target.value)
+  }
+
+  const handleAuthor = (e) =>{
+    console.log( author?.length);
+    author?.length < 5 ? setValidateAuthor('has-danger') : setValidateAuthor('has-success')
+    setAuthor(e.target.value)
+  }
+
+  const handleSynopsis = (e) =>{
+    console.log(synopsis?.length);
+    synopsis?.length < 11 ? setValidateSynopsis('has-danger') : setValidateSynopsis('has-success')
+    setSynopsis(e.target.value)
   }
 
   const handleSubmit = async (e) => {
@@ -187,6 +200,8 @@ const MyRecipe = () => {
       ("00" + date.getSeconds()).slice(-2);
     const created = formatDate
     const edited = formatDate
+
+    validateText()
 
     //Falta una mejor UX en validación de formularios
     if([title,url,synopsis,tags,procedures,author].includes(null) || total_energy < 0.5){
@@ -301,10 +316,10 @@ const MyRecipe = () => {
   return (
     <>
       <Container className="containerCreate" fluid>
-        <NavBar />
+        {/* <NavBar /> */}
         <Row className="rowCreate">
           <Col className="mainCreate">
-            <h1 className="MyRecipeTitle">❤ Mi receta ❤</h1>
+            <h1 className="MyRecipeTitle">Mi receta</h1>
             <Form >
               <FormGroup row>
                 <Label for="title" sm={2}>
@@ -312,12 +327,21 @@ const MyRecipe = () => {
                 </Label>
                 <Col sm={10}>
                   <Input
+                    valid={validateTitle === "has-success"}
+                    invalid={validateTitle === "has-danger"}
                     id="title"
                     name="title"
                     placeholder="escribe el título de tu receta..."
                     type="text"
-                    onChange={e => setTitle(e.target.value)}
+                    onChange={handleTitle}
+                    onBlur={handleTitle}
                   />
+                  <FormFeedback valid className="center">
+                    ¡Correcto!. ¡Gracias!
+                  </FormFeedback>
+                  <FormFeedback invalid className="center">
+                    ¡El título debe ser mayor a 5 caracteres!
+                  </FormFeedback>
                 </Col>
               </FormGroup>
 
@@ -327,12 +351,21 @@ const MyRecipe = () => {
                 </Label>
                 <Col sm={10}>
                   <Input
+                    valid={validateAuthor === "has-success"}
+                    invalid={validateAuthor === "has-danger"}
                     id="author"
                     name="author"
                     placeholder="escribe tu nombre o la fuente de tu receta..."
                     type="text"
-                    onChange={e => setAuthor(e.target.value)}
+                    onChange={handleAuthor}
+                    onBlur={handleAuthor}
                   />
+                  <FormFeedback valid className="center">
+                    ¡Correcto!. ¡Gracias!
+                  </FormFeedback>
+                  <FormFeedback invalid className="center">
+                    ¡El autor debe ser mayor a 5 caracteres!
+                  </FormFeedback>
                 </Col>
               </FormGroup>
 
@@ -342,13 +375,22 @@ const MyRecipe = () => {
                 </Label>
                 <Col sm={10}>
                   <Input
+                    valid={validateSynopsis === "has-success"}
+                    invalid={validateSynopsis === "has-danger"}
                     className="textbox"
                     id="synopsis"
                     name="synopsis"
                     type="textarea"
                     placeholder="¡cuéntale al mundo porqué tu receta es genial!"
-                    onChange={e => setSynopsis(e.target.value)}
+                    onChange={handleSynopsis}
+                    onBlur={handleSynopsis}
                   />
+                  <FormFeedback valid className="center">
+                    ¡Correcto!. ¡Gracias!
+                  </FormFeedback>
+                  <FormFeedback invalid className="center">
+                    ¡La sinopsis debe ser mayor a 10 caracteres!
+                  </FormFeedback>
                 </Col>
               </FormGroup>
               <FormGroup className="imgContainerMyRecipe">

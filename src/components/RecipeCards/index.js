@@ -46,10 +46,10 @@ function RecipeCards({Recipekey,AltImage, SrcImage, RecipeTitle, RecipeDescripti
           {RecipeDescription}
         </Typography>
       </CardContent>
-      <CardActions>
+      {/* <CardActions> */}
         {/* <Button size="small">Share</Button> */}
-        <Button size="small">Leer más</Button>
-      </CardActions>
+        {/* <Button size="small">Leer más</Button> */}
+      {/* </CardActions> */}
     </Card>
   );
   }

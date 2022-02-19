@@ -35,18 +35,15 @@ export const logout = () => ({
   type: types.logout
 })
 
-export const createIngredient = (ingredient, portion, typePortion, diner) =>{
+export const userApp = (userApp) =>{
   return ( dispatch ) => {
-    dispatch( newIngredient(ingredient, portion, typePortion, diner) )
+    dispatch( newUserApp(userApp) )
   }
 }
 
-export const newIngredient = (ingredient, portion, typePortion, diner) => ({
-  type: types.ingredient,
+export const newUserApp = (userApp) => ({
+  type: types.userApp,
   payload: {
-    ingredient,
-    portion,
-    typePortion,
-    diner,
+    userApp,
   }
 })

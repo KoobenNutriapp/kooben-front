@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Table } from "reactstrap";
-import { useDispatch, useSelector } from "react-redux";
+//import { useDispatch, useSelector } from "react-redux";
 import { createIngredient } from "../../actions/auth";
 import "./NutFactTable.scss";
 
@@ -26,10 +26,7 @@ const NutFactTable = ({
   const [zinc, setZinc] = useState(0);
   const [manganese, setManganese] = useState(0);
   const [selenium, setSelenium] = useState(0);
-  const [lithium, setLithium] = useState(0);
   const [vitA, setVitA] = useState(0);
-  const [carotene, setCarotene] = useState(0);
-  const [bcarotene, setBcarotene] = useState(0);
   const [vitB1, setVitB1] = useState(0);
   const [vitB2, setVitB2] = useState(0);
   const [vitB3, setVitB3] = useState(0);
@@ -72,10 +69,7 @@ const NutFactTable = ({
   const dvZinc = (zinc * 100) / 11;
   const dvManganese = (manganese * 100) / 2.3;
   const dvSelenium = (selenium * 100) / 55;
-  const dvLithium = (lithium * 100) / 0.1;
   const dvVitA = (vitA * 100) / 900;
-  const dvCarotene = (carotene * 100) / 2;
-  const dvBcarotene = (bcarotene * 100) / 4;
   const dvVitB1 = (vitB1 * 100) / 1.2;
   const dvVitB2 = (vitB2 * 100) / 1.4;
   const dvVitB3 = (vitB3 * 100) / 16;
@@ -88,17 +82,17 @@ const NutFactTable = ({
   const dvVitK = (vitK * 100) / 100;
 
   // REDUX
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
 
   useEffect(() => {
-    const test = () => dispatch(createIngredient());
-    test();
+    //const test = () => dispatch(createIngredient());
+    //test();
     //console.log("entra a use effect");
     //prepareArray()
     manageIngredients();
   }, [ingredient]);
 
-  const dataRedux = useSelector((state) => state.ingredient);
+  //const dataRedux = useSelector((state) => state.ingredient);
   //console.log(dataRedux.portion);
 
   // const prepareArray = () =>{
@@ -199,29 +193,11 @@ const NutFactTable = ({
     setSelenium(selenium.toFixed(2));
     console.log("selenium: " + selenium.toFixed(2));
 
-    const lithium = ingredient.reduce((acc, item) => {
-      return acc + (item?.lithium || 0);
-    }, 0);
-    setLithium(lithium.toFixed(2));
-    console.log("lithium: " + lithium.toFixed(2));
-
     const vitA = ingredient.reduce((acc, item) => {
       return acc + (item?.vitA || 0);
     }, 0);
     setVitA(vitA.toFixed(2));
     console.log("vitA: " + vitA.toFixed(2));
-
-    const carotene = ingredient.reduce((acc, item) => {
-      return acc + (item?.carotene || 0);
-    }, 0);
-    setCarotene(carotene.toFixed(2));
-    console.log("carotene: " + carotene.toFixed(2));
-
-    const bcarotene = ingredient.reduce((acc, item) => {
-      return acc + (item?.bcarotene || 0);
-    }, 0);
-    setBcarotene(bcarotene.toFixed(2));
-    console.log("bcarotene: " + bcarotene.toFixed(2));
 
     const vitB1 = ingredient.reduce((acc, item) => {
       return acc + (item?.vitB1 || 0);
@@ -598,41 +574,11 @@ const NutFactTable = ({
             ""
           )}
 
-          {lithium ? (
-            <tr>
-              <th>Litio:</th>
-              <td className="value">{(lithium * portion).toFixed(1)} mg</td>
-              <th className="center">{(dvLithium * portion).toFixed(0)} %</th>
-            </tr>
-          ) : (
-            ""
-          )}
-
           {vitA ? (
             <tr>
               <th>Vitamina A:</th>
               <td className="value">{(vitA * portion).toFixed(1)} ug</td>
               <th className="center">{(dvVitA * portion).toFixed(0)} %</th>
-            </tr>
-          ) : (
-            ""
-          )}
-
-          {carotene ? (
-            <tr>
-              <th>Caroteno:</th>
-              <td className="value">{(carotene * portion).toFixed(1)} mg</td>
-              <th className="center">{(dvCarotene * portion).toFixed(0)} %</th>
-            </tr>
-          ) : (
-            ""
-          )}
-
-          {bcarotene ? (
-            <tr>
-              <th>Beta-caroteno:</th>
-              <td className="value">{(bcarotene * portion).toFixed(1)} mg</td>
-              <th className="center">{(dvBcarotene * portion).toFixed(0)} %</th>
             </tr>
           ) : (
             ""

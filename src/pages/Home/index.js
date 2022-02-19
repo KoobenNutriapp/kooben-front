@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
 import { getRecipes } from "../../services/recipes";
-import { Container, Row, Col } from "reactstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  CardImg,
+  CardBody,
+  CardTitle,
+  CardText,
+} from "reactstrap";
 import MainSearchBar from "../../components/MainSearchBar";
 import FiltersTable from "../../components/FiltersTable";
 import RecipeCard from "../../components/RecipeCards";
 import Carousel from "../../components/Carousel";
+import FinalNavBar from "../../components/FinalNavBar";
 import Buttons from "../../components/Buttons/";
 import Alert from "@mui/material/Alert";
 import "./Home.scss";
@@ -19,7 +29,7 @@ function Home() {
     const fetchData = async () => {
       const data = await getRecipes(search);
       const allRecipes = data.data.recipes;
-      console.log(allRecipes)
+      console.log(allRecipes);
       setRecipes(allRecipes);
       setCounter(allRecipes.length);
     };
@@ -64,10 +74,21 @@ function Home() {
     setSearch(datosSearch);
     formatText(datosSearch);
   };
+
+  const openInNewTab = (url) => {
+    const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
+    if (newWindow) newWindow.opener = null
+  }
+
+  const onClickUrl = (url) => {
+    return () => openInNewTab(url)
+  }
+
   return (
     <>
       <Container className="container" fluid>
-        <MainSearchBar callback={handleSearch} />
+        {/* <MainSearchBar callback={handleSearch} /> */}
+        <FinalNavBar callback={handleSearch} />
         <Row className="row">
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
@@ -78,7 +99,7 @@ function Home() {
                 color="mexican-pink"
               />
             </div>
-            <RecipeCard
+            {/* <RecipeCard
               key={"a102012"}
               AltImage={"Card image cap"}
               
@@ -90,13 +111,37 @@ function Home() {
                 "¿Qué es el índice glucémico y la carga glucémica?. Aprende más sobre diabetes mellitus y nutrición."
               }
               tagsArray={[""]}
-            />
+            /> */}
+
+            <Card className="cardBox">
+              <CardTitle tag="h5">K'óoben tips</CardTitle>
+              <CardImg
+                className="cardImg"
+                alt="K'óoben tips"
+                src="https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg"
+                onClick={onClickUrl('https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg')}
+              />
+              <CardBody>
+                <CardText
+                  className="cardText"
+                  onClick={onClickUrl('https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg')}
+                >
+                  ¿Qué es el índice glucémico y la carga glucémica?. Aprende más
+                  sobre diabetes mellitus...
+                </CardText>
+              </CardBody>
+            </Card>
           </Col>
-          <Col md="9" className=" sideRight">
-            <Carousel className='carousel'></Carousel>
+
+          <Col md="10" className=" sideRight">
+            <Carousel className="carousel"></Carousel>
 
             {msg ? (
-              <Alert className="alert msgBox" variant="outlined" severity="success">
+              <Alert
+                className="alert msgBox"
+                variant="outlined"
+                severity="info"
+              >
                 {`Su búsqueda de: ${msg} tiene: ${counter} resultado(s)`}
               </Alert>
             ) : (
@@ -112,7 +157,7 @@ function Home() {
                   RecipeTitle={recipe.title}
                   RecipeDescription={recipe.synopsis}
                   tagsArray={recipe.tags}
-                  metaData = {recipe}
+                  metaData={recipe}
                 />
               );
             })}
