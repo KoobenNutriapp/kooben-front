@@ -1,14 +1,24 @@
 import { Container, Row, Col } from "reactstrap";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { FormGroup } from "reactstrap";
 import "./DetailRecipe.scss";
 import { useState, useEffect } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
+import { BASE_URL, PORT, } from "../../utils/constants";
 
 function DetailRecipe(){
     const location = useLocation();
     const [detailTable, setDetailTable] = useState([]);
+
+    const navigate = useNavigate();
+
+    const metaData = location.state.recipe.metaData;
+    const Recipekey = location.state.recipe.Recipekey;
+
+    const recipeId = `${BASE_URL}:3000/DetailRecipe/${Recipekey}`
+    console.log(recipeId);
+
     
 useEffect(() => {
     const loadData = async () => {
@@ -21,6 +31,10 @@ useEffect(() => {
     e.preventDefault();
     console.log("exporting...");
   };
+
+  const toUpdateRecipe = (recipe) =>{
+    navigate(`/UpdateRecipe/${recipe.Recipekey}`,{state:{recipe}});
+  }
 
   const handleBypassToNutTable = ((ingredient, operation, portion, quantity) => {
     console.log(ingredient);
@@ -83,6 +97,7 @@ useEffect(() => {
 
     return(
         <Container className="containerDetail" fluid>
+     
             <Row className="rowDetail">
                 <Col className="mainDetail">
                     <h1 className="detailRecipeTitle">{location.state.recipe.metaData.title}</h1>                
@@ -99,7 +114,7 @@ useEffect(() => {
                             {location.state.recipe.metaData.synopsis}
                         </div>    
                     </div>
-                    
+   
                     <div>
                       <div className="detailGeneralBox">
                         <img className="detailUrlImage" src={location.state.recipe.metaData.url}></img>
@@ -138,7 +153,11 @@ useEffect(() => {
                         >
                           Exportar
                         </button>
-                        <button className="detailPublishBtn" type="submit" value="submit">
+                        <button 
+                          className="detailPublishBtn" 
+                          onClick={()=>{toUpdateRecipe({Recipekey,metaData})}}
+
+                          >
                           Editar
                         </button>
                         <button className="detailDeleteBtn" type="submit" value="submit">
@@ -146,9 +165,10 @@ useEffect(() => {
                         </button>
                       </div>
                     </Col>
+             
                     </Row>
                 </Col> 
-            </Row>                    
+            </Row>
         </Container>       
     );
 }

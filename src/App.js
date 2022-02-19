@@ -14,6 +14,7 @@ import Home from './pages/Home'
 import CreateRecipe from './pages/CreateRecipe'
 import MyRecipe from './pages/MyRecipe'
 import DetailRecipe from './pages/DetailRecipe'
+import UpdateRecipe from './pages/UpdateRecipe'
 import Donation from './pages/Donation'
 import NotFound from './pages/NotFound'
 import PrivacyPolicies from './components/PrivacyPolicies/'
@@ -78,6 +79,7 @@ function App() {
           <Route path='*' element={<NotFound />}/>      
           <Route path='/' element={<Home />} />
           <Route path='/CreateRecipe' element={admin && isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
+          <Route path='/UpdateRecipe/:RecipeID' element={admin && isLoggedIn ? <UpdateRecipe /> : <Navigate to="/"/>} />
           <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
           <Route path='/MyRecipe/' element={isLoggedIn ? <MyRecipe /> : <Navigate to="/"/>} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />

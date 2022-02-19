@@ -1,0 +1,246 @@
+@import "../../styles/typography";
+@import "../../styles/colors";
+
+body {
+  background-color: rgb(245 245 245) !important;
+}
+
+.containerUpdate {
+  //border: 1px blue solid;
+  margin-top: 55px;
+  display: flex;
+  justify-content: center;
+  width: 70% !important;
+  margin-bottom: 100px;
+}
+
+.rowUpdate {
+  border-radius: 10px;
+  //border: 1px red solid;
+  display: flex;
+  justify-content: center;
+  width: 80% !important;
+}
+
+.mainUpdate {
+  //border: 1px black solid;
+  background-color: rgb(255 255 255);
+  border-radius: 5px;
+  width: 70%;
+  margin-bottom: 100px;
+}
+
+.newRecipeTitle {
+  color: $mayan-blue;
+  font-family: $title-font;
+  font-size: 40px;
+  font-weight: 800;
+  margin-top: 30px;
+  margin-bottom: 45px;
+  width: 100%;
+  text-align: center;
+}
+
+.textboxUpdate {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 5px;
+}
+
+.centerUpdate {
+  text-align: center;
+}
+
+.value{
+  font-size: 15px;
+  //font-weight: 600;
+}
+
+.ingredientsUpdate {
+  display: flex;
+  justify-content: center;
+}
+
+.boxCalculatorUpdate {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 45px;
+  margin-bottom: 25px;
+  padding-top: 10px;
+  height: 2350px;
+  width: 100%;
+  border: 1px solid #ddd;
+  background: rgb(245 245 245);
+  //overflow-y: scroll;
+  border-radius: 5px;
+  margin-left: 0px!important;
+}
+
+h2{
+  font-family: $title-font;
+  text-align: center;
+  font-weight: 800;
+}
+
+h3{
+  font-family: $title-font;
+  font-weight: 800;
+  color: $mayan-blue;
+}
+
+h6{
+  font-family: $title-font;
+  font-weight: 800;
+  color: $mayan-blue;
+  text-align: center;
+}
+
+.add-step-box{
+  width: 150px;
+  height: 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.pink-button{
+  border-color: $mexican-pink;
+  font-size: 13px;
+  font-weight:500;
+  border-radius: 5px;
+  background-color: $mexican-pink;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.publish{
+  border-color: $mayan-blue;
+  font-size: 13px !important;
+  font-weight:500 !important;
+  border-radius: 5px;
+  background-color: $mayan-blue !important;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 20px;
+  color: black !important;
+}
+
+.modal{
+  font-family: $title-font;
+  font-stretch:ultra-expanded;
+  font-size: 30px;
+  font-weight:700;
+  color:  $mexican-pink !important;
+}
+
+.modal-button{
+  background-color: $mexican-pink !important;
+  color:  white !important;
+  font-size: 15px !important;
+  font-weight:600 !important;
+  font-family:Arial, Helvetica, sans-serif
+}
+
+.errors{
+  font-size: 10px;
+  color: red;
+  font-weight: 700;
+}
+
+.bottom-label{
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.binStep{
+  color: $mexican-pink;
+  cursor: pointer;
+}
+
+.deleteButton{
+  display: flex;
+  justify-content: center;
+}
+
+.lineSteps{
+  border-bottom: $mayan-blue 5px solid;
+}
+
+.step {
+  width: 100%;
+  height: 150px;
+  margin-bottom: 5px;
+}
+
+.imgContainerUpdate {
+  align-self: flex-end;
+  width: 623px;
+  margin-left: 250px;
+}
+
+.thumbnailUpdate {
+  display: flex;
+  justify-content: center;
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px; /* Rounded border */
+  padding: 5px; /* Some padding */
+  width: 100%; /* Set a small width */
+}
+
+.thumbnailUpdate:hover {
+  box-shadow: 0 0 2px 1px $mexican-pink;
+}
+
+.deleteButtonUpdate{
+  display: flex;
+  justify-content: center;
+}
+
+.binStepUpdate{
+  color: $mexican-pink;
+  cursor: pointer;
+}
+
+.ingredients{
+  display: flex;
+  justify-content: center;
+}
+
+.ingredientTable{
+  width: 45%;
+}
+
+.nutritionalTable{
+  width: 44%;
+}
+
+.btnAddIngredient{
+border-color: $mexican-pink;
+font-size: 13px;
+font-weight:500;
+border-radius: 20px;
+background-color: $mexican-pink;
+width: 150px;
+height: 50px;
+margin-top: 8px;
+}
+
+.btnAddIngredient:hover {
+box-shadow: 0 0 2px 1px $mexican-pink;
+}
+
+.selectBox{
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  width: 75%;
+}
+
+.selectIngredient{
+width: 75%;
+border: $mexican-pink 1px solid;
+}
+
+.selectIngredient:hover{
+box-shadow: 0 0 2px 1px $mexican-pink;
+}

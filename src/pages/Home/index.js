@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, } from "react";
 import { getRecipes } from "../../services/recipes";
 import {
   Container,
@@ -86,11 +86,11 @@ function Home() {
 
   return (
     <>
-      <Container className="homeContainer" fluid>
+      <Container className="container" fluid>
         <FinalNavBar 
           handleSearchBar={handleSearch}
         />
-        <Row className="homeRow">
+        <Row className="row">
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
             <div className="btnCreateRecipe">
@@ -100,7 +100,7 @@ function Home() {
                 color="mexican-pink"
               />
             </div>
-            <Card className="homeCardBox">
+            <Card className="cardBox">
               <CardTitle tag="h5">K'óoben tips</CardTitle>
               <CardImg
                 className="cardImg"
