@@ -52,19 +52,24 @@ const SelectPortion = ({ingredient, nutData, people}) => {
   const handleRemove = (e) => {
     // console.log(e.currentTarget.id);
     //console.log(portion);
-    portion > 1 ? setPortion(portion - 1) : setPortion(1)
+    //portion > 1 ? setPortion(portion - 1) : setPortion(1)
+    const newPortion = portion > 1 ? portion - 1 : 1
+    setPortion(newPortion)
     setIngredientSelected(ingredient)
     setOperation('remove')
-    nutData(ingredientSelected,operation,typePortion,portion-1)
+    // nutData(ingredientSelected,operation,typePortion,portion-1)
+    nutData(ingredient,operation,typePortion,newPortion)
     sendStore(ingredientSelected)
   }
 
   const handleAdd = (e) => {
     //console.log(e.currentTarget.id);
-    setPortion(portion + 1)
+    const newPortion = portion + 1 
+    setPortion(newPortion)
     setIngredientSelected(ingredient)
     setOperation('add')
-    nutData(ingredientSelected,operation,typePortion,portion+1)
+    //nutData(ingredientSelected,operation,typePortion,portion+1)
+    nutData(ingredient,operation,typePortion,newPortion)
     sendStore(ingredientSelected)
   }
 
@@ -77,7 +82,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
           </IconButton>
         }  
       </td>
-      <td className="text">{ portion * people }</td>
+      <td className="text">{ (portion * people).toFixed(0) }</td>
       <td>
         {
           <IconButton>

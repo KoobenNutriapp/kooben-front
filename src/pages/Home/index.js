@@ -61,7 +61,6 @@ function Home() {
   };
 
   const handleSearch = (datosSearch) => {
-    //console.log("data: " + datosSearch);
     setSearch(datosSearch);
     formatText(datosSearch);
   };
@@ -70,21 +69,21 @@ function Home() {
       <Container className="container" fluid>
         <MainSearchBar callback={handleSearch} />
         <Row className="row">
-          <Col md="2" className="col-1 sideLeft">
+          <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
             <div className="btnCreateRecipe">
               <Buttons
                 children="Crea tu receta"
                 size="lg"
                 color="mexican-pink"
-                // callback={callbackName}
               />
             </div>
             <RecipeCard
               key={"a102012"}
               AltImage={"Card image cap"}
+              
               SrcImage={
-                "https://fmdiabetes.org/wp-content/uploads/2018/01/Iindice-glucemico-y-carga-glucemica-redes.jpg"
+                "https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg"
               }
               RecipeTitle={"Kóoben tips"}
               RecipeDescription={
@@ -93,11 +92,11 @@ function Home() {
               tagsArray={[""]}
             />
           </Col>
-          <Col md="9" className="col-2 sideRight">
+          <Col md="9" className=" sideRight">
             <Carousel className='carousel'></Carousel>
 
             {msg ? (
-              <Alert className="alert" variant="outlined" severity="success">
+              <Alert className="alert msgBox" variant="outlined" severity="success">
                 {`Su búsqueda de: ${msg} tiene: ${counter} resultado(s)`}
               </Alert>
             ) : (

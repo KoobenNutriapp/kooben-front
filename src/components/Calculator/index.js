@@ -7,7 +7,7 @@ import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import "./Calculator.scss";
 
-function Calculator() {
+function Calculator({getIngredientsToPost}) {
   const [addIngredient, setAddIngredient] = useState(false);
   const [ingredients, setIngredients] = useState([])
   const [detailTable, setDetailTable] = useState([]);
@@ -22,6 +22,7 @@ function Calculator() {
       const data = await getIngredients();
       const allIngredients = data.ingredients;
       setIngredients(allIngredients);
+      console.log(allIngredients);
     };
     fetchData();
   }, []);
@@ -41,7 +42,7 @@ function Calculator() {
   };
 
   const filterDeletingItems = (deleteIngredient) =>{
-    console.log(deleteIngredient);
+    //console.log(deleteIngredient);
     const filteredIngredient = detailTable.filter(item=>{
       return item._id !== deleteIngredient
     })
@@ -53,52 +54,75 @@ function Calculator() {
   }
 
   const handleSelection = (selection) => {
-   //selection ? setDetailTable([...detailTable,selection]) : console.log('empty');
    if(selection){
-    setDetailTable([...detailTable,selection])
-    setNutFactTable(selection)
-    setOperation('add')
-    setTypePortion('cup')
-    setFirstSelection(true)
+     setDetailTable([...detailTable,selection])
+     
    }else{
     console.log('empty');
    }
   }
 
   const handleBypassToNutTable = ((ingredient,operation, portion, quantity) => {
-    //¿porque no puedo leer el ingredient._id la primera vez????
-    console.log(ingredient);
-    //console.log('operation' + operation);
-    console.log('portion: ' + portion);
-    console.log(quantity);
+    // console.log(ingredient._id);
+    // console.log('portion: ' + portion);
+    // console.log(quantity);
+    const gramFactor = 85
+    const cupFactor = 2
+    const spoonFactor = 20
+    const pieceFactor = 1
 
-
-
-    detailTable.map(item=>{
+    const newDetailTable = detailTable.map(item=>{
       //console.log(item._id);
       if(item._id === ingredient._id){
-        console.log('ids iguales');
+        //console.log('ids iguales');
         if(portion==='cup'){
           console.log('entra a cup');
-          console.log(item.equivalence.gram);
-          console.log(item.equivalence.cup);
-          item.equivalence.gram = (quantity * item.equivalence.gram) / 2
+          console.log('cantidad: ' + quantity);
+          console.log('gramos: ' + item.equivalence.gram);
+          console.log('tazas: ' + item.equivalence.cup);
+          item.equivalence.gram = (quantity * gramFactor) / cupFactor
+          item.equivalence.cup = quantity
+          item.equivalence.spoon = (quantity * spoonFactor) / cupFactor
+          item.equivalence.piece = (quantity * pieceFactor) / cupFactor
         }else if(portion==='piece'){
           console.log('entra a piece');
-          item.equivalence.gram = quantity * item.equivalence.gram
+          console.log('cantidad: ' + quantity);
+          console.log('piezas: ' + item.equivalence.piece);
+          console.log('gramos: ' + item.equivalence.gram);
+          item.equivalence.gram = quantity * gramFactor
+          item.equivalence.piece = quantity
+          item.equivalence.cup = (quantity * pieceFactor) * cupFactor
+          item.equivalence.spoon = quantity * spoonFactor
         }else if(portion==='spoon'){
           console.log('entra a spooon');
-          item.equivalence.gram = (quantity * item.equivalence.gram) / 20
+          console.log('cantidad: ' + quantity);
+          console.log('cucharadas: ' + item.equivalence.spoon);
+          console.log('gramos: ' + item.equivalence.gram);
+          item.equivalence.gram = (quantity * gramFactor) / spoonFactor
+          item.equivalence.spoon = quantity
+          item.equivalence.cup = (quantity * cupFactor) / spoonFactor
+          item.equivalence.piece = quantity / spoonFactor
         }else if(portion==='gram'){
-        console.log('entra a gram');
-        item.equivalence.gram = (item.equivalence.gram + quantity)
+          console.log('entra a gram');
+          console.log('cantidad: ' + quantity);
+          console.log('gramos: ' + item.equivalence.gram);
+          item.equivalence.gram = quantity
+          item.equivalence.cup = (quantity * cupFactor) / gramFactor
+          item.equivalence.piece = quantity / gramFactor
+          item.equivalence.spoon = (quantity * spoonFactor) / gramFactor
         }
       }
+      return item
     })
+
+    setDetailTable(newDetailTable)
+  
+    //console.log(newDetailTable);
   })
   
-  console.log(detailTable);
-  
+  //console.log(detailTable);
+  getIngredientsToPost(detailTable)
+
   return (
     <>
       <Col className="ingredientTable">

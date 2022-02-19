@@ -6,20 +6,20 @@ import Compressor from 'compressorjs';
 import "./UploadPhoto.scss";
 
 const UploadPhoto = ({infMessage}) => {
-
+  
   const [image, setImage] = useState("");
   const [file, setFile] = useState("");
   const [fileName, setFileName] = useState("");
   const [fileType, setFileType] = useState("");
   const [validateMainImage, setValidateMainImage] = useState(null);
   const [thumbnail, setThumbnail] = useState(false);
-
+  
   //aws
   AWS.config.update({
     accessKeyId: process.env.REACT_APP_KEY_ID,
     secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
   });
-
+  
   const S3Client = new AWS.S3({
     params: { Bucket: "kooben" },
     region: "us-east-1",
@@ -28,6 +28,7 @@ const UploadPhoto = ({infMessage}) => {
 
   const handleLoad = (e) => {
     e.preventDefault();
+    console.log('handleLoad');
     const imageFile = e.target.files[0];
     const imageUrl = URL.createObjectURL(imageFile);
     compressImage(imageFile)
@@ -38,6 +39,8 @@ const UploadPhoto = ({infMessage}) => {
     setFileType(type);
   };
 
+  console.log(fileName);
+  
   const compressImage = (baseImage) => {
     if (!baseImage) {
       return;
@@ -94,9 +97,9 @@ const UploadPhoto = ({infMessage}) => {
       console.error(error);
     }
   };
-  console.log(file);
-  console.log(fileName);
-  console.log(fileType);
+  // console.log(file);
+  // console.log(fileName);
+  // console.log(fileType);
 
   return (
     <>

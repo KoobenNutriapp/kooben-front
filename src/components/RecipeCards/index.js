@@ -9,14 +9,11 @@ import Pills from '../Pills';
 import './RecipeCards.scss'
 import {Link, useNavigate} from 'react-router-dom';
 
-
 function getTags(Array){
     return Array.map((item, index) => 
       <Pills key={`Tag${index}`} children={item} pill={true} />
     )
 } 
-
-
 
 function RecipeCards({Recipekey,AltImage, SrcImage, RecipeTitle, RecipeDescription, tagsArray,metaData}) {
   const navigate = useNavigate();
@@ -31,7 +28,7 @@ function RecipeCards({Recipekey,AltImage, SrcImage, RecipeTitle, RecipeDescripti
     <Card sx={{ maxWidth: 680 }} sy={{height: 600 }} className='FullCard'>
       <CardMedia
         component="img"
-        height="200"
+        height="300"
         image={SrcImage}
         alt={AltImage}
       />
