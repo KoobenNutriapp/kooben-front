@@ -119,8 +119,15 @@ function Calculator({getIngredientsToPost}) {
   
     //console.log(newDetailTable);
   })
-  
-  //console.log(detailTable);
+
+  console.log(detailTable);
+  //****************eliminar duplicados */
+  let set = new Set( detailTable.map( JSON.stringify ) )
+  let result = Array.from( set ).map( JSON.parse );
+  console.log(result);
+  //setDetailTable(result)
+  //****************eliminar duplicados */
+
   getIngredientsToPost(detailTable)
 
   return (

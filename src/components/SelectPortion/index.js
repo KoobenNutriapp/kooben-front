@@ -8,10 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SelectPortion = ({ingredient, nutData, people}) => {
 
-  const dispatch = useDispatch();
-  console.log('SELECT-PORTION:')
-  console.log(ingredient);
-  console.log(nutData);
+  //const dispatch = useDispatch();
+  //console.log(ingredient);
+  //console.log(nutData);
 
   const [portion, setPortion] = useState(ingredient.equivalence.cup)
   const [ingredientSelected, setIngredientSelected] = useState({ingredient})
@@ -21,9 +20,9 @@ const SelectPortion = ({ingredient, nutData, people}) => {
   
   //setDiner(people)
 
-  const sendStore = (ingredient) =>{
-    dispatch(createIngredient(ingredient, portion, typePortion))
-  }
+  // const sendStore = (ingredient) =>{
+  //   dispatch(createIngredient(ingredient, portion, typePortion))
+  // }
 
   //console.log(portion);
 
@@ -60,7 +59,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
     setOperation('remove')
     // nutData(ingredientSelected,operation,typePortion,portion-1)
     nutData(ingredient,operation,typePortion,newPortion)
-    sendStore(ingredientSelected)
+    //sendStore(ingredientSelected)
   }
 
   const handleAdd = (e) => {
@@ -71,7 +70,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
     setOperation('add')
     //nutData(ingredientSelected,operation,typePortion,portion+1)
     nutData(ingredient,operation,typePortion,newPortion)
-    sendStore(ingredientSelected)
+    //sendStore(ingredientSelected)
   }
 
   return (

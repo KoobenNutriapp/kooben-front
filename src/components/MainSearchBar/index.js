@@ -164,7 +164,9 @@ function MainSearchBar({callback}) {
             <MenuIcon />
           </IconButton>
 
-          <div className='typography_title'>K'óoben</div>
+          <div className='logo1'></div>
+
+          {/* <div className='typography_title'>K'óoben</div> */}
           
           <form onSubmit={handleSubmit}>
             <Search>

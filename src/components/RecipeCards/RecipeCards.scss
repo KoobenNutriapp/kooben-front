@@ -1,11 +1,13 @@
 @import '../../styles/typography';
+@import "../../styles/colors";
 
 .FullCard{
     margin-bottom: 10px;
 
     .Typography{
-        font-family: 'Mayan';
+        font-family: $title-font;
         font-size: 33px;
+        color: $mayan-blue;
 
     }
 
