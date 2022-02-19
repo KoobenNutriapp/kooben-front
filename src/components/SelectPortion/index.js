@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const SelectPortion = ({ingredient, nutData, people}) => {
 
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   //console.log(ingredient);
   //console.log(nutData);
 
@@ -20,9 +20,9 @@ const SelectPortion = ({ingredient, nutData, people}) => {
   
   //setDiner(people)
 
-  const sendStore = (ingredient) =>{
-    dispatch(createIngredient(ingredient, portion, typePortion))
-  }
+  // const sendStore = (ingredient) =>{
+  //   dispatch(createIngredient(ingredient, portion, typePortion))
+  // }
 
   //console.log(portion);
 
@@ -59,7 +59,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
     setOperation('remove')
     // nutData(ingredientSelected,operation,typePortion,portion-1)
     nutData(ingredient,operation,typePortion,newPortion)
-    sendStore(ingredientSelected)
+    //sendStore(ingredientSelected)
   }
 
   const handleAdd = (e) => {
@@ -70,7 +70,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
     setOperation('add')
     //nutData(ingredientSelected,operation,typePortion,portion+1)
     nutData(ingredient,operation,typePortion,newPortion)
-    sendStore(ingredientSelected)
+    //sendStore(ingredientSelected)
   }
 
   return (

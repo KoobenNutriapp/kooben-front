@@ -7,7 +7,7 @@ const composeEnhancers =
   
 const reducers = combineReducers({
   auth: authReducer,
-  ingredient: authReducer,
+  userApp: authReducer,
 });
 
 export const store = createStore(

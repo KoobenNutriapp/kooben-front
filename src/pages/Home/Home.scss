@@ -1,3 +1,6 @@
+@import "../../styles/typography";
+@import "../../styles/colors";
+
 body{
     background-color: rgb(245 245 245);
 }
@@ -9,14 +12,15 @@ body{
 
 .container{
     //border: 1px blue solid;
-    margin-top: 65px;
+    margin-top: 63px !important;
     display: flex;
+    justify-content: center;
 }
 
 .row{
     //border: 1px red solid;
     display: flex;
-    justify-content:flex-end;
+    justify-content:flex-start;
     width: 100% !important;
 }
 
@@ -24,7 +28,7 @@ body{
 .sideLeft{
     //border: 1px rgb(89, 228, 128) solid;
     position: fixed;
-    top: 65px;
+    top: 70px !important;
     left: 450px;
     
     background-color: rgb(255 255 255);
@@ -36,17 +40,32 @@ body{
     //border: 1px rgb(86, 21, 112) solid;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    background-color: rgb(255 255 255);
+    //background-color: rgb(255 255 255);
     border-radius: 5px;
 }
 
 .btnCreateRecipe{
-    margin-top: 35px;
-    margin-bottom: 35px;
+    margin-top: 25px;
+    margin-bottom: 15px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    margin-left: 27px;
+}
+
+.cardBox{
+    width: 90% !important;
+    color: $mayan-blue;
+    font-family: $title-font;
+    text-align: center;
+}
+
+.cardBox:hover {
+    box-shadow: 0 0 2px 1px $mexican-pink;
+  }
+
+.cardImg, .cardText{
+    cursor: pointer;
 }
 
 .carousel{

@@ -49,6 +49,11 @@
 .Waiting{
   font-family: $title-font;
   font-size:50px;
-  color:$mayan-blue
-  
+  color:$mayan-blue;
+}
+
+.spinner{
+  width: 200px !important;
+  height: 200px !important;
+  align-content: center;
 }
