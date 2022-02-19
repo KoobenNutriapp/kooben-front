@@ -30,9 +30,10 @@ body {
   margin-bottom: 100px;
 }
 
-.newRecipeTitle {
+.MyRecipeTitle {
   font-family: $title-font;
   font-size: 40px;
+  color:  $mexican-pink;
   font-weight: 800;
   margin-bottom: 45px;
   width: 100%;
@@ -146,10 +147,10 @@ h3{
   margin-bottom: 5px;
 }
 
-.imgContainer {
+.imgContainerMyRecipe {
   align-self: flex-end;
-  width: 450px;
-  margin-left: 215px;
+  width: 662px;
+  margin-left: 136px;
 }
 
 .thumbnail {

@@ -7,7 +7,7 @@
 }
 
 .ingredientTable{
-    width: 56%;
+    width: 45%;
 }
 
 .nutritionalTable{
@@ -18,9 +18,11 @@
   border-color: $mexican-pink;
   font-size: 13px;
   font-weight:500;
-  border-radius: 5px;
+  border-radius: 20px;
   background-color: $mexican-pink;
-  // background-color: $mayan-blue;
+  width: 150px;
+  height: 50px;
+  margin-top: 8px;
 }
 
 .btnAddIngredient:hover {
@@ -31,11 +33,11 @@
     margin-top: 10px;
     display: flex;
     justify-content: center;
-    width: 100%;
+    width: 75%;
 }
 
 .selectIngredient{
-  width: 80%;
+  width: 75%;
   border: $mexican-pink 1px solid;
 }
 

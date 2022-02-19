@@ -27,3 +27,24 @@
 .center {
   text-align: center;
 }
+
+.nut-label{
+  border: 1px solid #ddd; /* Gray border */
+  border-radius: 4px; /* Rounded border */
+  margin: 2px 4px 0px 0px;
+  width: 35%; /* Set a small width */
+}
+
+.nut-label:hover {
+  box-shadow: 0 0 2px 1px $mexican-pink;
+}
+
+.label-container{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.healthy{
+  background-color: rgb(179, 236, 179);
+}

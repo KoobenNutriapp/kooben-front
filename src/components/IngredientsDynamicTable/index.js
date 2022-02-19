@@ -20,7 +20,7 @@ const IngredientsDynamicTable = ({ ingredients, callback, nutData }) => {
     <>
       <div className="diners">
         <Tooltip title="menos personas" placement="left-start">
-          <IconButton onClick={(e) => setDinerCounter(dinerCounter - 1)}>
+          <IconButton onClick={(e) => dinerCounter > 1 ? setDinerCounter(dinerCounter - 1):setDinerCounter(1)}>
             <PersonRemoveIcon className="people-blue"/>
           </IconButton>
         </Tooltip>
@@ -42,7 +42,8 @@ const IngredientsDynamicTable = ({ ingredients, callback, nutData }) => {
           </thead>
           <tbody>
             {ingredients.map((item) => {
-              //console.log(item);
+              console.log('ITEM')
+              console.log(item);
               return (
                   <tr key={item._id} className="center">
                     <td className="left">{item.name}</td>
