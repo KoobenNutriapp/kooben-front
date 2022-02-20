@@ -8,7 +8,7 @@ import PersonAddAlt1Icon from '@mui/icons-material/PersonAddAlt1';
 import "./IngredientsDynamicTable.scss";
 import SelectPortion from "../SelectPortion/";
 
-const IngredientsDynamicTable = ({ ingredients, callback, nutData }) => {
+const IngredientsDynamicTable = ({ ingredients, callback, nutData, showBin }) => {
 
   const [dinerCounter, setDinerCounter] = useState(1)
 
@@ -56,11 +56,13 @@ const IngredientsDynamicTable = ({ ingredients, callback, nutData }) => {
 
                     <td className="bin2" id={item._id} onClick={handleDeleteIngredient}>
                     {
+                      !showBin ?
                       <Tooltip title="Elimina ingrediente" placement="right-start">
                         <IconButton>
                           <DeleteIcon className="bin"/>
                         </IconButton>
-                      </Tooltip>
+                      </Tooltip> :
+                      null
                     }
                   </td>
                   </tr>

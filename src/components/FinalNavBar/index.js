@@ -16,7 +16,7 @@ import "./FinalNavBar.scss";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const FinaNavBar = ({ callback }) => {
+const FinaNavBar = ({ handleSearchBar }) => {
   const [content, setContent] = useState("");
 
   const handleSearch = (e) => {
@@ -29,7 +29,7 @@ const FinaNavBar = ({ callback }) => {
     console.log("Enviando...");
     if (content?.trim().length > 2) {
       const builRequest = `search=${content?.trim()}`;
-      callback(builRequest);
+      handleSearchBar(builRequest);
       setContent(e.target.reset());
     }
   };
@@ -46,22 +46,27 @@ const FinaNavBar = ({ callback }) => {
           light
         >
           <NavbarBrand>
-          <Link className="linkNavbar" to="/"><div className="logoNewNavBar"></div></Link>
-            
+            <Link className="linkNavbar" to="/"><div className="logoNewNavBar"></div></Link>
           </NavbarBrand>
 
-          <div class="box">
-            <form name="search" onSubmit={handleSubmit}>
-              <input
-                type="text"
-                class="input"
-                name="txt"
-                placeholder="Busca tu receta..."
-                onChange={handleSearch}
-              />
-            </form>
-            <i class="fas fa-search"></i>
-          </div>
+          {
+            handleSearchBar ? 
+              <div class="box">
+                <form name="search" onSubmit={handleSubmit}>
+                  <input
+                    type="text"
+                    class="input"
+                    name="txt"
+                    placeholder="Busca tu receta..."
+                    onChange={handleSearch}
+                  />
+                </form>
+                <i class="fas fa-search"></i>
+              </div> :
+            null
+          }
+
+
 
           <NavbarToggler onClick={function noRefCheck() {}} />
           <Collapse navbar className="navItems">

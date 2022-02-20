@@ -3,15 +3,16 @@ import Buttons from "../../components/Buttons";
 import {Button, Card, Container, Row, CardImg, Navbar, CardTitle, CardGroup, CardBody} from 'reactstrap'
 import '../../styles/_colors.scss'
 import image from '../../img/mexican-food-donation.jpg'
-import PDFRecipeCreator from "../../services/PdfRecipeCreator";
+// import PDFRecipeCreator from "../../services/PdfRecipeCreator";
 // import MyDocument from "../../services/PDFGenerator";
 // import { PDFViewer } from "@react-pdf/renderer";
 // import pdfmakedownload from "./pdfContainer";
-
+// import pdfmakedownload from '../../services/pdfRecipeGenerator'
+import pdfmakedownload from "../../services/PdfRecipeCreator";
 
 //PDF document creation
-import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
+// import pdfMake from "pdfmake/build/pdfmake";
+// import pdfFonts from "pdfmake/build/vfs_fonts";
 // import documentDefination from "./DocumentDefination";
 import {useLocation} from 'react-router-dom';
 
@@ -20,154 +21,152 @@ const qrCodeAlt = 'Imagen de código QR para donación a Kooben'
 const mainImageAlt = 'Imagen alusiva a la gastronomía mexicana.'
 
 //=======================
-pdfMake.vfs = pdfFonts.pdfMake.vfs
+// pdfMake.vfs = pdfFonts.pdfMake.vfs
 
 //============================== PDF document ============
 
-const data = {
-    "total_energy": {
-        "quantity": 64.15,
-        "unit": "KCalorías"
-    },
-    "total_carbohydrate": {
-        "quantity": 11.87,
-        "unit": "g"
-    },
-    "total_sugars": {
-        "quantity": 7.96,
-        "unit": "g"
-    },
-    "total_fiber": {
-        "quantity": 8.39,
-        "unit": "g"
-    },
-    "total_sodium": {
-        "quantity": 44.45,
-        "unit": "mg"
-    },
-    "total_protein": {
-        "quantity": 5.08,
-        "unit": "g"
-    },
-    "total_fat": {
-        "quantity": 0.51,
-        "unit": "g"
-    },
-    "total_cholesterol": {
-        "quantity": 0,
-        "unit": "g"
-    },
-    "total_glycemic_load": {
-        "quantity": 1.68
-    },
-    "_id": "61fc158a31438d0b54a7e427",
-    "status": true,
-    "url": "https://recetinas.com/wp-content/uploads/2019/10/ensalada-de-nopales.jpg",
-    "type": "prehispanic",
-    "title": "Ensalada de nopales 🌵🌵",
-    "synopsis": "El nopal es sin duda uno de los ingredientes más representativos de la cocina Mexicana. Esta ensalada, aparte de ser Mexicana, es muy fresca, nutritiva y  también está llena de colores y sabores.",
-    "tags": [
-        "🌵healthy",
-        "🐍prehispanic",
-        "🔽low-calories",
-        "🔼 high-fiber"
-    ],
-    "steps": [
-        {
-            "sequence": 1,
-            "text": "iztapalapa Lava muy bien los nopales, la cebolla, el jitomate y el cilantro. Pon a desinfectar el cilantro con algún producto comercial durante 20 minutos.",
-            "url": "https://i.blogs.es/ee8961/ensalada-nopales-3-1/1366_2000.jpg",
-            "_id": "61fc259931438d0b54a7e555"
-        },
-        {
-            "sequence": 2,
-            "text": "Corta los nopales en cubos pequeños y ponlos a hervir en una olla con un poco de agua durante unos 15 minutos. Posteriormente escúrrelos y déjalos enfriar.",
-            "url": "https://i.blogs.es/ee8961/ensalada-nopales-3-1/1366_2000.jpg",
-            "_id": "61fc259931438d0b54a7e556"
-        },
-        {
-            "sequence": 3,
-            "text": "Corta la cebolla en rodajas y reserva. Corta los jitomates en cubos pequeños. No se te olvide afilar el cuchillo",
-            "url": "https://i.blogs.es/ee8961/ensalada-nopales-3-1/1366_2000.jpg",
-            "_id": "61fc259931438d0b54a7e557"
-        },
-        {
-            "sequence": 4,
-            "text": "Escurre y corta las raíces de las ramitas de cilantro. Reserva las hojas. Si es de tu gusto, puedes picar los tallos y reservar también.",
-            "url": "https://i.blogs.es/ee8961/ensalada-nopales-3-1/1366_2000.jpg",
-            "_id": "61fc259931438d0b54a7e558"
-        },
-        {
-            "sequence": 5,
-            "text": "En una ensaladera, incorpora y mezcla: los nopales cocidos, el jitomate en cubo, las rodajas de cebolla y agrega las hojas de cilantro y los tallos bien picados.",
-            "url": "https://i.blogs.es/ee8961/ensalada-nopales-3-1/1366_2000.jpg",
-            "_id": "61fc259931438d0b54a7e559"
-        },
-        {
-            "sequence": 6,
-            "text": "Adereza con la cucharadita de aceite de oliva, la sal y la pimienta cuautitlán.",
-            "url": "https://i.blogs.es/ee8961/ensalada-nopales-3-1/1366_2000.jpg",
-            "_id": "61fc259931438d0b54a7e55a"
-        },
-        {
-            "sequence": 7,
-            "text": "¡Disfruta!.",
-            "url": "https://i.blogs.es/ee8961/ensalada-nopales-3-1/1366_2000.jpg",
-            "_id": "61fc259931438d0b54a7e55b"
+        const data = {
+            "_id": "620e708c160682c3b665e897",
+            "url": "https://kooben.s3.amazonaws.com/images/k-1645113453740",
+            "type": "prehispanic",
+            "title": "Nopales con aguacate",
+            "synopsis": "Ya sea por la temporada, por el tiempo o simplemente por el antojo de comer algo rico y nutritivo, preparar esta ensalada de nopales picante con agucate es una buena opción. Los ingredientes para prepararla son muy económicos y va muy bien con la carne a la plancha.",
+            "tags": [
+                "🐍prehispánico",
+                "🤤 delicioso"
+            ],
+            "procedures": [
+                "Limpia perfectamente los nopales, asegúrate de que no tengan espinas y córtalos.",
+                "Cuece los nopales con suficiente agua, una cucharada de sal y un diente de ajo.",
+                "Pica finamente el cilantro, corta la cebolla, los tomates y filetea los chiles.",
+                "Luego de 20 minutos en el fuego, escurre los nopales (cuida que el ajo no se mezcla en la ensalada) y espera que enfríen un poco.",
+                "Revuelve los nopales con el resto de las verduras y añade el jugo de limón. Añade sal al gusto; sirve con queso Cotija y rebanadas de aguacate fresco."
+            ],
+            "author": "Rafael Martínez Reyes",
+            "total_energy": 96.9,
+            "total_carbohydrate": 13.77,
+            "total_sugars": 3.43,
+            "total_fiber": 13.94,
+            "total_sodium": 153,
+            "total_protein": 5.17,
+            "total_fat": 41.73,
+            "total_cholesterol": 0,
+            "total_glycemic_load": 0.9639,
+            "created": "17/02/2022 09:58:04",
+            "edited": "17/02/2022 09:58:04",
+            "ingredients": [
+                {
+                    "equivalence": {
+                        "cup": 2,
+                        "spoon": 20,
+                        "piece": 1,
+                        "gram": 85
+                    },
+                    "_id": "6209e041767be76789298d11",
+                    "name": "aguacate 🥑",
+                    "alias": [
+                        "avocado",
+                        "palta"
+                    ],
+                    "url": "https://lopezdoriga.com/wp-content/uploads/2022/02/aguacate.jpg",
+                    "consistency": "S",
+                    "energy": 0.42,
+                    "total_carbohydrate": 0.0482,
+                    "dietary_fiber": 0.047,
+                    "sugars": 0.009,
+                    "calcium": 0.17,
+                    "phosphorus": 0.48,
+                    "iron": 0.0055,
+                    "sodium": 0.7,
+                    "potassium": 4.85,
+                    "magnesium": 0.29,
+                    "copper": 0.0068,
+                    "zinc": 0.0138,
+                    "manganese": 0.0016,
+                    "selenium": 0,
+                    "vitA": 0.07,
+                    "vitB1": 0.0006,
+                    "vitC": 0.01195,
+                    "folicAc": 0.66,
+                    "vitD": 0,
+                    "vitE": 0,
+                    "vitK": 0,
+                    "protein": 0.0169,
+                    "total_fat": 0.245,
+                    "saturated_fatty_acids": 0.0213,
+                    "monounsaturated_fatty_acids": 0.098,
+                    "polyunsaturated_fatty_acids": 0.0182,
+                    "cholesterol": 0,
+                    "glycemic_index": 7
+                },
+                {
+                    "equivalence": {
+                        "cup": 2,
+                        "spoon": 20,
+                        "piece": 1,
+                        "gram": 85
+                    },
+                    "_id": "6209dd55767be76789298d0c",
+                    "name": "nopal cocido",
+                    "alias": [
+                        "tuna",
+                        "tunera",
+                        "higo de tuna",
+                        "caitias",
+                        "chumbera"
+                    ],
+                    "url": "https://media.justo.mx/products/VERDURAS-Nopal-4.jpg",
+                    "consistency": "S",
+                    "energy": 0.15,
+                    "total_carbohydrate": 0.0328,
+                    "dietary_fiber": 0.035,
+                    "sugars": 0.0112,
+                    "calcium": 1.64,
+                    "phosphorus": 0.16,
+                    "iron": 0.005,
+                    "sodium": 0.2,
+                    "potassium": 1.95,
+                    "magnesium": 0.47,
+                    "copper": 0.005,
+                    "zinc": 0.0153,
+                    "manganese": 0.0041,
+                    "selenium": 0,
+                    "vitA": 0.22,
+                    "vitB1": 0.0001,
+                    "vitC": 0.053,
+                    "folicAc": 0,
+                    "vitD": 0,
+                    "vitE": 0,
+                    "vitK": 0,
+                    "protein": 0.0135,
+                    "total_fat": 0.0005,
+                    "saturated_fatty_acids": 0.0001,
+                    "monounsaturated_fatty_acids": 0.0001,
+                    "polyunsaturated_fatty_acids": 0.0002,
+                    "cholesterol": 0,
+                    "glycemic_index": 7
+                }
+            ],
+            "__v": 0
         }
-    ],
-    "author": "https://www.directoalpaladar.com/recetas-de-ensaladas/ensalada-de-nopales-receta-mexicana",
-    "created": "22-01-2022,09:24",
-    "edited": "27-01-2022,18:35",
-    "likes": 259,
-    "ids_of_likes": [
-        "a1",
-        "a2",
-        "a3",
-        "a4"
-    ],
-    "ingredients": [
-        {
-            "ingredient_equivalence": {
-                "cup": 60,
-                "spoon": 5,
-                "piece": 110,
-                "gram": 1
-            },
-            "ingredient_id": "61f0729a4a076cdebc709c87",
-            "_id": "61fc259931438d0b54a7e55c"
-        },
-        {
-            "ingredient_equivalence": {
-                "cup": 55,
-                "spoon": 6,
-                "piece": 85,
-                "gram": 1
-            },
-            "ingredient_id": "61f196d7980270914baee228",
-            "_id": "61fc259931438d0b54a7e55d"
-        }
-    ],
-    "__v": 0
-}
 
-// var dd = {
-//     content: [
-//       "First paragraph",
-//       "Another paragraph, this time a little bit longer to make sure, this line will be divided into at least two lines"
-//     ]
-//   };
+const toDataURL = (url) => fetch(url)
+    .then(response => response.blob())
+    .then(blob => new Promise((resolve, reject) => {
+        const reader = new FileReader()
+        reader.onloadend = () => resolve(reader.result)
+        reader.onerror = reject
+        reader.readAsDataURL(blob)
+    }));
 
-console.log(data.url)
-
-
-const dd = PDFRecipeCreator(data);
-
-
-  const pdfmakedownload = () => {
-
-    pdfMake.createPdf(dd).download();
-  };
+const exportHandler = async () => {
+    console.log('llamando')
+    data.url2 = await toDataURL(data.url)
+    console.log(data.url2)
+    console.log('se codifico')
+    console.log('Convierte PDF')
+    await pdfmakedownload(data);
+};
 
 function DonationInvite(){
     return(
@@ -254,7 +253,7 @@ function DownloadPDF() {
     return (
       <Card className="text-center">
           <CardBody>
-            <Button color="primary" onClick={() => pdfmakedownload()}>Exportar</Button>
+            <Button color="primary" onClick={exportHandler}>Exportar</Button>
 
           </CardBody>
       </Card>

@@ -50,31 +50,27 @@ function Calculator({getIngredientsToPost}) {
     setOperation(deleteIngredient)
     setTypePortion(null)
     setFirstSelection(false)
-
   }
 
   const handleSelection = (selection) => {
    if(selection){
-     setDetailTable([...detailTable,selection])
-     
+     const tempTable = [...detailTable,selection]
+     let set = new Set( tempTable.map( JSON.stringify ) )
+     let result = Array.from( set ).map( JSON.parse );
+     setDetailTable(result)
    }else{
     console.log('empty');
    }
   }
 
   const handleBypassToNutTable = ((ingredient,operation, portion, quantity) => {
-    // console.log(ingredient._id);
-    // console.log('portion: ' + portion);
-    // console.log(quantity);
     const gramFactor = 85
     const cupFactor = 2
     const spoonFactor = 20
     const pieceFactor = 1
 
     const newDetailTable = detailTable.map(item=>{
-      //console.log(item._id);
       if(item._id === ingredient._id){
-        //console.log('ids iguales');
         if(portion==='cup'){
           console.log('entra a cup');
           console.log('cantidad: ' + quantity);
@@ -116,17 +112,10 @@ function Calculator({getIngredientsToPost}) {
     })
 
     setDetailTable(newDetailTable)
-  
-    //console.log(newDetailTable);
   })
 
+  console.log('original');
   console.log(detailTable);
-  //****************eliminar duplicados */
-  let set = new Set( detailTable.map( JSON.stringify ) )
-  let result = Array.from( set ).map( JSON.parse );
-  console.log(result);
-  //setDetailTable(result)
-  //****************eliminar duplicados */
 
   getIngredientsToPost(detailTable)
 

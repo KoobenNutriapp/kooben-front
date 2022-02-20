@@ -9,6 +9,7 @@ import Pills from '../Pills';
 import './RecipeCards.scss'
 import {useNavigate} from 'react-router-dom';
 
+
 function getTags(Array){
     return Array.map((item, index) => 
       <Pills key={`Tag${index}`} children={item} pill={true} />
@@ -19,9 +20,7 @@ function RecipeCards({Recipekey,AltImage, SrcImage, RecipeTitle, RecipeDescripti
   const navigate = useNavigate();
 
   const toDetailRecipe=(recipe)=>{
-    console.log('Navega a detailed Recipe con ID: ')
-    console.log(recipe)
-    navigate(`/DetailRecipe/:${recipe.Recipekey}`,{state:{recipe}});
+    navigate(`/DetailRecipe/${recipe.Recipekey}`,{state:{recipe}});
     }
 
   return (
@@ -35,8 +34,7 @@ function RecipeCards({Recipekey,AltImage, SrcImage, RecipeTitle, RecipeDescripti
       <CardContent className = 'CardContent-Section'>
 
             <Typography gutterBottom variant="h6" component="div" className='Typography'  >
-            
-            <a onClick={()=>{toDetailRecipe({Recipekey,metaData})}}>{RecipeTitle}</a>
+              <a onClick={()=>{toDetailRecipe({Recipekey,metaData})}}>{RecipeTitle}</a>
             </Typography>
 
         <div className='Tags-Section'>
@@ -46,10 +44,6 @@ function RecipeCards({Recipekey,AltImage, SrcImage, RecipeTitle, RecipeDescripti
           {RecipeDescription}
         </Typography>
       </CardContent>
-      {/* <CardActions> */}
-        {/* <Button size="small">Share</Button> */}
-        {/* <Button size="small">Leer más</Button> */}
-      {/* </CardActions> */}
     </Card>
   );
   }

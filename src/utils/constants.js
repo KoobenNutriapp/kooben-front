@@ -1,5 +1,7 @@
-const BASE_URL = "http://localhost";
+// stage: prod | local
+const STAGE = 'prod' 
 const PORT = 8080;
+const BASE_URL = (STAGE === 'prod' ? 'http://api.koo-ben.com' :`http://localhost:${PORT}`);
 const PATH_RECIPE = "/recipe";
 const PATH_INGREDIENT = "/ingredient";
 const PATH_PAYMENT = "/payment";

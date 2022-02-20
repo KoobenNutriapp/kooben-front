@@ -1,55 +1,121 @@
-@import '../../styles/colors';
-@import '../../styles/typography';
+@import "../../styles/colors";
+@import "../../styles/typography";
 
-// *{
-//     border: rgb(255, 102, 0) 1px dashed;
-// }
-
-.mt-nav{
-    margin-top: 2em;
+body {
+  background-color: rgb(245 245 245) !important;
 }
 
-hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    border: 0;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-  }
-
-hr.solid {
-    border-top: 3px solid #bbb;
-  }
-
-.scroll{
-    height:500px;
-    overflow-y: scroll;
-  }
-
-.title{
-    display: flex;
-    justify-content:center;
-    width: 100%;
-    color: $mayan-blue;
+.containerDetail {
+  //border: 1px blue solid;
+  margin-top: 88px;
+  display: flex;
+  justify-content: center;
+  width: 65% !important;
+  margin-bottom: 100px;
 }
 
-img{
-    justify-content:center;
-}
-.container{
-    
-    margin-top: 65px;
-    display: flex;
-}
-
-.row{
-    
-    display: flex;
-    justify-content:flex-end;
-    width: 100%;
+.rowDetail {
+  border-radius: 10px;
+  //border: 1px red solid;
+  display: flex;
+  justify-content: center;
+  width: 90% !important;
 }
 
-.step{
-    font-weight: bold;
+.mainDetail {
+  //border: 1px black solid;
+  background-color: rgb(255 255 255);
+  border-radius: 10px;
+  width: 65%;
+  margin-bottom: 100px;
+}
+
+.detailRecipeTitle {
+  color: $mayan-blue;
+  font-family: $title-font;
+  font-size: 40px;
+  font-weight: 800;
+  margin-top: 30px;
+  margin-bottom: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.detailGeneralBox {
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+}
+
+.detailSynopsis {
+  margin-top: 15px;
+  border: 1px $mayan-blue solid;
+  border-radius: 8px;
+  width: 630px;
+  height: 150px;
+  text-align: center;
+  padding: 30px;
+}
+
+.detailUrlImage {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  width: 65%;
+  height: 100%px;
+}
+
+.detailFrameTables {
+  width: 100%;
+  height: 1930px;
+}
+
+.detailIngredientsTable {
+  width: 50%;
+}
+
+.detailNutritionalTable {
+  margin-top: 20px;
+  width: 50%;
+  //overflow-y: scroll;
+}
+
+.detailTitle{
+  margin-bottom: 20px;
+}
+
+.steps-text{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  margin-bottom: 20px;
+  border: 2px solid $mayan-blue;
+  border-radius: 10px;
+}
+
+.steps-text:hover {
+  box-shadow: 0 0 2px 1px $mexican-pink;
+}
+
+.detailExportBtn {
+  border-color: $mexican-pink;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 5px;
+  background-color: $mexican-pink;
+  width: 25%;
+  height: 40px;
+  margin-bottom: 20px;
+}
+
+.detailPublishBtn {
+  border-color: $mayan-blue;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  border-radius: 5px;
+  background-color: $mayan-blue !important;
+  width: 25%;
+  height: 40px;
+  margin-bottom: 20px;
+  color: black !important;
 }
 
 
@@ -63,3 +129,24 @@ img{
     height: 100%;
     margin-bottom: 20px;
   }
+.detailDeleteBtn {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  border-radius: 5px;
+  background-color: red !important;
+  width: 25%;
+  height: 40px;
+  margin-bottom: 20px;
+  color: black !important;
+}
+
+.lineSteps {
+  border-bottom: $mayan-blue 5px solid;
+}
+
+.detailButtons{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+}
