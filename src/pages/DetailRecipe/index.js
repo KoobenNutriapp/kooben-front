@@ -12,15 +12,6 @@ function DetailRecipe(){
     const location = useLocation();
     const ingredientes = location.state.recipe.metaData.ingredients
     
-
-    // const detailTable = location.state.recipe.metaData.ingredients
-    
-    
-    const toDonationPage=(recipe)=>{
-        console.log('Navega donation page con info para exportar ')
-        console.log(recipe)
-        navigate(`/Donation`,{state:{recipe}});
-        }
     const [detailTable, setDetailTable] = useState([]);
 
 
@@ -38,14 +29,16 @@ useEffect(() => {
     loadData();
   }, []);
     
-  const handleExport = (e) => {
-    e.preventDefault();
-    console.log("exporting...");
-  };
 
   const toUpdateRecipe = (recipe) =>{
     navigate(`/UpdateRecipe/${recipe.Recipekey}`,{state:{recipe}});
   }
+
+  const toDonationPage=(recipe)=>{
+    console.log('Navega donation page con info para exportar ')
+    console.log(recipe)
+    navigate(`/Donation`,{state:{recipe}});
+    }
 
   const handleBypassToNutTable = ((ingredient, operation, portion, quantity) => {
     console.log(ingredient);
@@ -163,7 +156,11 @@ useEffect(() => {
                         >
                           Exportar
                         </button>
-                        <button className='pink-button' onClick={toDonationPage}>Exportar2</button>
+                        <button 
+                          className='detailExportBtn' 
+                          onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}>
+                            ExportarPDF
+                        </button>
                         <button 
                           className="detailPublishBtn" 
                           onClick={()=>{toUpdateRecipe({Recipekey,metaData})}}
