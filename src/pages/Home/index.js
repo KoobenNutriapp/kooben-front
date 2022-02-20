@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, } from "react";
 import { getRecipes } from "../../services/recipes";
 import {
   Container,
@@ -17,6 +17,7 @@ import Carousel from "../../components/Carousel";
 import FinalNavBar from "../../components/FinalNavBar";
 import Buttons from "../../components/Buttons/";
 import Alert from "@mui/material/Alert";
+import { Link } from "react-router-dom";
 import "./Home.scss";
 
 function Home() {
@@ -87,32 +88,19 @@ function Home() {
   return (
     <>
       <Container className="container" fluid>
-        {/* <MainSearchBar callback={handleSearch} /> */}
-        <FinalNavBar callback={handleSearch} />
+        <FinalNavBar 
+          handleSearchBar={handleSearch}
+        />
         <Row className="row">
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
-            <div className="btnCreateRecipe">
-              <Buttons
-                children="Crea tu receta"
-                size="lg"
-                color="mexican-pink"
-              />
-            </div>
-            {/* <RecipeCard
-              key={"a102012"}
-              AltImage={"Card image cap"}
-              
-              SrcImage={
-                "https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg"
-              }
-              RecipeTitle={"Kóoben tips"}
-              RecipeDescription={
-                "¿Qué es el índice glucémico y la carga glucémica?. Aprende más sobre diabetes mellitus y nutrición."
-              }
-              tagsArray={[""]}
-            /> */}
-
+              <Link className="linkNavbar btnCreateRecipe" to="/MyRecipe">
+                <Buttons
+                  children="Crea tu receta"
+                  size="lg"
+                  color="mexican-pink"
+                />
+              </Link>
             <Card className="cardBox">
               <CardTitle tag="h5">K'óoben tips</CardTitle>
               <CardImg
