@@ -80,7 +80,7 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/CreateRecipe' element={admin && isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
           <Route path='/UpdateRecipe/:RecipeID' element={admin && isLoggedIn ? <UpdateRecipe /> : <Navigate to="/"/>} />
-          <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
+          <Route path='/DetailRecipe/:RecipeID' element={isLoggedIn ? <DetailRecipe /> : <Navigate to="/"/>} />
           <Route path='/MyRecipe/' element={isLoggedIn ? <MyRecipe /> : <Navigate to="/"/>} />
           <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
           <Route path='/Donation' element={<Donation />} />
