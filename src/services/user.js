@@ -1,8 +1,8 @@
-import { BASE_URL, PORT, PATH_USER } from "../utils/constants";
+import { BASE_URL, PATH_USER } from "../utils/constants";
 let request = null;
 
 const getUsers = async () => {
-    request = `${BASE_URL}:${PORT}${PATH_USER}`
+    request = `${BASE_URL}${PATH_USER}`
     try {
       const response = await fetch(request, {
         method: "GET",
