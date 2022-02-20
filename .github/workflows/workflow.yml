@@ -4,8 +4,6 @@ on:
   push:
     branches:
       - "main"
-      - "NUT-68-CI"
-      - "NUT-70-como-usuario-puedo-editar-una-receta"
   pull_request:
     branches:
       - main
