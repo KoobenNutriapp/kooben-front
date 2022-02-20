@@ -138,14 +138,13 @@ useEffect(() => {
                         </Col>
                     </Row>
                     <Row> 
-                        <h2 className="detailTitle">Preparacion</h2>
-                        <h3>Paso</h3>
+                        <h2 className="detailTitle">Procedimiento: </h2>
                             {location.state.recipe.metaData.procedures.map((item,index)=>(
-                            <p> <span class="step">{index}</span> :{item} </p>
+                            <div className="steps-text"> <span class="step">{index+1}</span> :{item} </div>
                             ))}
-                    <h2>Comparte tu receta con el mundo 🌎:</h2>
+                    <h2 className="detailTitle">Imprime o guarda tu receta 🖨💾:</h2>
 
-                    <Col sm={7}>
+                    <Col sm={9}>
                       <div className="detailButtons" >
                         <button
                           className="detailExportBtn"

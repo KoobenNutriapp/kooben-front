@@ -17,6 +17,7 @@ import Carousel from "../../components/Carousel";
 import FinalNavBar from "../../components/FinalNavBar";
 import Buttons from "../../components/Buttons/";
 import Alert from "@mui/material/Alert";
+import { Link } from "react-router-dom";
 import "./Home.scss";
 
 function Home() {
@@ -93,13 +94,13 @@ function Home() {
         <Row className="row">
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
-            <div className="btnCreateRecipe">
-              <Buttons
-                children="Crea tu receta"
-                size="lg"
-                color="mexican-pink"
-              />
-            </div>
+              <Link className="linkNavbar btnCreateRecipe" to="/MyRecipe">
+                <Buttons
+                  children="Crea tu receta"
+                  size="lg"
+                  color="mexican-pink"
+                />
+              </Link>
             <Card className="cardBox">
               <CardTitle tag="h5">K'óoben tips</CardTitle>
               <CardImg
