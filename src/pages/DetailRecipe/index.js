@@ -5,7 +5,7 @@ import "./DetailRecipe.scss";
 import { useState, useEffect } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-import { BASE_URL, PORT, } from "../../utils/constants";
+import { BASE_URL } from "../../utils/constants";
 
 function DetailRecipe(){
     const location = useLocation();

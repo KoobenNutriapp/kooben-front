@@ -1,8 +1,8 @@
-import { BASE_URL, PORT, PATH_INGREDIENT } from "../utils/constants";
+import { BASE_URL, PATH_INGREDIENT } from "../utils/constants";
 let request = null;
 
 const getIngredients = async () => {
-    request = `${BASE_URL}:${PORT}${PATH_INGREDIENT}`
+    request = `${BASE_URL}${PATH_INGREDIENT}`
     try {
       const response = await fetch(request, {
         method: "GET",
@@ -15,7 +15,7 @@ const getIngredients = async () => {
 }
 
 const getIngredientById = async (id) => {
-  request = `${BASE_URL}:${PORT}${PATH_INGREDIENT}/${id}`
+  request = `${BASE_URL}${PATH_INGREDIENT}/${id}`
   try {
     const response = await fetch(request, {
       method: "GET",
