@@ -14,6 +14,7 @@ import pdfmakedownload from "../../services/PdfRecipeCreator";
 // import pdfMake from "pdfmake/build/pdfmake";
 // import pdfFonts from "pdfmake/build/vfs_fonts";
 // import documentDefination from "./DocumentDefination";
+import {useLocation} from 'react-router-dom';
 
 const urlQRCode = 'https://kooben.s3.amazonaws.com/QR-paypal-kooben'
 const qrCodeAlt = 'Imagen de código QR para donación a Kooben'
@@ -261,6 +262,11 @@ function DownloadPDF() {
 
 
 function DonationPage(){
+
+    const location = useLocation();
+
+    console.log('******DONATION');
+    console.log(location)
 
     return(
         <>
