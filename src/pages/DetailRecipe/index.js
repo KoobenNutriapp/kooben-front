@@ -8,10 +8,21 @@ import NutFactTable from "../../components/NutFactTable/";
 import { BASE_URL } from "../../utils/constants";
 
 function DetailRecipe(){
+    const navigate = useNavigate();
     const location = useLocation();
+    const ingredientes = location.state.recipe.metaData.ingredients
+    
+
+    // const detailTable = location.state.recipe.metaData.ingredients
+    
+    
+    const toDonationPage=(recipe)=>{
+        console.log('Navega donation page con info para exportar ')
+        console.log(recipe)
+        navigate(`/Donation`,{state:{recipe}});
+        }
     const [detailTable, setDetailTable] = useState([]);
 
-    const navigate = useNavigate();
 
     const metaData = location.state.recipe.metaData;
     const Recipekey = location.state.recipe.Recipekey;
@@ -152,6 +163,7 @@ useEffect(() => {
                         >
                           Exportar
                         </button>
+                        <button className='pink-button' onClick={toDonationPage}>Exportar2</button>
                         <button 
                           className="detailPublishBtn" 
                           onClick={()=>{toUpdateRecipe({Recipekey,metaData})}}
