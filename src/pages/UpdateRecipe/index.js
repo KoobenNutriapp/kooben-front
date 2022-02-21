@@ -12,14 +12,21 @@ import Modals from "../../components/Modals";
 import TagsManager from "../../components/TagsManager";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-import { createRecipe } from "../../services/recipes";
+import { updateRecipe } from "../../services/recipes";
 import "./UpdateRecipe.scss";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AWS from "aws-sdk";
 import Compressor from "compressorjs";
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
 import { getIngredients } from "../../services/ingredient";
+import JoditEditor from "jodit-react";
+import { Link } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { firebase } from '../../Firebase/firebase-config'
+import { login, userApp, newUserApp  } from '../../actions/auth';
+import { Spinner } from "reactstrap";
+import { getUsers } from "../../services/user";
 
 const UpdateRecipe = () => {
   const location = useLocation();
@@ -30,7 +37,7 @@ const UpdateRecipe = () => {
   const [synopsis, setSynopsis] = useState("");
   const [tags, setTags] = useState([]);
   const [steps, setSteps] = useState([]);
-  const [procedures, setProcedures] = useState([]);
+  //const [procedures, setProcedures] = useState([]);
   const [counter, setCounter] = useState(1);
   //const [textValidator, setTextValidator] = useState(true)
   const [checked, setChecked] = useState(false);
@@ -59,6 +66,59 @@ const UpdateRecipe = () => {
   const [modal, setModal] = useState(false);
   const [addIngredient, setAddIngredient] = useState(false);
   const [detailTable, setDetailTable] = useState([]);
+  const [procedures, setProcedures] = useState('')
+    // ******Checking admin
+    const [ checking, setChecking ] = useState(true);
+    const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+    const [ admin, setAdmin ] = useState(true);
+  
+    const dispatch = useDispatch();
+  
+    useEffect(() => {
+      firebase.auth().onAuthStateChanged((user)=>{
+        if(user?.uid){
+          dispatch( login ( user.uid, user.displayName ) )
+          validateRol(user.email)
+          //console.log(admin);
+          dispatch( newUserApp)
+          setIsLoggedIn( true );
+        }else{
+          setIsLoggedIn( false );
+          setAdmin(false)
+        }
+        setChecking(false);
+      })
+    }, [ dispatch, checking, isLoggedIn, admin ])
+    
+    const validateRol = async (emailToValidate) =>{
+      const data = await getUsers();
+      const userList = data.data.users
+      const UserExist = userList.filter(user=>{
+          return user.mail===emailToValidate
+        })
+        console.log(UserExist);
+      if(UserExist.length === 1){
+        dispatch(userApp('admin'))
+        setAdmin(true)
+      }
+    }
+
+  const editor = useRef(null)
+  
+	const config = {
+    toolbarAdaptive: false,
+    placeholder:'escribe el detalle de tu receta aquí...',
+		readonly: false,
+    buttons:[
+    'bold',
+		'italic',
+    '|',
+		'ol',
+    '|',
+    'undo',
+		'redo',    
+    ]
+	}
 
   useEffect(() => {
     const setData = () => {
@@ -71,6 +131,7 @@ const UpdateRecipe = () => {
         //setIngredients(location.state.recipe.metaData.ingredients)
         setDetailTable(location.state.recipe.metaData.ingredients)
         setProcedures(location.state.recipe.metaData.procedures)
+        setTags(location.state.recipe.metaData.tags)
     
     };
     setData();
@@ -234,8 +295,11 @@ const UpdateRecipe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitting...");
-   
+    
+    const id = location.state.recipe.metaData._id
+    console.log(id);
 
+    console.log(procedures);
     
     const date = new Date();
     const formatDate =
@@ -288,9 +352,9 @@ const UpdateRecipe = () => {
           ingredients,
         };
         console.log(data);
-        //await createRecipe(data);
+        await updateRecipe(id,data);
         handleSend();
-        //alert('¡ La receta fue creada exitosamente !')
+        //alert('¡ La receta fue actualizada exitosamente !')
         //cleanForm() hay que implementar correctamente
       } catch (error) {
         console.error(error.message);
@@ -654,7 +718,7 @@ const UpdateRecipe = () => {
 
               <h2>Procedimiento:</h2>
 
-              {procedures.map((item, index) => {
+              {/* {procedures.map((item, index) => {
                 return (
                   <React.Fragment key={index}>
                     <div className="lineSteps"></div>
@@ -698,7 +762,16 @@ const UpdateRecipe = () => {
                     </button>
                   </div>
                 </Col>
-              </FormGroup>
+              </FormGroup> */}
+
+              <JoditEditor
+                ref={editor}
+                value={procedures}
+                config={config}
+		            tabIndex={1} // tabIndex of textarea
+		            onBlur={newContent => setProcedures(newContent)} // preferred to use only this option to update the content for performance reasons
+                //onChange={newContent => setProcedures(newContent)}
+              />
 
               <FormGroup row>
                 <Col sm={8}>
@@ -718,23 +791,31 @@ const UpdateRecipe = () => {
                       Exportar
                     </button>
                     {/* <button className='pink-button' onClick={handlePublish}>Exportar</button> */}
-                    <button className="publish" type="submit" value="submit">
+                    {/* <button className="publish" type="submit" value="submit">
                       Publicar
-                    </button>
+                    </button> */}
 
-                    <Button className="publish" onClick={toggle}>
-                      Publicar
-                    </Button>
-                    <Modal isOpen={modal} toggle={toggle}>
-                      <ModalBody >
-                        ¡ Gracias por crear con K'óoben !
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button className="modal-button" onClick={toggle}>
-                          Ir al detalle de mi receta
+                    {
+                      admin ?
+                      <>
+                        <Button className="publish" type="submit" onClick={toggle}>
+                          Publicar
                         </Button>
-                      </ModalFooter>
-                    </Modal>
+                        <Modal isOpen={modal} toggle={toggle}>
+                          <ModalBody >
+                            ¡ Gracias por crear con K'óoben !
+                          </ModalBody>
+                          <ModalFooter>
+                          <Link className="linkNavbar btnCreateRecipe" to={'/'}>
+                          <Button className="modal-button">
+                            Finalizar edición
+                          </Button>
+                          </Link>
+                          </ModalFooter>
+                      </Modal>
+                    </>:
+                    null
+                    }
                   </div>
                 </Col>
               </FormGroup>

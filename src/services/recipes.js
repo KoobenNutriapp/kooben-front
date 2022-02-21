@@ -38,13 +38,43 @@ const createRecipe = async (data) => {
   }
 };
 
+const updateRecipe = async (id,data) => {
+  try {
+    const response = await fetch(`${BASE_URL}:${PORT}${PATH_RECIPE}/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(response)
+    return await response.json();
 
+  } catch (error) {
+    console.error(error);
+  }
+};
 
+const deleteRecipe = async (id) => {
+  try {
+    const response = await fetch(`${BASE_URL}:${PORT}${PATH_RECIPE}/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    console.log(response)
+    return await response.json();
 
-
+  } catch (error) {
+    console.error(error);
+  }
+};
 
 
 export { getRecipes,
-        createRecipe
+        createRecipe,
+        updateRecipe,
+        deleteRecipe,
          
 };

@@ -1,35 +1,47 @@
-    .Not-Found-Container{
-        width: 100%;
-        border: 1px solid black;
-        height: 100%;
-        background-size: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    
-    }
-    
-    .Main-Content-Container{
-        border: solid 1px red;
+@import "../../styles/typography";
+@import "../../styles/colors";
 
-        display: flex;
-        flex-direction: column;
-        text-align: center;
-        justify-content: space-between;
-        text-align: center;
-        width: 80% !important;
-        height: 80% !important;
+.contenedor {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
 
-        .Warning-Message{
-            font-size: xx-large;
-        }
+.messageBox {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  //border: 1px solid red;
+  position: absolute;
+  top: 33%;
+  left: 65%;
+  transform: translate(-50%, -50%);
+  font-family: $title-font;
+}
 
-        .Error-Code{
-            font-size: xx-large;
-            color: red;
-        }
-    }
-    .Link-To-Page{
-        text-decoration: none;
-    }
+.m-404 {
+  font-size: 50px;
+  font-weight: 800;
+  font-family: $title-font;
+  color: $mexican-pink;
+}
+
+.userMessage {
+  font-size: 50px;
+  font-family: $title-font;
+  color: $mayan-blue;
+}
+
+.linkToHome {
+  margin-top: 30px;
+  font-size: 25px;
+  font-family: $title-font;
+  color: $mexican-pink;
+}
+
+.linkToMyRecipe {
+  margin-top: 30px;
+  font-size: 25px;
+  font-family: $title-font;
+  color: $mayan-blue;
+}

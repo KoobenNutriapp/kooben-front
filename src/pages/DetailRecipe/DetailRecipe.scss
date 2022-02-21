@@ -66,7 +66,7 @@ body {
 
 .detailFrameTables {
   width: 100%;
-  height: 1930px;
+  height: 2150px;
 }
 
 .detailIngredientsTable {
@@ -80,7 +80,12 @@ body {
 }
 
 .detailTitle{
+  margin-top: 20px !important;
   margin-bottom: 20px;
+}
+
+.editor{
+  padding-left: 40px !important;
 }
 
 .steps-text{
@@ -101,7 +106,7 @@ body {
   font-weight: 500;
   border-radius: 5px;
   background-color: $mexican-pink;
-  width: 25%;
+  width: 20%;
   height: 40px;
   margin-bottom: 20px;
 }
@@ -112,7 +117,7 @@ body {
   font-weight: 500 !important;
   border-radius: 5px;
   background-color: $mayan-blue !important;
-  width: 25%;
+  width: 20%;
   height: 40px;
   margin-bottom: 20px;
   color: black !important;
@@ -134,7 +139,7 @@ body {
   font-weight: 500 !important;
   border-radius: 5px;
   background-color: red !important;
-  width: 25%;
+  width: 20%;
   height: 40px;
   margin-bottom: 20px;
   color: black !important;
@@ -148,5 +153,21 @@ body {
   display:flex;
   flex-direction: column;
   align-items: center;
-  width: 60%;
+
+}
+
+.modal{
+  font-family: $title-font;
+  font-stretch:ultra-expanded;
+  font-size: 25px;
+  font-weight:700;
+  color:  $mexican-pink !important;
+}
+
+.modal-button-delete{
+  background-color: red !important;
+  color:  white !important;
+  font-size: 15px !important;
+  font-weight:600 !important;
+  font-family:Arial, Helvetica, sans-serif
 }
