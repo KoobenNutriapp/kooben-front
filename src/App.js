@@ -18,6 +18,7 @@ import UpdateRecipe from './pages/UpdateRecipe'
 import Donation from './pages/Donation'
 import NotFound from './pages/NotFound'
 import PrivacyPolicies from './components/PrivacyPolicies/'
+import PrintView from './components/PrintView/'
 
 function App() {
 
@@ -75,7 +76,8 @@ function App() {
     <>
       <BrowserRouter>
       <FinalNavBar />
-      {/* <Route path='*' element={<NotFound />}/> 
+        <Routes>
+          <Route path='*' element={<NotFound />}/> 
           <Route path='/' element={<Home />} />
           <Route path='/create_recipe' element={admin && isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
           <Route path='/update_recipe/:recipe_id' element={admin && isLoggedIn ? <UpdateRecipe /> : <Navigate to="/"/>} />
@@ -83,6 +85,7 @@ function App() {
           <Route path='/my_recipe/' element={isLoggedIn ? <MyRecipe /> : <Navigate to="/"/>} />
           <Route path='/privacy_policy' element={<PrivacyPolicies />} />
           <Route path='/donation' element={<Donation />} />
+          <Route path='/print_view/:recipe_id' element={<PrintView />} />
         </Routes>
       </BrowserRouter>
     </>

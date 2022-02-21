@@ -6,7 +6,6 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-<<<<<<< HEAD
 import { BASE_URL, PORT, } from "../../utils/constants";
 import JoditEditor from "jodit-react";
 import { deleteRecipe } from "../../services/recipes";
@@ -16,9 +15,6 @@ import { firebase } from '../../Firebase/firebase-config'
 import { login, userApp, newUserApp  } from '../../actions/auth';
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
-=======
-import { BASE_URL } from "../../utils/constants";
->>>>>>> develop
 
 function DetailRecipe(){
     const navigate = useNavigate();
@@ -231,6 +227,27 @@ useEffect(() => {
 
   const toggle = () => setModal(!modal);
 
+  const toPrintView = () =>{
+    const title = location.state.recipe.metaData.title
+    const tags = location.state.recipe.metaData.tags
+    const synopsis = location.state.recipe.metaData.synopsis
+    const url = location.state.recipe.metaData.url
+    const procedures = location.state.recipe.metaData.procedures
+
+    const data = {
+      title,
+      tags,
+      synopsis,
+      url,
+      procedures,
+      detailTable
+    }
+
+    console.log(data);
+
+    navigate(`/print_view/${Recipekey}`, { state: { data } });
+  }
+
     return(
         <Container className="containerDetail" fluid>
      
@@ -299,7 +316,8 @@ useEffect(() => {
                       <div className="detailButtons" >
                         <button
                           className="detailExportBtn"
-                          onClick={() => window.print()}
+                          //onClick={() => window.print()}
+                          onClick={() => {toPrintView()}}
                         >
                           Exportar
                         </button>
