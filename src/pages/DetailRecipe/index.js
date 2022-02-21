@@ -1,15 +1,25 @@
 import { Container, Row, Col } from "reactstrap";
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import { useLocation, useNavigate, Link } from 'react-router-dom';
 import { FormGroup } from "reactstrap";
 import "./DetailRecipe.scss";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
 import { BASE_URL, PORT, } from "../../utils/constants";
+import JoditEditor from "jodit-react";
+import { deleteRecipe } from "../../services/recipes";
+import AWS from "aws-sdk";
+import { useDispatch } from 'react-redux';
+import { firebase } from '../../Firebase/firebase-config'
+import { login, userApp, newUserApp  } from '../../actions/auth';
+import { Spinner } from "reactstrap";
+import { getUsers } from "../../services/user";
 
 function DetailRecipe(){
     const location = useLocation();
     const [detailTable, setDetailTable] = useState([]);
+    const [modal, setModal] = useState(false);
 
     const navigate = useNavigate();
 
@@ -19,6 +29,25 @@ function DetailRecipe(){
     const recipeId = `${BASE_URL}:3000/DetailRecipe/${Recipekey}`
     console.log(recipeId);
 
+    const [content, setContent] = useState(location.state.recipe.metaData.procedures)
+
+    const editor = useRef(null)
+    
+    const config = {
+      toolbarAdaptive: false,
+      placeholder:'escribe el detalle de tu receta aquí...',
+      readonly: true,
+      buttons:[
+      'bold',
+      'italic',
+      '|',
+      'ol',
+      '|',
+      'undo',
+      'redo',    
+      ]
+    }
+
     
 useEffect(() => {
     const loadData = async () => {
@@ -26,6 +55,57 @@ useEffect(() => {
     };
     loadData();
   }, []);
+
+  // ******Checking admin
+  const [ checking, setChecking ] = useState(true);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const [ admin, setAdmin ] = useState(true);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user?.uid){
+        dispatch( login ( user.uid, user.displayName ) )
+        validateRol(user.email)
+        //console.log(admin);
+        dispatch( newUserApp)
+        setIsLoggedIn( true );
+      }else{
+        setIsLoggedIn( false );
+        setAdmin(false)
+      }
+      setChecking(false);
+    })
+  }, [ dispatch, checking, isLoggedIn, admin ])
+  
+  const validateRol = async (emailToValidate) =>{
+    const data = await getUsers();
+    const userList = data.data.users
+    const UserExist = userList.filter(user=>{
+        return user.mail===emailToValidate
+      })
+      console.log(UserExist);
+    if(UserExist.length === 1){
+      dispatch(userApp('admin'))
+      setAdmin(true)
+    }
+  }    
+
+  if ( checking ) {
+    return (
+      <>
+        <Spinner
+          className='spinner'
+          color="info"
+          type="grow"
+          size="lg"
+        ></Spinner>
+          <h1 className='Waiting'>Espere...cargando Kóoben</h1>
+        </> 
+     )
+}
+   // ******Checking admin
     
   const handleExport = (e) => {
     e.preventDefault();
@@ -33,7 +113,7 @@ useEffect(() => {
   };
 
   const toUpdateRecipe = (recipe) =>{
-    navigate(`/UpdateRecipe/${recipe.Recipekey}`,{state:{recipe}});
+    navigate(`/update_recipe/${recipe.Recipekey}`,{state:{recipe}});
   }
 
   const handleBypassToNutTable = ((ingredient, operation, portion, quantity) => {
@@ -92,8 +172,56 @@ useEffect(() => {
     setDetailTable(newDetailTable)
   })
 
+    //AWS
+    AWS.config.update({
+      accessKeyId: process.env.REACT_APP_KEY_ID,
+      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
+    });
+  
+    const S3Client = new AWS.S3({
+      params: { Bucket: "kooben" },
+      region: "us-east-1",
+    });
+  
+
+  const deleteImgFromBucket = async () => {
+    console.log("Deleting photo from AWS...");
+    const tempUrl = (location.state.recipe.metaData.url).split('k-')
+    const imageToDelete = tempUrl[1]  
+
+    const params = {
+      Key: `images/k-${imageToDelete}`,
+    };
+
+    try {
+      const response = await S3Client.deleteObject(params).promise();
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleDelete = async (e) =>{
+    e.preventDefault()
+    console.log('Eliminando');
+
+    try {
+      await deleteRecipe(Recipekey);
+      deleteImgFromBucket();
+      //alert('¡ La receta fue creada exitosamente !')
+      //cleanForm() hay que implementar correctamente
+    } catch (error) {
+      console.error(error.message);
+    }
+    
+    toggle()
+    navigate('/');
+  } 
+
   console.log('original');
   console.log(detailTable);
+
+  const toggle = () => setModal(!modal);
 
     return(
         <Container className="containerDetail" fluid>
@@ -139,12 +267,27 @@ useEffect(() => {
                     </Row>
                     <Row> 
                         <h2 className="detailTitle">Procedimiento: </h2>
-                            {location.state.recipe.metaData.procedures.map((item,index)=>(
+                            {/* {location.state.recipe.metaData.procedures.map((item,index)=>(
                             <div className="steps-text"> <span class="step">{index+1}</span> :{item} </div>
-                            ))}
+                            ))} */}
+
+                    <div className="editor">
+
+                    <JoditEditor
+                      ref={editor}
+                      value={content}
+                      config={config}
+		                  tabIndex={1} // tabIndex of textarea
+		                  onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                      //onChange={newContent => {}}
+                    />
+                    </div>
+
+                    {/* <div class="fb-comments" data-href="https://localhost:3000/detail_recipe/6212b2f2526a4b03eab4b861" data-width="500" data-numposts="5"></div> */}
+
                     <h2 className="detailTitle">Imprime o guarda tu receta 🖨💾:</h2>
 
-                    <Col sm={9}>
+                    <Col sm={11}>
                       <div className="detailButtons" >
                         <button
                           className="detailExportBtn"
@@ -155,15 +298,33 @@ useEffect(() => {
                         <button 
                           className="detailPublishBtn" 
                           onClick={()=>{toUpdateRecipe({Recipekey,metaData})}}
-
                           >
                           Editar
                         </button>
-                        <button className="detailDeleteBtn" type="submit" value="submit">
-                          Eliminar
-                        </button>
+                        {
+                          admin ?
+                          <>
+                          <Button className="detailDeleteBtn" type="submit" onClick={toggle}>
+                            Eliminar
+                          </Button>
+                          <Modal isOpen={modal} toggle={toggle}>
+                            <ModalBody >
+                              ¿Estás seguro de eliminar la receta?. ¡Esta acción no se puede deshacer!
+                            </ModalBody>
+                            <ModalFooter>
+                                <Link to={'/'}>
+                                <Button className="modal-button-delete" onClick={handleDelete} >
+                                  Sí, ¡elimina receta!
+                                </Button>
+                                </Link>
+                            </ModalFooter>
+                          </Modal>
+                        </>:
+                        null
+                        }
                       </div>
                     </Col>
+
              
                     </Row>
                 </Col> 
