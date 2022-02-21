@@ -9,11 +9,12 @@ import image from '../../img/mexican-food-donation.jpg'
 // import pdfmakedownload from "./pdfContainer";
 // import pdfmakedownload from '../../services/pdfRecipeGenerator'
 import pdfmakedownload from "../../services/PdfRecipeCreator";
-
+import DonationButton from "../../components/DonationButton"
 //PDF document creation
 // import pdfMake from "pdfmake/build/pdfmake";
 // import pdfFonts from "pdfmake/build/vfs_fonts";
 // import documentDefination from "./DocumentDefination";
+import {useLocation} from 'react-router-dom';
 
 const urlQRCode = 'https://kooben.s3.amazonaws.com/QR-paypal-kooben'
 const qrCodeAlt = 'Imagen de código QR para donación a Kooben'
@@ -259,14 +260,17 @@ function DownloadPDF() {
     );
   }
 
-
 function DonationPage(){
+
+    const location = useLocation();
+
+    console.log('******DONATION');
+    console.log(location)
 
     return(
         <>
 
         <Navbar />
-
 
         <Row className="Main-Row-Container">
         <Container fluid className='General-Container col-lg-12'>
@@ -304,7 +308,10 @@ function DonationPage(){
 
         <NoDonate className='No-Donate'/>
         <DownloadPDF className='Download-PDF'/>
-
+        <DonationButton
+          ammount={"10.00"}
+          itemID="price_1KVNX9AqezYdKBDlm6ObBNND"
+        ></DonationButton>
         </Container>
 
         </Row>

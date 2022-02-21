@@ -6,6 +6,7 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
+<<<<<<< HEAD
 import { BASE_URL, PORT, } from "../../utils/constants";
 import JoditEditor from "jodit-react";
 import { deleteRecipe } from "../../services/recipes";
@@ -15,13 +16,18 @@ import { firebase } from '../../Firebase/firebase-config'
 import { login, userApp, newUserApp  } from '../../actions/auth';
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
+=======
+import { BASE_URL } from "../../utils/constants";
+>>>>>>> develop
 
 function DetailRecipe(){
+    const navigate = useNavigate();
     const location = useLocation();
+    const ingredientes = location.state.recipe.metaData.ingredients
+    
     const [detailTable, setDetailTable] = useState([]);
     const [modal, setModal] = useState(false);
 
-    const navigate = useNavigate();
 
     const metaData = location.state.recipe.metaData;
     const Recipekey = location.state.recipe.Recipekey;
@@ -107,14 +113,16 @@ useEffect(() => {
 }
    // ******Checking admin
     
-  const handleExport = (e) => {
-    e.preventDefault();
-    console.log("exporting...");
-  };
 
   const toUpdateRecipe = (recipe) =>{
     navigate(`/update_recipe/${recipe.Recipekey}`,{state:{recipe}});
   }
+
+  const toDonationPage=(recipe)=>{
+    console.log('Navega donation page con info para exportar ')
+    console.log(recipe)
+    navigate(`/Donation`,{state:{recipe}});
+    }
 
   const handleBypassToNutTable = ((ingredient, operation, portion, quantity) => {
     console.log(ingredient);
@@ -294,6 +302,11 @@ useEffect(() => {
                           onClick={() => window.print()}
                         >
                           Exportar
+                        </button>
+                        <button 
+                          className='detailExportBtn' 
+                          onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}>
+                            ExportarPDF
                         </button>
                         <button 
                           className="detailPublishBtn" 

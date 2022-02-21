@@ -1,13 +1,13 @@
-import { BASE_URL, PORT, PATH_RECIPE } from "../utils/constants";
+import { BASE_URL, PATH_RECIPE } from "../utils/constants";
 let request = null;
 
 const getRecipes = async (search) => {
     if(search.includes('search')){
-      request = `${BASE_URL}:${PORT}${PATH_RECIPE}?${search}`
+      request = `${BASE_URL}${PATH_RECIPE}?${search}`
     }
     else{
       const buildTableRequest = search.join('&')
-      request = `${BASE_URL}:${PORT}${PATH_RECIPE}?${buildTableRequest}`
+      request = `${BASE_URL}${PATH_RECIPE}?${buildTableRequest}`
     }
     console.log(request);
   
@@ -23,7 +23,7 @@ const getRecipes = async (search) => {
 
 const createRecipe = async (data) => {
   try {
-    const response = await fetch(`${BASE_URL}:${PORT}${PATH_RECIPE}`, {
+    const response = await fetch(`${BASE_URL}${PATH_RECIPE}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -75,8 +75,7 @@ function App() {
     <>
       <BrowserRouter>
       <FinalNavBar />
-        <Routes>
-          <Route path='*' element={<NotFound />}/>      
+      {/* <Route path='*' element={<NotFound />}/> 
           <Route path='/' element={<Home />} />
           <Route path='/create_recipe' element={admin && isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
           <Route path='/update_recipe/:recipe_id' element={admin && isLoggedIn ? <UpdateRecipe /> : <Navigate to="/"/>} />
