@@ -12,9 +12,10 @@ import TagsManager from "../../components/TagsManager";
 import { createRecipe } from "../../services/recipes";
 import { Link } from "react-router-dom";
 import "./CreateRecipe.scss";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import AWS from "aws-sdk";
 import Compressor from "compressorjs";
+import JoditEditor from "jodit-react";
 
 const CreateRecipe = () => {
   const [title, setTitle] = useState("");
@@ -22,7 +23,7 @@ const CreateRecipe = () => {
   const [synopsis, setSynopsis] = useState("");
   const [tags, setTags] = useState([]);
   const [steps, setSteps] = useState([]);
-  const [procedures, setProcedures] = useState([]);
+  //const [procedures, setProcedures] = useState([]);
   const [counter, setCounter] = useState(1);
   //const [textValidator, setTextValidator] = useState(true)
   const [checked, setChecked] = useState(false);
@@ -49,6 +50,24 @@ const CreateRecipe = () => {
   const [validateSynopsis, setValidateSynopsis] = useState(null);
   const [thumbnail, setThumbnail] = useState(false);
   const [modal, setModal] = useState(false);
+  const [procedures, setProcedures] = useState('')
+
+  const editor = useRef(null)
+  
+	const config = {
+    toolbarAdaptive: false,
+    placeholder:'escribe el detalle de tu receta aquí...',
+		readonly: false,
+    buttons:[
+    'bold',
+		'italic',
+    '|',
+		'ol',
+    '|',
+    'undo',
+		'redo',    
+    ]
+	}
 
   //AWS
   AWS.config.update({
@@ -467,7 +486,7 @@ const CreateRecipe = () => {
 
               <h2>Procedimiento:</h2>
 
-              {steps.map((item, index) => {
+              {/* {steps.map((item, index) => {
                 return (
                   <React.Fragment key={item}>
                     <div className="lineSteps"></div>
@@ -484,13 +503,13 @@ const CreateRecipe = () => {
                           </IconButton>
                         </Tooltip>
                       }
-                    </td>
+                    </td> */}
                     {/* <UploadPhoto
                       infMessage={
                         "Agrega una fotografía para este paso. Las imágenes serán optimizadas para web."
                       }
                     /> */}
-                    <Input
+                    {/* <Input
                       // valid={textValidator === 'has-success'}
                       // invalid={textValidator === 'has-danger'}
                       className="step"
@@ -517,7 +536,16 @@ const CreateRecipe = () => {
                     </button>
                   </div>
                 </Col>
-              </FormGroup>
+              </FormGroup> */}
+
+              <JoditEditor
+                ref={editor}
+                value={procedures}
+                config={config}
+		            tabIndex={1} // tabIndex of textarea
+		            onBlur={newContent => setProcedures(newContent)} // preferred to use only this option to update the content for performance reasons
+                // onChange={newContent => {}}
+              />
 
               <FormGroup row>
                 <Col sm={8}>
@@ -537,11 +565,11 @@ const CreateRecipe = () => {
                       Exportar
                     </button>
                     {/* <button className='pink-button' onClick={handlePublish}>Exportar</button> */}
-                    <button className="publish" type="submit" value="submit">
+                    {/* <button className="publish" type="submit" value="submit">
                       Publicar
-                    </button>
+                    </button> */}
 
-                    <Button className="publish" onClick={toggle}>
+                    <Button className="publish" type="submit" onClick={toggle}>
                       Publicar
                     </Button>
                     <Modal isOpen={modal} toggle={toggle}>
@@ -549,9 +577,12 @@ const CreateRecipe = () => {
                         ¡ Gracias por crear con K'óoben !
                       </ModalBody>
                       <ModalFooter>
-                        <Button className="modal-button" onClick={toggle}>
-                          Ir al detalle de mi receta
-                        </Button>
+                        {/* aqui meter el llink a detail */}
+                        <Link className="linkNavbar btnCreateRecipe" to={'/'}>
+                          <Button className="modal-button">
+                            Finalizar creación
+                          </Button>
+                        </Link>
                       </ModalFooter>
                     </Modal>
                   </div>

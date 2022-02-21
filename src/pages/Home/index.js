@@ -94,7 +94,7 @@ function Home() {
         <Row className="row">
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
-              <Link className="linkNavbar btnCreateRecipe" to="/MyRecipe">
+              <Link className="linkNavbar btnCreateRecipe" to="/my_recipe">
                 <Buttons
                   children="Crea tu receta"
                   size="lg"
@@ -135,7 +135,7 @@ function Home() {
             ) : (
               ""
             )}
-
+            
             {recipes.map((recipe) => {
               return (
                 <RecipeCard

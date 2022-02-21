@@ -8,9 +8,10 @@ import Calculator from "../../components/Calculator";
 import TagsManager from "../../components/TagsManager";
 import { createRecipe } from "../../services/recipes";
 import "./MyRecipe.scss";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import AWS from "aws-sdk";
 import Compressor from 'compressorjs';
+import JoditEditor from "jodit-react";
 
 const MyRecipe = () => {
   const [title, setTitle] = useState("")
@@ -44,6 +45,24 @@ const MyRecipe = () => {
   const [validateAuthor, setValidateAuthor] = useState("");
   const [validateSynopsis, setValidateSynopsis] = useState("");
   const [thumbnail, setThumbnail] = useState(false);
+	const [content, setContent] = useState('')
+
+  const editor = useRef(null)
+  
+	const config = {
+    toolbarAdaptive: false,
+    placeholder:'escribe el detalle de tu receta aquí...',
+		readonly: false,
+    buttons:[
+    'bold',
+		'italic',
+    '|',
+		'ol',
+    '|',
+    'undo',
+		'redo',    
+    ]
+	}
   
   //AWS
     AWS.config.update({
@@ -431,7 +450,7 @@ const MyRecipe = () => {
 
               <h2>Procedimiento:</h2>
 
-              {steps.map((item, index) => {
+              {/* {steps.map((item, index) => {
                 return (
                   <React.Fragment key={item}>
                     <div className="lineSteps"></div>
@@ -444,15 +463,9 @@ const MyRecipe = () => {
                         </IconButton>
                       </Tooltip>
                     }
-                  </td>
-                    {/* <UploadPhoto
-                      infMessage={
-                        "Agrega una fotografía para este paso. Las imágenes serán optimizadas para web."
-                      }
-                    /> */}
-                    <Input 
-                      // valid={textValidator === 'has-success'}
-                      // invalid={textValidator === 'has-danger'}
+                  </td> */}
+   
+                    {/* <Input 
                       className="step"
                       id="step"
                       name="step"
@@ -477,10 +490,19 @@ const MyRecipe = () => {
                     </button>
                   </div>
                 </Col>
-              </FormGroup>
+              </FormGroup> */}
+
+              <JoditEditor
+                ref={editor}
+                value={content}
+                config={config}
+		            tabIndex={1} // tabIndex of textarea
+		            onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
+                onChange={newContent => {}}
+              />
 
               <FormGroup row>
-                <Col sm={8}>
+                <Col sm={8} className="tagsBox">
                   <TagsManager 
                     getTags={getTags}
                   />

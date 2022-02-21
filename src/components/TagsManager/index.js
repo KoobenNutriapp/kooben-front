@@ -47,7 +47,7 @@ function TagsManager({getTags}) {
       className="tagsBox"
       multiple
       onChange={handleChange}
-      limitTags={4}
+      limitTags={10}
       id="multiple-limit-tags"
       options={tags}
       getOptionLabel={(option) => option}
