@@ -6,7 +6,6 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-<<<<<<< HEAD
 import { BASE_URL, PORT, } from "../../utils/constants";
 import JoditEditor from "jodit-react";
 import { deleteRecipe } from "../../services/recipes";
@@ -16,9 +15,6 @@ import { firebase } from '../../Firebase/firebase-config'
 import { login, userApp, newUserApp  } from '../../actions/auth';
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
-=======
-import { BASE_URL } from "../../utils/constants";
->>>>>>> develop
 
 function DetailRecipe(){
     const navigate = useNavigate();
@@ -115,7 +111,7 @@ useEffect(() => {
     
 
   const toUpdateRecipe = (recipe) =>{
-    navigate(`/update_recipe/${recipe.Recipekey}`,{state:{recipe}});
+    navigate(`/UpdateRecipe/${recipe.Recipekey}`,{state:{recipe}});
   }
 
   const toDonationPage=(recipe)=>{
