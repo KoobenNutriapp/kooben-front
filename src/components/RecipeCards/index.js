@@ -26,7 +26,7 @@ function RecipeCards({
   const navigate = useNavigate();
 
   const toDetailRecipe = (recipe) => {
-    navigate(`/detail_recipe/${recipe.Recipekey}`, { state: { recipe } });
+    navigate(`/DetailRecipe/${recipe.Recipekey}`, { state: { recipe } });
   };
 
   return (

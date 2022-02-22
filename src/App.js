@@ -74,7 +74,7 @@ function App() {
   console.log(isLoggedIn);
   return (
     <>
-      <BrowserRouter>
+       <BrowserRouter>
       <FinalNavBar />
         <Routes>
           <Route path='*' element={<NotFound />}/> 
