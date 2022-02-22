@@ -6,7 +6,7 @@ body {
 }
 
 .containerCreate {
-  // border: 1px blue solid;
+  //border: 1px blue solid;
   margin-top: 90px;
   display: flex;
   justify-content: center;
@@ -15,8 +15,8 @@ body {
 }
 
 .rowCreate {
-  border-radius: 10px;
   //border: 1px red solid;
+  border-radius: 10px;
   display: flex;
   justify-content: center;
   width: 80% !important;
@@ -28,6 +28,8 @@ body {
   border-radius: 10px;
   width: 70%;
   margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
 }
 
 .MyRecipeTitle {
@@ -148,25 +150,40 @@ h3{
   margin-bottom: 5px;
 }
 
-.imgContainerMyRecipe {
-  //align-self: flex-end;
-  width: 623px;
-  margin-left: 250px;
-}
 
 .thumbnail {
-  display: flex;
-  justify-content: center;
   border: 1px solid #ddd; /* Gray border */
   border-radius: 4px; /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 100%; /* Set a small width */
+  //padding: 5px; /* Some padding */
+  //width: 100%; /* Set a small width */
 }
 
 .thumbnail:hover {
   box-shadow: 0 0 2px 1px $mexican-pink;
 }
 
+.thumbnailBox{
+  display: flex !important;
+  justify-content: flex-end !important;
+  border: 1px solid black;
+  margin-bottom: 20px;
+  width: 100%;
+  margin-right: 250px !important;
+;
+}
+
 .tagsBox{
   margin-top: 20px;
+}
+
+
+.myRecipeExportBtn {
+  border-color: $mexican-pink;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: 5px;
+  background-color: $mexican-pink;
+  width: 90%;
+  height: 40px;
+  margin-bottom: 20px;
 }

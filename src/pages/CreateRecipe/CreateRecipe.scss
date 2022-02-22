@@ -165,19 +165,13 @@ h3{
   margin-bottom: 5px;
 }
 
-.imgContainer {
-  align-self: flex-end;
-  width: 623px;
-  margin-left: 250px;
-}
-
 .thumbnail {
   display: flex;
   justify-content: center;
-  border: 1px solid #ddd; /* Gray border */
-  border-radius: 4px; /* Rounded border */
-  padding: 5px; /* Some padding */
-  width: 100%; /* Set a small width */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100%;
 }
 
 .thumbnail:hover {

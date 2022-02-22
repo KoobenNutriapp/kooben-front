@@ -6,7 +6,7 @@ body {
 }
 
 .containerUpdate {
-  //border: 1px blue solid;
+  border: 1px blue solid;
   margin-top: 88px;
   display: flex;
   justify-content: center;
@@ -16,14 +16,14 @@ body {
 
 .rowUpdate {
   border-radius: 10px;
-  //border: 1px red solid;
+  border: 1px red solid;
   display: flex;
   justify-content: center;
   width: 80% !important;
 }
 
 .mainUpdate {
-  //border: 1px black solid;
+  border: 1px black solid;
   background-color: rgb(255 255 255);
   border-radius: 5px;
   width: 70%;
@@ -244,4 +244,19 @@ border: $mexican-pink 1px solid;
 
 .selectIngredient:hover{
 box-shadow: 0 0 2px 1px $mexican-pink;
+}
+
+.updateFrameTables {
+  width: 100%;
+  height: 1870px;
+}
+
+.updateIngredientsTable {
+  width: 50%;
+}
+
+.updatelNutritionalTable {
+  margin-top: 20px;
+  width: 50%;
+  //overflow-y: scroll;
 }

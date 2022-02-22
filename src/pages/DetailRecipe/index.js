@@ -1,12 +1,10 @@
 import { Container, Row, Col } from "reactstrap";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { FormGroup } from "reactstrap";
 import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-import { BASE_URL, PORT, } from "../../utils/constants";
 import JoditEditor from "jodit-react";
 import { deleteRecipe } from "../../services/recipes";
 import AWS from "aws-sdk";
@@ -18,39 +16,20 @@ import { getUsers } from "../../services/user";
 
 function DetailRecipe(){
     const navigate = useNavigate();
-    const location = useLocation();
-    const ingredientes = location.state.recipe.metaData.ingredients
-    
+    const location = useLocation()
     const [detailTable, setDetailTable] = useState([]);
     const [modal, setModal] = useState(false);
-
-
     const metaData = location.state.recipe.metaData;
     const Recipekey = location.state.recipe.Recipekey;
-
-    const recipeId = `${BASE_URL}:3000/DetailRecipe/${Recipekey}`
-    console.log(recipeId);
-
     const [content, setContent] = useState(location.state.recipe.metaData.procedures)
 
     const editor = useRef(null)
-    
     const config = {
       toolbarAdaptive: false,
-      placeholder:'escribe el detalle de tu receta aquí...',
       readonly: true,
-      buttons:[
-      'bold',
-      'italic',
-      '|',
-      'ol',
-      '|',
-      'undo',
-      'redo',    
-      ]
+      buttons:[]
     }
-
-    
+   
 useEffect(() => {
     const loadData = async () => {
         setDetailTable(location.state.recipe.metaData.ingredients)
@@ -109,7 +88,6 @@ useEffect(() => {
 }
    // ******Checking admin
     
-
   const toUpdateRecipe = (recipe) =>{
     navigate(`/update_recipe/${recipe.Recipekey}`,{state:{recipe}});
   }
@@ -291,24 +269,17 @@ useEffect(() => {
                         </Col>
                     </Row>
                     <Row> 
-                        <h2 className="detailTitle">Procedimiento: </h2>
-                            {/* {location.state.recipe.metaData.procedures.map((item,index)=>(
-                            <div className="steps-text"> <span class="step">{index+1}</span> :{item} </div>
-                            ))} */}
+                    <h2 className="detailTitle">Procedimiento: </h2>
 
                     <div className="editor">
-
                     <JoditEditor
                       ref={editor}
                       value={content}
                       config={config}
-		                  tabIndex={1} // tabIndex of textarea
-		                  onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                      //onChange={newContent => {}}
+		                  tabIndex={1}
+		                  onBlur={newContent => setContent(newContent)}
                     />
                     </div>
-
-                    {/* <div class="fb-comments" data-href="https://localhost:3000/detail_recipe/6212b2f2526a4b03eab4b861" data-width="500" data-numposts="5"></div> */}
 
                     <h2 className="detailTitle">Imprime o guarda tu receta 🖨💾:</h2>
 
@@ -321,11 +292,11 @@ useEffect(() => {
                         >
                           Exportar
                         </button>
-                        <button 
+                        {/* <button 
                           className='detailExportBtn' 
                           onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}>
                             ExportarPDF
-                        </button>
+                        </button> */}
                         <button 
                           className="detailPublishBtn" 
                           onClick={()=>{toUpdateRecipe({Recipekey,metaData})}}
