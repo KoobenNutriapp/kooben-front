@@ -1,14 +1,8 @@
 import {Form,FormGroup,Label,Input,FormText,FormFeedback} from "reactstrap";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useLocation } from 'react-router-dom';
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { Container, Row, Col } from "reactstrap";
 import Switch from "@mui/material/Switch";
-import NavBar from "../../components/NavBar";
-import Calculator from "../../components/Calculator";
-import Modals from "../../components/Modals";
 import TagsManager from "../../components/TagsManager";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
@@ -25,25 +19,17 @@ import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { firebase } from '../../Firebase/firebase-config'
 import { login, userApp, newUserApp  } from '../../actions/auth';
-import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
 
 const UpdateRecipe = () => {
   const location = useLocation();
-  console.log(location.state.recipe.metaData.ingredients);
-
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [synopsis, setSynopsis] = useState("");
   const [tags, setTags] = useState([]);
-  const [steps, setSteps] = useState([]);
-  //const [procedures, setProcedures] = useState([]);
-  const [counter, setCounter] = useState(1);
-  //const [textValidator, setTextValidator] = useState(true)
   const [checked, setChecked] = useState(false);
   const [type, setType] = useState("");
-  const [url, setUrl] = useState(null);
-  //const [portion, setPortion] = useState(0);
+  const [url, setUrl] = useState("");
   const [total_energy, setTotalEnergy] = useState(0);
   const [total_carbohydrate, setTotalCarbohydrate] = useState(0);
   const [total_fiber, setTotalFiber] = useState(0);
@@ -79,7 +65,6 @@ const UpdateRecipe = () => {
         if(user?.uid){
           dispatch( login ( user.uid, user.displayName ) )
           validateRol(user.email)
-          //console.log(admin);
           dispatch( newUserApp)
           setIsLoggedIn( true );
         }else{
@@ -104,7 +89,6 @@ const UpdateRecipe = () => {
     }
 
   const editor = useRef(null)
-  
 	const config = {
     toolbarAdaptive: false,
     placeholder:'escribe el detalle de tu receta aquí...',
@@ -112,9 +96,15 @@ const UpdateRecipe = () => {
     buttons:[
     'bold',
 		'italic',
+    'underline',
+    'strikethrough',
+    '|',
+    'font',
+    'fontsize',
     '|',
 		'ol',
     '|',
+    'align',
     'undo',
 		'redo',    
     ]
@@ -211,6 +201,23 @@ const UpdateRecipe = () => {
     }
   };
 
+  const deleteImgFromBucket = async () => {
+    console.log("Deleting photo from AWS...");
+    const tempUrl = (location.state.recipe.metaData.url).split('k-')
+    const imageToDelete = tempUrl[1]  
+
+    const params = {
+      Key: `images/k-${imageToDelete}`,
+    };
+
+    try {
+      const response = await S3Client.deleteObject(params).promise();
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSend = async () => {
     console.log("Sending photo to AWS...");
 
@@ -234,35 +241,6 @@ const UpdateRecipe = () => {
     e.preventDefault();
     console.log("exporting...");
   };
-
-  const handleDeleteStep = (e) => {
-    console.log(e.currentTarget.id);
-    const stepSelected = e.currentTarget.id;
-    const filteredSteps = steps.filter((item) => {
-      return item !== stepSelected;
-    });
-    setSteps(filteredSteps);
-  };
-
-  const handleAddStep = (e) => {
-    e.preventDefault();
-    setCounter(counter + 1);
-    const tempStep = `step ${counter}`;
-    console.log(tempStep);
-    setSteps([...steps, tempStep]);
-  };
-
-  const handleStepsBlur = (e) => {
-    console.log(e.target.value);
-    const addProcedure = e.target.value;
-    if(addProcedure!==""){
-      setProcedures([...procedures, addProcedure]);
-    }    
-  };
-
-  const handleStepsChange = (e) =>{
-    console.log(e);
-  }
 
   const getTags = (arrayOfTags) => {
     setTags(arrayOfTags);
@@ -295,11 +273,9 @@ const UpdateRecipe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitting...");
+    let imageIndicator = false
     
     const id = location.state.recipe.metaData._id
-    console.log(id);
-
-    console.log(procedures);
     
     const date = new Date();
     const formatDate =
@@ -318,10 +294,13 @@ const UpdateRecipe = () => {
       const edited = formatDate;
       
       validateText()
-      
-      //console.log(ingredients);
 
-    //Falta una mejor UX en validación de formularios
+      const oldIgame = location.state.recipe.metaData.url
+      if(oldIgame !== url){
+        console.log('son diferentes');
+        imageIndicator = true
+      }
+      
     if (
       // [title, url, synopsis, tags, procedures, author].includes(null) ||
       // total_energy < 0.5
@@ -353,9 +332,11 @@ const UpdateRecipe = () => {
         };
         console.log(data);
         await updateRecipe(id,data);
+        if (imageIndicator){
+          deleteImgFromBucket() 
+          imageIndicator = false
+        }
         handleSend();
-        //alert('¡ La receta fue actualizada exitosamente !')
-        //cleanForm() hay que implementar correctamente
       } catch (error) {
         console.error(error.message);
       }
@@ -369,14 +350,10 @@ const UpdateRecipe = () => {
   };
 
   const handleNutDetailTable = () => {
-    // console.log(location.state.recipe.metaData.ingredients);
-    // const ingredient = location.state.recipe.metaData.ingredients
 
     const portion = detailTable?.reduce((acc, item) => {
       return acc + (item?.equivalence.gram || 0);
     }, 0);
-    //setPortion(portion.toFixed(0));
-    //console.log("portion: " + portion.toFixed(2));
 
     const energy = detailTable?.reduce((acc, item) => {
       return acc + (item?.energy || 0);
@@ -440,11 +417,12 @@ const UpdateRecipe = () => {
   const toggle = () => setModal(!modal);
 
   const filterDeletingItems = (deleteIngredient) =>{
-    //console.log(deleteIngredient);
+
     const filteredIngredient = detailTable.filter(item=>{
       return item._id !== deleteIngredient
     })
     setDetailTable(filteredIngredient)
+    setIngredients(filteredIngredient)
   }
 
    const handleSelection = (selection) => {
@@ -453,6 +431,7 @@ const UpdateRecipe = () => {
       let set = new Set( tempTable.map( JSON.stringify ) )
       let result = Array.from( set ).map( JSON.parse );
       setDetailTable(result)
+      setIngredients(result)
     }else{
      console.log('empty');
     }
@@ -507,7 +486,7 @@ const UpdateRecipe = () => {
      })
  
      setDetailTable(newDetailTable)
-     setIngredients(detailTable)
+     setIngredients(newDetailTable)
      handleNutDetailTable()
    })
 
@@ -528,8 +507,6 @@ const UpdateRecipe = () => {
    console.log('original');
    console.log(detailTable);
  
-   //getIngredientsToPost(detailTable)   
-
   return (
     <>
       <Container className="containerUpdate" fluid>
@@ -614,8 +591,6 @@ const UpdateRecipe = () => {
                 </Col>
               </FormGroup>
 
-              
-
               {
                 !thumbnail ? 
                 <>
@@ -624,8 +599,6 @@ const UpdateRecipe = () => {
                 </>
                 : null
               }
-
-              
 
               <FormGroup className="imgContainerUpdate">
                 {thumbnail ? (
@@ -680,97 +653,49 @@ const UpdateRecipe = () => {
                 />
               </FormGroup>
               <h2>Ingredientes:</h2>
-{/* 
-              <Row className="ingredientsUpdate boxCalculatorUpdate">
-                <Calculator getIngredientsToPost={handleNutDetailTable} />
-              </Row> */}
 
-              <Col className="ingredientTable">
-                <IngredientsDynamicTable 
-                  ingredients={detailTable} 
-                  callback={filterDeletingItems}
-                  nutData={handleBypassToNutTable}
-                />
-                <button className="btnAddIngredient" onClick={handleAddIngredient}>
-                  Agrega ingrediente
-                </button>
-                <div className="selectBox">
-                  {addIngredient ? (
-                  <Autocomplete
-                    size='small'
-                    options={options?.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
-                    groupBy={(option) => option.firstLetter}
-                    getOptionLabel={(option) => option.name}
-                    renderInput={(params) => <TextField {...params} label="Agrega un ingrediente" />}
-                    className="selectIngredient"
-                    onChange={(e,selection) => handleSelection(selection)}
+              <Row className="updateFrameTables">
+                <Col className="updateIngredientsTable">
+                  <IngredientsDynamicTable 
+                    ingredients={detailTable} 
+                    callback={filterDeletingItems}
+                    nutData={handleBypassToNutTable}
                   />
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </Col>
-              <Col className="nutritionalTable">
-                <NutFactTable 
-                  ingredient={detailTable}
-                />
-              </Col>
-
-              <h2>Procedimiento:</h2>
-
-              {/* {procedures.map((item, index) => {
-                return (
-                  <React.Fragment key={index}>
-                    <div className="lineSteps"></div>
-                    <h3>{`paso ${index + 1}`}</h3>
-                    <td
-                      className="deleteButtonUpdate"
-                      id={item}
-                      onClick={handleDeleteStep}
-                    >
-                      {
-                        <Tooltip title="Elimina paso" placement="right-start">
-                          <IconButton>
-                            <DeleteIcon className="binStepUpdate" />
-                          </IconButton>
-                        </Tooltip>
-                      }
-                    </td>
-                    <Input
-                      className="stepUpdate"
-                      id="stepUpdate"
-                      name="stepUpdate"
-                      type="textarea"
-                      placeholder="¡describe con detalle el paso aquí!"
-                      //onBlur={handleStepsBlur}
-                      onChange={handleStepsChange}
-                      value={item}
+                  <button className="btnAddIngredient" onClick={handleAddIngredient}>
+                    Agrega ingrediente
+                  </button>
+                  <div className="selectBox">
+                    {addIngredient ? (
+                    <Autocomplete
+                      size='small'
+                      options={options?.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+                      groupBy={(option) => option.firstLetter}
+                      getOptionLabel={(option) => option.name}
+                      renderInput={(params) => <TextField {...params} label="Agrega un ingrediente" />}
+                      className="selectIngredient"
+                      onChange={(e,selection) => handleSelection(selection)}
                     />
-                  </React.Fragment>
-                );
-              })}
-
-              <FormGroup row>
-                <Col sm={7}>
-                  <div className="add-step-box">
-                    <button
-                      value="step"
-                      className="pink-button"
-                      onClick={handleAddStep}
-                    >
-                      agrega paso
-                    </button>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </Col>
-              </FormGroup> */}
+             
+                <Col className="updatelNutritionalTable">
+                  <NutFactTable 
+                    ingredient={detailTable}
+                  />
+                </Col>
+              </Row>
+
+              <h2>Procedimiento:</h2>
 
               <JoditEditor
                 ref={editor}
                 value={procedures}
                 config={config}
 		            tabIndex={1} // tabIndex of textarea
-		            onBlur={newContent => setProcedures(newContent)} // preferred to use only this option to update the content for performance reasons
-                //onChange={newContent => setProcedures(newContent)}
+		            onBlur={newContent => setProcedures(newContent)}
               />
 
               <FormGroup row>

@@ -18,6 +18,7 @@ import UpdateRecipe from './pages/UpdateRecipe'
 import Donation from './pages/Donation'
 import NotFound from './pages/NotFound'
 import PrivacyPolicies from './components/PrivacyPolicies/'
+import PrintView from './components/PrintView/'
 
 function App() {
 
@@ -75,23 +76,16 @@ function App() {
     <>
        <BrowserRouter>
       <FinalNavBar />
-      {/* <Route path='*' element={<NotFound />}/> 
-          <Route path='/' element={<Home />} />
-          <Route path='/CreateRecipe' element={admin && isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
-          <Route path='/UpdateRecipe/:RecipeID' element={admin && isLoggedIn ? <UpdateRecipe /> : <Navigate to="/"/>} />
-          <Route path='/DetailRecipe/:RecipeID' element={isLoggedIn ? <DetailRecipe /> : <Navigate to="/"/>} />
-          <Route path='/MyRecipe/' element={isLoggedIn ? <MyRecipe /> : <Navigate to="/"/>} />
-          <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
-          <Route path='/Donation' element={<Donation />} /> */}    
         <Routes>
-          <Route path='*' element={<NotFound />}/>      
+          <Route path='*' element={<NotFound />}/> 
           <Route path='/' element={<Home />} />
-          <Route path='/CreateRecipe' element={<CreateRecipe/>} />
-          <Route path='/UpdateRecipe/:RecipeID' element={ <UpdateRecipe/>} />
-          <Route path='/DetailRecipe/:RecipeID' element={<DetailRecipe />} />
-          <Route path='/MyRecipe/' element={<MyRecipe />} />
-          <Route path='/politica-de-privacidad' element={<PrivacyPolicies />} />
-          <Route path='/Donation' element={<Donation />} />
+          <Route path='/create_recipe' element={admin && isLoggedIn ? <CreateRecipe /> : <Navigate to="/"/>} />
+          <Route path='/update_recipe/:recipe_id' element={admin && isLoggedIn ? <UpdateRecipe /> : <Navigate to="/"/>} />
+          <Route path='/detail_recipe/:recipe_id' element={isLoggedIn ? <DetailRecipe /> : <Navigate to="/"/>} />
+          <Route path='/my_recipe/' element={isLoggedIn ? <MyRecipe /> : <Navigate to="/"/>} />
+          <Route path='/privacy_policy' element={<PrivacyPolicies />} />
+          <Route path='/donation' element={<Donation />} />
+          <Route path='/print_view/:recipe_id' element={<PrintView />} />
         </Routes>
       </BrowserRouter>
     </>

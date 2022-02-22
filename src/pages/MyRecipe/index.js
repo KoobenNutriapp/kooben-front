@@ -1,181 +1,45 @@
-import {Form,FormGroup,Label,Input,FormText, FormFeedback} from "reactstrap";
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
-import { Container, Row, Col } from "reactstrap";
-import NavBar from "../../components/NavBar";
-import Calculator from "../../components/Calculator";
+import {Form,FormGroup,Label,Input,FormFeedback} from "reactstrap";
 import TagsManager from "../../components/TagsManager";
-import { createRecipe } from "../../services/recipes";
-import "./MyRecipe.scss";
+import Calculator from "../../components/Calculator";
+import { Container, Row, Col } from "reactstrap";
 import React, { useState, useRef } from "react";
-import AWS from "aws-sdk";
-import Compressor from 'compressorjs';
+import { useNavigate } from 'react-router-dom';
 import JoditEditor from "jodit-react";
+import "./MyRecipe.scss";
 
 const MyRecipe = () => {
+  const navigate = useNavigate();
   const [title, setTitle] = useState("")
   const [author, setAuthor] = useState("")
   const [synopsis, setSynopsis] = useState("")
   const [tags, setTags] = useState([]);
-  const [steps, setSteps] = useState([]);
-  const [procedures, setProcedures] = useState([]);
-  const [counter, setCounter] = useState(1);
-  //const [textValidator, setTextValidator] = useState(true)
-  const [checked, setChecked] = useState(false);
-  const [type, setType] = useState("")
-  const [url, setUrl] = useState(null)
-  //const [portion, setPortion] = useState(0);
-  const [total_energy, setTotalEnergy] = useState(0);
-  const [total_carbohydrate, setTotalCarbohydrate] = useState(0);
-  const [total_fiber, setTotalFiber] = useState(0);
-  const [total_sugars, setTotalSugars] = useState(0);
-  const [total_sodium, setTotalSodium] = useState(0);
-  const [total_protein, setTotalProtein] = useState(0);
-  const [total_fat, setTotalFat] = useState(0);
-  const [total_cholesterol, setTotalCholesterol] = useState(0);
-  const [total_glycemic_load, setTotalGlycemicLoad] = useState(0);
-  const [ingredients, setIngredients] = useState([]);
-  const [image, setImage] = useState("");
-  const [file, setFile] = useState("");
-  const [fileName, setFileName] = useState("");
-  const [fileType, setFileType] = useState("");
-  const [validateMainImage, setValidateMainImage] = useState(null);
   const [validateTitle, setValidateTitle] = useState("");
   const [validateAuthor, setValidateAuthor] = useState("");
   const [validateSynopsis, setValidateSynopsis] = useState("");
-  const [thumbnail, setThumbnail] = useState(false);
-	const [content, setContent] = useState('')
+  const [procedures, setProcedures] = useState('');
+  const [detailTable, setDetailTable] = useState([]);
 
   const editor = useRef(null)
-  
 	const config = {
     toolbarAdaptive: false,
-    placeholder:'escribe el detalle de tu receta aquí...',
+    placeholder:'¡Cuéntale al mundo porqué tu receta es genial...!',
 		readonly: false,
     buttons:[
-    'bold',
-		'italic',
-    '|',
-		'ol',
-    '|',
-    'undo',
-		'redo',    
-    ]
+      'bold',
+      'italic',
+      'underline',
+      'strikethrough',
+      '|',
+      'font',
+      'fontsize',
+      '|',
+      'ol',
+      '|',
+      'align',
+      'undo',
+      'redo',    
+      ]
 	}
-  
-  //AWS
-    AWS.config.update({
-      accessKeyId: process.env.REACT_APP_KEY_ID,
-      secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY,
-    });
-
-    const S3Client = new AWS.S3({
-      params: { Bucket: "kooben" },
-      region: "us-east-1",
-    });
-
-    const handleLoad = (e) => {
-      e.preventDefault();
-      const imageFile = e.target.files[0];
-      const imageUrl = URL.createObjectURL(imageFile);
-      compressImage(imageFile)
-      setImage(imageUrl)
-      const name = `k-${Date.now()}`
-      setFileName(name);
-      const type = imageFile.type;
-      setFileType(type);
-      const url = `${process.env.REACT_APP_BUCKET_URL}${name}`
-      console.log(url);
-      setUrl(url)
-    };
-    console.log(fileName);
-    
-    const compressImage = (baseImage) => {
-      if (!baseImage) {
-        return;
-      }
-      new Compressor(baseImage, {
-        quality: 0.2,
-    
-        success(result) {
-          const formData = new FormData();
-          formData.append('file', result, result.name);
-          setFile(result)
-          setValidateMainImage('has-success')
-          setThumbnail(true)
-        },
-        error(err) {
-          console.log('error: ' + err.message);
-          setValidateMainImage('has-danger')
-          setThumbnail(false)
-        },
-      });
-    }
-  
-    const handleDelete = async () => {
-      console.log("Deleting photo from AWS...");
-  
-      const params = {
-        Key: `images/k-1644252135506`,
-      };
-  
-      try {
-        const response = await S3Client.deleteObject(params).promise();
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  
-    const handleSend = async () => {
-      console.log("Sending photo to AWS...");
-  
-      const params = {
-        ACL: "public-read",
-        Key: `images/${fileName}`,
-        ContentType: `${fileType}`,
-        Body: file,
-      };
-  
-      try {
-        const response = await S3Client.putObject(params).promise();
-        console.log(response);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-  //AWS
-
-  const handleExport = (e) => {
-    e.preventDefault();
-    console.log("exporting...");
-  };
-
-  const handleDeleteStep = (e) => {
-    console.log(e.currentTarget.id);
-    const stepSelected = e.currentTarget.id
-    const filteredSteps = steps.filter(item=>{
-      return item !== stepSelected
-    })
-    setSteps(filteredSteps)
-  }
-
-  const handleAddStep = (e) => {
-    e.preventDefault();
-    setCounter(counter + 1);
-    const tempStep = `step ${counter}`;
-    console.log(tempStep);
-    setSteps([...steps, tempStep]);
-  };
-
-  const handleStepsBlur = (e) => {
-    console.log(e.target.value);
-    const addProcedure = e.target.value;
-    if(addProcedure!==""){
-      setProcedures([...procedures, addProcedure]);
-    }    
-  };
 
   const getTags = (arrayOfTags) => {
     setTags(arrayOfTags)
@@ -205,141 +69,41 @@ const MyRecipe = () => {
     setSynopsis(e.target.value)
   }
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log('submitting...');
-
-    const date = new Date();
-    const formatDate =
-      ("00" + date.getDate()).slice(-2) + "/" +
-      ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
-      date.getFullYear() + " " +
-      ("00" + date.getHours()).slice(-2) + ":" +
-      ("00" + date.getMinutes()).slice(-2) + ":" +
-      ("00" + date.getSeconds()).slice(-2);
-    const created = formatDate
-    const edited = formatDate
-
-    validateText()
-
-    //Falta una mejor UX en validación de formularios
-    if([title,url,synopsis,tags,procedures,author].includes(null) || total_energy < 0.5){
-			alert('Todos los campos son obligatorios')
-		}else{
-			console.log('todos los campos llenos')
-			try {
-        const data = {
-          title,
-          url,
-          type,
-          synopsis,
-          tags,
-          procedures,
-          author,
-          created,
-          edited,
-          total_energy,
-          total_carbohydrate,
-          total_sugars,
-          total_fiber,
-          total_sodium,
-          total_protein,
-          total_fat,
-          total_cholesterol,
-          total_glycemic_load,
-          ingredients,
-        }
-        console.log(data);
-				await createRecipe(data);
-        handleSend()
-				alert('¡ La receta fue creada exitosamente !')
-        //cleanForm() hay que implementar correctamente
-			} catch (error) {
-				console.error(error.message);
-			}
-		}
+  const handleNutDetailTable = (ingredient) =>{   
+    setDetailTable(ingredient)
   }
 
- const handleType = (e) => {
-  setChecked(e.target.checked)
-  console.log(checked);
-  checked ? setType("") : setType('prehispanic')
- }
-
-  const handleNutDetailTable = (ingredient) =>{
-    const portion = ingredient.reduce((acc, item) => {
-      return acc + (item?.equivalence.gram || 0);
-    }, 0);
-    //setPortion(portion.toFixed(0));
-    //console.log("portion: " + portion.toFixed(2));
-
-    const energy = ingredient.reduce((acc, item) => {
-      return acc + (item?.energy || 0);
-    }, 0);
-    setTotalEnergy((energy*portion).toFixed(2));
-    //console.log("energy: " + energy.toFixed(2));
-
-    const total_carbohydrate = ingredient.reduce((acc, item) => {
-      return acc + (item?.total_carbohydrate || 0);
-    }, 0);
-    setTotalCarbohydrate((total_carbohydrate*portion).toFixed(2));
-    //console.log("total_carbohydrate: " + total_carbohydrate.toFixed(2));
-
-    const dietary_fiber = ingredient.reduce((acc, item) => {
-      return acc + (item?.dietary_fiber || 0);
-    }, 0);
-    setTotalFiber((dietary_fiber*portion).toFixed(2));
-    //console.log("dietary_fiber: " + dietary_fiber.toFixed(2));
-
-    const sugars = ingredient.reduce((acc, item) => {
-      return acc + (item?.sugars || 0);
-    }, 0);
-    setTotalSugars((sugars*portion).toFixed(2));
-    //console.log("sugars: " + sugars.toFixed(2));
-
-    const sodium = ingredient.reduce((acc, item) => {
-      return acc + (item?.sodium || 0);
-    }, 0);
-    setTotalSodium((sodium*portion).toFixed(2));
-    //console.log("sodium: " + sodium.toFixed(2));
-
-    const protein = ingredient.reduce((acc, item) => {
-      return acc + (item?.protein || 0);
-    }, 0);
-    setTotalProtein((protein*portion).toFixed(2));
-    //console.log("protein: " + protein.toFixed(2));
-
-    const total_fat = ingredient.reduce((acc, item) => {
-      return acc + (item?.total_fat || 0);
-    }, 0);
-    setTotalFat((total_fat*portion).toFixed(2));
-    //console.log("total_fat: " + total_fat.toFixed(2));
-
-    const cholesterol = ingredient.reduce((acc, item) => {
-      return acc + (item?.cholesterol || 0);
-    }, 0);
-    setTotalCholesterol((cholesterol*portion).toFixed(2));
-    //console.log("cholesterol: " + cholesterol.toFixed(2));
-
-    const glycemic_load = ingredient.reduce((acc, item) => {
-      return (
-        acc + ((item?.total_carbohydrate * item?.glycemic_index) / 100 || 0)
-      );
-    }, 0);
-    setTotalGlycemicLoad((glycemic_load*portion).toFixed(4));
-    //console.log("glycemic_load: " + glycemic_load.toFixed(4));
-    
-    setIngredients(ingredient)
+  const toPrintView = (e) =>{
+    e.preventDefault()
+    console.log('Exportando...');
+    const id = `r-${Date.now()}`
+        if(title === ''){
+          alert('Todos los campos son obligatorios')
+        }else{
+          console.log('todos los campos llenos')
+          try {
+            const data = {
+              title,
+              tags,
+              synopsis,
+              procedures,
+              detailTable,
+            }
+            console.log(data);
+            navigate(`/print_view/my-recipe-${id}`, { state: { data } });
+          } catch (error) {
+            console.error(error.message);
+          }
+        }
   }
 
   return (
     <>
       <Container className="containerCreate" fluid>
-        {/* <NavBar /> */}
         <Row className="rowCreate">
           <Col className="mainCreate">
             <h1 className="MyRecipeTitle">Mi receta</h1>
-            <Form >
+            <Form onSubmit={toPrintView}>
               <FormGroup row>
                 <Label for="title" sm={2}>
                   Título:
@@ -388,7 +152,7 @@ const MyRecipe = () => {
                 </Col>
               </FormGroup>
 
-              <FormGroup row>
+              {/* <FormGroup row>
                 <Label for="textbox" sm={2}>
                   Sinopsis:
                 </Label>
@@ -411,94 +175,32 @@ const MyRecipe = () => {
                     ¡La sinopsis debe ser mayor a 10 caracteres!
                   </FormFeedback>
                 </Col>
-              </FormGroup>
-              <FormGroup className="imgContainerMyRecipe">
-              
-              {thumbnail ? <img className="thumbnail" alt="tu receta" src={image} /> : ''}
-              </FormGroup>
+              </FormGroup> */}
 
-              <FormGroup row>
-                <Label for="mainPhoto" sm={2}>
-                  Fotografía:
-                </Label>
-                <Col sm={10}>
-                  <Input 
-                    valid={validateMainImage === 'has-success'}
-                    invalid={validateMainImage === 'has-danger'}
-                    id="mainPhoto"
-                    accept="image/png,image/jpeg"
-                    name="file"
-                    type="file"
-                    onChange={handleLoad}
-                  />
-                  <FormFeedback invalid className="center">
-                    Parece que el archivo que seleccionaste no es válido. Intenta con una imagen :)
-                  </FormFeedback>
-                  <FormText className="center">
-                    {'Agrega la fotografía principal de tu receta'}
-                  </FormText>
-                </Col>
-              </FormGroup>
+              <JoditEditor
+                ref={editor}
+                value={synopsis}
+                config={config}
+		            tabIndex={1}
+		            onBlur={newContent => setSynopsis(newContent)}
+              />
         
               <h2>Ingredientes:</h2>
 
               <Row className="ingredients boxCalculator">
                 <Calculator 
-                getIngredientsToPost={handleNutDetailTable}
+                  getIngredientsToPost={handleNutDetailTable}
                 />
               </Row>
 
               <h2>Procedimiento:</h2>
 
-              {/* {steps.map((item, index) => {
-                return (
-                  <React.Fragment key={item}>
-                    <div className="lineSteps"></div>
-                    <h3>{`paso ${index+1}`}</h3>
-                    <td className="deleteButton" id={item} onClick={handleDeleteStep}>
-                    {
-                      <Tooltip title="Elimina paso" placement="right-start">
-                        <IconButton>
-                          <DeleteIcon className="binStep"/>
-                        </IconButton>
-                      </Tooltip>
-                    }
-                  </td> */}
-   
-                    {/* <Input 
-                      className="step"
-                      id="step"
-                      name="step"
-                      type="textarea"
-                      placeholder="¡describe con detalle el paso aquí!"
-                      // onBlur={handleStepsBlur}
-                      onBlur={handleStepsBlur}
-                    />
-                  </React.Fragment>
-                );
-              })}
-
-              <FormGroup row>
-                <Col sm={7}>
-                  <div className="add-step-box">
-                    <button
-                      value="step"
-                      className="pink-button"
-                      onClick={handleAddStep}
-                    >
-                      agrega paso
-                    </button>
-                  </div>
-                </Col>
-              </FormGroup> */}
-
               <JoditEditor
                 ref={editor}
-                value={content}
+                value={procedures}
                 config={config}
-		            tabIndex={1} // tabIndex of textarea
-		            onBlur={newContent => setContent(newContent)} // preferred to use only this option to update the content for performance reasons
-                onChange={newContent => {}}
+		            tabIndex={1}
+		            onBlur={newContent => setProcedures(newContent)}
               />
 
               <FormGroup row>
@@ -514,13 +216,12 @@ const MyRecipe = () => {
               <FormGroup row>
                 <Col sm={7}>
                   <div className="add-step-box">
-                    <button
-                      className="pink-button"
-                      onClick={() => window.print()}
-                    >
-                      Exportar
-                    </button>
-                    {/* <button className='pink-button' onClick={handlePublish}>Exportar</button> */}
+                  <button
+                    className="myRecipeExportBtn"
+                    type="submit"
+                  >
+                    Exportar
+                  </button>
                   </div>
                 </Col>
               </FormGroup>
