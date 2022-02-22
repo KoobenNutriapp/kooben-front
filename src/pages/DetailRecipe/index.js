@@ -6,7 +6,6 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-<<<<<<< HEAD
 import { BASE_URL, PORT, } from "../../utils/constants";
 import JoditEditor from "jodit-react";
 import { deleteRecipe } from "../../services/recipes";
@@ -16,9 +15,6 @@ import { firebase } from '../../Firebase/firebase-config'
 import { login, userApp, newUserApp  } from '../../actions/auth';
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
-=======
-import { BASE_URL } from "../../utils/constants";
->>>>>>> develop
 
 function DetailRecipe(){
     const navigate = useNavigate();
@@ -32,7 +28,7 @@ function DetailRecipe(){
     const metaData = location.state.recipe.metaData;
     const Recipekey = location.state.recipe.Recipekey;
 
-    const recipeId = `${BASE_URL}:3000/DetailRecipe/${Recipekey}`
+    const recipeId = `${BASE_URL}/DetailRecipe/${Recipekey}`
     console.log(recipeId);
 
     const [content, setContent] = useState(location.state.recipe.metaData.procedures)
@@ -305,7 +301,8 @@ useEffect(() => {
                         </button>
                         <button 
                           className='detailExportBtn' 
-                          onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}>
+                          onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}
+                          >
                             ExportarPDF
                         </button>
                         <button 
