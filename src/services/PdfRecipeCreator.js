@@ -7,14 +7,23 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 function pdfmakedownload(data){
 
-
+    console.log(data)
     const tags = data.tags.map((tag) => {
         return `${tag}`
     });
 
-    const steps = data.procedures.map((step) => {
-        return `${step}`
-    });
+    // const steps = data.procedures.map((step) => {
+    //     return `${step}`
+    // });
+
+    function removeHTML(str){ 
+        var tmp = document.createElement("DIV");
+        tmp.innerHTML = str;
+        return tmp.textContent || tmp.innerText || "";
+    }
+
+    let steps = data.procedures
+    const steps2 = removeHTML(steps)
 
     const ingredients = data.ingredients.map((ingredient) => {
         return `${ingredient.name}`
@@ -23,6 +32,7 @@ function pdfmakedownload(data){
     // const steps = data.steps.map((step) => {
     //     return getEachStep(step);
     // });
+    console.log(data.url2)
 
     const dd = {
         content: [
@@ -71,7 +81,8 @@ function pdfmakedownload(data){
                         style: 'subtitle'
                     },
                     {
-                        ol: steps
+                        text: steps2,
+                        style: 'text'
                     }
                 ], margin: [0, 10, 0, 10]
             },
