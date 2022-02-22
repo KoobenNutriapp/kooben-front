@@ -89,7 +89,7 @@ useEffect(() => {
    // ******Checking admin
     
   const toUpdateRecipe = (recipe) =>{
-    navigate(`/UpdateRecipe/${recipe.Recipekey}`,{state:{recipe}});
+    navigate(`/update_recipe/${recipe.Recipekey}`,{state:{recipe}});
   }
 
   const toDonationPage=(recipe)=>{
