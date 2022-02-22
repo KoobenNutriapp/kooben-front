@@ -40,7 +40,7 @@ const createRecipe = async (data) => {
 
 const updateRecipe = async (id,data) => {
   try {
-    const response = await fetch(`${BASE_URL}:${PORT}${PATH_RECIPE}/${id}`, {
+    const response = await fetch(`${BASE_URL}${PATH_RECIPE}/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -57,7 +57,7 @@ const updateRecipe = async (id,data) => {
 
 const deleteRecipe = async (id) => {
   try {
-    const response = await fetch(`${BASE_URL}:${PORT}${PATH_RECIPE}/${id}`, {
+    const response = await fetch(`${BASE_URL}${PATH_RECIPE}/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
