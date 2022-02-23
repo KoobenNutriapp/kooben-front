@@ -5,7 +5,7 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-import PdfCreationButton from "../../components/PdfCreationButton/";
+// import PdfCreationButton from "../../components/PdfCreationButton/";
 import JoditEditor from "jodit-react";
 import { deleteRecipe } from "../../services/recipes";
 import AWS from "aws-sdk";
@@ -350,9 +350,9 @@ function DetailRecipe() {
                 >
                   Exportar
                 </button>
-                <PdfCreationButton
+                {/* <PdfCreationButton
                           content={metaData}
-                        />
+                        /> */}
                 <button
                   className="detailPublishBtn"
                   onClick={() => {
