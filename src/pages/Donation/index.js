@@ -3,33 +3,13 @@ import Buttons from "../../components/Buttons";
 import {Button, Card, Container, Row, CardImg, Navbar, CardTitle, CardGroup, CardBody} from 'reactstrap'
 import '../../styles/_colors.scss'
 import image from '../../img/mexican-food-donation.jpg'
-// import PDFRecipeCreator from "../../services/PdfRecipeCreator";
-// import MyDocument from "../../services/PDFGenerator";
-// import { PDFViewer } from "@react-pdf/renderer";
-// import pdfmakedownload from "./pdfContainer";
-// import pdfmakedownload from '../../services/pdfRecipeGenerator'
-import pdfmakedownload from "../../services/PdfRecipeCreator";
 import DonationButton from "../../components/DonationButton"
-import PdfCreationButton from "../../components/PdfCreationButton/";
-//PDF document creation
-// import pdfMake from "pdfmake/build/pdfmake";
-// import pdfFonts from "pdfmake/build/vfs_fonts";
-// import documentDefination from "./DocumentDefination";
+// import PdfCreationButton from "../../components/PdfCreationButton/";
 import {useLocation} from 'react-router-dom';
 
 const urlQRCode = 'https://kooben.s3.amazonaws.com/QR-paypal-kooben'
 const qrCodeAlt = 'Imagen de código QR para donación a Kooben'
 const mainImageAlt = 'Imagen alusiva a la gastronomía mexicana.'
-
-//=======================
-// pdfMake.vfs = pdfFonts.pdfMake.vfs
-
-//============================== PDF document ============
-
-
-
-
-
 
 function DonationInvite(){
     return(
@@ -103,9 +83,6 @@ function DonationPage(){
         <Card className="Paypal-QR-Container">
             <CardBody className="Paypal-QR-Container">
                 {/* <CardGroup> */}
-                <PdfCreationButton
-                          content={data}
-                />
                 <DonationButton
                     ammount={"10.00"}
                     itemID="price_1KVNX9AqezYdKBDlm6ObBNND"
