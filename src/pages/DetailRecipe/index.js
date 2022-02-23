@@ -13,7 +13,7 @@ import { firebase } from "../../Firebase/firebase-config";
 import { login, userApp, newUserApp } from "../../actions/auth";
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
-import PdfCreationButton from "../../components/PdfCreationButton";
+import PdfCreationButton from "../../components/PdfCreationButton/";
 
 function DetailRecipe() {
   const navigate = useNavigate();

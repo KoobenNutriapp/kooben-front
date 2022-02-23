@@ -10,7 +10,7 @@ import image from '../../img/mexican-food-donation.jpg'
 // import pdfmakedownload from '../../services/pdfRecipeGenerator'
 import pdfmakedownload from "../../services/PdfRecipeCreator";
 import DonationButton from "../../components/DonationButton"
-import PdfCreationButton from "../../components/PdfCreationButton";
+import PdfCreationButton from "../../components/PdfCreationButton/";
 //PDF document creation
 // import pdfMake from "pdfmake/build/pdfmake";
 // import pdfFonts from "pdfmake/build/vfs_fonts";
