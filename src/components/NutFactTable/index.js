@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Table } from "reactstrap";
 //import { useDispatch, useSelector } from "react-redux";
-import { createIngredient } from "../../actions/auth";
+
 import "./NutFactTable.scss";
 
 const NutFactTable = ({
