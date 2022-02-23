@@ -61,7 +61,7 @@ const PdfCreationButton = ({ content }) => {
               type="submit" onClick={toggle}
               className="button-donar btn btn-info"
             >
-                ExportarModalB
+                GenerarPDF
             </button>
             <Modal isOpen={modal} toggle={toggle}>
                 <ModalBody >
