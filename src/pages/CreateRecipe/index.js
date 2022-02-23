@@ -107,7 +107,7 @@ const CreateRecipe = () => {
       return;
     }
     new Compressor(baseImage, {
-      quality: 0.2,
+      quality: 0.6,
 
       success(result) {
         const formData = new FormData();

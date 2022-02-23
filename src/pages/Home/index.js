@@ -95,7 +95,7 @@ function Home() {
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
               <Link className="linkNavbar btnCreateRecipe" to="/my_recipe">
-                <button className="btnMyRecipe">Crea tu receta</button>
+                <button className="btnMyRecipe">Mi receta</button>
               </Link>
             <Card className="cardBox">
               <CardTitle tag="h5">K'óoben tips</CardTitle>
