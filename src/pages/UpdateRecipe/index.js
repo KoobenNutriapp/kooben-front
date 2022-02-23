@@ -1,14 +1,8 @@
 import {Form,FormGroup,Label,Input,FormText,FormFeedback} from "reactstrap";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useLocation } from 'react-router-dom';
-import Tooltip from "@mui/material/Tooltip";
-import IconButton from "@mui/material/IconButton";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { Container, Row, Col } from "reactstrap";
 import Switch from "@mui/material/Switch";
-import NavBar from "../../components/NavBar";
-import Calculator from "../../components/Calculator";
-import Modals from "../../components/Modals";
 import TagsManager from "../../components/TagsManager";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
@@ -25,25 +19,17 @@ import { Link } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { firebase } from '../../Firebase/firebase-config'
 import { login, userApp, newUserApp  } from '../../actions/auth';
-import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
 
 const UpdateRecipe = () => {
   const location = useLocation();
-  console.log(location.state.recipe.metaData.ingredients);
-
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [synopsis, setSynopsis] = useState("");
   const [tags, setTags] = useState([]);
-  const [steps, setSteps] = useState([]);
-  //const [procedures, setProcedures] = useState([]);
-  const [counter, setCounter] = useState(1);
-  //const [textValidator, setTextValidator] = useState(true)
   const [checked, setChecked] = useState(false);
   const [type, setType] = useState("");
-  const [url, setUrl] = useState(null);
-  //const [portion, setPortion] = useState(0);
+  const [url, setUrl] = useState("");
   const [total_energy, setTotalEnergy] = useState(0);
   const [total_carbohydrate, setTotalCarbohydrate] = useState(0);
   const [total_fiber, setTotalFiber] = useState(0);
@@ -79,7 +65,6 @@ const UpdateRecipe = () => {
         if(user?.uid){
           dispatch( login ( user.uid, user.displayName ) )
           validateRol(user.email)
-          //console.log(admin);
           dispatch( newUserApp)
           setIsLoggedIn( true );
         }else{
@@ -104,7 +89,6 @@ const UpdateRecipe = () => {
     }
 
   const editor = useRef(null)
-  
 	const config = {
     toolbarAdaptive: false,
     placeholder:'escribe el detalle de tu receta aquí...',
@@ -112,9 +96,15 @@ const UpdateRecipe = () => {
     buttons:[
     'bold',
 		'italic',
+    'underline',
+    'strikethrough',
+    '|',
+    'font',
+    'fontsize',
     '|',
 		'ol',
     '|',
+    'align',
     'undo',
 		'redo',    
     ]
@@ -211,6 +201,23 @@ const UpdateRecipe = () => {
     }
   };
 
+  const deleteImgFromBucket = async () => {
+    console.log("Deleting photo from AWS...");
+    const tempUrl = (location.state.recipe.metaData.url).split('k-')
+    const imageToDelete = tempUrl[1]  
+
+    const params = {
+      Key: `images/k-${imageToDelete}`,
+    };
+
+    try {
+      const response = await S3Client.deleteObject(params).promise();
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleSend = async () => {
     console.log("Sending photo to AWS...");
 
@@ -234,35 +241,6 @@ const UpdateRecipe = () => {
     e.preventDefault();
     console.log("exporting...");
   };
-
-  const handleDeleteStep = (e) => {
-    console.log(e.currentTarget.id);
-    const stepSelected = e.currentTarget.id;
-    const filteredSteps = steps.filter((item) => {
-      return item !== stepSelected;
-    });
-    setSteps(filteredSteps);
-  };
-
-  const handleAddStep = (e) => {
-    e.preventDefault();
-    setCounter(counter + 1);
-    const tempStep = `step ${counter}`;
-    console.log(tempStep);
-    setSteps([...steps, tempStep]);
-  };
-
-  const handleStepsBlur = (e) => {
-    console.log(e.target.value);
-    const addProcedure = e.target.value;
-    if(addProcedure!==""){
-      setProcedures([...procedures, addProcedure]);
-    }    
-  };
-
-  const handleStepsChange = (e) =>{
-    console.log(e);
-  }
 
   const getTags = (arrayOfTags) => {
     setTags(arrayOfTags);
@@ -295,11 +273,9 @@ const UpdateRecipe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("submitting...");
+    let imageIndicator = false
     
     const id = location.state.recipe.metaData._id
-    console.log(id);
-
-    console.log(procedures);
     
     const date = new Date();
     const formatDate =
@@ -318,10 +294,13 @@ const UpdateRecipe = () => {
       const edited = formatDate;
       
       validateText()
-      
-      //console.log(ingredients);
 
-    //Falta una mejor UX en validación de formularios
+      const oldIgame = location.state.recipe.metaData.url
+      if(oldIgame !== url){
+        console.log('son diferentes');
+        imageIndicator = true
+      }
+      
     if (
       // [title, url, synopsis, tags, procedures, author].includes(null) ||
       // total_energy < 0.5
@@ -353,9 +332,11 @@ const UpdateRecipe = () => {
         };
         console.log(data);
         await updateRecipe(id,data);
+        if (imageIndicator){
+          deleteImgFromBucket() 
+          imageIndicator = false
+        }
         handleSend();
-        //alert('¡ La receta fue actualizada exitosamente !')
-        //cleanForm() hay que implementar correctamente
       } catch (error) {
         console.error(error.message);
       }
@@ -369,82 +350,224 @@ const UpdateRecipe = () => {
   };
 
   const handleNutDetailTable = () => {
-    // console.log(location.state.recipe.metaData.ingredients);
-    // const ingredient = location.state.recipe.metaData.ingredients
+    //console.log(ingredient);
+  
+    // const portion = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.equivalence.gram || 0);
+    // }, 0);
+    // setPortion(portion.toFixed(0));
+    // console.log("portion: " + portion.toFixed(2));
 
-    const portion = detailTable?.reduce((acc, item) => {
-      return acc + (item?.equivalence.gram || 0);
+    const energy = detailTable.reduce((acc, item) => {
+      return acc + (item?.energy * item.equivalence.gram || 0);
     }, 0);
-    //setPortion(portion.toFixed(0));
-    //console.log("portion: " + portion.toFixed(2));
+    setTotalEnergy(energy.toFixed(4));
+    console.log("energy: " + energy.toFixed(4));
 
-    const energy = detailTable?.reduce((acc, item) => {
-      return acc + (item?.energy || 0);
+    const total_carbohydrate = detailTable.reduce((acc, item) => {
+      return acc + (item?.total_carbohydrate * item.equivalence.gram || 0);
     }, 0);
-    setTotalEnergy((energy * portion).toFixed(2));
-    console.log("energy: " + energy.toFixed(2));
+    setTotalCarbohydrate(total_carbohydrate.toFixed(4));
+    console.log("total_carbohydrate: " + total_carbohydrate.toFixed(4));
 
-    const total_carbohydrate = detailTable?.reduce((acc, item) => {
-      return acc + (item?.total_carbohydrate || 0);
+    const dietary_fiber = detailTable.reduce((acc, item) => {
+      return acc + (item?.dietary_fiber * item.equivalence.gram || 0);
     }, 0);
-    setTotalCarbohydrate((total_carbohydrate * portion).toFixed(2));
-    console.log("total_carbohydrate: " + total_carbohydrate.toFixed(2));
+    setTotalFiber(dietary_fiber.toFixed(4));
+    console.log("dietary_fiber: " + dietary_fiber.toFixed(4));
 
-    const dietary_fiber = detailTable?.reduce((acc, item) => {
-      return acc + (item?.dietary_fiber || 0);
+    const sugars = detailTable.reduce((acc, item) => {
+      return acc + (item?.sugars * item.equivalence.gram || 0);
     }, 0);
-    setTotalFiber((dietary_fiber * portion).toFixed(2));
-    console.log("dietary_fiber: " + dietary_fiber.toFixed(2));
+    setTotalSugars(sugars.toFixed(4));
+    console.log("sugars: " + sugars.toFixed(4));
 
-    const sugars = detailTable?.reduce((acc, item) => {
-      return acc + (item?.sugars || 0);
+    // const calcium = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.calcium * item.equivalence.gram || 0);
+    // }, 0);
+    // setCalcium(calcium.toFixed(4));
+    // console.log("calcium: " + calcium.toFixed(4));
+
+    // const phosphorus = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.phosphorus * item.equivalence.gram || 0);
+    // }, 0);
+    // setPhosphorus(phosphorus.toFixed(4));
+    // console.log("phosphorus: " + phosphorus.toFixed(4));
+
+    // const iron = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.iron * item.equivalence.gram || 0);
+    // }, 0);
+    // setIron(iron.toFixed(4));
+    // console.log("iron: " + iron.toFixed(4));
+
+    const sodium = detailTable.reduce((acc, item) => {
+      return acc + (item?.sodium * item.equivalence.gram || 0);
     }, 0);
-    setTotalSugars((sugars * portion).toFixed(2));
-    console.log("sugars: " + sugars.toFixed(2));
+    setTotalSodium(sodium.toFixed(4));
+    console.log("sodium: " + sodium.toFixed(4));
 
-    const sodium = detailTable?.reduce((acc, item) => {
-      return acc + (item?.sodium || 0);
+    // const potassium = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.potassium * item.equivalence.gram || 0);
+    // }, 0);
+    // setPotassium(potassium.toFixed(4));
+    // console.log("potassium: " + potassium.toFixed(4));
+
+    // const magnesium = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.magnesium * item.equivalence.gram || 0);
+    // }, 0);
+    // setMagnesium(magnesium.toFixed(4));
+    // console.log("magnesium: " + magnesium.toFixed(4));
+
+    // const copper = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.copper * item.equivalence.gram || 0);
+    // }, 0);
+    // setCopper(copper.toFixed(4));
+    // console.log("copper: " + copper.toFixed(4));
+
+    // const zinc = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.zinc * item.equivalence.gram || 0);
+    // }, 0);
+    // setZinc(zinc.toFixed(4));
+    // console.log("zinc: " + zinc.toFixed(4));
+
+    // const manganese = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.manganese * item.equivalence.gram || 0);
+    // }, 0);
+    // setManganese(manganese.toFixed(4));
+    // console.log("manganese: " + manganese.toFixed(4));
+
+    // const selenium = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.selenium * item.equivalence.gram || 0);
+    // }, 0);
+    // setSelenium(selenium.toFixed(4));
+    // console.log("selenium: " + selenium.toFixed(4));
+
+    // const vitA = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitA * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitA(vitA.toFixed(4));
+    // console.log("vitA: " + vitA.toFixed(4));
+
+    // const vitB1 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB1 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB1(vitB1.toFixed(4));
+    // console.log("vitB1: " + vitB1.toFixed(4));
+
+    // const vitB2 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB2 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB2(vitB2.toFixed(4));
+    // console.log("vitB2: " + vitB2.toFixed(4));
+    // const vitB3 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB3 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB3(vitB3.toFixed(4));
+    // console.log("vitB3: " + vitB3.toFixed(4));
+
+    // const vitB6 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB6 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB6(vitB6.toFixed(4));
+    // console.log("vitB6: " + vitB6.toFixed(4));
+
+    // const vitB12 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB12 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB12(vitB12.toFixed(4));
+    // console.log("vitB12: " + vitB12.toFixed(4));
+
+    // const vitC = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitC * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitC(vitC.toFixed(4));
+    // console.log("vitC: " + vitC.toFixed(4));
+
+    // const folicAc = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.folicAc * item.equivalence.gram || 0);
+    // }, 0);
+    // setFolicAc(folicAc.toFixed(4));
+    // console.log("folicAc: " + folicAc.toFixed(4));
+
+    // const vitD = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitD * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitD(vitD.toFixed(4));
+    // console.log("vitD: " + vitD.toFixed(4));
+
+    // const vitE = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitE * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitE(vitE.toFixed(4));
+    // console.log("vitE: " + vitE.toFixed(4));
+
+    // const vitK = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitK * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitK(vitK.toFixed(4));
+    // console.log("vitK: " + vitK.toFixed(4));
+
+    const protein = detailTable.reduce((acc, item) => {
+      return acc + (item?.protein * item.equivalence.gram || 0);
     }, 0);
-    setTotalSodium((sodium * portion).toFixed(2));
-    console.log("sodium: " + sodium.toFixed(2));
+    setTotalProtein(protein.toFixed(4));
+    console.log("protein: " + protein.toFixed(4));
 
-    const protein = detailTable?.reduce((acc, item) => {
-      return acc + (item?.protein || 0);
+    const total_fat = detailTable.reduce((acc, item) => {
+      return acc + (item?.total_fat * item.equivalence.gram || 0);
     }, 0);
-    setTotalProtein((protein * portion).toFixed(2));
-    console.log("protein: " + protein.toFixed(2));
+    setTotalFat(total_fat.toFixed(4));
+    console.log("total_fat: " + total_fat.toFixed(4));
 
-    const total_fat = detailTable?.reduce((acc, item) => {
-      return acc + (item?.total_fat || 0);
+    // const saturated_fatty_acids = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.saturated_fatty_acids * item.equivalence.gram || 0);
+    // }, 0);
+    // setSaturated_fatty_acids(saturated_fatty_acids.toFixed(4));
+    // console.log("saturated_fatty_acids: " + saturated_fatty_acids.toFixed(4));
+
+    // const monounsaturated_fatty_acids = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.monounsaturated_fatty_acids * item.equivalence.gram || 0);
+    // }, 0);
+    // setMonounsaturated_fatty_acids(monounsaturated_fatty_acids.toFixed(4));
+    // console.log(
+    //   "monounsaturated_fatty_acids: " + monounsaturated_fatty_acids.toFixed(4)
+    // );
+
+    // const polyunsaturated_fatty_acids = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.polyunsaturated_fatty_acids * item.equivalence.gram || 0);
+    // }, 0);
+    // setPolyunsaturated_fatty_acids(polyunsaturated_fatty_acids.toFixed(4));
+    // console.log(
+    //   "polyunsaturated_fatty_acids: " + polyunsaturated_fatty_acids.toFixed(4)
+    // );
+
+    const cholesterol = detailTable.reduce((acc, item) => {
+      return acc + (item?.cholesterol * item.equivalence.gram || 0);
     }, 0);
-    setTotalFat((total_fat * portion).toFixed(2));
-    console.log("total_fat: " + total_fat.toFixed(2));
+    setTotalCholesterol(cholesterol.toFixed(4));
+    console.log("cholesterol: " + cholesterol.toFixed(4));
 
-    const cholesterol = detailTable?.reduce((acc, item) => {
-      return acc + (item?.cholesterol || 0);
-    }, 0);
-    setTotalCholesterol((cholesterol * portion).toFixed(2));
-    console.log("cholesterol: " + cholesterol.toFixed(2));
-
-    const glycemic_load = detailTable?.reduce((acc, item) => {
+    const glycemic_load = detailTable.reduce((acc, item) => {
       return (
-        acc + ((item?.total_carbohydrate * item?.glycemic_index) / 100 || 0)
+        acc + ((item?.total_carbohydrate * item?.glycemic_index * item.equivalence.gram) / 100 || 0)
       );
     }, 0);
-    setTotalGlycemicLoad((glycemic_load * portion).toFixed(4));
+    setTotalGlycemicLoad(glycemic_load.toFixed(4));
     console.log("glycemic_load: " + glycemic_load.toFixed(4));
 
-    setIngredients(detailTable);
+
+    //setIngredients(detailTable);
   };
 
   const toggle = () => setModal(!modal);
 
   const filterDeletingItems = (deleteIngredient) =>{
-    //console.log(deleteIngredient);
+
     const filteredIngredient = detailTable.filter(item=>{
       return item._id !== deleteIngredient
     })
     setDetailTable(filteredIngredient)
+    setIngredients(filteredIngredient)
   }
 
    const handleSelection = (selection) => {
@@ -453,6 +576,7 @@ const UpdateRecipe = () => {
       let set = new Set( tempTable.map( JSON.stringify ) )
       let result = Array.from( set ).map( JSON.parse );
       setDetailTable(result)
+      setIngredients(result)
     }else{
      console.log('empty');
     }
@@ -507,7 +631,7 @@ const UpdateRecipe = () => {
      })
  
      setDetailTable(newDetailTable)
-     setIngredients(detailTable)
+     setIngredients(newDetailTable)
      handleNutDetailTable()
    })
 
@@ -528,8 +652,6 @@ const UpdateRecipe = () => {
    console.log('original');
    console.log(detailTable);
  
-   //getIngredientsToPost(detailTable)   
-
   return (
     <>
       <Container className="containerUpdate" fluid>
@@ -588,7 +710,7 @@ const UpdateRecipe = () => {
                 </Col>
               </FormGroup>
 
-              <FormGroup row>
+              {/* <FormGroup row>
                 <Label for="textboxUpdate" sm={2}>
                   Sinopsis: *
                 </Label>
@@ -612,9 +734,15 @@ const UpdateRecipe = () => {
                     ¡La sinopsis debe ser mayor a 11 caracteres!
                   </FormFeedback>
                 </Col>
-              </FormGroup>
-
-              
+              </FormGroup> */}
+              <h2>Sinopsis:</h2>
+              <JoditEditor
+                ref={editor}
+                value={synopsis}
+                config={config}
+		            tabIndex={1} 
+		            onBlur={newContent => setSynopsis(newContent)}
+              />
 
               {
                 !thumbnail ? 
@@ -624,8 +752,6 @@ const UpdateRecipe = () => {
                 </>
                 : null
               }
-
-              
 
               <FormGroup className="imgContainerUpdate">
                 {thumbnail ? (
@@ -680,109 +806,63 @@ const UpdateRecipe = () => {
                 />
               </FormGroup>
               <h2>Ingredientes:</h2>
-{/* 
-              <Row className="ingredientsUpdate boxCalculatorUpdate">
-                <Calculator getIngredientsToPost={handleNutDetailTable} />
-              </Row> */}
 
-              <Col className="ingredientTable">
-                <IngredientsDynamicTable 
-                  ingredients={detailTable} 
-                  callback={filterDeletingItems}
-                  nutData={handleBypassToNutTable}
-                />
-                <button className="btnAddIngredient" onClick={handleAddIngredient}>
-                  Agrega ingrediente
-                </button>
-                <div className="selectBox">
-                  {addIngredient ? (
-                  <Autocomplete
-                    size='small'
-                    options={options?.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
-                    groupBy={(option) => option.firstLetter}
-                    getOptionLabel={(option) => option.name}
-                    renderInput={(params) => <TextField {...params} label="Agrega un ingrediente" />}
-                    className="selectIngredient"
-                    onChange={(e,selection) => handleSelection(selection)}
+              <Row className="updateFrameTables">
+                <Col className="updateIngredientsTable">
+                  <IngredientsDynamicTable 
+                    ingredients={detailTable} 
+                    callback={filterDeletingItems}
+                    nutData={handleBypassToNutTable}
                   />
-                  ) : (
-                    ""
-                  )}
-                </div>
-              </Col>
-              <Col className="nutritionalTable">
-                <NutFactTable 
-                  ingredient={detailTable}
-                />
-              </Col>
-
-              <h2>Procedimiento:</h2>
-
-              {/* {procedures.map((item, index) => {
-                return (
-                  <React.Fragment key={index}>
-                    <div className="lineSteps"></div>
-                    <h3>{`paso ${index + 1}`}</h3>
-                    <td
-                      className="deleteButtonUpdate"
-                      id={item}
-                      onClick={handleDeleteStep}
-                    >
-                      {
-                        <Tooltip title="Elimina paso" placement="right-start">
-                          <IconButton>
-                            <DeleteIcon className="binStepUpdate" />
-                          </IconButton>
-                        </Tooltip>
-                      }
-                    </td>
-                    <Input
-                      className="stepUpdate"
-                      id="stepUpdate"
-                      name="stepUpdate"
-                      type="textarea"
-                      placeholder="¡describe con detalle el paso aquí!"
-                      //onBlur={handleStepsBlur}
-                      onChange={handleStepsChange}
-                      value={item}
+                  <button className="btnAddIngredient" onClick={handleAddIngredient}>
+                    Agrega ingrediente
+                  </button>
+                  <div className="selectBox">
+                    {addIngredient ? (
+                    <Autocomplete
+                      size='small'
+                      options={options?.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+                      groupBy={(option) => option.firstLetter}
+                      getOptionLabel={(option) => option.name}
+                      renderInput={(params) => <TextField {...params} label="Agrega un ingrediente" />}
+                      className="selectIngredient"
+                      onChange={(e,selection) => handleSelection(selection)}
                     />
-                  </React.Fragment>
-                );
-              })}
-
-              <FormGroup row>
-                <Col sm={7}>
-                  <div className="add-step-box">
-                    <button
-                      value="step"
-                      className="pink-button"
-                      onClick={handleAddStep}
-                    >
-                      agrega paso
-                    </button>
+                    ) : (
+                      ""
+                    )}
                   </div>
                 </Col>
-              </FormGroup> */}
+             
+                <Col className="updatelNutritionalTable">
+                  <NutFactTable 
+                    ingredient={detailTable}
+                  />
+                </Col>
+              </Row>
+
+              <h2>Procedimiento:</h2>
 
               <JoditEditor
                 ref={editor}
                 value={procedures}
                 config={config}
 		            tabIndex={1} // tabIndex of textarea
-		            onBlur={newContent => setProcedures(newContent)} // preferred to use only this option to update the content for performance reasons
-                //onChange={newContent => setProcedures(newContent)}
+		            onBlur={newContent => setProcedures(newContent)}
               />
 
               <FormGroup row>
-                <Col sm={8}>
-                  <TagsManager getTags={getTags} />
+                <Col sm={9} className="tagsBox">
+                  <TagsManager 
+                    getTags={getTags} 
+                  />
                 </Col>
               </FormGroup>
 
               <h2>Comparte tu receta con el mundo 🌎:</h2>
 
               <FormGroup row>
-                <Col sm={7}>
+                <Col sm={2}>
                   <div className="add-step-box">
                     <button
                       className="pink-button"

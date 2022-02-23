@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -27,11 +26,15 @@ function RecipeCards({
   const navigate = useNavigate();
 
   const toDetailRecipe = (recipe) => {
-    navigate(`/DetailRecipe/${recipe.Recipekey}`, { state: { recipe } });
+    navigate(`/detail_recipe/${recipe.Recipekey}`, { state: { recipe } });
   };
 
+  const fixedDescription = RecipeDescription.replace( /(<([^>]+)>)/ig, '')
+  
+  //console.log(fixedDescription);
+
   return (
-    <Card sx={{ maxWidth: 680 }} sy={{ height: 600 }} className="FullCard">
+    <Card  className="FullCard">
       <CardMedia component="img" height="300" image={SrcImage} alt={AltImage} />
       <CardContent className="CardContent-Section">
         <Typography
@@ -51,10 +54,10 @@ function RecipeCards({
         <div className="Tags-Section">{getTags(tagsArray)}</div>
         <Typography
           variant="body2"
-          color="text.secondary"
+          //color="text.secondary"
           className="Recipe-Description"
         >
-          {RecipeDescription}
+          {fixedDescription}
         </Typography>
       </CardContent>
     </Card>

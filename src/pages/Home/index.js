@@ -95,11 +95,7 @@ function Home() {
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
               <Link className="linkNavbar btnCreateRecipe" to="/my_recipe">
-                <Buttons
-                  children="Crea tu receta"
-                  size="lg"
-                  color="mexican-pink"
-                />
+                <button className="btnMyRecipe">Crea tu receta</button>
               </Link>
             <Card className="cardBox">
               <CardTitle tag="h5">K'óoben tips</CardTitle>
@@ -116,6 +112,24 @@ function Home() {
                 >
                   ¿Qué es el índice glucémico y la carga glucémica?. Aprende más
                   sobre diabetes mellitus...
+                </CardText>
+              </CardBody>
+            </Card>
+
+            <Card className="cardBox">
+              <CardTitle tag="h5">K'óoben y Alexa</CardTitle>
+              <CardImg
+                className="cardImg"
+                alt="AWS Alexa"
+                src="https://kooben.s3.amazonaws.com/images/home-images/Alexa-Logo-History.jpg"
+                onClick={onClickUrl('https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg')}
+              />
+              <CardBody>
+                <CardText
+                  className="cardText"
+                  onClick={onClickUrl('https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg')}
+                >
+                ¡Entérate cómo acceder a las recetas de K'óoben con Amazon Alexa!
                 </CardText>
               </CardBody>
             </Card>
