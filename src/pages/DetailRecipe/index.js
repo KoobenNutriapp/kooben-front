@@ -14,6 +14,7 @@ import { firebase } from "../../Firebase/firebase-config";
 import { login, userApp, newUserApp } from "../../actions/auth";
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
+import GeneratePdfButton from "../../components/GeneratePdfButton/GeneratePdfButton";
 
 
 function DetailRecipe() {
@@ -350,9 +351,12 @@ function DetailRecipe() {
                 >
                   Exportar
                 </button>
-                <PdfCreationButton
+                {/* <PdfCreationButton
                     content={metaData}
-                  />
+                  /> */}
+                <GeneratePdfButton
+                 content={metaData}
+                 />
                 <button
                   className="detailPublishBtn"
                   onClick={() => {
