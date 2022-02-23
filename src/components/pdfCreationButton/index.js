@@ -1,4 +1,4 @@
-import * as React from 'react';
+// import * as React from 'react';
 import "./pdfCreationButton.scss"
 import pdfmakedownload from "../../services/PdfRecipeCreator";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
