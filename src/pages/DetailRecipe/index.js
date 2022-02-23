@@ -5,6 +5,7 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
+// import PdfCreationButton from "../../components/PdfCreationButton/";
 import JoditEditor from "jodit-react";
 import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import EditIcon from '@mui/icons-material/Edit';
@@ -18,6 +19,8 @@ import { firebase } from "../../Firebase/firebase-config";
 import { login, userApp, newUserApp } from "../../actions/auth";
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
+import GeneratePdfButton from "../../components/GeneratePdfButton/GeneratePdfButton";
+
 
 function DetailRecipe() {
   const navigate = useNavigate();
@@ -373,13 +376,14 @@ function DetailRecipe() {
                   }}
                 >
                   Exportar
-                </button> */}
-                {/* <button 
-                          className='detailExportBtn' 
-                          onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}>
-                            ExportarPDF
-                        </button> */}
-                {/* <button
+                </button>
+                {/* <PdfCreationButton
+                    content={metaData}
+                  /> */}
+                <GeneratePdfButton
+                 content={metaData}
+                 />
+                <button
                   className="detailPublishBtn"
                   onClick={() => {
                     toUpdateRecipe({ Recipekey, metaData });
