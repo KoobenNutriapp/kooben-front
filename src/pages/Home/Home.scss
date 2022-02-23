@@ -20,29 +20,34 @@ body{
 .row{
     //border: 1px red solid;
     display: flex;
-    justify-content:flex-end;
+    justify-content:center;
     width: 100% !important;
 }
 
 
 .sideLeft{
     //border: 1px rgb(89, 228, 128) solid;
-    position: fixed;
-    top: 70px !important;
-    left: 457px;
+    display: flex;
+    flex-direction: column;
+    //position: fixed;
+    //top: 70px !important;
+    //left: 457px;
+    width: 23% !important;
+    align-items: center;
     
     background-color: rgb(255 255 255);
     border-radius: 5px;
 }
 
 .sideRight{
-    width: 75% !important;
+    width: 60% !important;
     //border: 1px rgb(86, 21, 112) solid;
     display: flex;
     flex-direction: column;
     align-items: center;
-    //background-color: rgb(255 255 255);
+    background-color: rgb(255 255 255);
     border-radius: 5px;
+    margin-left: 15px;
 }
 
 .btnCreateRecipe{
@@ -50,7 +55,15 @@ body{
     margin-bottom: 15px;
     display: flex;
     justify-content: flex-start;
-    margin-left: 25px;
+    //margin-left: 25px;
+}
+
+.btnMyRecipe{
+    background-color: $mexican-pink;
+    border: 1px solid $mexican-pink;
+    border-radius: 10px;
+    height: 45px;
+    width: 222px;
 }
 
 .cardBox{
@@ -58,6 +71,7 @@ body{
     color: $mayan-blue;
     font-family: $title-font;
     text-align: center;
+    margin-top: 10px;
 }
 
 .cardBox:hover {
@@ -66,15 +80,16 @@ body{
 
 .cardImg, .cardText{
     cursor: pointer;
+    border-radius: 10px !important;
 }
 
 .carousel{
-    width: 72%;
+    width: 100%;
 }
 
 @media (max-width: 1866px) {
     .sideLeft{
-        position: fixed;
+        //position: fixed;
         top: 65px;
         left: 400px;
     }
@@ -82,7 +97,7 @@ body{
 
 @media (max-width: 1715px) {
 .sideLeft{
-    position: fixed;
+    //position: fixed;
     top: 65px;
     left: 350px;
     }
@@ -90,23 +105,25 @@ body{
 
 @media (max-width: 1588px) {
     .sideLeft{
-        position: fixed;
+        //position: fixed;
         top: 65px;
         left: 300px;
         }
     } 
 @media (max-width: 1480px) {
     .sideLeft{
-        position: fixed;
-        top: 65px;
-        left: 280px;
+        //position: fixed;
+        visibility: none;
+        // top: 65px;
+        // left: 280px;
         }
 }     
 
 @media (max-width: 1444px) {
     .sideLeft{
-        position: fixed;
-        top: 65px;
-        left: 230px;
+        //position: fixed;
+        visibility: none;
+        // top: 65px;
+        // left: 230px;
         }
 }

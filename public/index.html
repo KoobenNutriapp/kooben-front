@@ -2,7 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <!-- <link rel="icon" href="%PUBLIC_URL%/favicon.ico" /> -->
+    <!-- <link rel="icon" type="image/svg" href="../src/img/logo10.svg" /> -->
+    <!-- <link rel="icon" href="../src/img/logo10.svg" sizes="any" type="image/svg+xml"> -->
+    <!-- <link href=""%PUBLIC_URL%/kooben.png" rel="icon"  type="image/x-icon" /> -->
+    <link rel="shortcut icon" href="./kooben.png">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta
@@ -25,22 +29,11 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
 
-    <title>React App</title>
+    <title>K'óoben</title>
   </head>
   <body>
-    <!-- <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId            : '960772997911474',
-          autoLogAppEvents : true,
-          xfbml            : true,
-          version          : 'v13.0'
-        });
-      };
-    </script>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script> -->
-        
-
+    <div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v13.0&appId=960772997911474&autoLogAppEvents=1" nonce="UhE1Gy7t"></script>
 
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>

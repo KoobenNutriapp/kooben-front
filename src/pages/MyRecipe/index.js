@@ -204,7 +204,7 @@ const MyRecipe = () => {
               />
 
               <FormGroup row>
-                <Col sm={8} className="tagsBox">
+                <Col sm={9} className="tagsBox">
                   <TagsManager 
                     getTags={getTags}
                   />
@@ -214,14 +214,14 @@ const MyRecipe = () => {
               <h2>Comparte tu receta con el mundo 🌎:</h2>
 
               <FormGroup row>
-                <Col sm={7}>
-                  <div className="add-step-box">
-                  <button
-                    className="myRecipeExportBtn"
-                    type="submit"
-                  >
-                    Exportar
-                  </button>
+                <Col>
+                  <div className="exportBtn">
+                    <button
+                      className="myRecipeExportBtn"
+                      type="submit"
+                    >
+                      Exportar
+                    </button>
                   </div>
                 </Col>
               </FormGroup>
