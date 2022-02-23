@@ -13,8 +13,8 @@ const DonationButton = ({ itemID, ammount }) => {
         .redirectToCheckout({
           lineItems: [{ price: itemID, quantity: 1 }],
           mode: "payment",
-          successUrl: window.location.protocol + "//localhost:3000/Donation",
-          cancelUrl: window.location.protocol + "//localhost:3000/",
+          successUrl: window.location.protocol + "//koo-ben.com/",
+          cancelUrl: window.location.protocol + "//koo-ben.com/",
           submitType: "donate",
         })
         .then(function (result) {
@@ -25,10 +25,10 @@ const DonationButton = ({ itemID, ammount }) => {
     };
     return (
       <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg"
+        className="button-donar btn btn-info"
         onClick={handleClick}
       >
-        DonaciónComponet {ammount}$
+        Apoya {ammount}$
       </button>
     );
   };

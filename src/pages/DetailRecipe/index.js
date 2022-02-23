@@ -28,7 +28,7 @@ function DetailRecipe(){
     const metaData = location.state.recipe.metaData;
     const Recipekey = location.state.recipe.Recipekey;
 
-    const recipeId = `${BASE_URL}:3000/DetailRecipe/${Recipekey}`
+    const recipeId = `${BASE_URL}/DetailRecipe/${Recipekey}`
     console.log(recipeId);
 
     const [content, setContent] = useState(location.state.recipe.metaData.procedures)
@@ -111,7 +111,7 @@ useEffect(() => {
     
 
   const toUpdateRecipe = (recipe) =>{
-    navigate(`/UpdateRecipe/${recipe.Recipekey}`,{state:{recipe}});
+    navigate(`/update_recipe/${recipe.Recipekey}`,{state:{recipe}});
   }
 
   const toDonationPage=(recipe)=>{
@@ -301,7 +301,8 @@ useEffect(() => {
                         </button>
                         <button 
                           className='detailExportBtn' 
-                          onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}>
+                          onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}
+                          >
                             ExportarPDF
                         </button>
                         <button 
