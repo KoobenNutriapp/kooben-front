@@ -57,7 +57,7 @@ const PdfCreationButton = ({ content }) => {
       } 
     
     return (
-        <>
+        <div>
             <button 
               type="submit" onClick={toggle}
               className="button-donar btn btn-info"
@@ -84,7 +84,7 @@ const PdfCreationButton = ({ content }) => {
                     </Link>
                 </ModalFooter>
               </Modal>
-        </>
+          </div>
     );
   };
 
