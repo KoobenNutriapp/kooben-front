@@ -24,6 +24,7 @@ function DetailRecipe() {
   const [content, setContent] = useState(
     location.state.recipe.metaData.procedures
   );
+  const detailSynopsis =  location.state.recipe.metaData.synopsis
 
   const editor = useRef(null);
   const config = {
@@ -227,6 +228,8 @@ function DetailRecipe() {
     navigate(`/print_view/${Recipekey}`, { state: { data } });
   };
 
+  const fixedDescription = detailSynopsis.replace( /(<([^>]+)>)/ig, '')
+
   return (
     <Container className="containerDetail" fluid>
       <Row className="rowDetail">
@@ -236,7 +239,7 @@ function DetailRecipe() {
           </h1>
           <div class="d-flex flex-row justify-content-center">
             {location.state.recipe.metaData.tags[0] ? (
-              <span className="badge rounded-pill bg-primary">
+              <span className="badge rounded-pill bg-secondary">
                 {location.state.recipe.metaData.tags[0]}
               </span>
             ) : (
@@ -250,14 +253,14 @@ function DetailRecipe() {
               ""
             )}
             {location.state.recipe.metaData.tags[2] ? (
-              <span className="badge rounded-pill bg-success">
+              <span className="badge rounded-pill bg-secondary">
                 {location.state.recipe.metaData.tags[2]}
               </span>
             ) : (
               ""
             )}
             {location.state.recipe.metaData.tags[3] ? (
-              <span className="badge rounded-pill bg-danger">
+              <span className="badge rounded-pill bg-secondary">
                 {location.state.recipe.metaData.tags[3]}
               </span>
             ) : (
@@ -288,19 +291,13 @@ function DetailRecipe() {
               tabIndex={1}
             />
           </div>
-          <div
-            className="fb-comments"
-            data-href="https://www.koo-ben.com/detail_recipe/62155a5a90113f59cf7fc0ac"
-            data-width=""
-            data-numposts="5"
-          ></div>
+
 
           <div>
             <div className="detailGeneralBox">
-              <img
-                className="detailUrlImage"
-                src={location.state.recipe.metaData.url}
-              ></img>
+              <img className="detailUrlImage" src={location.state.recipe.metaData.url}></img>
+              <div class="detailTitleInImage">{location.state.recipe.metaData.title}</div>
+              <div class="detailSynopsisInImage">{fixedDescription}</div>
             </div>
           </div>
 
@@ -329,6 +326,13 @@ function DetailRecipe() {
                 tabIndex={1}
                 onBlur={(newContent) => setContent(newContent)}
               />
+            </div>
+
+            <div
+              className="fb-comments"
+              data-href={`https://www.koo-ben.com/detail_recipe/${Recipekey}`}
+              data-width=""
+              data-numposts="10">
             </div>
 
             <h2 className="detailTitle">Imprime o guarda tu receta 💾:</h2>

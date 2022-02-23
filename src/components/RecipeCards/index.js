@@ -54,7 +54,7 @@ function RecipeCards({
         <div className="Tags-Section">{getTags(tagsArray)}</div>
         <Typography
           variant="body2"
-          color="text.secondary"
+          //color="text.secondary"
           className="Recipe-Description"
         >
           {fixedDescription}
