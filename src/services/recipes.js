@@ -75,6 +75,5 @@ const deleteRecipe = async (id) => {
 export { getRecipes,
         createRecipe,
         updateRecipe,
-        deleteRecipe,
-         
+        deleteRecipe,      
 };

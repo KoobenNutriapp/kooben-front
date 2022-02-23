@@ -25,26 +25,10 @@ const mainImageAlt = 'Imagen alusiva a la gastronomía mexicana.'
 
 //============================== PDF document ============
 
-let data = {}
 
-const toDataURL = (url) => fetch(url)
-    .then(response => response.blob())
-    .then(blob => new Promise((resolve, reject) => {
-        const reader = new FileReader()
-        reader.onloadend = () => resolve(reader.result)
-        reader.onerror = reject
-        reader.readAsDataURL(blob)
-    }));
 
-const exportHandler = async () => {
-    console.log('llamando data')
-    console.log(data);
-    data.url2 = await toDataURL(data.url)
-    console.log(data.url2)
-    console.log('se codifico')
-    console.log('Convierte PDF')
-    await pdfmakedownload(data);
-};
+
+
 
 function DonationInvite(){
     return(
@@ -82,49 +66,6 @@ function MainImage(){
     );
 };
 
-function QRCode(){
-    return(
-        <div className="text-center QR-Code">
-            <img src={urlQRCode} alt={qrCodeAlt} width={'15%'} />
-
-        </div>
-
-    );
-};
-
-
-function PaypalLogo(){
-    return(
-        <div className="text-center Paypal-Logo">
-            <table border="0" cellpadding="0" cellspacing="0" align="center">
-                    <tr>
-                        <td align="center"></td>
-                    </tr>
-                    <tr>
-                        <td align="center">
-                        <a href="https://www.paypal.com/c2/webapps/mpp/paypal-popup?locale.x=en_C2" title="PayPal" onclick="javascript:window.open('https://www.paypal.com/c2/webapps/mpp/paypal-popup?locale.x=en_C2','WIPaypal','toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1060, height=700'); return false;">
-                            <img width='80%' src="https://www.paypalobjects.com/digitalassets/c/website/marketing/apac/C2/logos-buttons/optimize/Online_Primary_Acceptance_Mark_RGB_V2.jpg" alt="PayPal" /></a>
-                        </td>
-                    </tr>
-                </table>
-        </div>
-    );
-};
-
-function RedirectingPayPalButton(){
-        return(
-            <Card className="text-center">
-                <CardBody>
-
-                <form action="https://www.paypal.com/donate" method="post" target="_top">
-                <input type="hidden" name="hosted_button_id" value="MQRFL8F42EH84" />
-                <input type="image" src="https://www.paypalobjects.com/es_XC/MX/i/btn/btn_donateCC_LG.gif" border="0" name="submit" title="PayPal - The safer, easier way to pay online!" alt="Donar con el botón PayPal" />
-                <img alt="" border="0" src="https://www.paypal.com/es_MX/i/scr/pixel.gif" width="1" height="1" />
-                </form>
-                </CardBody>
-            </Card>
-        );
-};
 
 function DownloadPDF() {
 
@@ -144,7 +85,7 @@ function DonationPage(){
 
     console.log('******DONATION');
     console.log(location)
-    data = location.state.recipe.metaData
+    const data = location.state.recipe.metaData
     console.log(data)
     return(
         <>
