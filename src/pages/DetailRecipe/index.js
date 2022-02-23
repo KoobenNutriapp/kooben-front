@@ -5,6 +5,7 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
+import PdfCreationButton from "../../components/PdfCreationButton/";
 import JoditEditor from "jodit-react";
 import { deleteRecipe } from "../../services/recipes";
 import AWS from "aws-sdk";
@@ -13,7 +14,7 @@ import { firebase } from "../../Firebase/firebase-config";
 import { login, userApp, newUserApp } from "../../actions/auth";
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
-import PdfCreationButton from "../../components/PdfCreationButton/";
+
 
 function DetailRecipe() {
   const navigate = useNavigate();

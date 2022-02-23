@@ -6,7 +6,14 @@ import { Link,useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import DonationButton from "../DonationButton"
 
-const toDataURL = (url) => fetch(url)
+let download = false
+const PdfCreationButton = ({ content }) => {
+    const navigate = useNavigate();
+    const [modal, setModal] = useState(false);
+    
+    let data = content
+
+    const toDataURL = (url) => fetch(url)
     .then(response => response.blob())
     .then(blob => new Promise((resolve, reject) => {
         const reader = new FileReader()
@@ -14,12 +21,6 @@ const toDataURL = (url) => fetch(url)
         reader.onerror = reject
         reader.readAsDataURL(blob)
     }));
-    let download = false
-const PdfCreationButton = ({ content }) => {
-    const navigate = useNavigate();
-    const [modal, setModal] = useState(false);
-    
-    let data = content
     
     const toggle = () => {
       console.log(download)
