@@ -29,8 +29,12 @@ function RecipeCards({
     navigate(`/detail_recipe/${recipe.Recipekey}`, { state: { recipe } });
   };
 
+  const fixedDescription = RecipeDescription.replace( /(<([^>]+)>)/ig, '')
+  
+  //console.log(fixedDescription);
+
   return (
-    <Card sx={{ maxWidth: 680 }} sy={{ height: 600 }} className="FullCard">
+    <Card  className="FullCard">
       <CardMedia component="img" height="300" image={SrcImage} alt={AltImage} />
       <CardContent className="CardContent-Section">
         <Typography
@@ -53,7 +57,7 @@ function RecipeCards({
           color="text.secondary"
           className="Recipe-Description"
         >
-          {RecipeDescription}
+          {fixedDescription}
         </Typography>
       </CardContent>
     </Card>

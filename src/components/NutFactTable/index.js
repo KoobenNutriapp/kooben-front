@@ -58,17 +58,17 @@ const NutFactTable = ({
     (monounsaturated_fatty_acids * 100) / 15.6;
   const dvPolyunsaturated_fatty_acids =
     (polyunsaturated_fatty_acids * 100) / 17.7;
-  const dvCholesterol = (cholesterol * 100) / 2.6;
+  const dvCholesterol = (cholesterol * 100) / 2600;
   const dvSodium = (sodium * 100) / 2300;
   const dvCalcium = (calcium * 100) / 1000;
   const dvPhosphorus = (phosphorus * 100) / 1200;
   const dvIron = (iron * 100) / 15;
   const dvPotassium = (potassium * 100) / 3500;
   const dvMagnesium = (magnesium * 100) / 340;
-  const dvCopper = (copper * 100) / 4;
+  const dvCopper = (copper * 100) / 3;
   const dvZinc = (zinc * 100) / 12;
   const dvManganese = (manganese * 100) / 2.3;
-  const dvSelenium = (selenium * 100) / 55;
+  const dvSelenium = (selenium * 100) / 5500;
   const dvVitA = (vitA * 100) / 900;
   const dvVitB1 = (vitB1 * 100) / 800;
   const dvVitB2 = (vitB2 * 100) / 1.3;
@@ -336,7 +336,7 @@ const NutFactTable = ({
                 src="https://kooben.s3.amazonaws.com/images/grasa.png"
               />
             ) : null}
-            {sodium > 460 ? (
+            {sodium > 500 ? (
               <img
                 className="nut-label"
                 src="https://kooben.s3.amazonaws.com/images/sodio.png"
@@ -465,7 +465,7 @@ const NutFactTable = ({
           {cholesterol ? (
             <tr>
               <th>Colesterol total:</th>
-              <td className="value">{Number(cholesterol).toFixed(1)} g</td>
+              <td className="value">{Number(cholesterol).toFixed(1)} mg</td>
               <th className="center">
                 {Number(dvCholesterol).toFixed(0)} %</th>
             </tr>

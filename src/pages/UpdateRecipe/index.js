@@ -350,68 +350,213 @@ const UpdateRecipe = () => {
   };
 
   const handleNutDetailTable = () => {
+    //console.log(ingredient);
+  
+    // const portion = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.equivalence.gram || 0);
+    // }, 0);
+    // setPortion(portion.toFixed(0));
+    // console.log("portion: " + portion.toFixed(2));
 
-    const portion = detailTable?.reduce((acc, item) => {
-      return acc + (item?.equivalence.gram || 0);
+    const energy = detailTable.reduce((acc, item) => {
+      return acc + (item?.energy * item.equivalence.gram || 0);
     }, 0);
+    setTotalEnergy(energy.toFixed(4));
+    console.log("energy: " + energy.toFixed(4));
 
-    const energy = detailTable?.reduce((acc, item) => {
-      return acc + (item?.energy || 0);
+    const total_carbohydrate = detailTable.reduce((acc, item) => {
+      return acc + (item?.total_carbohydrate * item.equivalence.gram || 0);
     }, 0);
-    setTotalEnergy((energy * portion).toFixed(2));
-    console.log("energy: " + energy.toFixed(2));
+    setTotalCarbohydrate(total_carbohydrate.toFixed(4));
+    console.log("total_carbohydrate: " + total_carbohydrate.toFixed(4));
 
-    const total_carbohydrate = detailTable?.reduce((acc, item) => {
-      return acc + (item?.total_carbohydrate || 0);
+    const dietary_fiber = detailTable.reduce((acc, item) => {
+      return acc + (item?.dietary_fiber * item.equivalence.gram || 0);
     }, 0);
-    setTotalCarbohydrate((total_carbohydrate * portion).toFixed(2));
-    console.log("total_carbohydrate: " + total_carbohydrate.toFixed(2));
+    setTotalFiber(dietary_fiber.toFixed(4));
+    console.log("dietary_fiber: " + dietary_fiber.toFixed(4));
 
-    const dietary_fiber = detailTable?.reduce((acc, item) => {
-      return acc + (item?.dietary_fiber || 0);
+    const sugars = detailTable.reduce((acc, item) => {
+      return acc + (item?.sugars * item.equivalence.gram || 0);
     }, 0);
-    setTotalFiber((dietary_fiber * portion).toFixed(2));
-    console.log("dietary_fiber: " + dietary_fiber.toFixed(2));
+    setTotalSugars(sugars.toFixed(4));
+    console.log("sugars: " + sugars.toFixed(4));
 
-    const sugars = detailTable?.reduce((acc, item) => {
-      return acc + (item?.sugars || 0);
+    // const calcium = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.calcium * item.equivalence.gram || 0);
+    // }, 0);
+    // setCalcium(calcium.toFixed(4));
+    // console.log("calcium: " + calcium.toFixed(4));
+
+    // const phosphorus = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.phosphorus * item.equivalence.gram || 0);
+    // }, 0);
+    // setPhosphorus(phosphorus.toFixed(4));
+    // console.log("phosphorus: " + phosphorus.toFixed(4));
+
+    // const iron = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.iron * item.equivalence.gram || 0);
+    // }, 0);
+    // setIron(iron.toFixed(4));
+    // console.log("iron: " + iron.toFixed(4));
+
+    const sodium = detailTable.reduce((acc, item) => {
+      return acc + (item?.sodium * item.equivalence.gram || 0);
     }, 0);
-    setTotalSugars((sugars * portion).toFixed(2));
-    console.log("sugars: " + sugars.toFixed(2));
+    setTotalSodium(sodium.toFixed(4));
+    console.log("sodium: " + sodium.toFixed(4));
 
-    const sodium = detailTable?.reduce((acc, item) => {
-      return acc + (item?.sodium || 0);
+    // const potassium = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.potassium * item.equivalence.gram || 0);
+    // }, 0);
+    // setPotassium(potassium.toFixed(4));
+    // console.log("potassium: " + potassium.toFixed(4));
+
+    // const magnesium = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.magnesium * item.equivalence.gram || 0);
+    // }, 0);
+    // setMagnesium(magnesium.toFixed(4));
+    // console.log("magnesium: " + magnesium.toFixed(4));
+
+    // const copper = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.copper * item.equivalence.gram || 0);
+    // }, 0);
+    // setCopper(copper.toFixed(4));
+    // console.log("copper: " + copper.toFixed(4));
+
+    // const zinc = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.zinc * item.equivalence.gram || 0);
+    // }, 0);
+    // setZinc(zinc.toFixed(4));
+    // console.log("zinc: " + zinc.toFixed(4));
+
+    // const manganese = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.manganese * item.equivalence.gram || 0);
+    // }, 0);
+    // setManganese(manganese.toFixed(4));
+    // console.log("manganese: " + manganese.toFixed(4));
+
+    // const selenium = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.selenium * item.equivalence.gram || 0);
+    // }, 0);
+    // setSelenium(selenium.toFixed(4));
+    // console.log("selenium: " + selenium.toFixed(4));
+
+    // const vitA = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitA * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitA(vitA.toFixed(4));
+    // console.log("vitA: " + vitA.toFixed(4));
+
+    // const vitB1 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB1 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB1(vitB1.toFixed(4));
+    // console.log("vitB1: " + vitB1.toFixed(4));
+
+    // const vitB2 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB2 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB2(vitB2.toFixed(4));
+    // console.log("vitB2: " + vitB2.toFixed(4));
+    // const vitB3 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB3 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB3(vitB3.toFixed(4));
+    // console.log("vitB3: " + vitB3.toFixed(4));
+
+    // const vitB6 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB6 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB6(vitB6.toFixed(4));
+    // console.log("vitB6: " + vitB6.toFixed(4));
+
+    // const vitB12 = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitB12 * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitB12(vitB12.toFixed(4));
+    // console.log("vitB12: " + vitB12.toFixed(4));
+
+    // const vitC = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitC * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitC(vitC.toFixed(4));
+    // console.log("vitC: " + vitC.toFixed(4));
+
+    // const folicAc = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.folicAc * item.equivalence.gram || 0);
+    // }, 0);
+    // setFolicAc(folicAc.toFixed(4));
+    // console.log("folicAc: " + folicAc.toFixed(4));
+
+    // const vitD = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitD * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitD(vitD.toFixed(4));
+    // console.log("vitD: " + vitD.toFixed(4));
+
+    // const vitE = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitE * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitE(vitE.toFixed(4));
+    // console.log("vitE: " + vitE.toFixed(4));
+
+    // const vitK = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.vitK * item.equivalence.gram || 0);
+    // }, 0);
+    // setVitK(vitK.toFixed(4));
+    // console.log("vitK: " + vitK.toFixed(4));
+
+    const protein = detailTable.reduce((acc, item) => {
+      return acc + (item?.protein * item.equivalence.gram || 0);
     }, 0);
-    setTotalSodium((sodium * portion).toFixed(2));
-    console.log("sodium: " + sodium.toFixed(2));
+    setTotalProtein(protein.toFixed(4));
+    console.log("protein: " + protein.toFixed(4));
 
-    const protein = detailTable?.reduce((acc, item) => {
-      return acc + (item?.protein || 0);
+    const total_fat = detailTable.reduce((acc, item) => {
+      return acc + (item?.total_fat * item.equivalence.gram || 0);
     }, 0);
-    setTotalProtein((protein * portion).toFixed(2));
-    console.log("protein: " + protein.toFixed(2));
+    setTotalFat(total_fat.toFixed(4));
+    console.log("total_fat: " + total_fat.toFixed(4));
 
-    const total_fat = detailTable?.reduce((acc, item) => {
-      return acc + (item?.total_fat || 0);
+    // const saturated_fatty_acids = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.saturated_fatty_acids * item.equivalence.gram || 0);
+    // }, 0);
+    // setSaturated_fatty_acids(saturated_fatty_acids.toFixed(4));
+    // console.log("saturated_fatty_acids: " + saturated_fatty_acids.toFixed(4));
+
+    // const monounsaturated_fatty_acids = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.monounsaturated_fatty_acids * item.equivalence.gram || 0);
+    // }, 0);
+    // setMonounsaturated_fatty_acids(monounsaturated_fatty_acids.toFixed(4));
+    // console.log(
+    //   "monounsaturated_fatty_acids: " + monounsaturated_fatty_acids.toFixed(4)
+    // );
+
+    // const polyunsaturated_fatty_acids = ingredient.reduce((acc, item) => {
+    //   return acc + (item?.polyunsaturated_fatty_acids * item.equivalence.gram || 0);
+    // }, 0);
+    // setPolyunsaturated_fatty_acids(polyunsaturated_fatty_acids.toFixed(4));
+    // console.log(
+    //   "polyunsaturated_fatty_acids: " + polyunsaturated_fatty_acids.toFixed(4)
+    // );
+
+    const cholesterol = detailTable.reduce((acc, item) => {
+      return acc + (item?.cholesterol * item.equivalence.gram || 0);
     }, 0);
-    setTotalFat((total_fat * portion).toFixed(2));
-    console.log("total_fat: " + total_fat.toFixed(2));
+    setTotalCholesterol(cholesterol.toFixed(4));
+    console.log("cholesterol: " + cholesterol.toFixed(4));
 
-    const cholesterol = detailTable?.reduce((acc, item) => {
-      return acc + (item?.cholesterol || 0);
-    }, 0);
-    setTotalCholesterol((cholesterol * portion).toFixed(2));
-    console.log("cholesterol: " + cholesterol.toFixed(2));
-
-    const glycemic_load = detailTable?.reduce((acc, item) => {
+    const glycemic_load = detailTable.reduce((acc, item) => {
       return (
-        acc + ((item?.total_carbohydrate * item?.glycemic_index) / 100 || 0)
+        acc + ((item?.total_carbohydrate * item?.glycemic_index * item.equivalence.gram) / 100 || 0)
       );
     }, 0);
-    setTotalGlycemicLoad((glycemic_load * portion).toFixed(4));
+    setTotalGlycemicLoad(glycemic_load.toFixed(4));
     console.log("glycemic_load: " + glycemic_load.toFixed(4));
 
-    setIngredients(detailTable);
+
+    //setIngredients(detailTable);
   };
 
   const toggle = () => setModal(!modal);
@@ -565,7 +710,7 @@ const UpdateRecipe = () => {
                 </Col>
               </FormGroup>
 
-              <FormGroup row>
+              {/* <FormGroup row>
                 <Label for="textboxUpdate" sm={2}>
                   Sinopsis: *
                 </Label>
@@ -589,7 +734,15 @@ const UpdateRecipe = () => {
                     ¡La sinopsis debe ser mayor a 11 caracteres!
                   </FormFeedback>
                 </Col>
-              </FormGroup>
+              </FormGroup> */}
+              <h2>Sinopsis:</h2>
+              <JoditEditor
+                ref={editor}
+                value={synopsis}
+                config={config}
+		            tabIndex={1} 
+		            onBlur={newContent => setSynopsis(newContent)}
+              />
 
               {
                 !thumbnail ? 
@@ -699,15 +852,17 @@ const UpdateRecipe = () => {
               />
 
               <FormGroup row>
-                <Col sm={8}>
-                  <TagsManager getTags={getTags} />
+                <Col sm={9} className="tagsBox">
+                  <TagsManager 
+                    getTags={getTags} 
+                  />
                 </Col>
               </FormGroup>
 
               <h2>Comparte tu receta con el mundo 🌎:</h2>
 
               <FormGroup row>
-                <Col sm={7}>
+                <Col sm={2}>
                   <div className="add-step-box">
                     <button
                       className="pink-button"

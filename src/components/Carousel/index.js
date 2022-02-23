@@ -6,6 +6,7 @@ const Carousel = () => {
   return (
   <>
       <UncontrolledCarousel
+          className='carousel'
           items={[
             {
               altText: 'elote preparado',

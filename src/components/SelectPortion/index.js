@@ -63,7 +63,7 @@ const SelectPortion = ({ingredient, nutData, people}) => {
           </IconButton>
         }  
       </td>
-      <td className="text">{ (portion * people).toFixed(0) }</td>
+      <td className="text">{ (portion * people).toFixed(2) }</td>
       <td>
         {
           <IconButton>
