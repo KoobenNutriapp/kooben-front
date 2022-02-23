@@ -15,6 +15,7 @@ import { firebase } from '../../Firebase/firebase-config'
 import { login, userApp, newUserApp  } from '../../actions/auth';
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
+import PdfCreationButton from "../../components/PdfCreationButton";
 
 function DetailRecipe(){
     const navigate = useNavigate();
@@ -293,12 +294,15 @@ useEffect(() => {
 
                     <Col sm={11}>
                       <div className="detailButtons" >
-                        <button
+                        {/* <button
                           className="detailExportBtn"
                           onClick={() => window.print()}
                         >
                           Exportar
-                        </button>
+                        </button> */}
+                        <PdfCreationButton
+                          content={metaData}
+                        />
                         <button 
                           className='detailExportBtn' 
                           onClick={()=>toDonationPage({Recipekey,metaData,detailTable})}

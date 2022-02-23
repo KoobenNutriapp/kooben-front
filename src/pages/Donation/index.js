@@ -10,6 +10,7 @@ import image from '../../img/mexican-food-donation.jpg'
 // import pdfmakedownload from '../../services/pdfRecipeGenerator'
 import pdfmakedownload from "../../services/PdfRecipeCreator";
 import DonationButton from "../../components/DonationButton"
+import PdfCreationButton from "../../components/PdfCreationButton";
 //PDF document creation
 // import pdfMake from "pdfmake/build/pdfmake";
 // import pdfFonts from "pdfmake/build/vfs_fonts";
@@ -72,7 +73,7 @@ function DownloadPDF() {
     return (
       <Card className="text-center">
           <CardBody>
-            <Button color="primary" onClick={exportHandler}>Exportar</Button>
+            {/* <Button color="primary" onClick={exportHandler}>Exportar</Button> */}
 
           </CardBody>
       </Card>
@@ -102,7 +103,9 @@ function DonationPage(){
         <Card className="Paypal-QR-Container">
             <CardBody className="Paypal-QR-Container">
                 {/* <CardGroup> */}
-                    
+                <PdfCreationButton
+                          content={data}
+                />
                 <DonationButton
                     ammount={"10.00"}
                     itemID="price_1KVNX9AqezYdKBDlm6ObBNND"

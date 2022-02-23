@@ -1,4 +1,5 @@
-import "./DonateButton.scss"
+import * as React from 'react';
+import "./pdfCreationButton.scss"
 import pdfmakedownload from "../../services/PdfRecipeCreator";
 
 const toDataURL = (url) => fetch(url)
@@ -10,7 +11,7 @@ const toDataURL = (url) => fetch(url)
         reader.readAsDataURL(blob)
     }));
 
-const pdfCreationButton = ({ content }) => {
+const PdfCreationButton = ({ content }) => {
     let data = content
     const exportHandler = async () => {
         console.log('llamando data')
@@ -27,9 +28,9 @@ const pdfCreationButton = ({ content }) => {
         className="button-donar btn btn-info"
         onClick={exportHandler}
       >
-        Exportar
+        ExportarComponeent
       </button>
     );
   };
 
-export default pdfCreationButton;
+export default PdfCreationButton;

@@ -24,12 +24,14 @@ const DonationButton = ({ itemID, ammount }) => {
         });
     };
     return (
+      <>
       <button
         className="button-donar btn btn-info"
         onClick={handleClick}
       >
         Apoya {ammount}$
       </button>
+      </>
     );
   };
 
