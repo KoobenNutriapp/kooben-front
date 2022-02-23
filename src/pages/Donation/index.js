@@ -4,7 +4,7 @@ import {Button, Card, Container, Row, CardImg, Navbar, CardTitle, CardGroup, Car
 import '../../styles/_colors.scss'
 import image from '../../img/mexican-food-donation.jpg'
 import DonationButton from "../../components/DonationButton"
-// import PdfCreationButton from "../../components/PdfCreationButton/";
+// import PdfCreationButton from "../../components/PdfCreationButton/"
 import {useLocation} from 'react-router-dom';
 
 const urlQRCode = 'https://kooben.s3.amazonaws.com/QR-paypal-kooben'
