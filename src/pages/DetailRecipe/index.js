@@ -5,9 +5,9 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-// import PdfCreationButton from "../../components/PdfCreationButton/";
-import JoditEditor from "jodit-react";
-import SaveAltIcon from '@mui/icons-material/SaveAlt';
+//import PdfCreationButton from "../../components/pdfCreationButton/index";
+// import JoditEditor from "jodit-react";
+// import SaveAltIcon from '@mui/icons-material/SaveAlt';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import IconButton from "@mui/material/IconButton";
@@ -327,11 +327,18 @@ function DetailRecipe() {
           </div>
 
           <div className="detailControls">
-            <Tooltip title="guardar receta" placement="left-start">
+            {/* <Tooltip title="guardar receta" placement="left-start">
               <IconButton>
-                <SaveAltIcon className="saveRecipe" onClick={() => {toPrintView()}}/>
+                <SaveAltIcon 
+                  className="saveRecipe" 
+                  onClick={<GeneratePdfButton content={metaData}  />}
+                />
               </IconButton>
-            </Tooltip>
+            </Tooltip> */}
+
+              <GeneratePdfButton
+                    content={metaData}
+              />
 
             <Tooltip title="editar receta" >
               <IconButton>
@@ -380,7 +387,7 @@ function DetailRecipe() {
                 {/* <PdfCreationButton
                     content={metaData}
                   /> */}
-                <GeneratePdfButton
+                {/* <GeneratePdfButton
                  content={metaData}
                  />
                 <button
@@ -419,7 +426,8 @@ function DetailRecipe() {
                   </>
                 ) : null}
               </div>
-            </Col> */}
+            </Col> */
+            } 
 
           <h2>Ingredientes:</h2>
 
