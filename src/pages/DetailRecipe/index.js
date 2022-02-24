@@ -5,8 +5,13 @@ import "./DetailRecipe.scss";
 import { useState, useEffect, useRef } from "react";
 import IngredientsDynamicTable from "../../components/IngredientsDynamicTable/";
 import NutFactTable from "../../components/NutFactTable/";
-// import PdfCreationButton from "../../components/PdfCreationButton/";
-import JoditEditor from "jodit-react";
+//import PdfCreationButton from "../../components/pdfCreationButton/index";
+// import JoditEditor from "jodit-react";
+// import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 import { deleteRecipe } from "../../services/recipes";
 import AWS from "aws-sdk";
 import { useDispatch } from "react-redux";
@@ -27,7 +32,7 @@ function DetailRecipe() {
   const [content, setContent] = useState(
     location.state.recipe.metaData.procedures
   );
-  const detailSynopsis =  location.state.recipe.metaData.synopsis
+  const detailSynopsis = location.state.recipe.metaData.synopsis;
 
   const editor = useRef(null);
   const config = {
@@ -231,16 +236,40 @@ function DetailRecipe() {
     navigate(`/print_view/${Recipekey}`, { state: { data } });
   };
 
-  const fixedDescription = detailSynopsis.replace( /(<([^>]+)>)/ig, '')
+  // const fixedDescription = detailSynopsis.replace(/(<([^>]+)>)/gi, "");
+  // const fixedProcedures = content.replace(/(<([^>]+)>)/gi, "");
+  // const finalProcedures = fixedProcedures.replace(/\&nbsp;/g, '<p>');
+  // console.log(fixedProcedures);
 
   return (
     <Container className="containerDetail" fluid>
       <Row className="rowDetail">
         <Col className="mainDetail">
-          <h1 className="detailRecipeTitle">
+          {/* <h1 className="detailRecipeTitle">
             {location.state.recipe.metaData.title}
-          </h1>
-          <div class="d-flex flex-row justify-content-center">
+          </h1> */}
+
+
+          {/* <div className="detailGeneralBox">
+                        <div className="detailSynopsis">
+                            {location.state.recipe.metaData.synopsis}
+                        </div>    
+                    </div> */}
+
+          {/* <div className="detailGeneralBox">
+            <h2>Sinopsis:</h2>
+            <JoditEditor
+              ref={editor}
+              value={location.state.recipe.metaData.synopsis}
+              config={config}
+              tabIndex={1}
+            />
+          </div> */}
+
+          <div>
+            <div className="detailGeneralBox">
+
+            <div className="d-flex flex-row justify-content-center mb-3">
             {location.state.recipe.metaData.tags[0] ? (
               <span className="badge rounded-pill bg-secondary">
                 {location.state.recipe.metaData.tags[0]}
@@ -278,69 +307,73 @@ function DetailRecipe() {
             )}
           </div>
 
-          {/* <div className="detailGeneralBox">
-                        <div className="detailSynopsis">
-                            {location.state.recipe.metaData.synopsis}
-                        </div>    
-                    </div> */}
-
-
-          <div className="detailGeneralBox">
-            <h2>Sinopsis:</h2>
-            <JoditEditor
-              ref={editor}
-              value={location.state.recipe.metaData.synopsis}
-              config={config}
-              tabIndex={1}
-            />
-          </div>
-
-
-          <div>
-            <div className="detailGeneralBox">
-              <img className="detailUrlImage" src={location.state.recipe.metaData.url}></img>
-              <div class="detailTitleInImage">{location.state.recipe.metaData.title}</div>
-              <div class="detailSynopsisInImage">{fixedDescription}</div>
+              <img
+                className="detailUrlImage"
+                src={location.state.recipe.metaData.url}
+              ></img>
+              <div className="detailTitleInImage detailRecipeTitle">
+                {location.state.recipe.metaData.title}
+              </div>
+              {/* <div className="detailSynopsisInImage">{fixedDescription}</div> */}
+              <div
+                className="detailSynopsisInImage"
+                dangerouslySetInnerHTML={{ __html: detailSynopsis }}
+              ></div>
+              <div
+                className="detailProceduresInImage"
+                dangerouslySetInnerHTML={{ __html: content }}
+              ></div>
             </div>
           </div>
 
-          <h2>Ingredientes:</h2>
+          <div className="detailControls">
+            {/* <Tooltip title="guardar receta" placement="left-start">
+              <IconButton>
+                <SaveAltIcon 
+                  className="saveRecipe" 
+                  onClick={<GeneratePdfButton content={metaData}  />}
+                />
+              </IconButton>
+            </Tooltip> */}
 
-          <Row className="detailFrameTables">
-            <Col className="detailIngredientsTable">
-              <IngredientsDynamicTable
-                ingredients={detailTable}
-                nutData={handleBypassToNutTable}
-                showBin={"no bin"}
+              <GeneratePdfButton
+                    content={metaData}
               />
-            </Col>
-            <Col className="detailNutritionalTable">
-              <NutFactTable ingredient={detailTable} />
-            </Col>
-          </Row>
-          <Row>
-            <h2 className="detailTitle">Procedimiento: </h2>
 
-            <div className="editor">
-              <JoditEditor
-                ref={editor}
-                value={content}
-                config={config}
-                tabIndex={1}
-                onBlur={(newContent) => setContent(newContent)}
-              />
-            </div>
+            <Tooltip title="editar receta" >
+              <IconButton>
+                <EditIcon className="editRecipe" onClick={() => {toUpdateRecipe({ Recipekey, metaData })}}/>
+              </IconButton>
+            </Tooltip>
+            {admin ? (
+              <>
+                <Tooltip title="eliminar receta" placement="right-start">
+                  <IconButton>
+                    <DeleteForeverIcon className="deleteRecipe" type="submit" onClick={toggle} />
+                  </IconButton>
+                </Tooltip>
+                <Modal isOpen={modal} toggle={toggle}>
+                  <ModalBody>
+                    ¿Estás seguro de eliminar la receta?. ¡Esta acción no se
+                    puede deshacer!
+                  </ModalBody>
+                  <ModalFooter>
+                    <Link to={"/"}>
+                      <Button
+                        className="modal-button-delete"
+                        onClick={handleDelete}
+                      >
+                        Sí, ¡elimina receta!
+                      </Button>
+                    </Link>
+                  </ModalFooter>
+                </Modal>
+              </>
+            ) : null
+            }
+          </div>
 
-            <div
-              className="fb-comments"
-              data-href={`https://www.koo-ben.com/detail_recipe/${Recipekey}`}
-              data-width=""
-              data-numposts="10">
-            </div>
-
-            <h2 className="detailTitle">Imprime o guarda tu receta 💾:</h2>
-
-            <Col sm={11}>
+          {/* <Col sm={11}>
               <div className="detailButtons">
                 <button
                   className="detailExportBtn"
@@ -354,7 +387,7 @@ function DetailRecipe() {
                 {/* <PdfCreationButton
                     content={metaData}
                   /> */}
-                <GeneratePdfButton
+                {/* <GeneratePdfButton
                  content={metaData}
                  />
                 <button
@@ -393,7 +426,52 @@ function DetailRecipe() {
                   </>
                 ) : null}
               </div>
+            </Col> */
+            } 
+
+          <h2>Ingredientes:</h2>
+
+          <Row className="detailFrameTables">
+            <Col className="detailIngredientsTable">
+              <div className="detailIngredientsContainer">
+                <IngredientsDynamicTable
+                  className="ingredientsTable"
+                  ingredients={detailTable}
+                  nutData={handleBypassToNutTable}
+                  showBin={"no bin"}
+                />
+              </div>
             </Col>
+            <Col className="detailNutritionalTable">
+              <NutFactTable
+                className="nutFactTable" 
+                ingredient={detailTable} 
+              />
+            </Col>
+          </Row>
+          <Row>
+            {/* <h2 className="detailTitle">Procedimiento: </h2>
+
+            <div className="editor">
+              <JoditEditor
+                ref={editor}
+                value={content}
+                config={config}
+                tabIndex={1}
+                onBlur={(newContent) => setContent(newContent)}
+              />
+            </div> */}
+
+            <div
+              className="fb-comments"
+              data-href={`https://www.koo-ben.com/detail_recipe/${Recipekey}`}
+              data-width=""
+              data-numposts="10"
+            ></div>
+
+            {/* <h2 className="detailTitle">Imprime o guarda tu receta 💾:</h2> */}
+
+
           </Row>
         </Col>
       </Row>

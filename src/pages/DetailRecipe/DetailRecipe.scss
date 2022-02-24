@@ -31,7 +31,7 @@ body {
 }
 
 .detailRecipeTitle {
-  color: $mayan-blue;
+  color: $mexican-pink;
   font-family: $title-font;
   font-size: 40px;
   font-weight: 800;
@@ -44,8 +44,8 @@ body {
 .detailGeneralBox {
   //margin-top: 20px;
   position: relative;
-  display: inline-block;
-  text-align: center;
+  //display: inline-block;
+  //text-align: center;
 }
 
 .detailSynopsis {
@@ -60,17 +60,34 @@ body {
 
 .detailUrlImage {
   margin-top: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
+  border-radius: 15px;
+  opacity: 95%;
 }
 
 .detailFrameTables {
+  margin-top: 40px !important;
   width: 100%;
   height: 1970px;
 }
 
+// .ingredientsTable{
+//   position: fixed;
+// }
+
 .detailIngredientsTable {
   width: 50%;
+}
+
+// .frameIngredientsTable{
+//   position: sticky;
+//   top:150px;
+// }
+
+.detailIngredientsContainer{
+  position: sticky;
+  top:150px;
 }
 
 .detailNutritionalTable {
@@ -179,12 +196,72 @@ body {
 }
 .detailTitleInImage{
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 8%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  //font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  //font-size: 30px;
 }
 .detailSynopsisInImage{
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 52%;
+  left: 24%;
   transform: translate(-50%, -50%);
+  //box-shadow: 2px 0px 3px 3px $mexican-pink;
+  text-align: center;
+  width: 336px;
+  height: 313px;
+  //border: 3px $mayan-blue solid;
+  border-radius: 71px;
+  font-size: 20px;
+  padding: 21px;
+  font-family: helvetica;
+  font-style: italic;
+  color: white;
+  font-weight: 600;
+  text-align: justify;
 }
+
+.detailProceduresInImage{
+  position: absolute;
+  top: 55%;
+  left: 73%;
+  transform: translate(-50%, -50%);
+  //box-shadow: 0 0 2px 1px $mexican-pink;
+  text-align: center;
+  width: 401px;
+  //border: 3px $mayan-blue solid;
+  border-radius: 71px;
+  font-size: 13px;
+  padding: 21px;
+  font-family: helvetica;
+  color: white;
+  font-weight: 500;
+  text-align: justify;
+
+}
+
+.detailControls{
+  display: flex;
+  justify-content: flex-end;
+  .saveRecipe{
+    color: $mexican-pink;
+    cursor: pointer;
+    width: 80px;
+    height: 80px;
+    }
+  .editRecipe{
+      color: $mexican-pink;
+      cursor: pointer;
+      width: 80px;
+      height: 80px;
+    }
+  .deleteRecipe{
+      color: $mexican-pink;
+      cursor: pointer;
+      width: 80px;
+      height: 80px;
+    }
+}
+

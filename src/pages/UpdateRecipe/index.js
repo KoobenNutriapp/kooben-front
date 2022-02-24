@@ -274,8 +274,8 @@ const UpdateRecipe = () => {
     e.preventDefault();
     console.log("submitting...");
     let imageIndicator = false
-    
     const id = location.state.recipe.metaData._id
+    const ingredients = detailTable
     
     const date = new Date();
     const formatDate =
@@ -567,7 +567,7 @@ const UpdateRecipe = () => {
       return item._id !== deleteIngredient
     })
     setDetailTable(filteredIngredient)
-    setIngredients(filteredIngredient)
+    //setIngredients(filteredIngredient)
   }
 
    const handleSelection = (selection) => {
@@ -576,7 +576,7 @@ const UpdateRecipe = () => {
       let set = new Set( tempTable.map( JSON.stringify ) )
       let result = Array.from( set ).map( JSON.parse );
       setDetailTable(result)
-      setIngredients(result)
+      //setIngredients(result)
     }else{
      console.log('empty');
     }
@@ -631,7 +631,7 @@ const UpdateRecipe = () => {
      })
  
      setDetailTable(newDetailTable)
-     setIngredients(newDetailTable)
+     //setIngredients(newDetailTable)
      handleNutDetailTable()
    })
 
@@ -809,28 +809,30 @@ const UpdateRecipe = () => {
 
               <Row className="updateFrameTables">
                 <Col className="updateIngredientsTable">
-                  <IngredientsDynamicTable 
-                    ingredients={detailTable} 
-                    callback={filterDeletingItems}
-                    nutData={handleBypassToNutTable}
-                  />
-                  <button className="btnAddIngredient" onClick={handleAddIngredient}>
-                    Agrega ingrediente
-                  </button>
-                  <div className="selectBox">
-                    {addIngredient ? (
-                    <Autocomplete
-                      size='small'
-                      options={options?.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
-                      groupBy={(option) => option.firstLetter}
-                      getOptionLabel={(option) => option.name}
-                      renderInput={(params) => <TextField {...params} label="Agrega un ingrediente" />}
-                      className="selectIngredient"
-                      onChange={(e,selection) => handleSelection(selection)}
+                  <div className="updateIngredientsContainer">
+                    <IngredientsDynamicTable 
+                      ingredients={detailTable} 
+                      callback={filterDeletingItems}
+                      nutData={handleBypassToNutTable}
                     />
-                    ) : (
-                      ""
-                    )}
+                    <button className="btnAddIngredient" onClick={handleAddIngredient}>
+                      Agrega ingrediente
+                    </button>
+                    <div className="selectBox">
+                      {addIngredient ? (
+                      <Autocomplete
+                        size='small'
+                        options={options?.sort((a, b) => -b.firstLetter.localeCompare(a.firstLetter))}
+                        groupBy={(option) => option.firstLetter}
+                        getOptionLabel={(option) => option.name}
+                        renderInput={(params) => <TextField {...params} label="Agrega un ingrediente" />}
+                        className="selectIngredient"
+                        onChange={(e,selection) => handleSelection(selection)}
+                      />
+                      ) : (
+                        ""
+                      )}
+                    </div>
                   </div>
                 </Col>
              

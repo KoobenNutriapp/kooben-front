@@ -5,6 +5,9 @@ import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { Link,useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import DonationButton from "../DonationButton"
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
 
 let download = false
 const GeneratePdfButton = ({ content }) => {
@@ -56,13 +59,23 @@ const GeneratePdfButton = ({ content }) => {
         navigate('/');
       } 
     
-    return (<div>
-      <button 
+    return (
+    <div>
+            <Tooltip title="guardar receta" placement="left-start">
+              <IconButton>
+                <SaveAltIcon 
+                  className="saveRecipe" 
+                  onClick={toggle}
+                  // onClick={<GeneratePdfButton content={metaData}  />}
+                />
+              </IconButton>
+            </Tooltip>
+      {/* <button 
         type="submit" onClick={toggle}
         className="button-donar btn btn-info"
       >
           GenerarPDF
-      </button>
+      </button> */}
       <Modal isOpen={modal} toggle={toggle}>
           <ModalBody >
             Hoy por nosotros, mañana por ti

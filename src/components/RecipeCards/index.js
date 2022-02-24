@@ -56,8 +56,9 @@ function RecipeCards({
           variant="body2"
           //color="text.secondary"
           className="Recipe-Description"
+          dangerouslySetInnerHTML={{ __html: fixedDescription }}
         >
-          {fixedDescription}
+          {/* {fixedDescription} */}
         </Typography>
       </CardContent>
     </Card>
