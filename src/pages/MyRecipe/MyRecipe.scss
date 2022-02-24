@@ -22,7 +22,7 @@ body {
   width: 80% !important;
 }
 
-.mainCreate {
+.mainMyRecipe {
   //border: 1px black solid;
   background-color: rgb(255 255 255);
   border-radius: 10px;
@@ -118,11 +118,6 @@ h3{
   font-weight: 700;
 }
 
-.bottom-label{
-  font-size: 12px;
-  font-weight: bold;
-}
-
 .binStep{
   color: $mexican-pink;
   cursor: pointer;
@@ -188,3 +183,20 @@ h3{
   display: flex;
   justify-content: center;
 }
+
+// .centerExports{
+//   justify-content: center !important;
+// }
+
+.myRecipeControls{
+  display: flex;
+  justify-content: center;
+}
+
+.saveRecipe{
+ 
+  color: $mexican-pink;
+  cursor: pointer;
+  width: 80px !important;
+  height: 80px !important;
+  }

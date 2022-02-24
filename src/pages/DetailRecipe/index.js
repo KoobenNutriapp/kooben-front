@@ -20,6 +20,8 @@ import { login, userApp, newUserApp } from "../../actions/auth";
 import { Spinner } from "reactstrap";
 import { getUsers } from "../../services/user";
 import GeneratePdfButton from "../../components/GeneratePdfButton/GeneratePdfButton";
+import { Badge } from "reactstrap";
+
 
 
 function DetailRecipe() {
@@ -269,43 +271,7 @@ function DetailRecipe() {
           <div>
             <div className="detailGeneralBox">
 
-            <div className="d-flex flex-row justify-content-center mb-3">
-            {location.state.recipe.metaData.tags[0] ? (
-              <span className="badge rounded-pill bg-secondary">
-                {location.state.recipe.metaData.tags[0]}
-              </span>
-            ) : (
-              ""
-            )}
-            {location.state.recipe.metaData.tags[1] ? (
-              <span className="badge rounded-pill bg-secondary">
-                {location.state.recipe.metaData.tags[1]}
-              </span>
-            ) : (
-              ""
-            )}
-            {location.state.recipe.metaData.tags[2] ? (
-              <span className="badge rounded-pill bg-secondary">
-                {location.state.recipe.metaData.tags[2]}
-              </span>
-            ) : (
-              ""
-            )}
-            {location.state.recipe.metaData.tags[3] ? (
-              <span className="badge rounded-pill bg-secondary">
-                {location.state.recipe.metaData.tags[3]}
-              </span>
-            ) : (
-              ""
-            )}
-            {location.state.recipe.metaData.tags[4] ? (
-              <span className="badge rounded-pill  bg-info text-dark">
-                {location.state.recipe.metaData.tags[4]}
-              </span>
-            ) : (
-              ""
-            )}
-          </div>
+
 
               <img
                 className="detailUrlImage"
@@ -326,7 +292,58 @@ function DetailRecipe() {
             </div>
           </div>
 
+
           <div className="detailControls">
+
+{/* 
+
+            {
+              location.state.recipe.metaData.tags.forEach(tag =>{
+                <div className="detailBadges" >
+                  {tag}
+                </div>
+              })
+            } */}
+
+
+
+            <div className="d-flex flex-row justify-content-center m-3">
+              {location.state.recipe.metaData.tags[0] ? (
+                <span className="badge rounded-pill bg-secondary">
+                  {location.state.recipe.metaData.tags[0]}
+                </span>
+              ) : (
+                ""
+              )}
+              {location.state.recipe.metaData.tags[1] ? (
+                <span className="badge rounded-pill bg-secondary ms-2">
+                  {location.state.recipe.metaData.tags[1]}
+                </span>
+              ) : (
+                ""
+              )}
+              {location.state.recipe.metaData.tags[2] ? (
+                <span className="badge rounded-pill bg-secondary ms-2">
+                  {location.state.recipe.metaData.tags[2]}
+                </span>
+              ) : (
+                ""
+              )}
+              {location.state.recipe.metaData.tags[3] ? (
+                <span className="badge rounded-pill bg-secondary ms-2">
+                  {location.state.recipe.metaData.tags[3]}
+                </span>
+              ) : (
+                ""
+              )}
+              {location.state.recipe.metaData.tags[4] ? (
+                <span className="badge rounded-pill  bg-info text-dark">
+                  {location.state.recipe.metaData.tags[4]}
+                </span>
+              ) : (
+                ""
+              )}
+            </div>
             {/* <Tooltip title="guardar receta" placement="left-start">
               <IconButton>
                 <SaveAltIcon 
@@ -335,6 +352,7 @@ function DetailRecipe() {
                 />
               </IconButton>
             </Tooltip> */}
+            <div className="detailActionsBox">
 
               <GeneratePdfButton
                     content={metaData}
@@ -371,6 +389,7 @@ function DetailRecipe() {
               </>
             ) : null
             }
+            </div>
           </div>
 
           {/* <Col sm={11}>
@@ -429,10 +448,11 @@ function DetailRecipe() {
             </Col> */
             } 
 
-          <h2>Ingredientes:</h2>
+          
 
           <Row className="detailFrameTables">
             <Col className="detailIngredientsTable">
+              <h2>Ingredientes:</h2>
               <div className="detailIngredientsContainer">
                 <IngredientsDynamicTable
                   className="ingredientsTable"

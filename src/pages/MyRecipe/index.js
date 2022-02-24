@@ -5,6 +5,7 @@ import { Container, Row, Col } from "reactstrap";
 import React, { useState, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import JoditEditor from "jodit-react";
+import GeneratePdfButton from "../../components/GeneratePdfButton/GeneratePdfButton";
 import "./MyRecipe.scss";
 
 const MyRecipe = () => {
@@ -18,6 +19,7 @@ const MyRecipe = () => {
   const [validateSynopsis, setValidateSynopsis] = useState("");
   const [procedures, setProcedures] = useState('');
   const [detailTable, setDetailTable] = useState([]);
+  const [metaData, setMetaData] = useState();
 
   const editor = useRef(null)
 	const config = {
@@ -90,6 +92,7 @@ const MyRecipe = () => {
               detailTable,
             }
             console.log(data);
+            setMetaData(data)
             navigate(`/print_view/my-recipe-${id}`, { state: { data } });
           } catch (error) {
             console.error(error.message);
@@ -101,7 +104,7 @@ const MyRecipe = () => {
     <>
       <Container className="containerCreate" fluid>
         <Row className="rowCreate">
-          <Col className="mainCreate">
+          <Col className="mainMyRecipe">
             <h1 className="MyRecipeTitle">Mi receta</h1>
             <Form onSubmit={toPrintView}>
               <FormGroup row>
@@ -214,14 +217,19 @@ const MyRecipe = () => {
               <h2>Comparte tu receta con el mundo 🌎:</h2>
 
               <FormGroup row>
-                <Col>
-                  <div className="exportBtn">
+                <Col className="myRecipeControls">
+                  {/* <div className="exportBtn">
                     <button
                       className="myRecipeExportBtn"
                       type="submit"
                     >
                       Exportar
                     </button>
+                  </div> */}
+                  <div className="saveRecipe">
+                    <GeneratePdfButton
+                      content={metaData}
+                    />
                   </div>
                 </Col>
               </FormGroup>

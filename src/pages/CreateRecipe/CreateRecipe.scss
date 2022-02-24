@@ -24,7 +24,7 @@ body {
 
 .mainCreate {
   //border: 1px black solid;
-  background-color: rgb(255 255 255);
+  //background-color: rgb(255 255 255);
   border-radius: 5px;
   width: 70%;
   margin-bottom: 100px;
@@ -140,11 +140,6 @@ h3{
   font-weight: 700;
 }
 
-.bottom-label{
-  font-size: 12px;
-  font-weight: bold;
-}
-
 .binStep{
   color: $mexican-pink;
   cursor: pointer;
@@ -178,3 +173,7 @@ h3{
   box-shadow: 0 0 2px 1px $mexican-pink;
 }
 
+.createControls{
+  display: flex;
+  justify-content: center;
+}

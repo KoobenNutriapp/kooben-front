@@ -24,7 +24,7 @@ body {
 
 .mainDetail {
   //border: 1px black solid;
-  background-color: rgb(255 255 255);
+  //background-color: rgb(255 255 255);
   border-radius: 10px;
   width: 65%;
   margin-bottom: 100px;
@@ -63,13 +63,13 @@ body {
   margin-bottom: 10px;
   width: 100%;
   border-radius: 15px;
-  opacity: 95%;
+  filter: brightness(0.5);
 }
 
 .detailFrameTables {
   margin-top: 40px !important;
   width: 100%;
-  height: 1970px;
+  height: 1880px;
 }
 
 // .ingredientsTable{
@@ -244,24 +244,41 @@ body {
 
 .detailControls{
   display: flex;
-  justify-content: flex-end;
-  .saveRecipe{
-    color: $mexican-pink;
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    }
-  .editRecipe{
-      color: $mexican-pink;
-      cursor: pointer;
-      width: 80px;
-      height: 80px;
-    }
-  .deleteRecipe{
-      color: $mexican-pink;
-      cursor: pointer;
-      width: 80px;
-      height: 80px;
-    }
+  justify-content: space-between;
+  align-items: center ;
 }
 
+.saveRecipe{
+  color: $mexican-pink;
+  cursor: pointer;
+  width: 80px !important;
+  height: 80px c !important;
+  }
+.editRecipe{
+    color: $mexican-pink;
+    cursor: pointer;
+    width: 80px !important;
+    height: 80px !important;
+  }
+.deleteRecipe{
+    color: $mexican-pink;
+    cursor: pointer;
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .detailActionsBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .detailBadges{
+    background-color: rgb(255, 255, 255);
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

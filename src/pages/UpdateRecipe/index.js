@@ -1,3 +1,4 @@
+import SecurityUpdateGoodIcon from '@mui/icons-material/SecurityUpdateGood';
 import {Form,FormGroup,Label,Input,FormText,FormFeedback} from "reactstrap";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
 import { useLocation } from 'react-router-dom';
@@ -20,6 +21,10 @@ import { useDispatch } from 'react-redux';
 import { firebase } from '../../Firebase/firebase-config'
 import { login, userApp, newUserApp  } from '../../actions/auth';
 import { getUsers } from "../../services/user";
+import IconButton from "@mui/material/IconButton";
+import Tooltip from "@mui/material/Tooltip";
+import GeneratePdfButton from "../../components/GeneratePdfButton/GeneratePdfButton";
+
 
 const UpdateRecipe = () => {
   const location = useLocation();
@@ -53,6 +58,7 @@ const UpdateRecipe = () => {
   const [addIngredient, setAddIngredient] = useState(false);
   const [detailTable, setDetailTable] = useState([]);
   const [procedures, setProcedures] = useState('')
+  const [metaData, setMetaData] = useState();
     // ******Checking admin
     const [ checking, setChecking ] = useState(true);
     const [ isLoggedIn, setIsLoggedIn ] = useState(false);
@@ -331,6 +337,7 @@ const UpdateRecipe = () => {
           ingredients,
         };
         console.log(data);
+        setMetaData(data)
         await updateRecipe(id,data);
         if (imageIndicator){
           deleteImgFromBucket() 
@@ -864,14 +871,18 @@ const UpdateRecipe = () => {
               <h2>Comparte tu receta con el mundo 🌎:</h2>
 
               <FormGroup row>
-                <Col sm={2}>
-                  <div className="add-step-box">
-                    <button
+
+                  <div className="updateControlBox">
+                    <GeneratePdfButton
+                      content={metaData}
+                    />
+
+                    {/* <button
                       className="pink-button"
                       onClick={() => window.print()}
                     >
                       Exportar
-                    </button>
+                    </button> */}
                     {/* <button className='pink-button' onClick={handlePublish}>Exportar</button> */}
                     {/* <button className="publish" type="submit" value="submit">
                       Publicar
@@ -880,9 +891,14 @@ const UpdateRecipe = () => {
                     {
                       admin ?
                       <>
-                        <Button className="publish" type="submit" onClick={toggle}>
+                        {/* <Button className="publish" type="submit" onClick={toggle}>
                           Publicar
-                        </Button>
+                        </Button> */}
+                        <Tooltip title="publicar receta" placement="right-start">
+                          <IconButton>
+                            <SecurityUpdateGoodIcon className="deleteRecipe" type="submit" onClick={toggle} />
+                          </IconButton>
+                        </Tooltip>
                         <Modal isOpen={modal} toggle={toggle}>
                           <ModalBody >
                             ¡ Gracias por crear con K'óoben !
@@ -899,7 +915,7 @@ const UpdateRecipe = () => {
                     null
                     }
                   </div>
-                </Col>
+
               </FormGroup>
             </Form>
           </Col>

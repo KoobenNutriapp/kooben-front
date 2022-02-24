@@ -1,5 +1,7 @@
+import SecurityUpdateGoodIcon from '@mui/icons-material/SecurityUpdateGood';
 import {Form,FormGroup,Label,Input,FormText,FormFeedback} from "reactstrap";
 import { Button, Modal, ModalBody, ModalFooter } from "reactstrap";
+import GeneratePdfButton from "../../components/GeneratePdfButton/GeneratePdfButton";
 import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -51,6 +53,7 @@ const CreateRecipe = () => {
   const [thumbnail, setThumbnail] = useState(false);
   const [modal, setModal] = useState(false);
   const [procedures, setProcedures] = useState('')
+  const [metaData, setMetaData] = useState();
 
   const editor = useRef(null)
   
@@ -267,6 +270,7 @@ const CreateRecipe = () => {
           ingredients,
         };
         console.log(data);
+        setMetaData(data)
         await createRecipe(data);
         handleSend();
         //alert('¡ La receta fue creada exitosamente !')
@@ -637,22 +641,30 @@ const CreateRecipe = () => {
               <h2>Comparte tu receta con el mundo 🌎:</h2>
 
               <FormGroup row>
-                <Col sm={2}>
-                  <div className="add-step-box">
-                    <button
+    
+                  <div className="createControls">
+                    <GeneratePdfButton
+                      content={metaData}
+                    />
+                    {/* <button
                       className="pink-button"
                       onClick={() => window.print()}
                     >
                       Exportar
-                    </button>
+                    </button> */}
                     {/* <button className='pink-button' onClick={handlePublish}>Exportar</button> */}
                     {/* <button className="publish" type="submit" value="submit">
                       Publicar
                     </button> */}
+                    <Tooltip title="publicar receta" placement="right-start">
+                      <IconButton>
+                        <SecurityUpdateGoodIcon className="deleteRecipe" type="submit" onClick={toggle} />
+                      </IconButton>
+                    </Tooltip>
 
-                    <Button className="publish" type="submit" onClick={toggle}>
+                    {/* <Button className="publish" type="submit" onClick={toggle}>
                       Publicar
-                    </Button>
+                    </Button> */}
                     <Modal isOpen={modal} toggle={toggle}>
                       <ModalBody >
                         ¡ Gracias por crear con K'óoben !
@@ -666,7 +678,7 @@ const CreateRecipe = () => {
                       </ModalFooter>
                     </Modal>
                   </div>
-                </Col>
+
               </FormGroup>
             </Form>
           </Col>

@@ -77,21 +77,22 @@ const GeneratePdfButton = ({ content }) => {
           GenerarPDF
       </button> */}
       <Modal isOpen={modal} toggle={toggle}>
-          <ModalBody >
-            Hoy por nosotros, mañana por ti
+          <ModalBody className="modalBox" >
+            Hoy por nosotros, mañana por tí
             <DonationButton
+              className="donationButton"
               ammount={"10.00"}
               itemID="price_1KVNX9AqezYdKBDlm6ObBNND"
             ></DonationButton>
             <DonationButton
-              ammount={"10.00"}
+              ammount={"20.00"}
               itemID="price_1KVNX9AqezYdKBDlm6ObBNND"
           ></DonationButton>
           </ModalBody>
           <ModalFooter>
               <Link to={'/'}>
-              <Button className="modal-button-delete" onClick={handleDelete} >
-                Solo, obtener receta.
+              <Button className="modal-button-donate" onClick={handleDelete} >
+                De momento sólo descargar receta...
               </Button>
               </Link>
           </ModalFooter>

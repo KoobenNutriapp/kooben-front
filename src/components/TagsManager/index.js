@@ -6,11 +6,9 @@ import "./TagsManager.scss";
 function TagsManager({getTags}) {
 
   const tags=[
-    'pasion',
-    'disciplina',
-    'sacrificio',
-    'inspiración',
-    'y una cerveza',
+    'saludable',
+    'virreinal',
+    'alta en calorías',
     '🤤 delicioso',
     '🐍prehispánico',
     '🏰virreinal',

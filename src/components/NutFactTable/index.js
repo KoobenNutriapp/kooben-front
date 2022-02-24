@@ -357,7 +357,7 @@ const NutFactTable = ({
           {energy ? (
             <tr className="mediumLine">
               <th>Energía:</th>
-              <th colSpan="2">{Number(energy).toFixed(0)} Kcalorías</th>
+              <th colSpan="2">{Number(energy).toFixed(0)} kcal</th>
             </tr>
           ) : (
             <tr className="thickLine">
@@ -578,7 +578,7 @@ const NutFactTable = ({
           {vitA ? (
             <tr>
               <th>Vitamina A:</th>
-              <td className="value">{Number(vitA).toFixed(1)} ug</td>
+              <td className="value">{Number(vitA).toFixed(1)} mcg</td>
               <th className="center">{Number(dvVitA).toFixed(0)} %</th>
             </tr>
           ) : (
@@ -588,7 +588,7 @@ const NutFactTable = ({
           {vitB1 ? (
             <tr>
               <th>Vitamina B1:</th>
-              <td className="value">{Number(vitB1).toFixed(1)} ug</td>
+              <td className="value">{Number(vitB1).toFixed(1)} mcg</td>
               <th className="center">{Number(dvVitB1).toFixed(0)} %</th>
             </tr>
           ) : (
@@ -626,7 +626,7 @@ const NutFactTable = ({
           {vitB12 ? (
             <tr>
               <th>Vitamina B12:</th>
-              <td className="value">{Number(vitB12).toFixed(1)} ug</td>
+              <td className="value">{Number(vitB12).toFixed(1)} mcg</td>
               <th className="center">{Number(dvVitB12).toFixed(0)} %</th>
             </tr>
           ) : (
@@ -644,7 +644,7 @@ const NutFactTable = ({
           {folicAc ? (
             <tr>
               <th>Ácido Fólico:</th>
-              <td className="value">{Number(folicAc).toFixed(1)} ug</td>
+              <td className="value">{Number(folicAc).toFixed(1)} mcg</td>
               <th className="center">{Number(dvFolicAc).toFixed(0)} %</th>
             </tr>
           ) : (
@@ -653,7 +653,7 @@ const NutFactTable = ({
           {vitD ? (
             <tr>
               <th>Vitamina D:</th>
-              <td className="value">{Number(vitD).toFixed(1)} ug</td>
+              <td className="value">{Number(vitD).toFixed(1)} mcg</td>
               <th className="center">{Number(dvVitD).toFixed(0)} %</th>
             </tr>
           ) : (
@@ -671,7 +671,7 @@ const NutFactTable = ({
           {vitK ? (
             <tr>
               <th>Vitamina K:</th>
-              <td className="value">{Number(vitK).toFixed(1)} ug</td>
+              <td className="value">{Number(vitK).toFixed(1)} mcg</td>
               <th className="center">{Number(dvVitK).toFixed(0)} %</th>
             </tr>
           ) : (
@@ -679,10 +679,13 @@ const NutFactTable = ({
           )}
         </tbody>
       </Table>
-      <span className="bottom-label">
+      <p className="bottom-label">
         * Valores basados en una dieta de 2000 Kcalorías para la población
         mexicana
-      </span>
+      </p>
+      <p className="bottom-label">
+        kcal: Kilocalorías, mg: miligramos, mcg: microgramos
+      </p>
     </div>
   );
 };
