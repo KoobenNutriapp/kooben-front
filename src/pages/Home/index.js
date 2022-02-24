@@ -16,15 +16,49 @@ import RecipeCard from "../../components/RecipeCards";
 import Carousel from "../../components/Carousel";
 import FinalNavBar from "../../components/FinalNavBar";
 import Buttons from "../../components/Buttons/";
+import { useDispatch } from 'react-redux';
+import { firebase } from '../../Firebase/firebase-config';
+import { login  } from '../../actions/auth';
 import Alert from "@mui/material/Alert";
 import { Link } from "react-router-dom";
 import "./Home.scss";
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 function Home() {
   const [recipes, setRecipes] = useState([]);
   const [search, setSearch] = useState([]);
   const [msg, setMsg] = useState("");
   const [counter, setCounter] = useState(0);
+  const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+
+  const notify = () => {
+      toast.info('Para acceder a esta sección haz log in con Facebook!', {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      });
+  };
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user?.uid){
+        dispatch( login ( user.uid, user.displayName ) )
+        setIsLoggedIn( true );
+      }else{
+        setIsLoggedIn( false );
+      }
+    })
+  }, [ dispatch,isLoggedIn ])
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -94,9 +128,27 @@ function Home() {
         <Row className="row">
           <Col md="2" className=" sideLeft">
             <FiltersTable callback={handleSearch} />
+              {
+                isLoggedIn ? 
               <Link className="linkNavbar btnCreateRecipe" to="/my_recipe">
                 <button className="btnMyRecipe">Mi receta</button>
               </Link>
+              :
+              <div className="btnCreateRecipe">
+                <button className="btnMyRecipe"onClick={notify}>Mi receta</button>
+                <ToastContainer 
+                  position="top-center"
+                  autoClose={3000}
+                  hideProgressBar={false}
+                  newestOnTop={false}
+                  closeOnClick
+                  rtl={false}
+                  pauseOnFocusLoss
+                  draggable
+                  pauseOnHover
+                />
+              </div>
+              }
             <Card className="cardBox">
               <CardTitle tag="h5">K'óoben tips</CardTitle>
               <CardImg
@@ -122,12 +174,12 @@ function Home() {
                 className="cardImg"
                 alt="AWS Alexa"
                 src="https://kooben.s3.amazonaws.com/images/home-images/Alexa-Logo-History.jpg"
-                onClick={onClickUrl('https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg')}
+                onClick={onClickUrl('https://kooben.s3.amazonaws.com/docs/Cocina+Azul.pdf')}
               />
               <CardBody>
                 <CardText
                   className="cardText"
-                  onClick={onClickUrl('https://kooben.s3.amazonaws.com/docs/Iindice-glucemico-y-carga-glucemica-redes.jpg')}
+                  onClick={onClickUrl('https://kooben.s3.amazonaws.com/docs/Cocina+Azul.pdf')}
                 >
                 ¡Entérate cómo acceder a las recetas de K'óoben con Amazon Alexa!
                 </CardText>

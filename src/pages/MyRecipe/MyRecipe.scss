@@ -184,6 +184,19 @@ h3{
   justify-content: center;
 }
 
-.centerExports{
-  justify-content: center !important;
+// .centerExports{
+//   justify-content: center !important;
+// }
+
+.myRecipeControls{
+  display: flex;
+  justify-content: center;
 }
+
+.saveRecipe{
+ 
+  color: $mexican-pink;
+  cursor: pointer;
+  width: 80px !important;
+  height: 80px !important;
+  }

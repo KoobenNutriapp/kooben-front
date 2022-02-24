@@ -217,7 +217,7 @@ const MyRecipe = () => {
               <h2>Comparte tu receta con el mundo 🌎:</h2>
 
               <FormGroup row>
-                <Col>
+                <Col className="myRecipeControls">
                   {/* <div className="exportBtn">
                     <button
                       className="myRecipeExportBtn"
@@ -226,7 +226,7 @@ const MyRecipe = () => {
                       Exportar
                     </button>
                   </div> */}
-                  <div className="detailControls centerExports">
+                  <div className="saveRecipe">
                     <GeneratePdfButton
                       content={metaData}
                     />

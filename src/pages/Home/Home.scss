@@ -59,6 +59,7 @@ body{
 }
 
 .btnMyRecipe{
+    font-family: 'Roboto', sans-serif;
     background-color: $mexican-pink;
     border: 1px solid $mexican-pink;
     border-radius: 10px;
@@ -70,7 +71,8 @@ body{
 .cardBox{
     width: 90% !important;
     color: $mayan-blue;
-    font-family: $title-font;
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
     text-align: center;
     margin-top: 10px;
 }

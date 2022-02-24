@@ -244,24 +244,41 @@ body {
 
 .detailControls{
   display: flex;
-  justify-content: flex-end;
-  .saveRecipe{
-    color: $mexican-pink;
-    cursor: pointer;
-    width: 80px;
-    height: 80px;
-    }
-  .editRecipe{
-      color: $mexican-pink;
-      cursor: pointer;
-      width: 80px;
-      height: 80px;
-    }
-  .deleteRecipe{
-      color: $mexican-pink;
-      cursor: pointer;
-      width: 80px;
-      height: 80px;
-    }
+  justify-content: space-between;
+  align-items: center ;
 }
 
+.saveRecipe{
+  color: $mexican-pink;
+  cursor: pointer;
+  width: 80px !important;
+  height: 80px c !important;
+  }
+.editRecipe{
+    color: $mexican-pink;
+    cursor: pointer;
+    width: 80px !important;
+    height: 80px !important;
+  }
+.deleteRecipe{
+    color: $mexican-pink;
+    cursor: pointer;
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .detailActionsBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .detailBadges{
+    background-color: rgb(255, 255, 255);
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }

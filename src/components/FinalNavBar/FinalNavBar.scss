@@ -16,7 +16,7 @@
 }
 
 .textLinksNewNavBar{
-    font-family: $title-font;
+    font-family: 'Roboto', sans-serif;
     font-size: 18px;
     font-weight: 800;
     color: $mayan-blue !important;
@@ -24,6 +24,7 @@
 }
 
 .navItems{
+    font-family: 'Roboto', sans-serif;
     display: flex;
     justify-content: center;
 }
@@ -47,7 +48,7 @@ body{
     border: 2px solid $mexican-pink;
     border-radius: 50px;
     box-sizing: border-box;
-    font-family: $title-font;
+    font-family: 'Roboto', sans-serif;
     font-weight: 500;
     font-size: 16px;
     color: $mayan-blue;
@@ -75,10 +76,10 @@ i{
 
 .linkNavbar{
     text-decoration: none;
-    font-family: $title-font;
+    font-family: 'Roboto', sans-serif;
     color: $mayan-blue;
 }
 .linkNavbar:hover{
     color: $mexican-pink;
-    font-family: $title-font;
+    font-family: 'Roboto', sans-serif;
 }
