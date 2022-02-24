@@ -1,4 +1,4 @@
-import { BASE_URL, PATH_INGREDIENT } from "../utils/constants";
+import { BASE_URL, PATH_INGREDIENT, API_KEY } from "../utils/constants";
 let request = null;
 
 const getIngredients = async () => {
@@ -6,6 +6,9 @@ const getIngredients = async () => {
     try {
       const response = await fetch(request, {
         method: "GET",
+        headers: {
+          'x-api-key': API_KEY
+        },
       });
       return await response.json();
       
@@ -19,6 +22,9 @@ const getIngredientById = async (id) => {
   try {
     const response = await fetch(request, {
       method: "GET",
+      headers: {
+        'x-api-key': API_KEY
+      },
     });
     return await response.json();
   } catch (error) {

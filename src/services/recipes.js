@@ -1,4 +1,4 @@
-import { BASE_URL, PATH_RECIPE, PORT } from "../utils/constants";
+import { BASE_URL, PATH_RECIPE, PORT, API_KEY } from "../utils/constants";
 let request = null;
 
 const getRecipes = async (search) => {
@@ -14,6 +14,9 @@ const getRecipes = async (search) => {
     try {
       const response = await fetch(request, {
         method: "GET",
+        headers: {
+          'x-api-key': API_KEY
+        },
       });
       return await response.json();
     } catch (error) {
@@ -27,6 +30,7 @@ const createRecipe = async (data) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'x-api-key': API_KEY
       },
       body: JSON.stringify(data),
     });
@@ -44,6 +48,7 @@ const updateRecipe = async (id,data) => {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        'x-api-key': API_KEY
       },
       body: JSON.stringify(data),
     });
@@ -61,6 +66,7 @@ const deleteRecipe = async (id) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
+        'x-api-key': API_KEY
       },
     });
     console.log(response)

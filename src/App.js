@@ -19,6 +19,7 @@ import Donation from './pages/Donation'
 import NotFound from './pages/NotFound'
 import PrivacyPolicies from './components/PrivacyPolicies/'
 import PrintView from './components/PrintView/'
+import Developer from './pages/Developer';
 
 function App() {
 
@@ -86,6 +87,7 @@ function App() {
           <Route path='/privacy_policy' element={<PrivacyPolicies />} />
           <Route path='/donation' element={<Donation />} />
           <Route path='/print_view/:recipe_id' element={<PrintView />} />
+          <Route path='/developer' element={<Developer />} />
         </Routes>
       </BrowserRouter>
     </>

@@ -6,6 +6,7 @@ const PATH_RECIPE = "/recipe";
 const PATH_INGREDIENT = "/ingredient";
 const PATH_PAYMENT = "/payment";
 const PATH_USER = "/user";
+const API_KEY = "5e891d20de82a036841180ea72e27ad4"
 
 export { BASE_URL,
          PORT,
@@ -13,4 +14,5 @@ export { BASE_URL,
          PATH_INGREDIENT,
          PATH_PAYMENT,
          PATH_USER,
+         API_KEY,
 };
