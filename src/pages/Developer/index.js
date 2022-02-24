@@ -1,8 +1,21 @@
 import "./Developer.scss";
 import { Link } from "react-router-dom";
+import { checkout } from "../../services/subscriptions";
+import { useEffect,useState } from "react";
 
 function Developer() {
-    let checkOutURL = "https://checkout.stripe.com/pay/cs_test_a1UNUR9ifu9swyq5SULmqGxN7C1hPmtGKb0usZPo80P6iXyE9ybI8SiTVi#fidkdWxOYHwnPyd1blpxYHZxWjA0TlNLVGNEdGB%2FXGFOR0FpUld2X05XVkhqUTBIZDZOPEBVdTFsNHdOVWJAXEJOZEdLYnI8QkJjc11ES3ZcXTdmSTE8TVJyTWhHREZ1fEQwX3dcdm9KTlMwNTVCM0AyZHwyXScpJ2N3amhWYHdzYHcnP3F3cGApJ2lkfGpwcVF8dWAnPyd2bGtiaWBabHFgaCcpJ2BrZGdpYFVpZGZgbWppYWB3dic%2FcXdwYHgl"
+    const [linkStripe, setlinkStripe] = useState([]);
+
+    useEffect(() => {
+        const handleCheckout=async ()=>{
+            const checkOutURL = await checkout()
+            console.log('checkOutURL: '+ JSON.stringify(checkOutURL))
+            setlinkStripe(checkOutURL.session.url)
+    
+        }
+        handleCheckout();
+      },);
+
   return (  
         <main role="main">
 
@@ -11,7 +24,7 @@ function Developer() {
                 <h1 class="jumbotron-heading">Tameme API</h1>
                 <p class="lead text-muted">Tameme una palabra que proviene del náhuatl, que significa cargar. Los tamemes eran los encargados de cumplir con las entregas, ahora solo consúmela.</p>
                 <p>
-                    <a href={checkOutURL} class="btn btn-primary my-2">Usar Tameme</a>
+                    <a href={linkStripe} class="btn btn-primary my-2">Usar Tameme</a>
                     {/* <a href="#" class="btn btn-secondary my-2">Secondary action</a> */}
                 </p>
                 </div>
