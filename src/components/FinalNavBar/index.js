@@ -133,6 +133,11 @@ const FinaNavBar = ({ handleSearchBar }) => {
                   <Link className="linkNavbar" to="/my_recipe">Mi receta</Link>
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink className="textLinksNewNavBar">
+                  <Link className="linkNavbar" to="/developer">Developer</Link>
+                </NavLink>
+              </NavItem>
               {
                 admin ?
                 <UncontrolledDropdown inNavbar nav>
