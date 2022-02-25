@@ -656,15 +656,15 @@ const CreateRecipe = () => {
                     {/* <button className="publish" type="submit" value="submit">
                       Publicar
                     </button> */}
-                    <Tooltip title="publicar receta" placement="right-start">
+                    {/* <Tooltip title="publicar receta" placement="right-start">
                       <IconButton>
                         <SecurityUpdateGoodIcon className="deleteRecipe" type="submit" onClick={toggle} />
                       </IconButton>
-                    </Tooltip>
+                    </Tooltip> */}
 
-                    {/* <Button className="publish" type="submit" onClick={toggle}>
+                    <Button className="publish" type="submit" onClick={toggle}>
                       Publicar
-                    </Button> */}
+                    </Button> 
                     <Modal isOpen={modal} toggle={toggle}>
                       <ModalBody >
                         ¡ Gracias por crear con K'óoben !

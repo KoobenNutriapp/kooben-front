@@ -26,6 +26,7 @@ const getRecipes = async (search) => {
 
 const createRecipe = async (data) => {
   try {
+    console.log(data)
     const response = await fetch(`${BASE_URL}${PATH_RECIPE}`, {
       method: "POST",
       headers: {
