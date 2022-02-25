@@ -36,13 +36,13 @@ function Developer() {
                 <div class="row">
                     <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Gull_portrait_ca_usa.jpg" alt="Card image cap"/>
+                        <img class="card-img-top" src="https://i0.wp.com/digitalpolicylaw.com/wp-content/uploads/2021/03/dplnews_cloudservers_vr230321.jpeg" alt="Card image cap"/>
                         <div class="card-body">
                         <p class="card-text">Las APIs simplifican la forma en que los desarrolladores integran los componentes de la aplicación en una arquitectura existente, lo que facilita la creación de aplicaciones y microservicios con mayor rapidez.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
+                            {/* <div class="btn-group">
                             <button type="button" title="Proximamente!" class="btn btn-sm btn-outline-secondary addMore">Ver</button>
-                            </div>
+                            </div> */}
                             <small class="text-muted">Próximamente</small>
                         </div>
                         </div>
@@ -50,13 +50,13 @@ function Developer() {
                     </div>
                     <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="Card image cap"/>
+                        <img class="card-img-top" src="https://ginachee.com/media/amazon/amazon-header-s-min.png" alt="Card image cap"/>
                         <div class="card-body">
                         <p class="card-text">Reúne información sobre cada ingrediente de tu platillo, documentación y un fragmento de código para ayudarlo a implementar el código en tu aplicación.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
+                            {/* <div class="btn-group">
                             <button type="button" title="Proximamente!" class="btn btn-sm btn-outline-secondary addMore">Ver</button>
-                            </div>
+                            </div> */}
                             <small class="text-muted">Próximamente</small>
                         </div>
                         </div>
@@ -64,13 +64,13 @@ function Developer() {
                     </div>
                     <div class="col-md-4">
                     <div class="card mb-4 box-shadow">
-                        <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png" alt="Card image cap"/>
+                        <img class="card-img-top" src="https://static.bluepiit.com/blog/wp-content/uploads/sites/2/2015/12/on-demand-scalability.jpg" alt="Card image cap"/>
                         <div class="card-body">
-                        <p class="card-text">Ve la información de lo que usas y facturación para obtener un desglose de los gastos de API.</p>
+                        <p class="card-text">Nosotros nos ecargamos de que recibas tus ingredientes, solo Ve la información de lo que usas, consume lo quieras, cuando quieras. recibe tu factura cada mes.</p>
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="btn-group">
+                            {/* <div class="btn-group">
                             <button type="button" title="Proximamente!" class="btn btn-sm btn-outline-secondary addMore">Ver</button>
-                            </div>
+                            </div> */}
                             <small class="text-muted">Próximamente</small>
                         </div>
                         </div>
