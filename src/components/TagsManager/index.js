@@ -6,6 +6,9 @@ import "./TagsManager.scss";
 function TagsManager({getTags}) {
 
   const tags=[
+    'pasión',
+    'constancia',
+    'inspiración',
     'saludable',
     'virreinal',
     'alta en calorías',
