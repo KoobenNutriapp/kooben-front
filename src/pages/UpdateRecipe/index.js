@@ -891,14 +891,14 @@ const UpdateRecipe = () => {
                     {
                       admin ?
                       <>
-                        {/* <Button className="publish" type="submit" onClick={toggle}>
+                        <Button className="publish" type="submit" onClick={toggle}>
                           Publicar
-                        </Button> */}
-                        <Tooltip title="publicar receta" placement="right-start">
+                        </Button>
+                        {/* <Tooltip title="publicar receta" placement="right-start">
                           <IconButton>
                             <SecurityUpdateGoodIcon className="deleteRecipe" type="submit" onClick={toggle} />
                           </IconButton>
-                        </Tooltip>
+                        </Tooltip> */}
                         <Modal isOpen={modal} toggle={toggle}>
                           <ModalBody >
                             ¡ Gracias por crear con K'óoben !
